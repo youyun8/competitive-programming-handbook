@@ -20,7 +20,10 @@ for (const path of required) if (!existsSync(path)) errors.push(`Missing require
 
 for (const path of ['source', '.codex', 'tmp']) {
   try {
-    execFileSync('git', ['check-ignore', '-q', path]);
+    // A clean checkout does not contain ignored directories. Check a
+    // representative child path so the rule is evaluated even when the
+    // directory itself is absent.
+    execFileSync('git', ['check-ignore', '-q', `${path}/.keep`]);
   } catch {
     errors.push(`${path} must be ignored by Git`);
   }
