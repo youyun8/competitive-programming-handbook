@@ -9,13 +9,13 @@ This project uses a split deployment:
 The current repository URL is expected to be:
 
 ```text
-git@github.com:youyun8/algorithm-handbook.git
+git@github.com:youyun8/competitive-programming-handbook.git
 ```
 
 The expected project Pages URL is:
 
 ```text
-https://youyun8.github.io/algorithm-handbook/
+https://youyun8.github.io/competitive-programming-handbook/
 ```
 
 If you rename the repository, follow the rename section at the end.
@@ -108,7 +108,7 @@ supabase secrets set \
   --project-ref YOUR_PROJECT_REF
 ```
 
-Use origins only: do not include `/algorithm-handbook/` in `ALLOWED_ORIGINS`, because the browser `Origin`
+Use origins only: do not include `/competitive-programming-handbook/` in `ALLOWED_ORIGINS`, because the browser `Origin`
 header contains only scheme, host, and port.
 
 Deploy both functions:
@@ -130,10 +130,10 @@ In **Supabase Dashboard → Authentication → URL Configuration** set:
 
 ```text
 Site URL:
-https://youyun8.github.io/algorithm-handbook/
+https://youyun8.github.io/competitive-programming-handbook/
 
 Redirect URL:
-https://youyun8.github.io/algorithm-handbook/auth/callback/
+https://youyun8.github.io/competitive-programming-handbook/auth/callback/
 ```
 
 Also keep explicit development redirects:
@@ -173,7 +173,7 @@ Use:
 
 ```text
 Homepage URL:
-https://youyun8.github.io/algorithm-handbook/
+https://youyun8.github.io/competitive-programming-handbook/
 
 Authorization callback URL:
 https://YOUR_PROJECT_REF.supabase.co/auth/v1/callback
@@ -195,10 +195,10 @@ In **GitHub repository → Settings → Secrets and variables → Actions → Va
 
 ```text
 PUBLIC_SITE_URL
-https://youyun8.github.io/algorithm-handbook/
+https://youyun8.github.io/competitive-programming-handbook/
 
 PUBLIC_BASE_PATH
-/algorithm-handbook
+/competitive-programming-handbook
 
 PUBLIC_SUPABASE_URL
 https://YOUR_PROJECT_REF.supabase.co
@@ -233,20 +233,20 @@ with **Run workflow**.
 The expected frontend URL is:
 
 ```text
-https://youyun8.github.io/algorithm-handbook/
+https://youyun8.github.io/competitive-programming-handbook/
 ```
 
 ## 11. Production verification checklist
 
 Verify in a clean or private browser window:
 
-1. Home, chapter, lesson, practice, profile, and 404 routes load below `/algorithm-handbook/`.
+1. Home, chapter, lesson, practice, profile, and 404 routes load below `/competitive-programming-handbook/`.
 2. CSS, JavaScript, favicon, Pagefind, and React islands have no base-path 404 errors.
 3. Public lessons and exercises are readable while logged out.
 4. Email registration sends a confirmation email.
 5. Email login and logout work.
 6. Forgot-password and reset-password return to the Pages callback route.
-7. GitHub OAuth returns to `/algorithm-handbook/auth/callback/`.
+7. GitHub OAuth returns to `/competitive-programming-handbook/auth/callback/`.
 8. A guest can set exercise status and write solution/thought notes.
 9. First login merges guest progress and notes.
 10. A second browser sees the synchronized status and notes.
@@ -260,15 +260,15 @@ Verify in a clean or private browser window:
 Frontend build:
 
 ```bash
-PUBLIC_BASE_PATH=/algorithm-handbook \
-PUBLIC_SITE_URL=https://youyun8.github.io/algorithm-handbook/ \
+PUBLIC_BASE_PATH=/competitive-programming-handbook \
+PUBLIC_SITE_URL=https://youyun8.github.io/competitive-programming-handbook/ \
 pnpm build
 ```
 
 Local browser tests with the project base:
 
 ```bash
-PUBLIC_BASE_PATH=/algorithm-handbook \
+PUBLIC_BASE_PATH=/competitive-programming-handbook \
 PUBLIC_AUTH_MODE=mock \
 pnpm test:e2e
 ```

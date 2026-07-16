@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const basePath = process.env.PUBLIC_BASE_PATH ?? '/algorithm-handbook';
+const basePath = process.env.PUBLIC_BASE_PATH ?? '/competitive-programming-handbook';
 
 export default defineConfig({
   testDir: './tests/e2e',

@@ -3,7 +3,8 @@ import { dirname, join, normalize } from 'node:path';
 import fg from 'fast-glob';
 
 const root = 'dist';
-const repositoryName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'algorithm-handbook';
+const repositoryName =
+  process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'competitive-programming-handbook';
 const base = (
   process.env.PUBLIC_BASE_PATH ?? (process.env.GITHUB_ACTIONS ? `/${repositoryName}` : '/')
 ).replace(/\/$/, '');

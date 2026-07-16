@@ -23,7 +23,7 @@ let databasePromise: Promise<IDBPDatabase<HandbookDatabase>> | null = null;
 
 export function getDatabase() {
   if (!databasePromise) {
-    databasePromise = openDB<HandbookDatabase>('algorithm-competition-handbook', 2, {
+    databasePromise = openDB<HandbookDatabase>('competitive-programming-handbook', 2, {
       upgrade(database, oldVersion) {
         if (oldVersion < 1) {
           database.createObjectStore('settings');

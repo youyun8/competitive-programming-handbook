@@ -59,7 +59,7 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
       const blob = new Blob([JSON.stringify(exported, null, 2)], { type: 'application/json' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = 'algorithm-handbook-export.json';
+      link.download = 'competitive-programming-handbook-export.json';
       link.click();
       URL.revokeObjectURL(link.href);
     });
@@ -70,7 +70,7 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
       if (!token) {
         if (readMockUser()) writeMockUser(null);
         localStorage.clear();
-        indexedDB.deleteDatabase('algorithm-competition-handbook');
+        indexedDB.deleteDatabase('competitive-programming-handbook');
         if (status) status.textContent = 'Mock 帳戶與本機資料已刪除。';
         return;
       }

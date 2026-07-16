@@ -71,5 +71,5 @@ jobs:
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e
         env:
-          PUBLIC_BASE_PATH: /algorithm-handbook
+          PUBLIC_BASE_PATH: /competitive-programming-handbook
           PUBLIC_AUTH_MODE: mock

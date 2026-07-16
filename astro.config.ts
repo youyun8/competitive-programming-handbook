@@ -8,7 +8,7 @@ import remarkMath from 'remark-math';
 
 const [repositoryOwner, repositoryName] = process.env.GITHUB_REPOSITORY?.split('/') ?? [
   process.env.GITHUB_REPOSITORY_OWNER ?? 'youyun8',
-  'algorithm-handbook'
+  'competitive-programming-handbook'
 ];
 const site =
   process.env.PUBLIC_SITE_URL ?? `https://${repositoryOwner}.github.io/${repositoryName}/`;

@@ -1,4 +1,4 @@
-project_id = "algorithm-handbook"
+project_id = "competitive-programming-handbook"
 
 [api]
 enabled = true
