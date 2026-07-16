@@ -60,7 +60,7 @@ test('theme, auth callback mock, dashboard, offline status, profile, and 404', a
   await context.setOffline(true);
   await expect(page.getByText('離線：等待同步')).toBeVisible();
   await context.setOffline(false);
-  await page.goto('./auth/callback/?next=/algorithm-competition-handbook/dashboard/');
+  await page.goto('./auth/callback/?next=/algorithm-handbook/dashboard/');
   await expect(page.getByRole('heading', { name: '你的學習摘要' })).toBeVisible();
   await page.goto('./dashboard/');
   await expect(page.getByRole('heading', { name: '你的學習摘要' })).toBeVisible();

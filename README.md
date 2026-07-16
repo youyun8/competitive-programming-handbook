@@ -145,6 +145,8 @@ RLS 測試建立 user A 與 user B，證明 user A 看不到或改不到 user B 
 
 `astro.config.ts` 會在 Actions 依 `GITHUB_REPOSITORY` 設定專案型 Pages `base`。`.github/workflows/deploy.yml` 使用 Astro 官方 action 建置並交給 GitHub Pages deploy action。
 
+完整逐步部署指南請見 [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)。
+
 正式部署前需要使用者確認：
 
 1. GitHub owner、repo 名稱與 private visibility。

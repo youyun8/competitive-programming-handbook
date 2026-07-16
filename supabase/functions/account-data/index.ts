@@ -30,12 +30,6 @@ Deno.serve(async (request: Request) => {
     }
 
     if (request.method === 'DELETE') {
-      const { data: objects } = await database.storage.from('user-data').list(user.id);
-      if (objects?.length) {
-        await database.storage
-          .from('user-data')
-          .remove(objects.map((object) => `${user.id}/${object.name}`));
-      }
       const { error } = await database.auth.admin.deleteUser(user.id);
       if (error) throw error;
       return json(request, { deleted: true });

@@ -6,9 +6,14 @@ import { defineConfig } from 'astro/config';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 
-const repository = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'algorithm-competition-handbook';
-const site = process.env.PUBLIC_SITE_URL ?? `https://example.github.io/${repository}/`;
-const base = process.env.PUBLIC_BASE_PATH ?? (process.env.GITHUB_ACTIONS ? `/${repository}` : '/');
+const [repositoryOwner, repositoryName] = process.env.GITHUB_REPOSITORY?.split('/') ?? [
+  process.env.GITHUB_REPOSITORY_OWNER ?? 'youyun8',
+  'algorithm-handbook'
+];
+const site =
+  process.env.PUBLIC_SITE_URL ?? `https://${repositoryOwner}.github.io/${repositoryName}/`;
+const base =
+  process.env.PUBLIC_BASE_PATH ?? (process.env.GITHUB_ACTIONS ? `/${repositoryName}` : '/');
 
 export default defineConfig({
   site,
