@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">演算法競賽互動學習網站預覽</title>
+  <desc id="desc">左側章節導覽、右側首頁課程地圖的示意圖。實際畫面由 Playwright 視覺檢查。</desc>
+  <rect width="1200" height="675" fill="#f7f8fa"/>
+  <rect width="1200" height="64" fill="#fff" stroke="#d7e0e7"/>
+  <rect x="24" y="16" width="32" height="32" rx="7" fill="#0c7183"/>
+  <text x="68" y="40" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#17212b">演算法競賽互動學習</text>
+  <rect y="64" width="240" height="611" fill="#fff" stroke="#d7e0e7"/>
+  <g font-family="system-ui,sans-serif" font-size="14" fill="#5f6f7d">
+    <text x="24" y="105" font-weight="700">學習路線</text>
+    <text x="24" y="142">1. 基礎資料結構</text><text x="24" y="174">2. 基本演算法</text>
+    <text x="24" y="206">3. 搜尋</text><text x="24" y="238">4. 進階資料結構</text>
+    <text x="24" y="270">5. 動態規劃</text><text x="24" y="302">6. 數論與線性代數</text>
+    <text x="24" y="334">7. 組合數學</text><text x="24" y="366">8. 計算幾何</text>
+    <text x="24" y="398">9. 字串</text><text x="24" y="430">10. 圖論</text>
+  </g>
+  <g font-family="system-ui,sans-serif" fill="#17212b">
+    <text x="300" y="132" font-size="15" font-weight="700" fill="#075766">給懂基礎 C++ 的系統化路線</text>
+    <text x="300" y="190" font-size="42" font-weight="800">把演算法從「看過」變成</text>
+    <text x="300" y="242" font-size="42" font-weight="800">能辨識、能證明、能寫對</text>
+    <text x="300" y="286" font-size="18" fill="#5f6f7d">原創繁體中文教學、互動視覺化、分級練習與學習狀態追蹤。</text>
+  </g>
+  <g transform="translate(300 340)" font-family="system-ui,sans-serif">
+    <rect width="250" height="130" rx="10" fill="#fff" stroke="#d7e0e7"/><rect width="5" height="130" rx="2" fill="#0c7183"/>
+    <text x="24" y="38" font-size="13" font-weight="700" fill="#0c7183">上冊 · 第 2 章</text><text x="24" y="72" font-size="22" font-weight="700" fill="#17212b">基本演算法</text>
+    <text x="24" y="102" font-size="14" fill="#5f6f7d">雙指標、二分、分治、貪心</text>
+    <g transform="translate(275)"><rect width="250" height="130" rx="10" fill="#fff" stroke="#d7e0e7"/><rect width="5" height="130" rx="2" fill="#7651a6"/>
+    <text x="24" y="38" font-size="13" font-weight="700" fill="#7651a6">上冊 · 第 4 章</text><text x="24" y="72" font-size="22" font-weight="700" fill="#17212b">進階資料結構</text>
+    <text x="24" y="102" font-size="14" fill="#5f6f7d">並查集、線段樹、LCA、LCT</text></g>
+    <g transform="translate(550)"><rect width="250" height="130" rx="10" fill="#fff" stroke="#d7e0e7"/><rect width="5" height="130" rx="2" fill="#a5433d"/>
+    <text x="24" y="38" font-size="13" font-weight="700" fill="#a5433d">下冊 · 第 10 章</text><text x="24" y="72" font-size="22" font-weight="700" fill="#17212b">圖論</text>
+    <text x="24" y="102" font-size="14" fill="#5f6f7d">最短路、生成樹、最大流</text></g>
+  </g>
+</svg>

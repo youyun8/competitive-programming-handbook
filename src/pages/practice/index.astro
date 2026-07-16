@@ -1,0 +1,123 @@
+---
+import { getCollection } from 'astro:content';
+import ExerciseNotes from '@/components/progress/ExerciseNotes';
+import ExerciseStatusControl from '@/components/progress/ExerciseStatusControl';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/site';
+
+const exercises = await getCollection('exercises', ({ data }) => data.review_status === 'verified');
+---
+
+<BaseLayout title="完整題庫" wide>
+  <p class="eyebrow">Practice</p>
+  <h1>完整題庫</h1>
+  <p class="lede">題目敘述皆為本站改寫或自行設計；來源候選仍待校對者不會出現在公開題庫。</p>
+  <div class="filter-bar">
+    <div class="field">
+      <label for="exercise-search">搜尋</label>
+      <input id="exercise-search" type="search" placeholder="題名、主題" />
+    </div>
+    <div class="field">
+      <label for="chapter-filter">章節</label>
+      <select id="chapter-filter"
+        ><option value="">全部</option>{
+          Array.from({ length: 10 }, (_, index) => (
+            <option value={index + 1}>第 {index + 1} 章</option>
+          ))
+        }</select
+      >
+    </div>
+    <div class="field">
+      <label for="difficulty-filter">難度</label>
+      <select id="difficulty-filter"
+        ><option value="">全部</option>{
+          [1, 2, 3, 4, 5].map((level) => <option value={level}>{level}</option>)
+        }</select
+      >
+    </div>
+    <div class="field">
+      <label for="status-filter">學習狀態</label>
+      <select id="status-filter"
+        ><option value="">全部</option><option value="not-started">未開始</option><option
+          value="in-progress">練習中</option
+        ><option value="needs-review">待複習</option><option value="solved">已解決</option></select
+      >
+    </div>
+  </div>
+  <div class="practice-stack" id="exercise-list">
+    {
+      exercises.map((exercise) => (
+        <article
+          class="card exercise-card"
+          data-title={`${exercise.data.title} ${exercise.data.topics.join(' ')}`.toLowerCase()}
+          data-chapter={exercise.data.chapter}
+          data-difficulty={exercise.data.difficulty}
+          data-id={exercise.data.id}
+        >
+          <p class="eyebrow">
+            第 {exercise.data.chapter} 章 · 難度 {exercise.data.difficulty}
+          </p>
+          <h2>
+            <a href={withBase(`/practice/${exercise.data.id}/`)}>{exercise.data.title}</a>
+          </h2>
+          <p>{exercise.data.statement}</p>
+          <p>
+            {exercise.data.topics.map((topic) => (
+              <span class="badge">{topic}</span>
+            ))}
+          </p>
+          {exercise.data.external_url && (
+            <p>
+              <a
+                class="external-problem-link"
+                href={exercise.data.external_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {exercise.data.external_relation === 'original' ? '前往原題' : '前往相關原題'}：
+                {exercise.data.external_platform} {exercise.data.external_problem_id}{' '}
+                {exercise.data.external_title} ↗
+              </a>
+            </p>
+          )}
+          <div class="exercise-card-actions">
+            <ExerciseStatusControl client:load exerciseId={exercise.data.id} compact />
+            <ExerciseNotes
+              client:load
+              exerciseId={exercise.data.id}
+              title={exercise.data.title}
+              compact
+            />
+          </div>
+        </article>
+      ))
+    }
+  </div>
+  <p id="empty-exercises" hidden>沒有符合條件的題目。</p>
+  <script>
+    const search = document.querySelector<HTMLInputElement>('#exercise-search');
+    const chapter = document.querySelector<HTMLSelectElement>('#chapter-filter');
+    const difficulty = document.querySelector<HTMLSelectElement>('#difficulty-filter');
+    const status = document.querySelector<HTMLSelectElement>('#status-filter');
+    const cards = [...document.querySelectorAll<HTMLElement>('.exercise-card')];
+    const empty = document.querySelector<HTMLElement>('#empty-exercises');
+    function filter() {
+      let visible = 0;
+      for (const card of cards) {
+        const exerciseStatus =
+          localStorage.getItem(`ac-exercise:${card.dataset.id}`) ?? 'not-started';
+        const matches =
+          (!search?.value || card.dataset.title?.includes(search.value.toLowerCase())) &&
+          (!chapter?.value || card.dataset.chapter === chapter.value) &&
+          (!difficulty?.value || card.dataset.difficulty === difficulty.value) &&
+          (!status?.value || status.value === exerciseStatus);
+        card.hidden = !matches;
+        if (matches) visible++;
+      }
+      if (empty) empty.hidden = visible !== 0;
+    }
+    for (const input of [search, chapter, difficulty, status])
+      input?.addEventListener('input', filter);
+    window.addEventListener('ac:exercise-status-change', filter);
+  </script>
+</BaseLayout>

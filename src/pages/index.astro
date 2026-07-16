@@ -1,0 +1,106 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { curriculum } from '@/lib/curriculum';
+import { withBase } from '@/lib/site';
+
+const chapterColors: Record<string, string> = {
+  cyan: '#0c7183',
+  blue: '#2864b4',
+  indigo: '#5158a6',
+  violet: '#7651a6',
+  magenta: '#9b477c',
+  orange: '#b65d20',
+  amber: '#9b6a00',
+  green: '#38754a',
+  teal: '#27766e',
+  red: '#a5433d'
+};
+---
+
+<BaseLayout title="首頁" wide>
+  <section class="hero">
+    <p class="eyebrow">給懂基礎 C++ 的系統化路線</p>
+    <h1>把演算法從「看過」變成<br />能辨識、能證明、能寫對</h1>
+    <p class="lede">
+      依上下冊十章重新編排的繁體中文互動筆記。不是掃描閱讀器，而是從題型訊號、核心不變量、C++17
+      模板到分級練習的原生學習網站。
+    </p>
+    <div class="hero-actions">
+      <a class="button" href={withBase('/lessons/binary-search/')}>從二分搜尋開始</a>
+      <a class="button secondary" href={withBase('/learn/')}>查看先備學習路線</a>
+    </div>
+  </section>
+
+  <section aria-labelledby="course-map-title">
+    <p class="eyebrow">Course map</p>
+    <h2 id="course-map-title">上下冊十章地圖</h2>
+    <div class="grid">
+      {
+        curriculum.chapters.map((chapter) => (
+          <article
+            class="card chapter-card"
+            style={`--chapter-color:${chapterColors[chapter.color]}`}
+          >
+            <p class="eyebrow">
+              {chapter.volume === 'upper' ? '上冊' : '下冊'} · 第 {chapter.chapter} 章
+            </p>
+            <h3>
+              <a href={withBase(`/chapters/${chapter.chapter}/`)}>{chapter.title}</a>
+            </h3>
+            <p>
+              {chapter.sections
+                .map((section) => section.title)
+                .slice(0, 4)
+                .join('、')}
+              …
+            </p>
+            <p class="meta">
+              <span>{chapter.sections.length} 節</span>
+              <span>
+                書本 {chapter.book_pages[0]}–{chapter.book_pages[1]} 頁
+              </span>
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section style="margin-top:3rem" aria-labelledby="recommended-title">
+    <p class="eyebrow">Recommended start</p>
+    <h2 id="recommended-title">推薦起點</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>1. 建立判定與不變量</h3>
+        <p>從二分搜尋練習半開區間與真假分界。</p>
+        <a href={withBase('/lessons/binary-search/')}>開始二分搜尋 →</a>
+      </article>
+      <article class="card">
+        <h3>2. 把問題畫成狀態圖</h3>
+        <p>用 BFS／DFS 分清 frontier、visited 與搜尋順序。</p>
+        <a href={withBase('/lessons/bfs-dfs/')}>開始圖搜尋 →</a>
+      </article>
+      <article class="card">
+        <h3>3. 完成一次完整練習</h3>
+        <p>閱讀題目、逐層提示、解答與本機進度，登入後再同步。</p>
+        <a href={withBase('/practice/first-not-less/')}>前往練習 →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:3rem" aria-labelledby="progress-title">
+    <p class="eyebrow">Your progress</p>
+    <h2 id="progress-title">目前進度</h2>
+    <p id="home-progress">尚未開始。完成 lesson 後，進度會先保存在此裝置。</p>
+    <a href={withBase('/dashboard/')}>開啟 Dashboard</a>
+  </section>
+
+  <script>
+    const completed = Object.keys(localStorage).filter(
+      (key) => key.startsWith('ac-progress:') && localStorage.getItem(key) === 'completed'
+    ).length;
+    const progress = document.querySelector('#home-progress');
+    if (progress && completed > 0)
+      progress.textContent = `已完成 ${completed} 篇核心教學；可登入同步到其他裝置。`;
+  </script>
+</BaseLayout>

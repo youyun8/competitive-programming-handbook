@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { curriculum, sectionSlug } from '@/lib/curriculum';
+import { withBase } from '@/lib/site';
+
+export function getStaticPaths() {
+  return curriculum.chapters.map((chapter) => ({
+    params: { chapter: String(chapter.chapter) },
+    props: { chapter }
+  }));
+}
+
+const { chapter } = Astro.props;
+const lessons = await getCollection('lessons');
+const exercises = await getCollection('exercises');
+---
+
+<BaseLayout title={`第 ${chapter.chapter} 章 ${chapter.title}`} wide>
+  <nav class="breadcrumb" aria-label="麵包屑">
+    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><a
+      href={withBase(`/volumes/${chapter.volume}/`)}
+      >{chapter.volume === 'upper' ? '上冊' : '下冊'}</a
+    ><span aria-hidden="true">/</span><span>第 {chapter.chapter} 章</span>
+  </nav>
+  <p class="eyebrow">{chapter.volume === 'upper' ? '上冊' : '下冊'} · Chapter {chapter.chapter}</p>
+  <h1>{chapter.title}</h1>
+  <p class="lede">
+    本章共 {chapter.sections.length} 節。完整教學標示為「已發布」；其餘節點已建立來源與學習範圍，內容會在人工校對後逐步擴充。
+  </p>
+  <div class="meta">
+    <span>書本 {chapter.book_pages[0]}–{chapter.book_pages[1]} 頁</span>
+    <span>PDF {chapter.pdf_pages[0]}–{chapter.pdf_pages[1]} 頁</span>
+    <span
+      >{exercises.filter((item) => item.data.chapter === chapter.chapter).length} 道已發布練習</span
+    >
+  </div>
+  <ul class="section-list">
+    {
+      chapter.sections.map((section) => {
+        const lesson = lessons.find((item) => item.data.section === section.id);
+        return (
+          <li class="section-row">
+            <span class="section-id">{section.id}</span>
+            <div>
+              <h3>
+                <a href={withBase(`/lessons/${sectionSlug(section)}/`)}>{section.title}</a>
+              </h3>
+              <p>{section.topics.join('、')}</p>
+            </div>
+            <span class:list={['badge', { verified: Boolean(lesson) }]}>
+              {lesson ? '已發布' : '內容擴充中'}
+            </span>
+          </li>
+        );
+      })
+    }
+  </ul>
+</BaseLayout>

@@ -1,0 +1,45 @@
+# Source publications and extraction artifacts
+/source/
+*.pdf
+/tmp/
+/ocr/
+/renders/
+/data/private/
+/reports/artifacts/
+*.ocr.json
+*.ocr.txt
+
+# Local agent/runtime state
+/.codex/
+
+# Dependencies and builds
+/node_modules/
+/dist/
+/.astro/
+/.cache/
+/coverage/
+/playwright-report/
+/test-results/
+/lighthouse-results/
+*.tsbuildinfo
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+supabase/.branches/
+supabase/.temp/
+
+# Database state
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/

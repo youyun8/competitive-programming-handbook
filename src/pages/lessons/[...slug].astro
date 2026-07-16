@@ -1,0 +1,112 @@
+---
+import { getCollection, render } from 'astro:content';
+import AlgorithmVisualizer from '@/components/visualizers/AlgorithmVisualizer';
+import ProgressActions from '@/components/progress/ProgressActions';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { curriculum, sectionSlug } from '@/lib/curriculum';
+import { withBase } from '@/lib/site';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('lessons');
+  return curriculum.chapters.flatMap((chapter) =>
+    chapter.sections.map((section) => {
+      const lesson = entries.find((item) => item.data.section === section.id);
+      return {
+        params: { slug: sectionSlug(section) },
+        props: { chapter, section, lesson }
+      };
+    })
+  );
+}
+
+const { chapter, section, lesson } = Astro.props;
+const rendered = lesson ? await render(lesson) : null;
+const Content = rendered?.Content;
+const allSections = curriculum.chapters.flatMap((item) =>
+  item.sections.map((entry) => ({ chapter: item, section: entry }))
+);
+const currentIndex = allSections.findIndex((item) => item.section.id === section.id);
+const previous = allSections[currentIndex - 1];
+const next = allSections[currentIndex + 1];
+---
+
+<BaseLayout title={lesson?.data.title ?? `${section.id} ${section.title}`}>
+  <nav class="breadcrumb" aria-label="麵包屑">
+    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><a
+      href={withBase(`/chapters/${chapter.chapter}/`)}>第 {chapter.chapter} 章</a
+    ><span aria-hidden="true">/</span><span>{section.id}</span>
+  </nav>
+  <p class="eyebrow">Lesson {section.id}</p>
+  <h1>{lesson?.data.title ?? section.title}</h1>
+  <p class="lede">{lesson?.data.summary ?? `本節涵蓋：${section.topics.join('、')}。`}</p>
+  <div class="meta">
+    <span>{chapter.volume === 'upper' ? '上冊' : '下冊'}</span>
+    <span>章節來源書頁 {chapter.book_pages[0]}–{chapter.book_pages[1]}</span>
+    <span class:list={['badge', { verified: Boolean(lesson) }]}
+      >{lesson ? '原創教學已發布' : '內容擴充中'}</span
+    >
+  </div>
+  <ProgressActions client:load lessonId={lesson?.data.id ?? `section-${section.id}`} />
+  {
+    lesson && Content ? (
+      <>
+        {lesson.data.visualizer && (
+          <AlgorithmVisualizer client:visible kind={lesson.data.visualizer} />
+        )}
+        <Content />
+        <aside class="callout">
+          <strong>來源追溯</strong>
+          <p>
+            本文是原創繁體中文教學；參考範圍為書本第 {lesson.data.source_book_pages.join('–')} 頁、
+            PDF 第 {lesson.data.source_pdf_pages.join('–')} 頁。未公開 OCR 文字或掃描版面。
+          </p>
+        </aside>
+      </>
+    ) : (
+      <>
+        <section class="callout warning">
+          <h2>內容狀態：架構已建立，完整教學擴充中</h2>
+          <p>
+            這不是空白頁。此節將依固定教學結構整理「問題訊號、核心直覺、狀態定義、不變量、C++17
+            模板、複雜度、陷阱、比較與練習」。在來源頁面與例題完成逐項人工校對前，不會把 OCR
+            猜測文字公開。
+          </p>
+        </section>
+        <h2>預定學習範圍</h2>
+        <ul>
+          {section.topics.map((topic) => (
+            <li>{topic}</li>
+          ))}
+        </ul>
+        <h2>閱讀前先問</h2>
+        <ol>
+          <li>這個結構或演算法要維護的資訊是什麼？</li>
+          <li>每次操作後必須保持哪個不變量？</li>
+          <li>輸入限制允許的時間與空間複雜度是多少？</li>
+        </ol>
+        <p class="meta">
+          <span>
+            來源章節書頁 {chapter.book_pages[0]}–{chapter.book_pages[1]}
+          </span>
+          <span>頁碼細分狀態：待人工確認</span>
+        </p>
+      </>
+    )
+  }
+  <nav class="page-actions" aria-label="前後教學">
+    {
+      previous && (
+        <a class="button secondary" href={withBase(`/lessons/${sectionSlug(previous.section)}/`)}>
+          ← {previous.section.id} {previous.section.title}
+        </a>
+      )
+    }
+    {
+      next && (
+        <a class="button secondary" href={withBase(`/lessons/${sectionSlug(next.section)}/`)}>
+          {next.section.id} {next.section.title} →
+        </a>
+      )
+    }
+  </nav>
+</BaseLayout>

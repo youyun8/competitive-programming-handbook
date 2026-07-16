@@ -1,0 +1,367 @@
+{
+  "version": 1,
+  "generated_from": "User-confirmed structure, checked against PDF table-of-contents OCR on 2026-07-16",
+  "volumes": {
+    "upper": {
+      "source_file": "upper-volume",
+      "display_name": "《算法竞赛》上册",
+      "pdf_pages": 406,
+      "sha256": "05d471dc258775779925dc705864f20519a6966aa9b45f05620706787e5dd75d"
+    },
+    "lower": {
+      "source_file": "lower-volume",
+      "display_name": "《算法竞赛》下册",
+      "pdf_pages": 330,
+      "sha256": "885c201be96b05a146d8dd3f493d848231b1e7fa8b2d82a13aa1aa8fbbdb04f5"
+    }
+  },
+  "chapters": [
+    {
+      "chapter": 1,
+      "volume": "upper",
+      "title": "基礎資料結構",
+      "book_pages": [1, 31],
+      "pdf_pages": [19, 49],
+      "color": "cyan",
+      "sections": [
+        {
+          "id": "1.1",
+          "title": "鏈結串列",
+          "topics": ["動態鏈結串列", "靜態鏈結串列", "STL list"]
+        },
+        {
+          "id": "1.2",
+          "title": "佇列",
+          "topics": ["STL queue", "循環佇列", "雙端佇列", "單調佇列", "優先佇列"]
+        },
+        { "id": "1.3", "title": "堆疊", "topics": ["STL stack", "手寫堆疊", "單調堆疊"] },
+        { "id": "1.4", "title": "二元樹與霍夫曼樹", "topics": ["概念", "遍歷", "霍夫曼樹與編碼"] },
+        {
+          "id": "1.5",
+          "title": "堆積",
+          "topics": ["二元堆積", "基本操作", "手寫實作", "priority_queue"]
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "volume": "upper",
+      "title": "基本演算法",
+      "book_pages": [33, 95],
+      "pdf_pages": [51, 113],
+      "color": "blue",
+      "sections": [
+        { "id": "2.1", "title": "演算法複雜度", "topics": ["概念", "複雜度", "大 O 記號"] },
+        { "id": "2.2", "title": "雙指標", "topics": ["概念", "反向掃描", "同向掃描"] },
+        { "id": "2.3", "title": "二分法", "topics": ["理論背景", "整數二分", "實數二分"] },
+        { "id": "2.4", "title": "三分法", "topics": ["原理", "實數三分", "整數三分"] },
+        { "id": "2.5", "title": "倍增法與 ST 演算法", "topics": ["倍增", "Sparse Table", "RMQ"] },
+        { "id": "2.6", "title": "前綴和與差分", "topics": ["一維", "二維", "三維"] },
+        { "id": "2.7", "title": "離散化", "topics": ["概念", "手寫編碼", "STL 實作", "應用"] },
+        { "id": "2.8", "title": "排序與排列", "topics": ["排序函式", "排列"] },
+        { "id": "2.9", "title": "分治法", "topics": ["漢諾塔", "快速冪", "合併排序", "快速排序"] },
+        { "id": "2.10", "title": "貪心法與模擬", "topics": ["局部選擇", "交換論證", "流程模擬"] }
+      ]
+    },
+    {
+      "chapter": 3,
+      "volume": "upper",
+      "title": "搜尋",
+      "book_pages": [97, 149],
+      "pdf_pages": [115, 167],
+      "color": "indigo",
+      "sections": [
+        {
+          "id": "3.1",
+          "title": "BFS 與 DFS 基礎",
+          "topics": ["搜尋思路", "程式框架", "比較", "連通性"]
+        },
+        { "id": "3.2", "title": "剪枝", "topics": ["BFS 判重", "可行性剪枝", "最優性剪枝"] },
+        { "id": "3.3", "title": "洪水填充", "topics": ["網格連通塊", "邊界處理"] },
+        { "id": "3.4", "title": "BFS 與最短路徑", "topics": ["分層", "無權最短路"] },
+        { "id": "3.5", "title": "雙向廣搜", "topics": ["原理", "複雜度", "兩種實作", "例題"] },
+        { "id": "3.6", "title": "BFS 與優先佇列", "topics": ["最佳優先", "狀態代價"] },
+        { "id": "3.7", "title": "BFS 與雙端佇列", "topics": ["0-1 BFS", "邊權分類"] },
+        {
+          "id": "3.8",
+          "title": "A*",
+          "topics": ["與 Dijkstra 的關係", "啟發函數", "複雜度", "例題"]
+        },
+        { "id": "3.9", "title": "IDDFS 與 IDA*", "topics": ["迭代加深", "深度界", "估價函數"] }
+      ]
+    },
+    {
+      "chapter": 4,
+      "volume": "upper",
+      "title": "進階資料結構",
+      "book_pages": [151, 314],
+      "pdf_pages": [169, 332],
+      "color": "violet",
+      "sections": [
+        {
+          "id": "4.1",
+          "title": "並查集",
+          "topics": ["基本操作", "按秩合併", "路徑壓縮", "帶權並查集"]
+        },
+        { "id": "4.2", "title": "樹狀陣列", "topics": ["概念", "基本編碼", "基本與擴展應用"] },
+        {
+          "id": "4.3",
+          "title": "線段樹",
+          "topics": [
+            "區間查詢",
+            "Lazy Tag",
+            "區間最值",
+            "歷史最值",
+            "區間合併",
+            "掃描線",
+            "二維線段樹"
+          ]
+        },
+        {
+          "id": "4.4",
+          "title": "可持久化線段樹",
+          "topics": ["思想", "區間第 k 大／小", "經典問題"]
+        },
+        {
+          "id": "4.5",
+          "title": "分塊與莫隊演算法",
+          "topics": ["基礎莫隊", "帶修改莫隊", "樹上莫隊"]
+        },
+        { "id": "4.6", "title": "塊狀鏈表", "topics": ["分塊儲存", "插入刪除", "重建"] },
+        { "id": "4.7", "title": "簡單樹上問題", "topics": ["重心", "直徑"] },
+        { "id": "4.8", "title": "LCA", "topics": ["倍增", "Tarjan", "應用"] },
+        { "id": "4.9", "title": "樹上分治", "topics": ["靜態點分治", "動態點分治"] },
+        { "id": "4.10", "title": "樹鏈剖分", "topics": ["概念", "LCA", "典型應用"] },
+        { "id": "4.11", "title": "二元搜尋樹", "topics": ["有序性", "查找", "插入刪除"] },
+        { "id": "4.12", "title": "替罪羊樹", "topics": ["不平衡率", "操作", "例題"] },
+        { "id": "4.13", "title": "Treap", "topics": ["性質", "旋轉式操作"] },
+        { "id": "4.14", "title": "FHQ Treap", "topics": ["基本操作", "分裂合併", "應用"] },
+        { "id": "4.15", "title": "笛卡兒樹", "topics": ["概念", "單調堆疊建樹", "RMQ"] },
+        { "id": "4.16", "title": "Splay", "topics": ["旋轉", "攤銷分析", "常用操作"] },
+        {
+          "id": "4.17",
+          "title": "K-D 樹",
+          "topics": ["空間到二元樹", "基本操作", "最近點", "區間查詢"]
+        },
+        {
+          "id": "4.18",
+          "title": "動態樹與 LCT",
+          "topics": ["思想", "輔助樹", "儲存", "操作", "基本應用"]
+        }
+      ]
+    },
+    {
+      "chapter": 5,
+      "volume": "upper",
+      "title": "動態規劃",
+      "book_pages": [316, 385],
+      "pdf_pages": [334, 403],
+      "color": "magenta",
+      "sections": [
+        {
+          "id": "5.1",
+          "title": "DP 概念與編程方法",
+          "topics": ["兩種方法", "設計與實作", "滾動陣列"]
+        },
+        { "id": "5.2", "title": "經典線性 DP", "topics": ["狀態", "轉移", "順序"] },
+        { "id": "5.3", "title": "數位統計 DP", "topics": ["遞推", "記憶化搜尋", "例題"] },
+        { "id": "5.4", "title": "狀態壓縮 DP", "topics": ["原理", "例題", "三進位狀壓"] },
+        { "id": "5.5", "title": "區間 DP", "topics": ["石子合併", "例題", "二維區間 DP"] },
+        { "id": "5.6", "title": "樹形 DP", "topics": ["基本操作", "背包與樹形 DP"] },
+        { "id": "5.7", "title": "一般優化", "topics": ["狀態縮減", "轉移重排", "資料結構輔助"] },
+        { "id": "5.8", "title": "單調佇列優化", "topics": ["原理", "例題"] },
+        {
+          "id": "5.9",
+          "title": "斜率優化／凸殼優化",
+          "topics": ["轉移方程", "單點查詢", "全部狀態", "例題"]
+        },
+        {
+          "id": "5.10",
+          "title": "四邊形不等式優化",
+          "topics": ["應用", "操作", "定義", "單調性", "定理與例題"]
+        }
+      ]
+    },
+    {
+      "chapter": 6,
+      "volume": "lower",
+      "title": "數論與線性代數",
+      "book_pages": [387, 461],
+      "pdf_pages": [17, 91],
+      "color": "orange",
+      "sections": [
+        { "id": "6.1", "title": "模運算", "topics": ["性質", "負數正規化", "溢位"] },
+        { "id": "6.2", "title": "快速冪", "topics": ["二進位拆解", "模冪"] },
+        {
+          "id": "6.3",
+          "title": "矩陣的應用",
+          "topics": ["矩陣計算", "矩陣快速冪", "加速遞推", "路徑問題"]
+        },
+        { "id": "6.4", "title": "高斯消去", "topics": ["基本操作", "高斯－喬登消去法", "例題"] },
+        { "id": "6.5", "title": "XOR 空間線性基", "topics": ["概念", "建構", "應用"] },
+        { "id": "6.6", "title": "0/1 分數規劃", "topics": ["二分法", "應用場景"] },
+        { "id": "6.7", "title": "GCD 與 LCM", "topics": ["最大公因數", "最小公倍數", "裴蜀定理"] },
+        {
+          "id": "6.8",
+          "title": "線性丟番圖方程",
+          "topics": ["二元方程", "擴展歐幾里得", "多元方程"]
+        },
+        { "id": "6.9", "title": "同餘", "topics": ["一元線性同餘", "模反元素", "同餘方程組"] },
+        { "id": "6.10", "title": "質數", "topics": ["質數判定", "質數篩", "質因數分解"] },
+        { "id": "6.11", "title": "威爾遜定理", "topics": ["定理", "模質數"] },
+        { "id": "6.12", "title": "積性函數", "topics": ["定義", "性質"] },
+        { "id": "6.13", "title": "歐拉函數", "topics": ["定義", "性質", "通解公式", "線性篩"] },
+        { "id": "6.14", "title": "整除分塊", "topics": ["商的分段", "數論求和"] },
+        { "id": "6.15", "title": "狄利克雷卷積", "topics": ["定義", "單位元", "積性"] },
+        { "id": "6.16", "title": "莫比烏斯函數與反演", "topics": ["莫比烏斯函數", "反演"] },
+        { "id": "6.17", "title": "杜教篩", "topics": ["公式推導", "演算法", "複雜度", "模板"] }
+      ]
+    },
+    {
+      "chapter": 7,
+      "volume": "lower",
+      "title": "組合數學",
+      "book_pages": [463, 509],
+      "pdf_pages": [93, 139],
+      "color": "amber",
+      "sections": [
+        { "id": "7.1", "title": "基本概念", "topics": ["排列", "組合", "計數原則"] },
+        { "id": "7.2", "title": "鴿巢原理", "topics": ["存在性", "極值"] },
+        { "id": "7.3", "title": "二項式定理與楊輝三角形", "topics": ["二項式係數", "遞推"] },
+        { "id": "7.4", "title": "盧卡斯定理", "topics": ["質數模", "進位分解"] },
+        { "id": "7.5", "title": "容斥原理", "topics": ["集合交聯集", "計數"] },
+        {
+          "id": "7.6",
+          "title": "Catalan 數與 Stirling 數",
+          "topics": ["Catalan 數", "Stirling 數"]
+        },
+        {
+          "id": "7.7",
+          "title": "Burnside 定理與 Pólya 計數",
+          "topics": ["置換群", "Burnside", "Pólya"]
+        },
+        { "id": "7.8", "title": "生成函數", "topics": ["普通型", "指數型", "Stirling 數"] },
+        {
+          "id": "7.9",
+          "title": "公平組合遊戲",
+          "topics": ["P/N-position", "巴什", "Nim", "SG", "威佐夫"]
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "volume": "lower",
+      "title": "計算幾何",
+      "book_pages": [510, 548],
+      "pdf_pages": [140, 178],
+      "color": "green",
+      "sections": [
+        {
+          "id": "8.1",
+          "title": "二維幾何",
+          "topics": [
+            "點與向量",
+            "點積／叉積",
+            "點與線",
+            "多邊形",
+            "凸包",
+            "最近點對",
+            "旋轉卡尺",
+            "半平面交"
+          ]
+        },
+        { "id": "8.2", "title": "圓", "topics": ["基本定義與計算", "最小圓覆蓋"] },
+        {
+          "id": "8.3",
+          "title": "三維幾何",
+          "topics": ["點與線", "點積", "叉積", "最小球覆蓋", "三維凸包", "例題"]
+        }
+      ]
+    },
+    {
+      "chapter": 9,
+      "volume": "lower",
+      "title": "字串",
+      "book_pages": [549, 599],
+      "pdf_pages": [179, 229],
+      "color": "teal",
+      "sections": [
+        { "id": "9.1", "title": "進制雜湊", "topics": ["BKDRHash", "應用"] },
+        { "id": "9.2", "title": "Manacher", "topics": ["暴力最長回文", "演算法", "模板"] },
+        { "id": "9.3", "title": "Trie 字典樹", "topics": ["建構", "模板"] },
+        { "id": "9.4", "title": "回文樹", "topics": ["關鍵技術", "模板"] },
+        { "id": "9.5", "title": "KMP", "topics": ["樸素匹配", "KMP", "模板", "例題", "擴展 KMP"] },
+        { "id": "9.6", "title": "AC 自動機", "topics": ["Trie", "失配邊", "模板"] },
+        { "id": "9.7", "title": "後綴樹與後綴陣列", "topics": ["概念", "倍增法", "經典應用"] },
+        {
+          "id": "9.8",
+          "title": "後綴自動機",
+          "topics": ["概念", "endpos／等價類", "建構", "模板", "應用"]
+        }
+      ]
+    },
+    {
+      "chapter": 10,
+      "volume": "lower",
+      "title": "圖論",
+      "book_pages": [600, 683],
+      "pdf_pages": [230, 313],
+      "color": "red",
+      "sections": [
+        { "id": "10.1", "title": "圖的儲存", "topics": ["鄰接矩陣", "鄰接表", "鏈式前向星"] },
+        { "id": "10.2", "title": "拓撲排序", "topics": ["BFS", "DFS", "輸出拓撲序"] },
+        { "id": "10.3", "title": "歐拉路", "topics": ["存在性", "輸出迴路"] },
+        { "id": "10.4", "title": "無向圖連通性", "topics": ["割點", "橋", "雙連通分量"] },
+        { "id": "10.5", "title": "有向圖連通性", "topics": ["Kosaraju", "Tarjan"] },
+        { "id": "10.6", "title": "基環樹", "topics": ["環", "樹枝", "拆分"] },
+        { "id": "10.7", "title": "2-SAT", "topics": ["蘊含圖", "SCC", "構造解"] },
+        {
+          "id": "10.8",
+          "title": "最短路徑",
+          "topics": [
+            "Floyd-Warshall",
+            "傳遞閉包",
+            "Dijkstra",
+            "Bellman-Ford",
+            "SPFA",
+            "負環",
+            "差分約束"
+          ]
+        },
+        { "id": "10.9", "title": "最小生成樹", "topics": ["Kruskal", "Prim", "擴展問題"] },
+        {
+          "id": "10.10",
+          "title": "最大流",
+          "topics": ["Ford-Fulkerson", "Edmonds-Karp", "Dinic", "ISAP", "混合圖歐拉迴路"]
+        },
+        { "id": "10.11", "title": "二分圖", "topics": ["染色", "匹配", "覆蓋"] },
+        { "id": "10.12", "title": "最小割", "topics": ["最大流最小割", "建模"] },
+        { "id": "10.13", "title": "費用流", "topics": ["殘量網路", "最短增廣路"] }
+      ]
+    }
+  ],
+  "appendix": {
+    "id": "A",
+    "volume": "lower",
+    "title": "C++ 競賽工程技巧",
+    "book_pages": [684, 693],
+    "pdf_pages": [314, 323],
+    "sections": [
+      {
+        "id": "A.1",
+        "title": "大數計算",
+        "topics": ["boost::multiprecision::cpp_int", "常用操作", "效能與限制", "手寫設計方向"]
+      },
+      {
+        "id": "A.2",
+        "title": "建構測試資料與對拍",
+        "topics": ["mt19937_64", "可重現 seed", "極端測資", "去重", "differential testing"]
+      },
+      {
+        "id": "A.3",
+        "title": "高效輸入／輸出",
+        "topics": ["sync_with_stdio", "cin.tie", "大量資料", "格式化", "陷阱"]
+      }
+    ]
+  }
+}

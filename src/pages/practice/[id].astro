@@ -1,0 +1,151 @@
+---
+import { getCollection, render } from 'astro:content';
+import ExerciseNotes from '@/components/progress/ExerciseNotes';
+import ExerciseStatusControl from '@/components/progress/ExerciseStatusControl';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/site';
+
+export async function getStaticPaths() {
+  const exercises = await getCollection(
+    'exercises',
+    ({ data }) => data.review_status === 'verified'
+  );
+  return exercises.map((exercise) => ({ params: { id: exercise.data.id }, props: { exercise } }));
+}
+
+const { exercise } = Astro.props;
+const { Content } = await render(exercise);
+---
+
+<BaseLayout title={exercise.data.title} wide>
+  <nav class="breadcrumb" aria-label="麵包屑">
+    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><a
+      href={withBase('/practice/')}>題庫</a
+    ><span aria-hidden="true">/</span><span>{exercise.data.title}</span>
+  </nav>
+  <p class="eyebrow">第 {exercise.data.chapter} 章 · 難度 {exercise.data.difficulty}</p>
+  <h1>{exercise.data.title}</h1>
+  {
+    exercise.data.external_url && (
+      <p>
+        <a
+          class="button secondary"
+          href={exercise.data.external_url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {exercise.data.external_relation === 'original' ? '前往原題' : '前往相關原題'}：
+          {exercise.data.external_platform} {exercise.data.external_problem_id} ↗
+        </a>
+      </p>
+    )
+  }
+  <section class="card exercise-progress-card">
+    <h2>記錄學習進度</h2>
+    <p>這是自我管理狀態，不是線上判題結果。可以隨時改成「待複習」再回來練習。</p>
+    <div class="exercise-card-actions">
+      <ExerciseStatusControl client:load exerciseId={exercise.data.id} />
+      <ExerciseNotes client:load exerciseId={exercise.data.id} title={exercise.data.title} />
+    </div>
+  </section>
+  <article>
+    <h2>題目</h2>
+    <p>{exercise.data.statement}</p>
+    {
+      exercise.data.constraints && (
+        <>
+          <>
+            <h3>限制</h3>
+            <ul>
+              {exercise.data.constraints.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </>
+        </>
+      )
+    }
+    {
+      exercise.data.input_format && (
+        <>
+          <>
+            <h3>輸入格式</h3>
+            <p>{exercise.data.input_format}</p>
+          </>
+        </>
+      )
+    }
+    {
+      exercise.data.output_format && (
+        <>
+          <>
+            <h3>輸出格式</h3>
+            <p>{exercise.data.output_format}</p>
+          </>
+        </>
+      )
+    }
+    <h3>範例</h3>
+    {
+      exercise.data.samples.map((sample) => (
+        <div class="grid">
+          <div>
+            <strong>輸入</strong>
+            <pre>{sample.input}</pre>
+          </div>
+          <div>
+            <strong>輸出</strong>
+            <pre>{sample.output}</pre>
+          </div>
+          {sample.explanation && <p>{sample.explanation}</p>}
+        </div>
+      ))
+    }
+    <h2>逐層提示</h2>
+    {
+      exercise.data.hints.map((hint, index) => (
+        <details>
+          <>
+            <summary>提示 {index + 1}</summary>
+            <p>{hint}</p>
+          </>
+        </details>
+      ))
+    }
+    <details>
+      <summary>解答與證明（預設收合）</summary>
+      <h3>解法概要</h3><p>{exercise.data.solution_outline}</p>
+      {
+        exercise.data.proof_or_invariant && (
+          <>
+            <>
+              <h3>不變量／正確性</h3>
+              <p>{exercise.data.proof_or_invariant}</p>
+            </>
+          </>
+        )
+      }
+      <h3>複雜度</h3><p>
+        時間 {exercise.data.complexity.time}；空間 {exercise.data.complexity.space}。
+      </p>
+      {
+        exercise.data.cpp_solution && (
+          <>
+            <>
+              <h3>參考 C++17</h3>
+              <pre>
+                <code>{exercise.data.cpp_solution}</code>
+              </pre>
+            </>
+          </>
+        )
+      }
+    </details>
+    <Content />
+    <p class="meta">
+      來源書頁 {exercise.data.source_book_pages.join('、')}；PDF 頁 {
+        exercise.data.source_pdf_pages.join('、')
+      }。公開敘述為改寫版。
+    </p>
+  </article>
+</BaseLayout>

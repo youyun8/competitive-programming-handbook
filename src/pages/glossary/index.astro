@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/site';
+
+const entries = await getCollection('glossary');
+const extra = [
+  ['佇列', '队列', 'queue', '先進先出的容器。'],
+  ['堆疊', '栈', 'stack', '後進先出的容器。'],
+  ['線段樹', '线段树', 'segment tree', '維護可合併區間摘要的平衡二元樹。'],
+  ['並查集', '并查集', 'disjoint-set union', '維護只合併集合的代表元結構。'],
+  ['最近公共祖先', '最近公共祖先', 'lowest common ancestor', '兩節點共同祖先中深度最大者。'],
+  ['凸包', '凸包', 'convex hull', '包含點集的最小凸集合。']
+];
+---
+
+<BaseLayout title="術語表" wide>
+  <p class="eyebrow">Glossary</p>
+  <h1>簡體／繁體／英文術語對照</h1>
+  <div class="field" style="max-width:30rem">
+    <label for="glossary-search">搜尋術語</label><input id="glossary-search" type="search" />
+  </div>
+  <div class="grid" id="glossary-list" style="margin-top:1rem">
+    {
+      entries.map((entry) => (
+        <article
+          class="card glossary-entry"
+          data-terms={`${entry.data.traditional} ${entry.data.simplified} ${entry.data.english} ${entry.data.aliases.join(' ')}`.toLowerCase()}
+        >
+          <p>{entry.data.definition}</p>
+          {entry.data.related_lessons.map((id) => (
+            <a href={withBase(`/lessons/${id}/`)}>相關教學</a>
+          ))}
+        </article>
+      ))
+    }
+    {
+      extra.map(([traditional, simplified, english, definition]) => (
+        <article
+          class="card glossary-entry"
+          data-terms={`${traditional} ${simplified} ${english}`.toLowerCase()}
+        >
+          <>
+            <h2>{traditional}</h2>
+            <p>
+              <strong>簡：</strong>
+              {simplified}
+              <br />
+              <strong>EN：</strong>
+              {english}
+            </p>
+            <p>{definition}</p>
+          </>
+        </article>
+      ))
+    }
+  </div>
+  <script>
+    const input = document.querySelector<HTMLInputElement>('#glossary-search');
+    const entries = [...document.querySelectorAll<HTMLElement>('.glossary-entry')];
+    input?.addEventListener('input', () => {
+      for (const entry of entries)
+        entry.hidden = !entry.dataset.terms?.includes(input.value.toLowerCase());
+    });
+  </script>
+</BaseLayout>

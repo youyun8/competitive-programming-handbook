@@ -1,0 +1,90 @@
+---
+import AccountPanel from '@/components/auth/AccountPanel';
+import ReadingSettings from '@/components/progress/ReadingSettings';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout title="個人資料與偏好" wide>
+  <p class="eyebrow">Profile</p>
+  <h1>個人資料、偏好與資料權利</h1>
+  <div class="grid">
+    <AccountPanel client:load basePath={basePath} />
+    <ReadingSettings client:load />
+    <section class="card">
+      <h2>匯出資料</h2>
+      <p>匯出本機 lesson 進度、題目狀態、書籤與閱讀偏好。</p>
+      <button class="button secondary" id="export-data" type="button">下載 JSON</button>
+    </section>
+    <section class="card">
+      <h2>刪除帳號</h2>
+      <p>正式 Supabase 模式會呼叫受保護的帳號刪除 API，清除同步進度、題目狀態、書籤與儲存資料。</p>
+      <button class="button danger" id="delete-account" type="button">要求刪除</button>
+      <p id="delete-status" role="status"></p>
+    </section>
+  </div>
+  <script>
+    import { authMode, getSupabaseClient, readMockUser, writeMockUser } from '@/lib/auth/client';
+    import { readGuestSnapshot } from '@/lib/sync/store';
+
+    async function bearerToken() {
+      if (authMode() === 'mock') return null;
+      const {
+        data: { session }
+      } = await getSupabaseClient().auth.getSession();
+      return session?.access_token ?? null;
+    }
+
+    document.querySelector('#export-data')?.addEventListener('click', async () => {
+      let exported: unknown;
+      const token = await bearerToken();
+      if (token) {
+        const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/account-data`, {
+          headers: { authorization: `Bearer ${token}` }
+        });
+        if (!response.ok) throw new Error('雲端資料匯出失敗。');
+        exported = await response.json();
+      } else {
+        const legacyLocal: Record<string, string | null> = {};
+        for (const key of Object.keys(localStorage)) {
+          if (key.startsWith('ac-') && !key.includes('session'))
+            legacyLocal[key] = localStorage.getItem(key);
+        }
+        exported = {
+          exportedAt: new Date().toISOString(),
+          snapshot: await readGuestSnapshot(),
+          legacyLocal
+        };
+      }
+      const blob = new Blob([JSON.stringify(exported, null, 2)], { type: 'application/json' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'algorithm-handbook-export.json';
+      link.click();
+      URL.revokeObjectURL(link.href);
+    });
+    document.querySelector('#delete-account')?.addEventListener('click', async () => {
+      const status = document.querySelector<HTMLElement>('#delete-status');
+      if (!confirm('確定刪除帳號、進度、題目狀態與書籤？此操作無法復原。')) return;
+      const token = await bearerToken();
+      if (!token) {
+        if (readMockUser()) writeMockUser(null);
+        localStorage.clear();
+        indexedDB.deleteDatabase('algorithm-competition-handbook');
+        if (status) status.textContent = 'Mock 帳戶與本機資料已刪除。';
+        return;
+      }
+      if (status) status.textContent = '正在刪除雲端與個人資料…';
+      const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/account-data`, {
+        method: 'DELETE',
+        headers: { authorization: `Bearer ${token}` }
+      });
+      if (!response.ok) {
+        if (status) status.textContent = '刪除失敗，請重新登入後再試。';
+        return;
+      }
+      localStorage.clear();
+      location.href = `${import.meta.env.BASE_URL}`;
+    });
+  </script>
+</BaseLayout>

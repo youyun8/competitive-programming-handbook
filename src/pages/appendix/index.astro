@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/site';
+---
+
+<BaseLayout title="附錄 A：C++ 競賽工程技巧">
+  <nav class="breadcrumb" aria-label="麵包屑">
+    <a href={withBase('/')}>首頁</a><span>/</span><span>附錄 A</span>
+  </nav>
+  <p class="eyebrow">Appendix A · C++17/C++20 rewrite</p>
+  <h1>C++ 競賽工程技巧</h1>
+  <p class="lede">
+    原教材附錄想解決的是大數、測資與 I/O 工程問題；本站不照搬 Python，全部以可獨立編譯的 C++ 重寫。
+  </p>
+
+  <h2>A.1 大數計算</h2>
+  <p>
+    `boost::multiprecision::cpp_int`
+    提供任意精度整數，可直接做加減乘除、位元運算與輸入輸出。它沒有固定上限，但時間與記憶體成本會隨位數成長，也不能直接混用所有標準數學函式。
+  </p>
+  <pre><code>{`#include <boost/multiprecision/cpp_int.hpp>
+using boost::multiprecision::cpp_int;
+
+cpp_int factorial(int number) {
+    cpp_int result = 1;
+    for (int value = 2; value <= number; ++value) result *= value;
+    return result;
+}`}</code></pre>
+  <div class="callout">
+    若題目只需要十進位加減，可以用低位在前的 `vector<int
+      >`；若需要高效乘法與除法，手寫成本很高，先確認題目是否其實只要求取模。
+    </int>
+
+    <h2>A.2 建構測試資料與對拍</h2>
+    <p>
+      固定 seed
+      是重現錯誤的關鍵。亂數之外，還要主動加入空間最小值、最大值、重複值、已排序、反向排序與答案在邊界等測資。
+    </p>
+    <pre><code>{`std::uint64_t seed = 20260716;
+std::mt19937_64 random_engine(seed);
+std::uniform_int_distribution<int> distribution(-100, 100);
+
+std::sort(values.begin(), values.end());
+values.erase(std::unique(values.begin(), values.end()), values.end());`}</code></pre>
+    <p>
+      差分測試把小資料交給明顯正確的暴力解與待驗證的最佳化解。發現不一致時，輸出
+      seed、測試編號與完整輸入後立刻停止。
+    </p>
+
+    <h2>A.3 高效輸入／輸出</h2>
+    <pre><code>{`std::ios::sync_with_stdio(false);
+std::cin.tie(nullptr);`}</code></pre>
+    <p>
+      關閉同步後不要再混用 `scanf/printf` 與
+      `cin/cout`。大量逐行輸出可先累積到字串；互動題則要在每次詢問後 flush。格式化輸出要留意
+      `fixed`、`setprecision` 的狀態會持續影響後續輸出。
+    </p>
+
+    <h2>可執行範例</h2>
+    <ul>
+      <li><code>examples/appendix/big_integer.cpp</code></li>
+      <li><code>examples/appendix/test_generator.cpp</code></li>
+      <li><code>examples/appendix/differential_testing.cpp</code></li>
+      <li><code>examples/appendix/fast_io.cpp</code></li>
+    </ul>
+    <p class="meta">來源書頁 684–693；下冊 PDF 314–323。概念保留，程式與教學均重新設計。</p>
+  </div>
+</BaseLayout>

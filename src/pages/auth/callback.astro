@@ -1,0 +1,43 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="完成登入">
+  <h1>正在完成登入…</h1>
+  <p id="callback-status" role="status">正在驗證安全回呼並恢復工作階段。</p>
+  <script>
+    import { authMode, getSupabaseClient } from '@/lib/auth/client';
+    import { flushSyncQueue } from '@/lib/sync/processor';
+    import { enqueue, readGuestSnapshot } from '@/lib/sync/store';
+
+    const status = document.querySelector<HTMLElement>('#callback-status');
+    const url = new URL(location.href);
+    const next = url.searchParams.get('next') || `${import.meta.env.BASE_URL}dashboard/`;
+    async function finish() {
+      try {
+        if (authMode() !== 'mock') {
+          const code = url.searchParams.get('code');
+          if (code) {
+            const { error } = await getSupabaseClient().auth.exchangeCodeForSession(code);
+            if (error) throw error;
+          }
+          const {
+            data: { session }
+          } = await getSupabaseClient().auth.getSession();
+          if (!session) throw new Error('登入回呼沒有有效 session。');
+        }
+        const guest = await readGuestSnapshot();
+        await enqueue('merge', 'merge', guest, `first-login:${Date.now()}`);
+        await flushSyncQueue();
+        if (url.searchParams.get('mode') === 'reset') {
+          location.replace(`${import.meta.env.BASE_URL}auth/reset-password/`);
+          return;
+        }
+        location.replace(next);
+      } catch (error) {
+        if (status) status.textContent = error instanceof Error ? error.message : '登入回呼失敗。';
+      }
+    }
+    finish();
+  </script>
+</BaseLayout>

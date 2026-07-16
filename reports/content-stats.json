@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2026-07-16T04:49:13.053Z",
+  "sourcePages": 736,
+  "ocrCompletePages": 736,
+  "candidateExampleLabels": 103,
+  "candidateExternalUrls": 0,
+  "candidateQrLinks": 0,
+  "exerciseCandidates": 252,
+  "labeledExerciseCandidates": 94,
+  "unlabeledExternalOjCandidatePages": 158,
+  "pagesPendingHumanReview": 736,
+  "chapters": 10,
+  "sections": 102,
+  "publishedLessons": 12,
+  "publishedExercises": 3,
+  "glossaryEntries": 3
+}

@@ -1,0 +1,201 @@
+---
+import { curriculum } from '@/lib/curriculum';
+import { withBase } from '@/lib/site';
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  wide?: boolean;
+}
+
+const {
+  title,
+  description = '以繁體中文重新整理的演算法競賽互動學習筆記。',
+  wide = false
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0c7183" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+    <title>{title}</title></head
+  >｜演算法競賽互動學習
+  <script is:inline>
+    (() => {
+      const saved = localStorage.getItem('ac-theme');
+      const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme = saved || (dark ? 'dark' : 'light');
+      const settings = JSON.parse(localStorage.getItem('ac-reading-settings') || '{}');
+      if (settings.fontSize)
+        document.documentElement.style.setProperty('--font-size', `${settings.fontSize}px`);
+      if (settings.contentWidth)
+        document.documentElement.style.setProperty(
+          '--reading-width',
+          `${settings.contentWidth}rem`
+        );
+      if (settings.codeFontSize)
+        document.documentElement.style.setProperty(
+          '--code-font-size',
+          `${settings.codeFontSize}px`
+        );
+    })();
+  </script>
+
+  <body>
+    <a class="skip-link" href="#main">跳至主要內容</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <button
+          class="icon-button mobile-menu-button"
+          id="menu-toggle"
+          type="button"
+          aria-label="開啟導覽"
+          aria-expanded="false">☰</button
+        >
+        <a class="brand" href={withBase('/')} aria-label="演算法競賽互動學習首頁">
+          <span class="brand-mark" aria-hidden="true">AC</span>
+          <span>演算法競賽互動學習</span>
+        </a>
+        <nav class="header-nav" aria-label="主要導覽">
+          <a class="desktop-only" href={withBase('/learn/')}>學習路線</a>
+          <a class="desktop-only" href={withBase('/practice/')}>題庫</a>
+          <button class="icon-button" id="search-toggle" type="button" aria-label="開啟搜尋"
+            >⌕</button
+          >
+          <button class="icon-button" id="theme-toggle" type="button" aria-label="切換深淺色主題"
+            >◐</button
+          >
+          <a href={withBase('/auth/login/')}>登入</a>
+        </nav>
+      </div>
+    </header>
+    <div class="site-shell">
+      <aside class="site-sidebar" id="site-sidebar" data-open="false" aria-label="章節導覽">
+        <div class="sidebar-label">開始</div>
+        <a class="sidebar-link" href={withBase('/learn/')}>依先備關係學習</a>
+        <a class="sidebar-link" href={withBase('/patterns/')}>跨章解題模式</a>
+        <a class="sidebar-link" href={withBase('/glossary/')}>術語表</a>
+        <div class="sidebar-label">章節</div>
+        {
+          curriculum.chapters.map((chapter) => {
+            const href = withBase(`/chapters/${chapter.chapter}/`);
+            return (
+              <a
+                class="sidebar-link"
+                href={href}
+                aria-current={currentPath === href ? 'page' : undefined}
+              >
+                {chapter.chapter}. {chapter.title}
+              </a>
+            );
+          })
+        }
+        <a class="sidebar-link" href={withBase('/appendix/')}>附錄 A：C++ 工程技巧</a>
+        <div class="sidebar-label">帳戶</div>
+        <a class="sidebar-link" href={withBase('/dashboard/')}>Dashboard</a>
+        <a class="sidebar-link" href={withBase('/profile/')}>偏好與資料</a>
+        <div class="sidebar-label">同步狀態</div>
+        <span class="sync-indicator" id="sync-indicator" data-status="synced">
+          <span class="sync-dot" aria-hidden="true"></span>
+          <span id="sync-label">僅儲存在此裝置</span>
+        </span>
+      </aside>
+      <main class:list={['main-content', { reading: !wide }]} id="main" data-pagefind-body>
+        <slot />
+        <footer class="footer">
+          <p>非官方、原創改寫的學習筆記。掃描 PDF、OCR 中間資料與原書版面不會部署。</p>
+          <p><a href={withBase('/about/sources/')}>資料來源、頁碼對照與著作權界線</a></p>
+        </footer>
+      </main>
+    </div>
+    <dialog id="search-dialog" aria-labelledby="search-title">
+      <form method="dialog">
+        <button class="icon-button" style="float:right" aria-label="關閉搜尋">×</button>
+      </form>
+      <h2 id="search-title">全文搜尋</h2>
+      <div class="field">
+        <label for="search-input">輸入演算法、術語或題型</label>
+        <input id="search-input" type="search" autocomplete="off" />
+      </div>
+      <div id="search-results" aria-live="polite"></div>
+    </dialog>
+    <script>
+      const menuButton = document.querySelector<HTMLButtonElement>('#menu-toggle');
+      const sidebar = document.querySelector<HTMLElement>('#site-sidebar');
+      menuButton?.addEventListener('click', () => {
+        const open = sidebar?.dataset.open !== 'true';
+        if (sidebar) sidebar.dataset.open = String(open);
+        menuButton.setAttribute('aria-expanded', String(open));
+        menuButton.setAttribute('aria-label', open ? '關閉導覽' : '開啟導覽');
+      });
+
+      const themeButton = document.querySelector<HTMLButtonElement>('#theme-toggle');
+      themeButton?.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('ac-theme', next);
+        window.dispatchEvent(new CustomEvent('ac:setting-change', { detail: { theme: next } }));
+      });
+
+      const dialog = document.querySelector<HTMLDialogElement>('#search-dialog');
+      const searchButton = document.querySelector<HTMLButtonElement>('#search-toggle');
+      const searchInput = document.querySelector<HTMLInputElement>('#search-input');
+      const results = document.querySelector<HTMLElement>('#search-results');
+      let pagefind: any;
+      searchButton?.addEventListener('click', async () => {
+        dialog?.showModal();
+        searchInput?.focus();
+        if (!pagefind) {
+          try {
+            pagefind = await import(
+              /* @vite-ignore */ `${import.meta.env.BASE_URL}pagefind/pagefind.js`
+            );
+            await pagefind.init();
+          } catch {
+            if (results) results.textContent = '搜尋索引會在 production build 後啟用。';
+          }
+        }
+      });
+      searchInput?.addEventListener('input', async () => {
+        if (!pagefind || !results) return;
+        const search = await pagefind.search(searchInput.value);
+        const items = await Promise.all(
+          search.results.slice(0, 12).map((item: any) => item.data())
+        );
+        results.replaceChildren(
+          ...items.map((item: any) => {
+            const card = document.createElement('p');
+            const link = document.createElement('a');
+            link.href = item.url;
+            link.textContent = item.meta.title;
+            card.append(link);
+            return card;
+          })
+        );
+      });
+
+      const updateConnectivity = () => {
+        const indicator = document.querySelector<HTMLElement>('#sync-indicator');
+        const label = document.querySelector<HTMLElement>('#sync-label');
+        const online = navigator.onLine;
+        if (indicator) indicator.dataset.status = online ? 'synced' : 'offline';
+        if (label) label.textContent = online ? '僅儲存在此裝置' : '離線：等待同步';
+      };
+      addEventListener('online', updateConnectivity);
+      addEventListener('offline', updateConnectivity);
+      updateConnectivity();
+    </script>
+  </body>
+
+
+</html>

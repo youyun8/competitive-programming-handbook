@@ -1,0 +1,75 @@
+name: Backend, RLS, content, and security checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  application:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.13.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm format:check
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm validate:content
+      - run: pnpm validate:cpp
+      - run: pnpm validate:secrets
+      - run: pnpm build
+
+  supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Start local Supabase
+        run: supabase start
+      - name: Apply migrations from an empty database
+        run: supabase db reset
+      - name: Verify two-user RLS isolation
+        run: psql postgresql://postgres:postgres@127.0.0.1:54322/postgres -f tests/rls/rls.sql
+      - name: Type-check Edge Functions
+        run: >-
+          deno check
+          supabase/functions/sync-progress/index.ts
+          supabase/functions/account-data/index.ts
+      - name: Stop local Supabase
+        if: always()
+        run: supabase stop --no-backup
+
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.13.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e
+        env:
+          PUBLIC_BASE_PATH: /algorithm-competition-handbook
+          PUBLIC_AUTH_MODE: mock

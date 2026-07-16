@@ -1,0 +1,389 @@
+# 內容校對報告
+
+> OCR 僅用來建立候選清單。以下項目未經人工比對掃描頁前，不會發布 OCR 文字、題目、公式、程式碼或 URL。
+
+- 產生時間：2026-07-16T03:34:52.019711+00:00
+- OCR 工具：tesseract 4.1.1
+
+## 分冊統計
+
+| 分冊  | PDF 頁數 | 已 OCR | 例題標籤候選 | 外部 URL 候選 | QR 候選 | 需人工檢查頁 |
+| ----- | -------: | -----: | -----------: | ------------: | ------: | -----------: |
+| upper |      406 |    406 |           52 |             0 |       0 |          406 |
+| lower |      330 |    330 |           51 |             0 |       0 |          330 |
+
+## 優先人工確認
+
+### upper
+
+- PDF 第 20 頁：例 1.1；特徵 `example-label、external-oj`；OCR 信心 82.5%；狀態 `required`。
+- PDF 第 21 頁：例 1.1；特徵 `example-label`；OCR 信心 56.1%；狀態 `required`。
+- PDF 第 22 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 74.1%；狀態 `required`。
+- PDF 第 24 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 81.6%；狀態 `required`。
+- PDF 第 25 頁：例 1.2；特徵 `example-label`；OCR 信心 73.2%；狀態 `required`。
+- PDF 第 26 頁：未辨識標籤；特徵 `code`；OCR 信心 81.2%；狀態 `required`。
+- PDF 第 28 頁：例 1.3；特徵 `example-label`；OCR 信心 81.9%；狀態 `required`。
+- PDF 第 30 頁：未辨識標籤；特徵 `code`；OCR 信心 69.8%；狀態 `required`。
+- PDF 第 31 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 66.8%；狀態 `required`。
+- PDF 第 32 頁：未辨識標籤；特徵 `code`；OCR 信心 68.2%；狀態 `required`。
+- PDF 第 35 頁：例 1.5；特徵 `example-label、external-oj、code`；OCR 信心 41.2%；狀態 `required`。
+- PDF 第 36 頁：例 1.6；特徵 `example-label、code`；OCR 信心 79.7%；狀態 `required`。
+- PDF 第 37 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 39.9%；狀態 `required`。
+- PDF 第 41 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 81.2%；狀態 `required`。
+- PDF 第 44 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 77.9%；狀態 `required`。
+- PDF 第 45 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 80.2%；狀態 `required`。
+- PDF 第 48 頁：未辨識標籤；特徵 `code`；OCR 信心 72.0%；狀態 `required`。
+- PDF 第 55 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 77.5%；狀態 `required`。
+- PDF 第 56 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 76.8%；狀態 `required`。
+- PDF 第 57 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 77.2%；狀態 `required`。
+- PDF 第 59 頁：例 2.4；特徵 `example-label`；OCR 信心 62.6%；狀態 `required`。
+- PDF 第 60 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 83.6%；狀態 `required`。
+- PDF 第 61 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 80.9%；狀態 `required`。
+- PDF 第 62 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 77.9%；狀態 `required`。
+- PDF 第 64 頁：未辨識標籤；特徵 `code`；OCR 信心 84.8%；狀態 `required`。
+- PDF 第 65 頁：未辨識標籤；特徵 `code`；OCR 信心 53.7%；狀態 `required`。
+- PDF 第 68 頁：未辨識標籤；特徵 `code`；OCR 信心 69.9%；狀態 `required`。
+- PDF 第 70 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 71.7%；狀態 `required`。
+- PDF 第 72 頁：例 2.10；特徵 `example-label、code`；OCR 信心 62.7%；狀態 `required`。
+- PDF 第 73 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 38.3%；狀態 `required`。
+- PDF 第 74 頁：未辨識標籤；特徵 `code`；OCR 信心 83.2%；狀態 `required`。
+- PDF 第 75 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 36.4%；狀態 `required`。
+- PDF 第 78 頁：未辨識標籤；特徵 `code`；OCR 信心 69.7%；狀態 `required`。
+- PDF 第 81 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 71.5%；狀態 `required`。
+- PDF 第 82 頁：未辨識標籤；特徵 `code`；OCR 信心 71.0%；狀態 `required`。
+- PDF 第 83 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 80.5%；狀態 `required`。
+- PDF 第 84 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 79.5%；狀態 `required`。
+- PDF 第 85 頁：例 2.16；特徵 `example-label`；OCR 信心 69.1%；狀態 `required`。
+- PDF 第 86 頁：例 2.17；特徵 `example-label、external-oj`；OCR 信心 78.4%；狀態 `required`。
+- PDF 第 87 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 73.8%；狀態 `required`。
+- PDF 第 88 頁：未辨識標籤；特徵 `code`；OCR 信心 60.8%；狀態 `required`。
+- PDF 第 90 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 81.8%；狀態 `required`。
+- PDF 第 93 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 43.2%；狀態 `required`。
+- PDF 第 95 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 60.6%；狀態 `required`。
+- PDF 第 96 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 77.5%；狀態 `required`。
+- PDF 第 99 頁：未辨識標籤；特徵 `code`；OCR 信心 57.8%；狀態 `required`。
+- PDF 第 100 頁：未辨識標籤；特徵 `code`；OCR 信心 71.4%；狀態 `required`。
+- PDF 第 104 頁：未辨識標籤；特徵 `code`；OCR 信心 61.1%；狀態 `required`。
+- PDF 第 106 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 77.7%；狀態 `required`。
+- PDF 第 107 頁：未辨識標籤；特徵 `code`；OCR 信心 66.2%；狀態 `required`。
+- PDF 第 110 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 86.4%；狀態 `required`。
+- PDF 第 113 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 79.2%；狀態 `required`。
+- PDF 第 116 頁：未辨識標籤；特徵 `code`；OCR 信心 75.0%；狀態 `required`。
+- PDF 第 117 頁：未辨識標籤；特徵 `code`；OCR 信心 38.0%；狀態 `required`。
+- PDF 第 122 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 58.8%；狀態 `required`。
+- PDF 第 126 頁：未辨識標籤；特徵 `code`；OCR 信心 53.1%；狀態 `required`。
+- PDF 第 127 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 73.4%；狀態 `required`。
+- PDF 第 128 頁：例 3.2；特徵 `example-label`；OCR 信心 80.7%；狀態 `required`。
+- PDF 第 129 頁：例 3.2；特徵 `example-label`；OCR 信心 55.3%；狀態 `required`。
+- PDF 第 130 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 59.0%；狀態 `required`。
+- PDF 第 132 頁：例 3.5；特徵 `example-label、external-oj`；OCR 信心 76.2%；狀態 `required`。
+- PDF 第 134 頁：未辨識標籤；特徵 `code`；OCR 信心 54.7%；狀態 `required`。
+- PDF 第 135 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 74.3%；狀態 `required`。
+- PDF 第 136 頁：未辨識標籤；特徵 `code`；OCR 信心 74.4%；狀態 `required`。
+- PDF 第 137 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 76.7%；狀態 `required`。
+- PDF 第 138 頁：例 3.11；特徵 `example-label、external-oj`；OCR 信心 78.8%；狀態 `required`。
+- PDF 第 139 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 76.9%；狀態 `required`。
+- PDF 第 140 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 77.2%；狀態 `required`。
+- PDF 第 141 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 82.0%；狀態 `required`。
+- PDF 第 142 頁：未辨識標籤；特徵 `code`；OCR 信心 84.7%；狀態 `required`。
+- PDF 第 145 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 84.5%；狀態 `required`。
+- PDF 第 146 頁：例 3.16；特徵 `example-label、external-oj`；OCR 信心 83.4%；狀態 `required`。
+- PDF 第 147 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 66.0%；狀態 `required`。
+- PDF 第 148 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 71.4%；狀態 `required`。
+- PDF 第 151 頁：未辨識標籤；特徵 `code`；OCR 信心 39.7%；狀態 `required`。
+- PDF 第 152 頁：例 3.21；特徵 `example-label、code`；OCR 信心 72.4%；狀態 `required`。
+- PDF 第 155 頁：未辨識標籤；特徵 `code`；OCR 信心 39.7%；狀態 `required`。
+- PDF 第 159 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 81.5%；狀態 `required`。
+- PDF 第 160 頁：例 3.22；特徵 `example-label`；OCR 信心 82.9%；狀態 `required`。
+- PDF 第 161 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 78.8%；狀態 `required`。
+- PDF 第 165 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 78.7%；狀態 `required`。
+- PDF 第 166 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 78.2%；狀態 `required`。
+- PDF 第 167 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 71.1%；狀態 `required`。
+- PDF 第 170 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 75.6%；狀態 `required`。
+- PDF 第 171 頁：未辨識標籤；特徵 `code`；OCR 信心 59.4%；狀態 `required`。
+- PDF 第 174 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 75.0%；狀態 `required`。
+- PDF 第 175 頁：未辨識標籤；特徵 `code`；OCR 信心 38.2%；狀態 `required`。
+- PDF 第 176 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 67.3%；狀態 `required`。
+- PDF 第 177 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 34.7%；狀態 `required`。
+- PDF 第 178 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 86.0%；狀態 `required`。
+- PDF 第 180 頁：未辨識標籤；特徵 `code`；OCR 信心 59.5%；狀態 `required`。
+- PDF 第 181 頁：例 4.4；特徵 `example-label、code`；OCR 信心 72.1%；狀態 `required`。
+- PDF 第 182 頁：未辨識標籤；特徵 `code`；OCR 信心 70.0%；狀態 `required`。
+- PDF 第 184 頁：未辨識標籤；特徵 `code`；OCR 信心 46.1%；狀態 `required`。
+- PDF 第 186 頁：未辨識標籤；特徵 `code`；OCR 信心 49.3%；狀態 `required`。
+- PDF 第 189 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 71.5%；狀態 `required`。
+- PDF 第 190 頁：例 4.8；特徵 `example-label、external-oj`；OCR 信心 75.0%；狀態 `required`。
+- PDF 第 191 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 35.9%；狀態 `required`。
+- PDF 第 192 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 70.0%；狀態 `required`。
+- PDF 第 193 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 80.7%；狀態 `required`。
+- PDF 第 198 頁：未辨識標籤；特徵 `code`；OCR 信心 78.3%；狀態 `required`。
+- PDF 第 200 頁：例 4.10；特徵 `example-label、external-oj、code`；OCR 信心 69.1%；狀態 `required`。
+- PDF 第 202 頁：例 4.13；特徵 `example-label、external-oj`；OCR 信心 74.9%；狀態 `required`。
+- PDF 第 207 頁：例 4.15；特徵 `example-label`；OCR 信心 80.0%；狀態 `required`。
+- PDF 第 208 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 69.8%；狀態 `required`。
+- PDF 第 210 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 73.6%；狀態 `required`。
+- PDF 第 211 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 77.1%；狀態 `required`。
+- PDF 第 212 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 80.6%；狀態 `required`。
+- PDF 第 214 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 69.2%；狀態 `required`。
+- PDF 第 216 頁：未辨識標籤；特徵 `code`；OCR 信心 71.1%；狀態 `required`。
+- PDF 第 218 頁：例 4.21；特徵 `example-label、external-oj、code`；OCR 信心 73.8%；狀態 `required`。
+- PDF 第 220 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 80.4%；狀態 `required`。
+- PDF 第 221 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 76.2%；狀態 `required`。
+- PDF 第 224 頁：未辨識標籤；特徵 `code`；OCR 信心 75.6%；狀態 `required`。
+- PDF 第 226 頁：例 4.23、例 4.24；特徵 `example-label、external-oj`；OCR 信心 70.3%；狀態 `required`。
+- PDF 第 232 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 75.9%；狀態 `required`。
+- PDF 第 238 頁：未辨識標籤；特徵 `code`；OCR 信心 77.4%；狀態 `required`。
+- PDF 第 240 頁：例 4.30；特徵 `example-label`；OCR 信心 81.2%；狀態 `required`。
+- PDF 第 242 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 84.7%；狀態 `required`。
+- PDF 第 244 頁：未辨識標籤；特徵 `code`；OCR 信心 66.5%；狀態 `required`。
+- PDF 第 247 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 78.4%；狀態 `required`。
+- PDF 第 248 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 76.8%；狀態 `required`。
+- PDF 第 249 頁：例 4.34；特徵 `example-label`；OCR 信心 56.9%；狀態 `required`。
+- PDF 第 250 頁：未辨識標籤；特徵 `code`；OCR 信心 77.3%；狀態 `required`。
+- PDF 第 252 頁：未辨識標籤；特徵 `code`；OCR 信心 65.7%；狀態 `required`。
+- PDF 第 255 頁：例 4.35；特徵 `example-label`；OCR 信心 74.0%；狀態 `required`。
+- PDF 第 258 頁：未辨識標籤；特徵 `code`；OCR 信心 62.3%；狀態 `required`。
+- PDF 第 262 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 82.5%；狀態 `required`。
+- PDF 第 264 頁：例 4.37、例 4.38；特徵 `example-label、external-oj`；OCR 信心 78.1%；狀態 `required`。
+- PDF 第 269 頁：未辨識標籤；特徵 `code`；OCR 信心 25.9%；狀態 `required`。
+- PDF 第 272 頁：例 4.40；特徵 `example-label`；OCR 信心 79.7%；狀態 `required`。
+- PDF 第 276 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 81.5%；狀態 `required`。
+- PDF 第 281 頁：例 4.41；特徵 `example-label`；OCR 信心 55.4%；狀態 `required`。
+- PDF 第 287 頁：例 4.41；特徵 `example-label、code`；OCR 信心 81.5%；狀態 `required`。
+- PDF 第 291 頁：例 4.42；特徵 `example-label`；OCR 信心 66.1%；狀態 `required`。
+- PDF 第 292 頁：例 4.41；特徵 `example-label、code`；OCR 信心 73.9%；狀態 `required`。
+- PDF 第 294 頁：例 4.32；特徵 `example-label、code`；OCR 信心 69.9%；狀態 `required`。
+- PDF 第 296 頁：例 4.42；特徵 `example-label、code`；OCR 信心 81.8%；狀態 `required`。
+- PDF 第 298 頁：未辨識標籤；特徵 `code`；OCR 信心 79.5%；狀態 `required`。
+- PDF 第 300 頁：例 4.44；特徵 `example-label`；OCR 信心 65.8%；狀態 `required`。
+- PDF 第 302 頁：例 4.45；特徵 `example-label、external-oj`；OCR 信心 76.9%；狀態 `required`。
+- PDF 第 303 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 33.4%；狀態 `required`。
+- PDF 第 304 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 81.4%；狀態 `required`。
+- PDF 第 309 頁：例 4.32；特徵 `example-label`；OCR 信心 82.8%；狀態 `required`。
+- PDF 第 310 頁：未辨識標籤；特徵 `code`；OCR 信心 74.9%；狀態 `required`。
+- PDF 第 318 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 77.3%；狀態 `required`。
+- PDF 第 319 頁：例 4.47；特徵 `example-label`；OCR 信心 41.6%；狀態 `required`。
+- PDF 第 320 頁：未辨識標籤；特徵 `code`；OCR 信心 64.4%；狀態 `required`。
+- PDF 第 322 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 65.6%；狀態 `required`。
+- PDF 第 326 頁：例 4.48；特徵 `example-label`；OCR 信心 87.2%；狀態 `required`。
+- PDF 第 328 頁：例 4.48；特徵 `example-label`；OCR 信心 82.8%；狀態 `required`。
+- PDF 第 329 頁：未辨識標籤；特徵 `code`；OCR 信心 48.6%；狀態 `required`。
+- PDF 第 330 頁：未辨識標籤；特徵 `code`；OCR 信心 63.1%；狀態 `required`。
+- PDF 第 332 頁：未辨識標籤；特徵 `code`；OCR 信心 78.0%；狀態 `required`。
+- PDF 第 337 頁：例 5.1；特徵 `example-label、external-oj`；OCR 信心 76.0%；狀態 `required`。
+- PDF 第 340 頁：未辨識標籤；特徵 `code`；OCR 信心 70.8%；狀態 `required`。
+- PDF 第 344 頁：例 5.3；特徵 `example-label、code`；OCR 信心 69.2%；狀態 `required`。
+- PDF 第 346 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 82.5%；狀態 `required`。
+- PDF 第 347 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 78.3%；狀態 `required`。
+- PDF 第 348 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 83.4%；狀態 `required`。
+- PDF 第 350 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 76.5%；狀態 `required`。
+- PDF 第 351 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 79.3%；狀態 `required`。
+- PDF 第 354 頁：未辨識標籤；特徵 `code`；OCR 信心 84.5%；狀態 `required`。
+- PDF 第 356 頁：例 5.5；特徵 `example-label、code`；OCR 信心 84.3%；狀態 `required`。
+- PDF 第 357 頁：例 5.6；特徵 `example-label`；OCR 信心 49.1%；狀態 `required`。
+- PDF 第 358 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 57.9%；狀態 `required`。
+- PDF 第 360 頁：未辨識標籤；特徵 `code`；OCR 信心 81.3%；狀態 `required`。
+- PDF 第 362 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 75.7%；狀態 `required`。
+- PDF 第 364 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 67.3%；狀態 `required`。
+- PDF 第 365 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 57.7%；狀態 `required`。
+- PDF 第 366 頁：未辨識標籤；特徵 `code`；OCR 信心 75.8%；狀態 `required`。
+- PDF 第 368 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 75.7%；狀態 `required`。
+- PDF 第 370 頁：例 5.11；特徵 `example-label`；OCR 信心 80.5%；狀態 `required`。
+- PDF 第 372 頁：例 5.12；特徵 `example-label、external-oj`；OCR 信心 73.4%；狀態 `required`。
+- PDF 第 373 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 34.2%；狀態 `required`。
+- PDF 第 375 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 52.5%；狀態 `required`。
+- PDF 第 376 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 69.8%；狀態 `required`。
+- PDF 第 377 頁：例 5.15；特徵 `example-label`；OCR 信心 65.7%；狀態 `required`。
+- PDF 第 378 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 66.4%；狀態 `required`。
+- PDF 第 380 頁：未辨識標籤；特徵 `code`；OCR 信心 73.5%；狀態 `required`。
+- PDF 第 381 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 60.2%；狀態 `required`。
+- PDF 第 382 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 83.0%；狀態 `required`。
+- PDF 第 383 頁：未辨識標籤；特徵 `code`；OCR 信心 65.7%；狀態 `required`。
+- PDF 第 384 頁：例 5.19；特徵 `example-label`；OCR 信心 72.3%；狀態 `required`。
+- PDF 第 387 頁：未辨識標籤；特徵 `code`；OCR 信心 71.7%；狀態 `required`。
+- PDF 第 388 頁：未辨識標籤；特徵 `code`；OCR 信心 71.3%；狀態 `required`。
+- PDF 第 390 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 78.4%；狀態 `required`。
+- PDF 第 393 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 76.5%；狀態 `required`。
+- PDF 第 394 頁：未辨識標籤；特徵 `code`；OCR 信心 63.7%；狀態 `required`。
+- PDF 第 400 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 61.6%；狀態 `required`。
+- PDF 第 402 頁：例 5.23；特徵 `example-label、external-oj`；OCR 信心 76.2%；狀態 `required`。
+- PDF 第 403 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 80.6%；狀態 `required`。
+
+### lower
+
+- PDF 第 18 頁：未辨識標籤；特徵 `code`；OCR 信心 81.0%；狀態 `required`。
+- PDF 第 20 頁：未辨識標籤；特徵 `code`；OCR 信心 75.8%；狀態 `required`。
+- PDF 第 23 頁：例 6.1；特徵 `example-label`；OCR 信心 55.3%；狀態 `required`。
+- PDF 第 24 頁：例 6.2；特徵 `example-label、external-oj`；OCR 信心 61.4%；狀態 `required`。
+- PDF 第 25 頁：例 6.3；特徵 `example-label、external-oj`；OCR 信心 75.8%；狀態 `required`。
+- PDF 第 26 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 78.4%；狀態 `required`。
+- PDF 第 27 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 66.8%；狀態 `required`。
+- PDF 第 28 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 80.7%；狀態 `required`。
+- PDF 第 30 頁：未辨識標籤；特徵 `code`；OCR 信心 80.6%；狀態 `required`。
+- PDF 第 31 頁：例 6.5；特徵 `example-label、external-oj`；OCR 信心 80.5%；狀態 `required`。
+- PDF 第 32 頁：例 6.5、例 6.6；特徵 `example-label、external-oj`；OCR 信心 84.5%；狀態 `required`。
+- PDF 第 33 頁：例 6.7；特徵 `example-label、code`；OCR 信心 82.8%；狀態 `required`。
+- PDF 第 36 頁：未辨識標籤；特徵 `code`；OCR 信心 87.4%；狀態 `required`。
+- PDF 第 37 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 77.9%；狀態 `required`。
+- PDF 第 38 頁：未辨識標籤；特徵 `code`；OCR 信心 72.2%；狀態 `required`。
+- PDF 第 40 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 76.2%；狀態 `required`。
+- PDF 第 41 頁：未辨識標籤；特徵 `code`；OCR 信心 59.7%；狀態 `required`。
+- PDF 第 42 頁：未辨識標籤；特徵 `code`；OCR 信心 77.5%；狀態 `required`。
+- PDF 第 44 頁：未辨識標籤；特徵 `code`；OCR 信心 78.7%；狀態 `required`。
+- PDF 第 46 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 67.6%；狀態 `required`。
+- PDF 第 47 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 71.2%；狀態 `required`。
+- PDF 第 48 頁：例 6.13、例 6.14；特徵 `example-label、external-oj`；OCR 信心 78.5%；狀態 `required`。
+- PDF 第 50 頁：例 6.16；特徵 `example-label、external-oj、code`；OCR 信心 75.2%；狀態 `required`。
+- PDF 第 55 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 49.5%；狀態 `required`。
+- PDF 第 56 頁：例 6.21、例 6.22；特徵 `example-label、external-oj、code`；OCR 信心 62.1%；狀態 `required`。
+- PDF 第 57 頁：例 6.23；特徵 `example-label`；OCR 信心 76.6%；狀態 `required`。
+- PDF 第 58 頁：未辨識標籤；特徵 `code`；OCR 信心 65.3%；狀態 `required`。
+- PDF 第 61 頁：未辨識標籤；特徵 `code`；OCR 信心 38.8%；狀態 `required`。
+- PDF 第 62 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 73.1%；狀態 `required`。
+- PDF 第 63 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 78.6%；狀態 `required`。
+- PDF 第 64 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 84.5%；狀態 `required`。
+- PDF 第 67 頁：未辨識標籤；特徵 `code`；OCR 信心 44.7%；狀態 `required`。
+- PDF 第 72 頁：未辨識標籤；特徵 `code`；OCR 信心 80.5%；狀態 `required`。
+- PDF 第 73 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 48.7%；狀態 `required`。
+- PDF 第 74 頁：例 6.26；特徵 `example-label、external-oj`；OCR 信心 64.2%；狀態 `required`。
+- PDF 第 75 頁：例 6.28；特徵 `example-label、external-oj`；OCR 信心 65.9%；狀態 `required`。
+- PDF 第 78 頁：例 6.29；特徵 `example-label`；OCR 信心 70.9%；狀態 `required`。
+- PDF 第 81 頁：未辨識標籤；特徵 `code`；OCR 信心 61.1%；狀態 `required`。
+- PDF 第 85 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 71.2%；狀態 `required`。
+- PDF 第 88 頁：例 6.30；特徵 `example-label`；OCR 信心 63.9%；狀態 `required`。
+- PDF 第 90 頁：未辨識標籤；特徵 `code`；OCR 信心 64.7%；狀態 `required`。
+- PDF 第 91 頁：未辨識標籤；特徵 `code`；OCR 信心 66.2%；狀態 `required`。
+- PDF 第 92 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 76.4%；狀態 `required`。
+- PDF 第 97 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 81.0%；狀態 `required`。
+- PDF 第 99 頁：未辨識標籤；特徵 `code`；OCR 信心 78.1%；狀態 `required`。
+- PDF 第 100 頁：例 7.2；特徵 `example-label、code`；OCR 信心 74.5%；狀態 `required`。
+- PDF 第 101 頁：未辨識標籤；特徵 `code`；OCR 信心 48.6%；狀態 `required`。
+- PDF 第 103 頁：未辨識標籤；特徵 `code`；OCR 信心 68.0%；狀態 `required`。
+- PDF 第 104 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 70.2%；狀態 `required`。
+- PDF 第 106 頁：例 7.7；特徵 `example-label`；OCR 信心 75.3%；狀態 `required`。
+- PDF 第 114 頁：例 7.10；特徵 `example-label`；OCR 信心 79.9%；狀態 `required`。
+- PDF 第 122 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 71.0%；狀態 `required`。
+- PDF 第 123 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 65.7%；狀態 `required`。
+- PDF 第 124 頁：例 7.13；特徵 `example-label、external-oj、code`；OCR 信心 70.9%；狀態 `required`。
+- PDF 第 126 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 67.4%；狀態 `required`。
+- PDF 第 130 頁：例 7.15；特徵 `example-label、external-oj`；OCR 信心 66.0%；狀態 `required`。
+- PDF 第 131 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 79.1%；狀態 `required`。
+- PDF 第 132 頁：例 7.17；特徵 `example-label`；OCR 信心 78.4%；狀態 `required`。
+- PDF 第 134 頁：例 7.18；特徵 `example-label、external-oj`；OCR 信心 84.1%；狀態 `required`。
+- PDF 第 137 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 61.4%；狀態 `required`。
+- PDF 第 138 頁：例 7.20；特徵 `example-label、external-oj、code`；OCR 信心 76.6%；狀態 `required`。
+- PDF 第 139 頁：例 1.618；特徵 `example-label、code`；OCR 信心 67.9%；狀態 `required`。
+- PDF 第 147 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 59.6%；狀態 `required`。
+- PDF 第 148 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 72.0%；狀態 `required`。
+- PDF 第 149 頁：未辨識標籤；特徵 `code`；OCR 信心 73.7%；狀態 `required`。
+- PDF 第 150 頁：未辨識標籤；特徵 `code`；OCR 信心 82.4%；狀態 `required`。
+- PDF 第 152 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 82.3%；狀態 `required`。
+- PDF 第 153 頁：未辨識標籤；特徵 `code`；OCR 信心 73.8%；狀態 `required`。
+- PDF 第 154 頁：未辨識標籤；特徵 `code`；OCR 信心 68.3%；狀態 `required`。
+- PDF 第 155 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 47.4%；狀態 `required`。
+- PDF 第 156 頁：未辨識標籤；特徵 `code`；OCR 信心 77.4%；狀態 `required`。
+- PDF 第 157 頁：未辨識標籤；特徵 `code`；OCR 信心 69.1%；狀態 `required`。
+- PDF 第 158 頁：例 8.5；特徵 `example-label`；OCR 信心 83.7%；狀態 `required`。
+- PDF 第 159 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 82.0%；狀態 `required`。
+- PDF 第 160 頁：例 8.6；特徵 `example-label、external-oj`；OCR 信心 83.2%；狀態 `required`。
+- PDF 第 161 頁：未辨識標籤；特徵 `code`；OCR 信心 40.4%；狀態 `required`。
+- PDF 第 162 頁：未辨識標籤；特徵 `code`；OCR 信心 70.8%；狀態 `required`。
+- PDF 第 163 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 55.0%；狀態 `required`。
+- PDF 第 165 頁：例 8.7；特徵 `example-label、code`；OCR 信心 66.8%；狀態 `required`。
+- PDF 第 166 頁：未辨識標籤；特徵 `code`；OCR 信心 75.8%；狀態 `required`。
+- PDF 第 169 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 58.3%；狀態 `required`。
+- PDF 第 171 頁：例 8.8；特徵 `example-label、external-oj`；OCR 信心 67.7%；狀態 `required`。
+- PDF 第 172 頁：未辨識標籤；特徵 `code`；OCR 信心 77.6%；狀態 `required`。
+- PDF 第 173 頁：例 8.9；特徵 `example-label、external-oj`；OCR 信心 77.5%；狀態 `required`。
+- PDF 第 174 頁：未辨識標籤；特徵 `code`；OCR 信心 67.0%；狀態 `required`。
+- PDF 第 175 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 31.2%；狀態 `required`。
+- PDF 第 176 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 70.1%；狀態 `required`。
+- PDF 第 178 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 79.6%；狀態 `required`。
+- PDF 第 180 頁：未辨識標籤；特徵 `code`；OCR 信心 78.9%；狀態 `required`。
+- PDF 第 181 頁：未辨識標籤；特徵 `code`；OCR 信心 49.9%；狀態 `required`。
+- PDF 第 183 頁：未辨識標籤；特徵 `code`；OCR 信心 67.5%；狀態 `required`。
+- PDF 第 184 頁：例 9.3；特徵 `example-label、code`；OCR 信心 74.6%；狀態 `required`。
+- PDF 第 185 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 74.8%；狀態 `required`。
+- PDF 第 187 頁：例 9.4；特徵 `example-label`；OCR 信心 78.6%；狀態 `required`。
+- PDF 第 188 頁：例 9.4；特徵 `example-label、code`；OCR 信心 63.5%；狀態 `required`。
+- PDF 第 189 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 81.4%；狀態 `required`。
+- PDF 第 190 頁：例 9.5；特徵 `example-label`；OCR 信心 85.6%；狀態 `required`。
+- PDF 第 191 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 62.1%；狀態 `required`。
+- PDF 第 197 頁：例 9.6；特徵 `example-label、external-oj`；OCR 信心 35.4%；狀態 `required`。
+- PDF 第 198 頁：未辨識標籤；特徵 `code`；OCR 信心 74.2%；狀態 `required`。
+- PDF 第 202 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 68.6%；狀態 `required`。
+- PDF 第 203 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 48.8%；狀態 `required`。
+- PDF 第 204 頁：例 9.8；特徵 `example-label、code`；OCR 信心 76.5%；狀態 `required`。
+- PDF 第 206 頁：例 9.10；特徵 `example-label、external-oj`；OCR 信心 76.4%；狀態 `required`。
+- PDF 第 209 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 81.2%；狀態 `required`。
+- PDF 第 210 頁：未辨識標籤；特徵 `code`；OCR 信心 69.0%；狀態 `required`。
+- PDF 第 211 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 56.0%；狀態 `required`。
+- PDF 第 212 頁：未辨識標籤；特徵 `code`；OCR 信心 70.3%；狀態 `required`。
+- PDF 第 216 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 75.7%；狀態 `required`。
+- PDF 第 217 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 72.7%；狀態 `required`。
+- PDF 第 218 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 69.2%；狀態 `required`。
+- PDF 第 219 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 75.4%；狀態 `required`。
+- PDF 第 220 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 73.3%；狀態 `required`。
+- PDF 第 226 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 80.1%；狀態 `required`。
+- PDF 第 227 頁：未辨識標籤；特徵 `code`；OCR 信心 53.8%；狀態 `required`。
+- PDF 第 228 頁：未辨識標籤；特徵 `code`；OCR 信心 64.2%；狀態 `required`。
+- PDF 第 234 頁：未辨識標籤；特徵 `code`；OCR 信心 77.3%；狀態 `required`。
+- PDF 第 238 頁：例 10.1；特徵 `example-label、external-oj、code`；OCR 信心 78.7%；狀態 `required`。
+- PDF 第 239 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 21.6%；狀態 `required`。
+- PDF 第 240 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 87.2%；狀態 `required`。
+- PDF 第 241 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 69.3%；狀態 `required`。
+- PDF 第 242 頁：例 10.2；特徵 `example-label、code`；OCR 信心 69.7%；狀態 `required`。
+- PDF 第 243 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 75.7%；狀態 `required`。
+- PDF 第 245 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 59.0%；狀態 `required`。
+- PDF 第 248 頁：未辨識標籤；特徵 `code`；OCR 信心 68.0%；狀態 `required`。
+- PDF 第 250 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 72.3%；狀態 `required`。
+- PDF 第 254 頁：未辨識標籤；特徵 `code`；OCR 信心 80.9%；狀態 `required`。
+- PDF 第 256 頁：例 10.6；特徵 `example-label、code`；OCR 信心 67.8%；狀態 `required`。
+- PDF 第 257 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 83.4%；狀態 `required`。
+- PDF 第 258 頁：例 10.7、例 5.15；特徵 `example-label`；OCR 信心 81.7%；狀態 `required`。
+- PDF 第 259 頁：未辨識標籤；特徵 `code`；OCR 信心 39.3%；狀態 `required`。
+- PDF 第 262 頁：未辨識標籤；特徵 `code`；OCR 信心 74.9%；狀態 `required`。
+- PDF 第 263 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 58.5%；狀態 `required`。
+- PDF 第 267 頁：未辨識標籤；特徵 `code`；OCR 信心 34.8%；狀態 `required`。
+- PDF 第 268 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 78.7%；狀態 `required`。
+- PDF 第 269 頁：例 10.11；特徵 `example-label`；OCR 信心 32.9%；狀態 `required`。
+- PDF 第 271 頁：未辨識標籤；特徵 `code`；OCR 信心 56.8%；狀態 `required`。
+- PDF 第 272 頁：例 10.13；特徵 `example-label、external-oj`；OCR 信心 76.5%；狀態 `required`。
+- PDF 第 273 頁：未辨識標籤；特徵 `code`；OCR 信心 46.6%；狀態 `required`。
+- PDF 第 275 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 76.4%；狀態 `required`。
+- PDF 第 277 頁：未辨識標籤；特徵 `code`；OCR 信心 68.8%；狀態 `required`。
+- PDF 第 278 頁：例 10.15；特徵 `example-label、external-oj、code`；OCR 信心 82.9%；狀態 `required`。
+- PDF 第 279 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 32.3%；狀態 `required`。
+- PDF 第 280 頁：例 10.14；特徵 `example-label、external-oj、code`；OCR 信心 88.2%；狀態 `required`。
+- PDF 第 282 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 80.2%；狀態 `required`。
+- PDF 第 283 頁：未辨識標籤；特徵 `code`；OCR 信心 66.1%；狀態 `required`。
+- PDF 第 284 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 85.9%；狀態 `required`。
+- PDF 第 285 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 76.4%；狀態 `required`。
+- PDF 第 286 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 80.9%；狀態 `required`。
+- PDF 第 290 頁：例 10.18；特徵 `example-label、code`；OCR 信心 78.0%；狀態 `required`。
+- PDF 第 291 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 55.1%；狀態 `required`。
+- PDF 第 292 頁：例 10.19；特徵 `example-label、external-oj`；OCR 信心 85.0%；狀態 `required`。
+- PDF 第 293 頁：例 10.20；特徵 `example-label、external-oj`；OCR 信心 81.7%；狀態 `required`。
+- PDF 第 296 頁：未辨識標籤；特徵 `code`；OCR 信心 81.7%；狀態 `required`。
+- PDF 第 298 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 85.2%；狀態 `required`。
+- PDF 第 299 頁：未辨識標籤；特徵 `code`；OCR 信心 33.7%；狀態 `required`。
+- PDF 第 302 頁：未辨識標籤；特徵 `code`；OCR 信心 74.3%；狀態 `required`。
+- PDF 第 304 頁：未辨識標籤；特徵 `code`；OCR 信心 84.8%；狀態 `required`。
+- PDF 第 305 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 82.1%；狀態 `required`。
+- PDF 第 306 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 83.9%；狀態 `required`。
+- PDF 第 308 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 79.1%；狀態 `required`。
+- PDF 第 309 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 86.8%；狀態 `required`。
+- PDF 第 310 頁：例 10.22；特徵 `example-label、external-oj`；OCR 信心 85.6%；狀態 `required`。
+- PDF 第 311 頁：未辨識標籤；特徵 `external-oj、code`；OCR 信心 72.0%；狀態 `required`。
+- PDF 第 312 頁：未辨識標籤；特徵 `code`；OCR 信心 68.3%；狀態 `required`。
+- PDF 第 316 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 88.0%；狀態 `required`。
+- PDF 第 318 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 74.8%；狀態 `required`。
+- PDF 第 319 頁：未辨識標籤；特徵 `external-oj`；OCR 信心 63.7%；狀態 `required`。
+- PDF 第 320 頁：未辨識標籤；特徵 `code`；OCR 信心 76.0%；狀態 `required`。
+
+## 固定待確認項目
+
+- 上冊 PDF 第 403 頁是否完整對應書本第 385 頁。
+- 下冊 PDF 第 323 頁是否完整對應附錄書本第 693 頁。
+- 所有公式、程式碼區塊、例題框、樣例與外部 URL 必須逐項人工比對。
+- QR code 僅可在本機解碼；確認為合法公開連結後才可加入文字連結，QR 圖片不得發布。

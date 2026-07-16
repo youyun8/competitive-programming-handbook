@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/site';
+
+const lessons = await getCollection('lessons');
+const orderedIds = [
+  'binary-search',
+  'bfs-dfs',
+  'union-find',
+  'segment-tree',
+  'lca',
+  'dynamic-programming',
+  'fast-power',
+  'extended-gcd',
+  'convex-hull',
+  'kmp',
+  'dijkstra',
+  'max-flow'
+];
+const ordered = orderedIds
+  .map((id) => lessons.find((lesson) => lesson.data.id === id))
+  .filter(Boolean);
+---
+
+<BaseLayout title="學習路線" wide>
+  <p class="eyebrow">Learning paths</p>
+  <h1>依先備關係前進</h1>
+  <p class="lede">頁碼適合查來源；真正學習時，先備關係比書本順序更重要。</p>
+  <ol class="section-list">
+    {
+      ordered.map(
+        (lesson, index) =>
+          lesson && (
+            <li class="card">
+              <p class="eyebrow">
+                Step {index + 1} · 第 {lesson.data.chapter} 章
+              </p>
+              <h2>
+                <a href={withBase(`/lessons/${lesson.data.id}/`)}>{lesson.data.title}</a>
+              </h2>
+              <p>{lesson.data.summary}</p>
+              <p class="meta">
+                <span>先備：{lesson.data.prerequisites.join('、') || '基礎 C++'}</span>
+                <span>來源書頁 {lesson.data.source_book_pages.join('–')}</span>
+              </p>
+            </li>
+          )
+      )
+    }
+  </ol>
+</BaseLayout>

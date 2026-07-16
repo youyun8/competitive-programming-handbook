@@ -1,0 +1,58 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { curriculum, type Volume } from '@/lib/curriculum';
+import { withBase } from '@/lib/site';
+
+export function getStaticPaths() {
+  return (['upper', 'lower'] as const).map((volume) => ({ params: { volume } }));
+}
+
+const volume = Astro.params.volume as Volume;
+const info = curriculum.volumes[volume];
+const chapters = curriculum.chapters.filter((chapter) => chapter.volume === volume);
+---
+
+<BaseLayout title={info.display_name} wide>
+  <nav class="breadcrumb" aria-label="麵包屑">
+    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><span>{info.display_name}</span
+    >
+  </nav>
+  <p class="eyebrow">{volume === 'upper' ? 'Volume I' : 'Volume II'}</p>
+  <h1>{info.display_name}</h1>
+  <p class="lede">
+    {
+      volume === 'upper'
+        ? '從基礎資料結構、基本演算法與搜尋，建立進階資料結構和動態規劃的先備能力。'
+        : '承接第 6 章，涵蓋數論、組合、幾何、字串、圖論與改寫為 C++ 的競賽工程附錄。'
+    }
+  </p>
+  <div class="meta">
+    <span>{chapters.length} 章</span><span
+      >{chapters.reduce((sum, item) => sum + item.sections.length, 0)} 節</span
+    ><span>來源 PDF {info.pdf_pages} 頁</span>
+  </div>
+  <div class="grid" style="margin-top:2rem">
+    {
+      chapters.map((chapter) => (
+        <article class="card">
+          <p class="eyebrow">第 {chapter.chapter} 章</p>
+          <h2>
+            <a href={withBase(`/chapters/${chapter.chapter}/`)}>{chapter.title}</a>
+          </h2>
+          <p>{chapter.sections.map((section) => section.title).join('、')}</p>
+        </article>
+      ))
+    }
+  </div>
+  {
+    volume === 'lower' && (
+      <article class="card" style="margin-top:1rem">
+        <p class="eyebrow">Appendix A</p>
+        <h2>
+          <a href={withBase('/appendix/')}>C++ 競賽工程技巧</a>
+        </h2>
+        <p>大數、可重現測資、差分對拍與高效 I/O；不要求讀者使用 Python。</p>
+      </article>
+    )
+  }
+</BaseLayout>

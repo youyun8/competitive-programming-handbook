@@ -1,0 +1,39 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/site';
+
+const patterns = [
+  ['雙指標與滑動視窗', '當左右端點只會單向移動時，把重複掃描降成線性。', '/lessons/section-2-2/'],
+  ['答案二分', '把最佳化問題改寫成具有單調性的可行性判定。', '/lessons/binary-search/'],
+  ['BFS 分層', '所有邊代價相同時，frontier 的層數就是最少步數。', '/lessons/bfs-dfs/'],
+  [
+    '延遲決策',
+    '先保留可能性，到資訊足夠時再決定；常見於貪心與資料結構。',
+    '/lessons/section-2-10/'
+  ],
+  ['單調結構', '刪掉永遠不可能成為答案的候選，維持堆疊或佇列的單調性。', '/lessons/section-1-2/'],
+  ['模運算', '在等價類中計算；乘法可分配，除法需要逆元。', '/lessons/fast-power/'],
+  ['字串匹配', '利用已匹配部分的結構，避免文字指標回退。', '/lessons/kmp/'],
+  ['圖連通性', '把「同組」分成靜態走訪、只合併、強連通與動態森林。', '/lessons/union-find/'],
+  ['殘量網路', '保留撤回已做選擇的能力，把局部增廣組合成全域最大流。', '/lessons/max-flow/']
+];
+---
+
+<BaseLayout title="跨章解題模式" wide>
+  <p class="eyebrow">Patterns</p>
+  <h1>跨章解題模式</h1>
+  <p class="lede">同一個思考模式會在不同章節反覆出現。先辨認模式，再選資料結構與演算法。</p>
+  <div class="grid">
+    {
+      patterns.map(([title, description, href]) => (
+        <article class="card">
+          <>
+            <h2>{title}</h2>
+            <p>{description}</p>
+            <a href={withBase(href)}>查看相關教學 →</a>
+          </>
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>

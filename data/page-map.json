@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "notes": [
+    "Page maps apply only to body pages; covers, front matter, tables of contents, and back matter are explicit exceptions.",
+    "Upper body mapping is approximately PDF page = book page + 18.",
+    "Lower body mapping is approximately PDF page = book page - 370."
+  ],
+  "upper": {
+    "source_file": "upper-volume",
+    "pdf_pages": 406,
+    "toc_pdf_pages": [11, 17],
+    "body_segments": [
+      { "book_pages": [1, 385], "pdf_pages": [19, 403], "offset": 18, "status": "sampled" }
+    ],
+    "checks": [
+      {
+        "label": "chapter-1-start",
+        "book_page": 1,
+        "pdf_page": 19,
+        "status": "verified-by-metadata-and-user-map"
+      },
+      { "label": "chapter-2-start", "book_page": 33, "pdf_page": 51, "status": "toc-ocr-sampled" },
+      { "label": "chapter-3-start", "book_page": 97, "pdf_page": 115, "status": "toc-ocr-sampled" },
+      {
+        "label": "chapter-4-start",
+        "book_page": 151,
+        "pdf_page": 169,
+        "status": "toc-ocr-sampled"
+      },
+      {
+        "label": "chapter-5-start",
+        "book_page": 316,
+        "pdf_page": 334,
+        "status": "toc-ocr-sampled"
+      },
+      { "label": "body-end", "book_page": 385, "pdf_page": 403, "status": "needs-visual-review" }
+    ]
+  },
+  "lower": {
+    "source_file": "lower-volume",
+    "pdf_pages": 330,
+    "toc_pdf_pages": [11, 16],
+    "chapter_cover_pdf_page": 17,
+    "body_segments": [
+      { "book_pages": [387, 693], "pdf_pages": [17, 323], "offset": -370, "status": "sampled" }
+    ],
+    "checks": [
+      {
+        "label": "chapter-6-cover",
+        "book_page": 387,
+        "pdf_page": 17,
+        "status": "verified-by-user-map"
+      },
+      {
+        "label": "chapter-6-body-sample",
+        "book_page": 388,
+        "pdf_page": 18,
+        "status": "ocr-verified"
+      },
+      { "label": "chapter-7-start", "book_page": 463, "pdf_page": 93, "status": "toc-ocr-sampled" },
+      {
+        "label": "chapter-8-start",
+        "book_page": 510,
+        "pdf_page": 140,
+        "status": "toc-ocr-sampled"
+      },
+      {
+        "label": "chapter-9-start",
+        "book_page": 549,
+        "pdf_page": 179,
+        "status": "toc-ocr-sampled"
+      },
+      {
+        "label": "chapter-10-start",
+        "book_page": 600,
+        "pdf_page": 230,
+        "status": "toc-ocr-sampled"
+      },
+      { "label": "appendix-start", "book_page": 684, "pdf_page": 314, "status": "toc-ocr-sampled" },
+      {
+        "label": "appendix-end",
+        "book_page": 693,
+        "pdf_page": 323,
+        "status": "needs-visual-review"
+      }
+    ]
+  }
+}

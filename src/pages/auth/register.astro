@@ -1,0 +1,11 @@
+---
+import AuthForm from '@/components/auth/AuthForm';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/site';
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout title="註冊">
+  <AuthForm client:load mode="register" basePath={basePath} />
+  <p>已經有帳戶？<a href={withBase('/auth/login/')}>登入</a></p>
+</BaseLayout>
