@@ -12,7 +12,7 @@ concepts: [residual-network, augmenting-path, blocking-flow]
 complexity:
   time: O(V^2 E) general
   space: O(V + E)
-related_exercises: []
+related_exercises: ['mst-kruskal']
 source_book_pages: [600, 683]
 source_pdf_pages: [230, 313]
 review_status: verified

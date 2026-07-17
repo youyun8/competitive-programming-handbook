@@ -12,7 +12,7 @@ concepts: [range-query, monoid, lazy-propagation]
 complexity:
   time: O(log n) per query or update
   space: O(n)
-related_exercises: []
+related_exercises: ['fenwick-tree-query']
 source_book_pages: [151, 314]
 source_pdf_pages: [169, 332]
 review_status: verified

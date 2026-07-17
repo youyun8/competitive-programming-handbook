@@ -13,7 +13,7 @@ const lessons = defineCollection({
     volume,
     source_file: z.string().min(1),
     chapter: z.number().int().min(1).max(10),
-    section: z.string().regex(/^(?:[1-9]|10)\.\d+$/),
+    section: z.string().regex(/^((?:[1-9]|10)\.\d+|A\.\d+)$/),
     title: z.string().min(1),
     summary: z.string().min(1),
     prerequisites: z.array(z.string()),

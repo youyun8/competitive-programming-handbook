@@ -12,7 +12,7 @@ concepts: [cross-product, orientation, monotone-chain]
 complexity:
   time: O(n log n)
   space: O(n)
-related_exercises: []
+related_exercises: ['convex-hull-points']
 source_book_pages: [510, 548]
 source_pdf_pages: [140, 178]
 review_status: verified

@@ -12,7 +12,7 @@ concepts: [border, prefix-function, pattern-matching]
 complexity:
   time: O(n + m)
   space: O(m)
-related_exercises: []
+related_exercises: ['kmp-pattern-match']
 source_book_pages: [549, 599]
 source_pdf_pages: [179, 229]
 review_status: verified

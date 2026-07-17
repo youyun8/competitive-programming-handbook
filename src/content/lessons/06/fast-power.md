@@ -12,7 +12,7 @@ concepts: [modulo, exponentiation-by-squaring]
 complexity:
   time: O(log exponent)
   space: O(1)
-related_exercises: []
+related_exercises: ['modular-power']
 source_book_pages: [387, 461]
 source_pdf_pages: [17, 91]
 review_status: verified

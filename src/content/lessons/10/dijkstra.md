@@ -12,7 +12,7 @@ concepts: [shortest-path, relaxation, greedy]
 complexity:
   time: O((V + E) log V)
   space: O(V + E)
-related_exercises: []
+related_exercises: ['zero-one-bfs-shortest']
 source_book_pages: [600, 683]
 source_pdf_pages: [230, 313]
 review_status: verified

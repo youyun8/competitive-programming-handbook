@@ -12,7 +12,7 @@ concepts: [state, transition, optimal-substructure, overlapping-subproblems]
 complexity:
   time: states × transitions
   space: number of stored states
-related_exercises: []
+related_exercises: ['dp-knapsack-01']
 source_book_pages: [316, 385]
 source_pdf_pages: [334, 403]
 review_status: verified
