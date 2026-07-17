@@ -14,8 +14,8 @@ int main() {
         std::cin >> value;
         sum += value;
     }
-    double average = count == 0 ? 0.0 : static_cast<double>(sum) / count;
+    const double average =
+        count == 0 ? 0.0 : static_cast<double>(sum) / static_cast<double>(count);
     std::cout << sum << '\n';
     std::cout << std::fixed << std::setprecision(3) << average << '\n';
 }
-

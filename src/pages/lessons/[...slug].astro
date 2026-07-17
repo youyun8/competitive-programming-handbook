@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import SectionGuide from '@/components/lessons/SectionGuide.astro';
+import TextbookPractice from '@/components/lessons/TextbookPractice.astro';
 import AlgorithmVisualizer from '@/components/visualizers/AlgorithmVisualizer';
 import ProgressActions from '@/components/progress/ProgressActions';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -77,6 +78,7 @@ const next = allSections[currentIndex + 1];
       </>
     )
   }
+  <TextbookPractice chapter={chapter} section={section} />
   <nav class="page-actions" aria-label="前後教學">
     {
       previous && (

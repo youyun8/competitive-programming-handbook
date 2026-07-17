@@ -46,15 +46,45 @@ visualizer: fast-power
 ## C++17 模板
 
 ```cpp
+#include <cstdint>
+
+std::uint64_t add_mod(
+    std::uint64_t left,
+    std::uint64_t right,
+    std::uint64_t modulus
+) {
+    return left >= modulus - right ? left - (modulus - right) : left + right;
+}
+
+long long multiply_mod(long long left, long long right, long long modulus) {
+    std::uint64_t multiplicand = static_cast<std::uint64_t>(left);
+    std::uint64_t multiplier = static_cast<std::uint64_t>(right);
+    const std::uint64_t unsigned_modulus = static_cast<std::uint64_t>(modulus);
+    std::uint64_t result = 0;
+
+    while (multiplier > 0) {
+        if ((multiplier & 1U) != 0U) {
+            result = add_mod(result, multiplicand, unsigned_modulus);
+        }
+        multiplier >>= 1U;
+        if (multiplier > 0) {
+            multiplicand = add_mod(multiplicand, multiplicand, unsigned_modulus);
+        }
+    }
+    return static_cast<long long>(result);
+}
+
 long long modular_power(long long base, long long exponent, long long modulus) {
     base %= modulus;
-    if (base < 0) base += modulus;
+    if (base < 0) {
+        base += modulus;
+    }
     long long result = 1 % modulus;
     while (exponent > 0) {
-        if (exponent & 1LL) {
-            result = static_cast<long long>((__int128)result * base % modulus);
+        if ((exponent & 1LL) != 0) {
+            result = multiply_mod(result, base, modulus);
         }
-        base = static_cast<long long>((__int128)base * base % modulus);
+        base = multiply_mod(base, base, modulus);
         exponent >>= 1;
     }
     return result;

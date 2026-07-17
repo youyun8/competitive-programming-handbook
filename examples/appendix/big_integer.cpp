@@ -5,7 +5,9 @@ using boost::multiprecision::cpp_int;
 
 cpp_int factorial(int number) {
     cpp_int result = 1;
-    for (int value = 2; value <= number; ++value) result *= value;
+    for (int value = 2; value <= number; ++value) {
+        result *= value;
+    }
     return result;
 }
 
@@ -14,4 +16,3 @@ int main() {
     std::cin >> number;
     std::cout << factorial(number) << '\n';
 }
-

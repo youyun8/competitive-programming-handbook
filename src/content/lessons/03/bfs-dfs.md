@@ -54,15 +54,20 @@ std::vector<int> bfs_distance(const std::vector<std::vector<int>>& graph, int so
     std::queue<int> frontier;
     distance[source] = 0;
     frontier.push(source);
+
     while (!frontier.empty()) {
-        int node = frontier.front();
+        const int node = frontier.front();
         frontier.pop();
-        for (int next : graph[node]) {
-            if (distance[next] != -1) continue;
+
+        for (const int next : graph[node]) {
+            if (distance[next] != -1) {
+                continue;
+            }
             distance[next] = distance[node] + 1;
             frontier.push(next);
         }
     }
+
     return distance;
 }
 ```

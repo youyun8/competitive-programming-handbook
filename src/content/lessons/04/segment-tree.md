@@ -46,16 +46,23 @@ visualizer: segment-tree
 ## C++17 模板
 
 ```cpp
+#include <algorithm>
 #include <vector>
 
 class SegmentTree {
 public:
     explicit SegmentTree(const std::vector<long long>& values)
-        : size(static_cast<int>(values.size())), tree(size * 4) {
-        build(1, 0, size, values);
+        : size(static_cast<int>(values.size())),
+          tree(static_cast<std::size_t>(std::max(1, size)) * 4, 0) {
+        if (size > 0) {
+            build(1, 0, size, values);
+        }
     }
 
     long long query(int query_left, int query_right) const {
+        if (size == 0 || query_left >= query_right) {
+            return 0;
+        }
         return query(1, 0, size, query_left, query_right);
     }
 
@@ -75,8 +82,12 @@ private:
     }
 
     long long query(int node, int left, int right, int query_left, int query_right) const {
-        if (query_right <= left || right <= query_left) return 0;
-        if (query_left <= left && right <= query_right) return tree[node];
+        if (query_right <= left || right <= query_left) {
+            return 0;
+        }
+        if (query_left <= left && right <= query_right) {
+            return tree[node];
+        }
         int middle = left + (right - left) / 2;
         return query(node * 2, left, middle, query_left, query_right) +
                query(node * 2 + 1, middle, right, query_left, query_right);

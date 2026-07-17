@@ -53,8 +53,12 @@ std::vector<int> prefix_function(const std::string& pattern) {
     std::vector<int> prefix(pattern.size());
     for (int index = 1; index < static_cast<int>(pattern.size()); ++index) {
         int matched = prefix[index - 1];
-        while (matched > 0 && pattern[index] != pattern[matched]) matched = prefix[matched - 1];
-        if (pattern[index] == pattern[matched]) ++matched;
+        while (matched > 0 && pattern[index] != pattern[matched]) {
+            matched = prefix[matched - 1];
+        }
+        if (pattern[index] == pattern[matched]) {
+            ++matched;
+        }
         prefix[index] = matched;
     }
     return prefix;

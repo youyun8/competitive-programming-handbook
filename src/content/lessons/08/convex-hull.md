@@ -50,10 +50,16 @@ visualizer: convex-hull
 #include <vector>
 
 struct Point {
-    long long x;
-    long long y;
-    bool operator<(const Point& other) const { return x != other.x ? x < other.x : y < other.y; }
-    bool operator==(const Point& other) const { return x == other.x && y == other.y; }
+    long long x = 0;
+    long long y = 0;
+
+    bool operator<(const Point& other) const {
+        return x != other.x ? x < other.x : y < other.y;
+    }
+
+    bool operator==(const Point& other) const {
+        return x == other.x && y == other.y;
+    }
 };
 
 long long cross(const Point& origin, const Point& left, const Point& right) {
@@ -64,10 +70,14 @@ long long cross(const Point& origin, const Point& left, const Point& right) {
 std::vector<Point> convex_hull(std::vector<Point> points) {
     std::sort(points.begin(), points.end());
     points.erase(std::unique(points.begin(), points.end()), points.end());
-    if (points.size() <= 1) return points;
+    if (points.size() <= 1) {
+        return points;
+    }
+
     std::vector<Point> hull;
+
     for (int pass = 0; pass < 2; ++pass) {
-        std::size_t start = hull.size();
+        const std::size_t start = hull.size();
         for (const Point& point : points) {
             while (hull.size() >= start + 2 &&
                    cross(hull[hull.size() - 2], hull.back(), point) <= 0) {
@@ -78,6 +88,7 @@ std::vector<Point> convex_hull(std::vector<Point> points) {
         hull.pop_back();
         std::reverse(points.begin(), points.end());
     }
+
     return hull;
 }
 ```

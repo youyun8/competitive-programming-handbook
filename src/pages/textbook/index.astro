@@ -59,15 +59,20 @@ const chapters = curriculum.chapters.map((chapter) => {
         <h3>教材範例</h3>
         <div class="textbook-item-grid">
           {examples.map((item) => (
-            <article class="textbook-item">
+            <article id={item.id} class="textbook-item">
               <div class="textbook-item-heading">
-                <strong>{item.label}</strong>
+                <strong>
+                  <a href={`#${item.id}`}>{item.label}</a>
+                </strong>
                 <span class="badge">範例</span>
               </div>
               <p>{item.summary}</p>
               <p class="textbook-focus">重點：{item.learning_focus.join('、')}</p>
               <p class="meta">
                 書頁 {item.source_book_pages.join('、')} · PDF 頁 {item.source_pdf_pages.join('、')}
+              </p>
+              <p>
+                <a href={`#${item.id}`}>範例連結</a>
               </p>
             </article>
           ))}
@@ -76,15 +81,20 @@ const chapters = curriculum.chapters.map((chapter) => {
         <h3>教材習題</h3>
         <div class="textbook-item-grid compact">
           {exercises.map((item) => (
-            <article class="textbook-item">
+            <article id={item.id} class="textbook-item">
               <div class="textbook-item-heading">
-                <strong>{item.label}</strong>
+                <strong>
+                  <a href={`#${item.id}`}>{item.label}</a>
+                </strong>
                 <span class="badge">習題</span>
               </div>
               <p>{item.summary}</p>
               <p class="textbook-focus">建議複習：{item.learning_focus.join('、')}</p>
               <p class="meta">
                 書頁 {item.source_book_pages.join('、')} · PDF 頁 {item.source_pdf_pages.join('、')}
+              </p>
+              <p>
+                <a href={`#${item.id}`}>題目連結</a>
               </p>
             </article>
           ))}
@@ -114,6 +124,7 @@ const chapters = curriculum.chapters.map((chapter) => {
     border-radius: 0.6rem;
     background: var(--surface);
     padding: 0.85rem;
+    scroll-margin-top: 5rem;
   }
 
   .textbook-item-heading {

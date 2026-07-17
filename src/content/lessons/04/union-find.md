@@ -46,6 +46,7 @@ visualizer: union-find
 ## C++17 模板
 
 ```cpp
+#include <algorithm>
 #include <numeric>
 #include <vector>
 
@@ -56,15 +57,21 @@ public:
     }
 
     int find(int node) {
-        if (parent[node] != node) parent[node] = find(parent[node]);
+        if (parent[node] != node) {
+            parent[node] = find(parent[node]);
+        }
         return parent[node];
     }
 
     bool unite(int left, int right) {
         left = find(left);
         right = find(right);
-        if (left == right) return false;
-        if (size[left] < size[right]) std::swap(left, right);
+        if (left == right) {
+            return false;
+        }
+        if (size[left] < size[right]) {
+            std::swap(left, right);
+        }
         parent[right] = left;
         size[left] += size[right];
         return true;

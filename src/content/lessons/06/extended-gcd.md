@@ -52,9 +52,10 @@ long long extended_gcd(long long a, long long b, long long& x, long long& y) {
         y = 0;
         return a;
     }
+
     long long next_x = 0;
     long long next_y = 0;
-    long long gcd = extended_gcd(b, a % b, next_x, next_y);
+    const long long gcd = extended_gcd(b, a % b, next_x, next_y);
     x = next_y;
     y = next_x - (a / b) * next_y;
     return gcd;

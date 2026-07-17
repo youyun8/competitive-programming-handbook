@@ -69,10 +69,14 @@ public:
     }
 
     long long max_flow(int source, int sink) {
+        if (source == sink) {
+            return 0;
+        }
         long long total = 0;
         while (build_levels(source, sink)) {
             std::fill(current.begin(), current.end(), 0);
-            while (long long pushed = send_flow(source, sink, std::numeric_limits<long long>::max())) {
+            while (long long pushed =
+                       send_flow(source, sink, std::numeric_limits<long long>::max())) {
                 total += pushed;
             }
         }
@@ -103,12 +107,18 @@ private:
     }
 
     long long send_flow(int node, int sink, long long available) {
-        if (node == sink) return available;
+        if (node == sink) {
+            return available;
+        }
         for (int& index = current[node]; index < static_cast<int>(graph[node].size()); ++index) {
             FlowEdge& edge = graph[node][index];
-            if (edge.capacity == 0 || level[edge.to] != level[node] + 1) continue;
+            if (edge.capacity == 0 || level[edge.to] != level[node] + 1) {
+                continue;
+            }
             long long pushed = send_flow(edge.to, sink, std::min(available, edge.capacity));
-            if (pushed == 0) continue;
+            if (pushed == 0) {
+                continue;
+            }
             edge.capacity -= pushed;
             graph[edge.to][edge.reverse_index].capacity += pushed;
             return pushed;

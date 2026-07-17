@@ -52,26 +52,37 @@ visualizer: dijkstra
 #include <utility>
 #include <vector>
 
-using Edge = std::pair<int, int>;
+struct Edge {
+    int to = 0;
+    int weight = 0;
+};
 
 std::vector<long long> dijkstra(const std::vector<std::vector<Edge>>& graph, int source) {
     const long long infinity = std::numeric_limits<long long>::max() / 4;
     std::vector<long long> distance(graph.size(), infinity);
     using QueueItem = std::pair<long long, int>;
     std::priority_queue<QueueItem, std::vector<QueueItem>, std::greater<QueueItem>> queue;
+
     distance[source] = 0;
     queue.push({0, source});
+
     while (!queue.empty()) {
-        auto [current_distance, node] = queue.top();
+        const auto [current_distance, node] = queue.top();
         queue.pop();
-        if (current_distance != distance[node]) continue;
-        for (auto [next, weight] : graph[node]) {
-            long long candidate = current_distance + weight;
-            if (candidate >= distance[next]) continue;
-            distance[next] = candidate;
-            queue.push({candidate, next});
+
+        if (current_distance != distance[node]) {
+            continue;
+        }
+        for (const Edge& edge : graph[node]) {
+            const long long candidate = current_distance + edge.weight;
+            if (candidate >= distance[edge.to]) {
+                continue;
+            }
+            distance[edge.to] = candidate;
+            queue.push({candidate, edge.to});
         }
     }
+
     return distance;
 }
 ```

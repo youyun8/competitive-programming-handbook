@@ -38,14 +38,28 @@ for (const [index, source] of sources.entries()) {
   writeFileSync(sourcePath, source.code);
   execFileSync(
     'g++',
-    ['-std=c++17', '-Wall', '-Wextra', '-Werror', '-c', sourcePath, '-o', objectPath],
+    [
+      '-std=c++17',
+      '-pedantic-errors',
+      '-Wall',
+      '-Wextra',
+      '-Wconversion',
+      '-Wshadow',
+      '-Werror',
+      '-c',
+      sourcePath,
+      '-o',
+      objectPath
+    ],
     {
       stdio: 'pipe'
     }
   );
   if (source.sample) {
     const executable = `${outputDirectory}/${index}`;
-    execFileSync('g++', ['-std=c++17', '-O2', sourcePath, '-o', executable], { stdio: 'pipe' });
+    execFileSync('g++', ['-std=c++17', '-pedantic-errors', '-O2', sourcePath, '-o', executable], {
+      stdio: 'pipe'
+    });
     const actual = execFileSync(executable, {
       input: source.sample.input,
       encoding: 'utf8',

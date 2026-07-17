@@ -45,11 +45,16 @@ cpp_solution: |
   int first_not_less(const std::vector<int>& values, int target) {
       int left = 0;
       int right = static_cast<int>(values.size());
+
       while (left < right) {
-          int middle = left + (right - left) / 2;
-          if (values[middle] < target) left = middle + 1;
-          else right = middle;
+          const int middle = left + (right - left) / 2;
+          if (values[middle] < target) {
+              left = middle + 1;
+          } else {
+              right = middle;
+          }
       }
+
       return left == static_cast<int>(values.size()) ? -1 : left;
   }
 
@@ -60,7 +65,11 @@ cpp_solution: |
       int query_count = 0;
       std::cin >> count >> query_count;
       std::vector<int> values(count);
-      for (int& value : values) std::cin >> value;
+
+      for (int& value : values) {
+          std::cin >> value;
+      }
+
       while (query_count--) {
           int target = 0;
           std::cin >> target;

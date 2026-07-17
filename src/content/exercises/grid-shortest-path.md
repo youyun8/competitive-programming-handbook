@@ -46,21 +46,33 @@ cpp_solution: |
       int columns = 0;
       std::cin >> rows >> columns;
       std::vector<std::string> grid(rows);
-      for (std::string& row : grid) std::cin >> row;
+
+      for (std::string& row : grid) {
+          std::cin >> row;
+      }
+
       std::vector<std::vector<int>> distance(rows, std::vector<int>(columns, -1));
       std::queue<std::pair<int, int>> frontier;
       distance[0][0] = 0;
       frontier.push({0, 0});
       const std::array<int, 4> delta_row{-1, 1, 0, 0};
       const std::array<int, 4> delta_column{0, 0, -1, 1};
+
       while (!frontier.empty()) {
-          auto [row, column] = frontier.front();
+          const auto [row, column] = frontier.front();
           frontier.pop();
+
           for (int direction = 0; direction < 4; ++direction) {
-              int next_row = row + delta_row[direction];
-              int next_column = column + delta_column[direction];
-              if (next_row < 0 || next_row >= rows || next_column < 0 || next_column >= columns) continue;
-              if (grid[next_row][next_column] == '#' || distance[next_row][next_column] != -1) continue;
+              const int next_row = row + delta_row[direction];
+              const int next_column = column + delta_column[direction];
+              if (next_row < 0 || next_row >= rows || next_column < 0 ||
+                  next_column >= columns) {
+                  continue;
+              }
+              if (grid[next_row][next_column] == '#' ||
+                  distance[next_row][next_column] != -1) {
+                  continue;
+              }
               distance[next_row][next_column] = distance[row][column] + 1;
               frontier.push({next_row, next_column});
           }

@@ -24,25 +24,52 @@ samples:
 hints:
   - 將 exponent 看成二進位，每輪處理最低位。
   - 負數取模後再加 modulus 以正規化。
-  - 兩個 long long 相乘可能溢位，可用 __int128 承接中間值。
+  - 兩個 long long 相乘可能溢位；可用重複倍增完成可攜式模乘法。
 solution_outline: 維持 result * base^exponent 與原目標同餘；奇數位乘入 result，之後 base 平方且 exponent 右移。
 proof_or_invariant: 每輪把指數最低位拆出，或以 base^e = (base^2)^(e/2) 改寫，因此不變量保持。
 complexity:
   time: O(log exponent)
   space: O(1)
 cpp_solution: |
+  #include <cstdint>
   #include <iostream>
 
+  std::uint64_t add_mod(
+      std::uint64_t left,
+      std::uint64_t right,
+      std::uint64_t modulus
+  ) {
+      return left >= modulus - right ? left - (modulus - right) : left + right;
+  }
+
   long long multiply_mod(long long left, long long right, long long modulus) {
-      return static_cast<long long>((__int128)left * right % modulus);
+      std::uint64_t multiplicand = static_cast<std::uint64_t>(left);
+      std::uint64_t multiplier = static_cast<std::uint64_t>(right);
+      const std::uint64_t unsigned_modulus = static_cast<std::uint64_t>(modulus);
+      std::uint64_t result = 0;
+
+      while (multiplier > 0) {
+          if ((multiplier & 1U) != 0U) {
+              result = add_mod(result, multiplicand, unsigned_modulus);
+          }
+          multiplier >>= 1U;
+          if (multiplier > 0) {
+              multiplicand = add_mod(multiplicand, multiplicand, unsigned_modulus);
+          }
+      }
+      return static_cast<long long>(result);
   }
 
   long long modular_power(long long base, long long exponent, long long modulus) {
       base %= modulus;
-      if (base < 0) base += modulus;
+      if (base < 0) {
+          base += modulus;
+      }
       long long result = 1 % modulus;
       while (exponent > 0) {
-          if (exponent & 1LL) result = multiply_mod(result, base, modulus);
+          if ((exponent & 1LL) != 0) {
+              result = multiply_mod(result, base, modulus);
+          }
           base = multiply_mod(base, base, modulus);
           exponent >>= 1;
       }
