@@ -1,5 +1,4 @@
 ---
-
 id: range-add-difference
 volume: upper
 source_file: upper-volume
@@ -18,7 +17,13 @@ constraints:
 input_format: 第一行為 n 與 q。接下來 q 行各為 l、r、v。
 output_format: 輸出 n 個整數，代表最終陣列。
 samples:
-  - {'input': '5 3\n1 3 2\n2 4 3\n3 5 1', 'output': '2 5 6 4 1', 'explanation': '差分陣列操作後前綴和得到最終陣列。'}
+  - input: |
+      5 3
+      1 3 2
+      2 4 3
+      3 5 1
+    output: 2 5 6 4 1
+    explanation: 差分陣列操作後前綴和得到最終陣列。
 hints:
   - 使用差分陣列：對區間 [l,r] 加 v，只需 diff[l] += v 且 diff[r+1] -= v。
   - 最後對差分陣列做一次前綴和即可得到答案。
@@ -30,7 +35,7 @@ complexity:
 cpp_solution: |
   #include <iostream>
   #include <vector>
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -58,4 +63,3 @@ external_problem_id: P2367
 external_title: 语文成绩
 external_relation: related
 ---
-

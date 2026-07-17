@@ -66,7 +66,8 @@ public:
     }
 
     bool is_ancestor(int ancestor, int descendant) const {
-        return false;
+        return dfn[ancestor] <= dfn[descendant] &&
+               dfn[descendant] < dfn[ancestor] + size[ancestor];
     }
 
     std::vector<std::pair<int, int>> path_ranges(int u, int v) const {

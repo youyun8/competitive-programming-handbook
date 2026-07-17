@@ -1,6 +1,4 @@
 ---
-
-
 id: monotone-stack-histogram
 volume: upper
 source_file: upper-volume
@@ -18,7 +16,11 @@ constraints:
 input_format: 第一行為 n，第二行為 n 個整數 h[i]。
 output_format: 輸出最大矩形面積。
 samples:
-  - {'input': '6\n2 1 5 6 2 3', 'output': '10', 'explanation': '以高度 5 為底，合併寬度 2，面積為 10。'}
+  - input: |
+      6
+      2 1 5 6 2 3
+    output: '10'
+    explanation: 以高度 5 為底，合併寬度 2，面積為 10。
 hints:
   - 對每個高度，找出左邊第一個比它小、右邊第一個比它小的柱子。
   - 以單調遞增堆疊掃描兩次，分別求左右邊界。
@@ -31,7 +33,7 @@ cpp_solution: |
   #include <iostream>
   #include <stack>
   #include <vector>
-  
+
   long long max_histogram_area(const std::vector<long long>& heights) {
       std::stack<int> monotone;
       long long max_area = 0;
@@ -47,7 +49,7 @@ cpp_solution: |
       }
       return max_area;
   }
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -65,7 +67,4 @@ external_platform: POJ
 external_problem_id: '2559'
 external_title: Largest Rectangle in a Histogram
 external_relation: related
-
 ---
-
-

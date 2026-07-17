@@ -19,10 +19,10 @@ test('every curriculum section has a published guide instead of an expansion pla
   await page.goto('./chapters/1/');
   await expect(page.getByText('內容擴充中')).toHaveCount(0);
   await page.getByRole('link', { name: '鏈結串列', exact: true }).click();
-  await expect(page.getByText('原創核心導讀', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '鏈結串列：用指標串起連續邏輯' })).toBeVisible();
   await expect(page.getByRole('heading', { name: '不變量或正確性證明' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'C++17 起手架構' })).toBeVisible();
-  await expect(page.getByText(/來源識別：upper-volume/)).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'C++17 模板' })).toBeVisible();
+  await expect(page.getByText(/來源識別為 upper-volume/)).toBeVisible();
 });
 
 test('practice cards, external links, hints, solution, and progress status', async ({ page }) => {

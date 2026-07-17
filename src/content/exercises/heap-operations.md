@@ -1,5 +1,4 @@
 ---
-
 id: heap-operations
 volume: upper
 source_file: upper-volume
@@ -17,7 +16,18 @@ constraints:
 input_format: 第一行為 n，接下來 n 行各一個操作。
 output_format: 對每個操作 2，輸出當前最小值。若堆為空則輸出 -1。
 samples:
-  - {'input': '6\n1 5\n1 3\n2\n3\n2\n1 7', 'output': '3\n5', 'explanation': '插入 5 與 3 後，最小值為 3；刪除最小值後剩 5。'}
+  - input: |
+      6
+      1 5
+      1 3
+      2
+      3
+      2
+      1 7
+    output: |
+      3
+      5
+    explanation: 插入 5 與 3 後，最小值為 3；刪除最小值後剩 5。
 hints:
   - 用陣列儲存堆，索引 i 的左子為 2*i、右子為 2*i+1。
   - 插入時放到尾端後向上調整；刪除時把尾端放到根再向下調整。
@@ -29,7 +39,7 @@ complexity:
 cpp_solution: |
   #include <iostream>
   #include <vector>
-  
+
   class MinHeap {
   public:
       void insert(int value) {
@@ -69,7 +79,7 @@ cpp_solution: |
           }
       }
   };
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -99,4 +109,3 @@ external_problem_id: P3378
 external_title: 【模板】堆
 external_relation: related
 ---
-

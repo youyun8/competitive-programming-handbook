@@ -84,4 +84,4 @@ std::vector<long long> dirichlet_convolution(
 
 ## 本節重點速查
 
-(f*g)(n)=Σ_{d|n} f(d)g(n/d)；單位元是 ε；積性函數的卷積仍積性；O(n log n) 前 n 項計算。
+(f\*g)(n)=Σ\_{d|n} f(d)g(n/d)；單位元是 ε；積性函數的卷積仍積性；O(n log n) 前 n 項計算。

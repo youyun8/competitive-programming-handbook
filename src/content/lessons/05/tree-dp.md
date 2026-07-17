@@ -44,8 +44,8 @@ review_status: verified
 2. DFS(u, parent)：
    a. 初始化 `dp[u]` 為基底（如只選 u 自身的狀態）。
    b. 對每個子節點 v ≠ parent：
-      - 遞迴處理 v。
-      - 做背包合併：新 dp = 合併(dp[u], dp[v])。
+   - 遞迴處理 v。
+   - 做背包合併：新 dp = 合併(dp[u], dp[v])。
 3. 回傳 `dp[u]`。
 
 ## C++17 模板

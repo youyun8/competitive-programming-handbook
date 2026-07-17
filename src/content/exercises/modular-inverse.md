@@ -1,5 +1,4 @@
 ---
-
 id: modular-inverse
 volume: lower
 source_file: lower-volume
@@ -38,7 +37,7 @@ complexity:
 cpp_solution: |
   #include <cstdint>
   #include <iostream>
-  
+
   long long extended_gcd(long long a, long long b, long long& x, long long& y) {
       if (b == 0) { x = 1; y = 0; return a; }
       long long x1 = 0, y1 = 0;
@@ -47,7 +46,7 @@ cpp_solution: |
       y = x1 - (a / b) * y1;
       return g;
   }
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -75,4 +74,3 @@ external_problem_id: P3811
 external_title: 【模板】乘法逆元
 external_relation: related
 ---
-

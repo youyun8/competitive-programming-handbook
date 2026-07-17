@@ -111,12 +111,8 @@ private:
             }
             std::vector<int> distances;
             collect_distances(neighbor, centroid, 1, distances);
-            for (int distance : distances) {
-                for (int existing : all_distances) {
-                    (void)existing;
-                    ++answer;
-                }
-            }
+            answer += static_cast<long long>(distances.size()) *
+                      static_cast<long long>(all_distances.size());
             all_distances.insert(all_distances.end(), distances.begin(), distances.end());
         }
     }

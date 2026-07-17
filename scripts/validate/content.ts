@@ -17,6 +17,7 @@ const exercises = fg.sync('src/content/exercises/**/*.{md,mdx}').map((path) => (
 const sectionIds = new Set(
   toc.chapters.flatMap((chapter) => chapter.sections.map((section) => section.id))
 );
+for (const section of toc.appendix.sections) sectionIds.add(section.id);
 for (const lesson of lessons) {
   const data = lesson.data;
   if (!sectionIds.has(data.section)) errors.push(`${lesson.path}: unknown section ${data.section}`);
@@ -62,9 +63,14 @@ for (const sectionId of sectionIds) {
 
 for (const exercise of exercises) {
   const data = exercise.data;
-  for (const field of ['source_book_pages', 'source_pdf_pages', 'samples', 'hints']) {
+  for (const field of ['source_book_pages', 'source_pdf_pages', 'hints']) {
     if (!Array.isArray(data[field]) || data[field].length === 0)
       errors.push(`${exercise.path}: ${field} is required`);
+  }
+  if (!Array.isArray(data.samples)) {
+    errors.push(`${exercise.path}: samples must be an array`);
+  } else if (data.kind !== 'external-oj' && data.samples.length === 0) {
+    errors.push(`${exercise.path}: samples is required`);
   }
   for (const field of [
     'external_url',

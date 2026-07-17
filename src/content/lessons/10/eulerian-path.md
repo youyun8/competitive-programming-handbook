@@ -52,23 +52,29 @@ Hierholzer 算法：從起點出發 DFS，走到無路時把該點壓入答案�
 ## C++17 模板
 
 ```cpp
+#include <algorithm>
 #include <vector>
 
 struct EulerianEdge {
     int to;
     int index;
-    bool used;
 };
 
 std::vector<int> hierholzer(int node_count, const std::vector<std::vector<EulerianEdge>>& adj, int start) {
     std::vector<int> path;
     std::vector<int> ptr(node_count);
-    std::vector<bool> used;
+    int edge_count = 0;
+    for (const std::vector<EulerianEdge>& edges : adj) {
+        for (const EulerianEdge& edge : edges) {
+            edge_count = std::max(edge_count, edge.index + 1);
+        }
+    }
+    std::vector<bool> used(edge_count, false);
 
     auto dfs = [&](auto&& self, int u) -> void {
         while (ptr[u] < static_cast<int>(adj[u].size())) {
             const EulerianEdge& edge = adj[u][ptr[u]++];
-            if (edge.used) continue;
+            if (used[edge.index]) continue;
             used[edge.index] = true;
             self(self, edge.to);
         }

@@ -55,6 +55,7 @@ review_status: verified
 
 long long inclusion_exclusion(const std::vector<long long>& single,
                               const std::vector<std::vector<long long>>& inter) {
+    (void)inter; // Replace with the problem-specific intersection calculation.
     int n = static_cast<int>(single.size());
     long long total = 0;
     for (int mask = 1; mask < (1 << n); ++mask) {

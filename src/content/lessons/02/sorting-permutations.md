@@ -61,8 +61,9 @@ next_permutation 的不變量：每次呼叫後，序列變為「所有元素排
 ## C++17 模板
 
 ```cpp
-#include <vector>
 #include <algorithm>
+#include <string>
+#include <vector>
 
 // 多欄位排序：先按分數降序，同分按名字升序
 struct Student {

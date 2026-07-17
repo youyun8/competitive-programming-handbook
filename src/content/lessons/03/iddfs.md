@@ -21,7 +21,6 @@ source_pdf_pages: [115, 167]
 review_status: verified
 ---
 
-
 ## 這個技術解決什麼問題
 
 BFS 保證最優解但空間是 O(b^d)；DFS 空間只有 O(d) 但可能深陷無窮分支或因深度無界而找不到解。IDDFS（Iterative Deepening DFS）結合兩者優點：從深度限制 1 開始，反覆執行有深度上限的 DFS，直到找到目標。雖然會重複搜尋淺層節點，但總時間複雜度仍為 O(b^d)，因為深層的節點數遠多於淺層。IDA* 則在 IDDFS 中加入 A* 的 f = g + h 評估函數，在深度限制設為 f 值上限時進行剪枝。

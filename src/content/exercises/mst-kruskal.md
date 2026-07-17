@@ -1,5 +1,4 @@
 ---
-
 id: mst-kruskal
 volume: lower
 source_file: lower-volume
@@ -45,7 +44,7 @@ cpp_solution: |
   #include <algorithm>
   #include <iostream>
   #include <vector>
-  
+
   class UnionFind {
   public:
       explicit UnionFind(int n) : parent_(n), size_(n, 1) {
@@ -67,7 +66,7 @@ cpp_solution: |
       std::vector<int> parent_;
       std::vector<int> size_;
   };
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -105,4 +104,3 @@ external_problem_id: P3366
 external_title: 【模板】最小生成树
 external_relation: related
 ---
-

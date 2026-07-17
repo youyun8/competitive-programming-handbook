@@ -44,11 +44,13 @@ review_status: verified
 ## 逐步演算法
 
 ### 重心
+
 1. DFS 計算 `subtree_size`。
 2. 對每個節點，最大子樹大小為 `max(n - subtree_size[v], max(subtree_size[child]))`。
 3. 取最大值最小者即為重心。
 
 ### 直徑
+
 1. 從任意點 BFS 找最遠點 `u`。
 2. 從 `u` BFS 找最遠點 `v`，距離即為直徑長度。
 

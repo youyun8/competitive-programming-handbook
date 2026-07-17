@@ -1,5 +1,4 @@
 ---
-
 id: iddfs-eight-puzzle
 volume: upper
 source_file: upper-volume
@@ -28,8 +27,8 @@ samples:
       4 0 5
       7 8 6
     output: |
-      1
-    explanation: 把 0 向下移動與 6 交換，即可得到目標狀態。
+      2
+    explanation: 先把 0 向右移動與 5 交換，再向下移動與 6 交換，即可得到目標狀態。
 hints:
   - 用曼哈頓距離作為啟發函數估價值。
   - IDA* 設定深度上限為 f = g + h，每次超過上限就回傳新的最小超過值作為下次上限。
@@ -39,14 +38,15 @@ complexity:
   time: O(b^d)，其中 d 為最優解深度
   space: O(d)
 cpp_solution: |
+  #include <algorithm>
   #include <cmath>
   #include <iostream>
-  
+
   const int goal[3][3] = {{1,2,3},{4,5,6},{7,8,0}};
   int board[3][3];
   int dx[4] = {-1,1,0,0};
   int dy[4] = {0,0,-1,1};
-  
+
   int manhattan() {
       int sum = 0;
       for (int i = 0; i < 3; ++i)
@@ -57,7 +57,7 @@ cpp_solution: |
               }
       return sum;
   }
-  
+
   int ida_star(int g, int bound, int prev) {
       int h = manhattan();
       int f = g + h;
@@ -80,7 +80,7 @@ cpp_solution: |
       }
       return min_exceed;
   }
-  
+
   int main() {
       for (int i = 0; i < 3; ++i)
           for (int j = 0; j < 3; ++j)
@@ -106,4 +106,3 @@ external_problem_id: P1379
 external_title: 八数码难题
 external_relation: related
 ---
-

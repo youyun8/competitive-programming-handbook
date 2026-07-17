@@ -52,6 +52,7 @@ Burnside：$|X/G| = \frac{1}{|G|} \sum_{g \in G} |X^g|$。等式來自對所有 
 ## C++17 模板
 
 ```cpp
+#include <numeric>
 #include <vector>
 
 long long mod_pow(long long a, long long e, long long mod) {

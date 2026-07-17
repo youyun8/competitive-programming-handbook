@@ -21,7 +21,6 @@ source_pdf_pages: [169, 188]
 review_status: verified
 ---
 
-
 ## 這個技術解決什麼問題
 
 樹狀陣列在 $O(\log n)$ 時間內完成「單點增加＋前綴和查詢」。若前綴運算可逆，也可以 $O(\log n)$ 求區間和。

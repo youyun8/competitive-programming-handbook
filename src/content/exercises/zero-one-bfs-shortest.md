@@ -1,5 +1,4 @@
 ---
-
 id: zero-one-bfs-shortest
 volume: upper
 source_file: upper-volume
@@ -44,13 +43,14 @@ complexity:
 cpp_solution: |
   #include <deque>
   #include <iostream>
+  #include <limits>
   #include <vector>
-  
+
   struct Edge {
       int to = 0;
       int weight = 0;
   };
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -63,21 +63,22 @@ cpp_solution: |
           g[u].push_back({v, w});
           g[v].push_back({u, w});
       }
-      std::vector<int> dist(n + 1, -1);
+      const int infinity = std::numeric_limits<int>::max();
+      std::vector<int> dist(n + 1, infinity);
       std::deque<int> dq;
       dist[s] = 0;
       dq.push_front(s);
       while (!dq.empty()) {
           int u = dq.front(); dq.pop_front();
-          if (u == t) break;
           for (const Edge& e : g[u]) {
-              if (dist[e.to] != -1) continue;
-              dist[e.to] = dist[u] + e.weight;
+              const int next_distance = dist[u] + e.weight;
+              if (next_distance >= dist[e.to]) continue;
+              dist[e.to] = next_distance;
               if (e.weight == 0) dq.push_front(e.to);
               else dq.push_back(e.to);
           }
       }
-      std::cout << dist[t] << "\n";
+      std::cout << (dist[t] == infinity ? -1 : dist[t]) << "\n";
   }
 source_book_pages:
   - 97
@@ -92,4 +93,3 @@ external_problem_id: KATHTHI
 external_title: KATHTHI
 external_relation: related
 ---
-

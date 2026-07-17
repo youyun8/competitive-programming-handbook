@@ -56,6 +56,11 @@ review_status: verified
 #include <queue>
 #include <vector>
 
+struct FlowEdge {
+    int to;
+    long long capacity;
+};
+
 std::vector<bool> min_cut_reachable(
     const std::vector<std::vector<FlowEdge>>& residual_graph,
     int source) {

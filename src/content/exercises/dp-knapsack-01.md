@@ -1,5 +1,4 @@
 ---
-
 id: dp-knapsack-01
 volume: upper
 source_file: upper-volume
@@ -43,7 +42,7 @@ complexity:
 cpp_solution: |
   #include <iostream>
   #include <vector>
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -73,4 +72,3 @@ external_problem_id: P1048
 external_title: 采药
 external_relation: related
 ---
-

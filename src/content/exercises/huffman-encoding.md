@@ -1,6 +1,4 @@
 ---
-
-
 id: huffman-encoding
 volume: upper
 source_file: upper-volume
@@ -18,7 +16,11 @@ constraints:
 input_format: 第一行為 n，第二行為 n 個出現次數。
 output_format: 輸出最小加權編碼總長度。
 samples:
-  - {'input': '4\n5 9 12 13', 'output': '78', 'explanation': '合併順序影響影響樹高，貪心每次取最小的兩個合併。'}
+  - input: |
+      4
+      5 9 12 13
+    output: '78'
+    explanation: 合併順序影響樹高，貪心每次取最小的兩個合併。
 hints:
   - 每次取最小兩個頻率合併，合併後的新頻率放回優先佇列。
   - 使用最小堆（priority_queue with greater<>）。
@@ -32,7 +34,7 @@ cpp_solution: |
   #include <iostream>
   #include <queue>
   #include <vector>
-  
+
   long long huffman_total_length(const std::vector<long long>& freq) {
       std::priority_queue<long long, std::vector<long long>, std::greater<long long>> min_heap;
       for (long long f : freq) min_heap.push(f);
@@ -46,7 +48,7 @@ cpp_solution: |
       }
       return total;
   }
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -64,7 +66,4 @@ external_platform: POJ
 external_problem_id: '1521'
 external_title: Entropy
 external_relation: related
-
 ---
-
-

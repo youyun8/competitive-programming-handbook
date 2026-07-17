@@ -88,8 +88,8 @@ struct Lucas {
     long long comb(long long n, long long k) const {
         long long res = 1;
         while (n > 0 || k > 0) {
-            int ni = n % prime;
-            int ki = k % prime;
+            int ni = static_cast<int>(n % prime);
+            int ki = static_cast<int>(k % prime);
             if (ki > ni) return 0;
             res = res * comb_small(ni, ki) % prime;
             n /= prime;

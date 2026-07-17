@@ -1,5 +1,4 @@
 ---
-
 id: linked-list-queue
 volume: upper
 source_file: upper-volume
@@ -17,7 +16,17 @@ constraints:
 input_format: 第一行為 n，接下來 n 行各一個操作。
 output_format: 對每個操作 3，輸出當前佇列前端；若空則輸出 -1。
 samples:
-  - {'input': '5\n1 3\n1 7\n3\n2\n3', 'output': '3\n7', 'explanation': 'push 3 與 7 後前端為 3；pop 後前端變為 7。'}
+  - input: |
+      5
+      1 3
+      1 7
+      3
+      2
+      3
+    output: |
+      3
+      7
+    explanation: push 3 與 7 後前端為 3；pop 後前端變為 7。
 hints:
   - 使用 std::queue 直接維護，或手寫靜態鏈結串列。
   - pop 前檢查佇列是否為空。
@@ -29,7 +38,7 @@ complexity:
 cpp_solution: |
   #include <iostream>
   #include <queue>
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -59,4 +68,3 @@ external_problem_id: P1996
 external_title: 约瑟夫问题
 external_relation: related
 ---
-

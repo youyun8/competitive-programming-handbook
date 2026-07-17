@@ -21,7 +21,6 @@ source_pdf_pages: [115, 167]
 review_status: verified
 ---
 
-
 ## 這個技術解決什麼問題
 
 當圖中所有邊的權重只有 0 或 1 時，使用 priority_queue 的 Dijkstra 會帶來 O(E log V) 的對數開銷。0-1 BFS 利用雙端雙端佇列：邊權為 0 的轉移從佇列前端加入（維持同一層），邊權為 1 的轉移從尾端加入（下一層），從而達到 O(V + E) 的線性複雜度。

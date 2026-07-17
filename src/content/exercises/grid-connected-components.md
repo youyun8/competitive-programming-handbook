@@ -1,5 +1,4 @@
 ---
-
 id: grid-connected-components
 volume: upper
 source_file: upper-volume
@@ -26,7 +25,7 @@ samples:
       ..#..
       ..#..
       .##..
-      .....
+      ..#..
     output: |
       2
     explanation: 障礙物把網格分成上下兩個連通塊。
@@ -41,8 +40,9 @@ complexity:
 cpp_solution: |
   #include <iostream>
   #include <queue>
+  #include <string>
   #include <vector>
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -88,4 +88,3 @@ external_problem_id: P1596
 external_title: Lake Counting
 external_relation: related
 ---
-

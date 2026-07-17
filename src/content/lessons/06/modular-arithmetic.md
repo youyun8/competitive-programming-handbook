@@ -62,9 +62,7 @@ long long normalize(long long x, long long mod) {
 long long add_mod(long long a, long long b, long long mod) {
     a = normalize(a, mod);
     b = normalize(b, mod);
-    long long sum = a + b;
-    if (sum >= mod) sum -= mod;
-    return sum;
+    return a >= mod - b ? a - (mod - b) : a + b;
 }
 
 long long sub_mod(long long a, long long b, long long mod) {
@@ -78,9 +76,13 @@ long long sub_mod(long long a, long long b, long long mod) {
 long long mul_mod(long long a, long long b, long long mod) {
     a = normalize(a, mod);
     b = normalize(b, mod);
-    return static_cast<long long>(
-        (static_cast<__int128>(a) * b) % mod
-    );
+    long long result = 0;
+    while (b > 0) {
+        if (b & 1LL) result = add_mod(result, a, mod);
+        a = add_mod(a, a, mod);
+        b >>= 1LL;
+    }
+    return result;
 }
 ```
 

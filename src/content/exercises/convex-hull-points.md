@@ -1,5 +1,4 @@
 ---
-
 id: convex-hull-points
 volume: lower
 source_file: lower-volume
@@ -49,18 +48,18 @@ cpp_solution: |
   #include <algorithm>
   #include <iostream>
   #include <vector>
-  
+
   struct Point {
       long long x = 0, y = 0;
       bool operator<(const Point& other) const {
           return x < other.x || (x == other.x && y < other.y);
       }
   };
-  
+
   long long cross(const Point& o, const Point& a, const Point& b) {
       return (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
   }
-  
+
   std::vector<Point> convex_hull(std::vector<Point>& points) {
       if (points.size() <= 1) return points;
       std::sort(points.begin(), points.end());
@@ -83,7 +82,7 @@ cpp_solution: |
       lower.insert(lower.end(), upper.begin(), upper.end());
       return lower;
   }
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -110,4 +109,3 @@ external_problem_id: P2742
 external_title: 【模板】二维凸包
 external_relation: related
 ---
-

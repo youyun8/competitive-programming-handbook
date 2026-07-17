@@ -38,7 +38,12 @@ review_status: verified
 ## 狀態／資料結構定義
 
 ```cpp
-std::mt19937_64 rng(seed);
+#include <cstdint>
+#include <random>
+
+std::mt19937_64 make_rng(std::uint64_t seed) {
+    return std::mt19937_64(seed);
+}
 ```
 
 - `rng()`：產生 64 位元均勻分佈整數。
@@ -62,13 +67,14 @@ std::mt19937_64 rng(seed);
 ```cpp
 #include <algorithm>
 #include <chrono>
+#include <cstdint>
 #include <fstream>
 #include <random>
 #include <vector>
 
 class TestGenerator {
 public:
-    explicit TestGenerator(uint64_t seed)
+    explicit TestGenerator(std::uint64_t seed)
         : rng_(seed), dist_(1, 100000) {}
 
     void generate(std::ostream& out, int n, int q) {
@@ -99,9 +105,9 @@ private:
 };
 
 int main() {
-    const uint64_t seed = std::chrono::steady_clock::now()
-                              .time_since_epoch()
-                              .count();
+    const std::uint64_t seed = static_cast<std::uint64_t>(
+        std::chrono::steady_clock::now().time_since_epoch().count()
+    );
     TestGenerator gen(seed);
     std::ofstream ofs("input.txt");
     gen.generate(ofs, 10, 5);

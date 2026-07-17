@@ -1,5 +1,4 @@
 ---
-
 id: sliding-window-maximum
 volume: upper
 source_file: upper-volume
@@ -18,7 +17,11 @@ constraints:
 input_format: 第一行為 n 與 k，第二行為 n 個整數。
 output_format: 輸出 n - k + 1 個最大值，以空白分隔。
 samples:
-  - {'input': '8 3\n1 3 -1 -3 5 3 6 7', 'output': '3 3 5 5 6 7', 'explanation': '視窗 [1,3,-1] 最大值為 3，[3,-1,-3] 最大值為 3，依此類推。'}
+  - input: |
+      8 3
+      1 3 -1 -3 5 3 6 7
+    output: 3 3 5 5 6 7
+    explanation: 視窗 [1,3,-1] 最大值為 3，[3,-1,-3] 最大值為 3，依此類推。
 hints:
   - 使用雙端佇列維護單調遞減序列，隊首永遠是當前視窗最大值。
   - 新元素進入時，從隊尾彈出所有不大於它的元素。
@@ -31,7 +34,7 @@ cpp_solution: |
   #include <deque>
   #include <iostream>
   #include <vector>
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -60,4 +63,3 @@ external_problem_id: P1886
 external_title: 滑动窗口 / 单调队列
 external_relation: related
 ---
-

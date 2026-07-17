@@ -24,7 +24,7 @@ review_status: verified
 
 ## 辨識題型的訊號
 
-轉移式可化為 dp[j] + a[j] * b[i] + c[j] + d[i]；查詢點 x_i 若單調，可用雙端佇列維護凸包做到 O(n)；若不單調則用李超線段樹 O(n log n)。
+轉移式可化為 dp[j] + a[j] \* b[i] + c[j] + d[i]；查詢點 x_i 若單調，可用雙端佇列維護凸包做到 O(n)；若不單調則用李超線段樹 O(n log n)。
 
 ## 核心想法與直覺
 
@@ -59,7 +59,8 @@ class ConvexHullOptimizationTemplate {
     };
 
     static double intersect_x(const Line& a, const Line& b) {
-        return static_cast<double>(b.b - a.b) / (a.m - b.m);
+        return (static_cast<double>(b.b) - static_cast<double>(a.b)) /
+               (static_cast<double>(a.m) - static_cast<double>(b.m));
     }
 
 public:

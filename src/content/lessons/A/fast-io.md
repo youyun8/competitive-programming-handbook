@@ -40,8 +40,12 @@ review_status: verified
 不需要額外資料結構；核心是把 stream 的同步與綁定關掉：
 
 ```cpp
-std::ios::sync_with_stdio(false);
-std::cin.tie(nullptr);
+#include <iostream>
+
+void configure_fast_io() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+}
 ```
 
 ## 不變量或正確性證明

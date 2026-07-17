@@ -1,5 +1,4 @@
 ---
-
 id: fenwick-tree-query
 volume: upper
 source_file: upper-volume
@@ -42,7 +41,7 @@ complexity:
 cpp_solution: |
   #include <iostream>
   #include <vector>
-  
+
   class FenwickTree {
   public:
       explicit FenwickTree(int n) : tree_(n + 1, 0) {}
@@ -66,7 +65,7 @@ cpp_solution: |
   private:
       std::vector<long long> tree_;
   };
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -101,4 +100,3 @@ external_problem_id: P3374
 external_title: 【模板】树状数组 1
 external_relation: related
 ---
-

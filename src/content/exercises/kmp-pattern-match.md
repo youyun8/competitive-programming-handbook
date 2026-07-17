@@ -1,5 +1,4 @@
 ---
-
 id: kmp-pattern-match
 volume: lower
 source_file: lower-volume
@@ -25,8 +24,8 @@ samples:
       ABA
     output: |
       3
-      1 3 7
-    explanation: ABA 出現在位置 1、3（ABAB...）、7。
+      1 3 8
+    explanation: ABA 出現在位置 1、3（ABAB...）、8。
 hints:
   - 先計算 pattern 的 prefix function，再用 prefix function 值加速匹配。
   - 匹配過程中利用已匹配的 prefix 資訊避免 text 指標回退。
@@ -39,7 +38,7 @@ cpp_solution: |
   #include <iostream>
   #include <string>
   #include <vector>
-  
+
   std::vector<int> compute_prefix(const std::string& pattern) {
       int m = static_cast<int>(pattern.size());
       std::vector<int> pi(m, 0);
@@ -51,7 +50,7 @@ cpp_solution: |
       }
       return pi;
   }
-  
+
   int main() {
       std::ios::sync_with_stdio(false);
       std::cin.tie(nullptr);
@@ -90,4 +89,3 @@ external_problem_id: P3375
 external_title: 【模板】KMP字符串匹配
 external_relation: related
 ---
-
