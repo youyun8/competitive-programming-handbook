@@ -10,7 +10,9 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h1>個人資料、偏好與資料權利</h1>
   <div class="grid">
     <AccountPanel client:load basePath={basePath} />
-    <ReadingSettings client:load />
+    <section class="card">
+      <ReadingSettings client:load idPrefix="profile" />
+    </section>
     <section class="card">
       <h2>匯出資料</h2>
       <p>匯出本機 lesson 進度、題目狀態、書籤與閱讀偏好。</p>

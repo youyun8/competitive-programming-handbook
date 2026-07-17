@@ -57,6 +57,14 @@
   --shadow: 0 12px 36px rgb(0 0 0 / 24%);
 }
 
+:root[data-reading-width='wide'] {
+  --content-width: 92rem;
+}
+
+:root[data-reading-width='full'] {
+  --content-width: 100%;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -296,6 +304,10 @@ code {
   max-width: var(--reading-width);
 }
 
+:root[data-reading-width='full'] .reading {
+  max-width: none;
+}
+
 .reading > :first-child {
   margin-top: 0;
 }
@@ -518,6 +530,83 @@ h1 {
 .field-error {
   color: var(--danger);
   font-size: 0.84rem;
+}
+
+.settings-dialog {
+  width: min(92vw, 35rem);
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0;
+  box-shadow: 0 24px 80px rgb(0 0 0 / 30%);
+}
+
+.settings-dialog::backdrop {
+  background: rgb(7 15 22 / 55%);
+  backdrop-filter: blur(5px);
+}
+
+.dialog-close-row {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.55rem 0.55rem 0;
+}
+
+.reading-settings {
+  display: grid;
+  gap: 1rem;
+  padding: 0 1.2rem 1.2rem;
+}
+
+.card > .reading-settings {
+  padding: 0;
+}
+
+.reading-settings h2 {
+  margin: 0;
+}
+
+.settings-group {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.settings-group legend {
+  padding: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.segmented-control {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.35rem;
+}
+
+.segmented-control button {
+  min-height: 2.55rem;
+  border: 1px solid var(--border);
+  border-radius: 0.45rem;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.segmented-control button[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-weight: 750;
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .auth-card {

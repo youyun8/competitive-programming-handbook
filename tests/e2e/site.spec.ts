@@ -13,6 +13,18 @@ test('home, chapter, lesson, visualizer, and progress work under project base pa
   await expect(page.getByRole('button', { name: /已完成/ })).toBeVisible();
 });
 
+test('every curriculum section has a published guide instead of an expansion placeholder', async ({
+  page
+}) => {
+  await page.goto('./chapters/1/');
+  await expect(page.getByText('內容擴充中')).toHaveCount(0);
+  await page.getByRole('link', { name: '鏈結串列', exact: true }).click();
+  await expect(page.getByText('原創核心導讀', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '不變量或正確性證明' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'C++17 起手架構' })).toBeVisible();
+  await expect(page.getByText(/來源識別：upper-volume/)).toBeVisible();
+});
+
 test('practice cards, external links, hints, solution, and progress status', async ({ page }) => {
   await page.goto('./practice/');
   await page.getByRole('searchbox', { name: '搜尋' }).fill('第一個');
@@ -50,13 +62,21 @@ test('practice cards, external links, hints, solution, and progress status', asy
   await expect(page.getByLabel('學習狀態')).toHaveValue('needs-review');
 });
 
-test('theme, auth callback mock, dashboard, offline status, profile, and 404', async ({
+test('reading settings, auth callback mock, dashboard, offline status, profile, and 404', async ({
   page,
   context
 }) => {
   await page.goto('./');
-  await page.getByRole('button', { name: '切換深淺色主題' }).click();
-  await expect(page.locator('html')).toHaveAttribute('data-theme', /dark|light/);
+  await page.getByRole('button', { name: '開啟閱讀設定' }).click();
+  await page.getByRole('button', { name: '深色', exact: true }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await page.getByRole('button', { name: '全螢幕' }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-reading-width', 'full');
+  await page.getByLabel(/正文字級/).fill('20');
+  await page.getByRole('button', { name: '關閉閱讀設定' }).click();
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await expect(page.locator('html')).toHaveAttribute('data-reading-width', 'full');
   await context.setOffline(true);
   await expect(page.getByText('離線：等待同步')).toBeVisible();
   await context.setOffline(false);

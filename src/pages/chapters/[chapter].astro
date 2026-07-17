@@ -26,7 +26,7 @@ const exercises = await getCollection('exercises');
   <p class="eyebrow">{chapter.volume === 'upper' ? '上冊' : '下冊'} · Chapter {chapter.chapter}</p>
   <h1>{chapter.title}</h1>
   <p class="lede">
-    本章共 {chapter.sections.length} 節。完整教學標示為「已發布」；其餘節點已建立來源與學習範圍，內容會在人工校對後逐步擴充。
+    本章共 {chapter.sections.length} 節，每節都有可直接閱讀的原創核心導讀；其中部分主題另有含完整程式模板與視覺化的深度教學。
   </p>
   <div class="meta">
     <span>書本 {chapter.book_pages[0]}–{chapter.book_pages[1]} 頁</span>
@@ -48,9 +48,7 @@ const exercises = await getCollection('exercises');
               </h3>
               <p>{section.topics.join('、')}</p>
             </div>
-            <span class:list={['badge', { verified: Boolean(lesson) }]}>
-              {lesson ? '已發布' : '內容擴充中'}
-            </span>
+            <span class="badge verified">{lesson ? '深度教學' : '核心導讀'}</span>
           </li>
         );
       })

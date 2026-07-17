@@ -1,7 +1,7 @@
 export type SyncState = 'synced' | 'syncing' | 'offline' | 'error';
 
 export interface ReadingSettings {
-  theme: 'light' | 'dark';
+  theme: 'light' | 'dark' | 'system';
   fontSize: number;
   contentWidth: number;
   codeFontSize: number;

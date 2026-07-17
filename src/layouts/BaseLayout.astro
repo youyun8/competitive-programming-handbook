@@ -1,4 +1,5 @@
 ---
+import ReadingSettings from '@/components/progress/ReadingSettings';
 import { curriculum } from '@/lib/curriculum';
 import { withBase } from '@/lib/site';
 import '@/styles/global.css';
@@ -32,22 +33,33 @@ const currentPath = Astro.url.pathname;
   >｜演算法競賽互動學習
   <script is:inline>
     (() => {
-      const saved = localStorage.getItem('ac-theme');
-      const dark = matchMedia('(prefers-color-scheme: dark)').matches;
-      document.documentElement.dataset.theme = saved || (dark ? 'dark' : 'light');
-      const settings = JSON.parse(localStorage.getItem('ac-reading-settings') || '{}');
-      if (settings.fontSize)
-        document.documentElement.style.setProperty('--font-size', `${settings.fontSize}px`);
-      if (settings.contentWidth)
-        document.documentElement.style.setProperty(
-          '--reading-width',
-          `${settings.contentWidth}rem`
-        );
-      if (settings.codeFontSize)
-        document.documentElement.style.setProperty(
-          '--code-font-size',
-          `${settings.codeFontSize}px`
-        );
+      try {
+        const settings = JSON.parse(localStorage.getItem('ac-reading-settings') || '{}');
+        const preference = settings.theme || localStorage.getItem('ac-theme') || 'system';
+        const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme =
+          preference === 'system' ? (dark ? 'dark' : 'light') : preference;
+        document.documentElement.dataset.themePreference = preference;
+        if (settings.fontSize)
+          document.documentElement.style.setProperty('--font-size', `${settings.fontSize}px`);
+        if (settings.contentWidth) {
+          document.documentElement.style.setProperty(
+            '--reading-width',
+            `${settings.contentWidth}rem`
+          );
+          document.documentElement.dataset.readingWidth =
+            settings.contentWidth >= 80 ? 'full' : settings.contentWidth >= 60 ? 'wide' : 'focused';
+        }
+        if (settings.codeFontSize)
+          document.documentElement.style.setProperty(
+            '--code-font-size',
+            `${settings.codeFontSize}px`
+          );
+      } catch {
+        document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
+      }
     })();
   </script>
 
@@ -72,8 +84,8 @@ const currentPath = Astro.url.pathname;
           <button class="icon-button" id="search-toggle" type="button" aria-label="開啟搜尋"
             >⌕</button
           >
-          <button class="icon-button" id="theme-toggle" type="button" aria-label="切換深淺色主題"
-            >◐</button
+          <button class="icon-button" id="settings-toggle" type="button" aria-label="開啟閱讀設定"
+            >⚙</button
           >
           <a href={withBase('/auth/login/')}>登入</a>
         </nav>
@@ -129,6 +141,12 @@ const currentPath = Astro.url.pathname;
       </div>
       <div id="search-results" aria-live="polite"></div>
     </dialog>
+    <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="global-settings-title">
+      <form method="dialog" class="dialog-close-row">
+        <button class="icon-button" aria-label="關閉閱讀設定">×</button>
+      </form>
+      <ReadingSettings client:load idPrefix="global" />
+    </dialog>
     <script>
       const menuButton = document.querySelector<HTMLButtonElement>('#menu-toggle');
       const sidebar = document.querySelector<HTMLElement>('#site-sidebar');
@@ -139,12 +157,15 @@ const currentPath = Astro.url.pathname;
         menuButton.setAttribute('aria-label', open ? '關閉導覽' : '開啟導覽');
       });
 
-      const themeButton = document.querySelector<HTMLButtonElement>('#theme-toggle');
-      themeButton?.addEventListener('click', () => {
-        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.dataset.theme = next;
-        localStorage.setItem('ac-theme', next);
-        window.dispatchEvent(new CustomEvent('ac:setting-change', { detail: { theme: next } }));
+      const settingsDialog = document.querySelector<HTMLDialogElement>('#settings-dialog');
+      const settingsButton = document.querySelector<HTMLButtonElement>('#settings-toggle');
+      settingsButton?.addEventListener('click', () => settingsDialog?.showModal());
+
+      const colorScheme = matchMedia('(prefers-color-scheme: dark)');
+      colorScheme.addEventListener('change', (event) => {
+        if (document.documentElement.dataset.themePreference === 'system') {
+          document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
+        }
       });
 
       const dialog = document.querySelector<HTMLDialogElement>('#search-dialog');

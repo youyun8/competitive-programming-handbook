@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import fg from 'fast-glob';
 import toc from '../../data/toc.json' with { type: 'json' };
 import { readFrontmatter } from './frontmatter';
@@ -48,6 +48,17 @@ for (const lesson of lessons) {
 }
 
 const lessonIds = new Set(lessons.map((lesson) => lesson.data.id));
+const publishedLessonSections = new Set(lessons.map((lesson) => lesson.data.section));
+const sectionGuideSource = readFileSync('src/components/lessons/SectionGuide.astro', 'utf8');
+const guidedSections = new Set(
+  [...sectionGuideSource.matchAll(/^ {2}'(\d+\.\d+)':/gm)].map((match) => match[1])
+);
+for (const sectionId of sectionIds) {
+  if (!publishedLessonSections.has(sectionId) && !guidedSections.has(sectionId)) {
+    errors.push(`Section ${sectionId} has neither a deep lesson nor a core guide`);
+  }
+}
+
 for (const exercise of exercises) {
   const data = exercise.data;
   for (const field of ['source_book_pages', 'source_pdf_pages', 'samples', 'hints']) {
@@ -86,5 +97,5 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(
-  `Content validation passed: ${toc.chapters.length} chapters, ${sectionCount} sections, ${lessons.length} lessons, ${exercises.length} exercises.`
+  `Content validation passed: ${toc.chapters.length} chapters, ${sectionCount} covered sections, ${lessons.length} deep lessons, ${guidedSections.size} core guides, ${exercises.length} exercises.`
 );
