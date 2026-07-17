@@ -9,7 +9,8 @@ const defaults: StoredSettings = {
   theme: 'system',
   fontSize: 17,
   contentWidth: 48,
-  codeFontSize: 14
+  codeFontSize: 14,
+  wrapLines: true
 };
 
 function isTheme(value: unknown): value is StoredSettings['theme'] {
@@ -18,19 +19,14 @@ function isTheme(value: unknown): value is StoredSettings['theme'] {
 
 function loadSettings(): StoredSettings {
   try {
-    const saved = JSON.parse(
-      localStorage.getItem('ac-reading-settings') || '{}'
-    ) as Partial<StoredSettings>;
+    const saved = JSON.parse(localStorage.getItem('ac-reading-settings') || '{}') as Partial<StoredSettings>;
     const legacyTheme = localStorage.getItem('ac-theme');
     return {
-      theme: isTheme(saved.theme)
-        ? saved.theme
-        : isTheme(legacyTheme)
-          ? legacyTheme
-          : defaults.theme,
+      theme: isTheme(saved.theme) ? saved.theme : isTheme(legacyTheme) ? legacyTheme : defaults.theme,
       fontSize: Number(saved.fontSize) || defaults.fontSize,
       contentWidth: Number(saved.contentWidth) || defaults.contentWidth,
-      codeFontSize: Number(saved.codeFontSize) || defaults.codeFontSize
+      codeFontSize: Number(saved.codeFontSize) || defaults.codeFontSize,
+      wrapLines: typeof saved.wrapLines === 'boolean' ? saved.wrapLines : defaults.wrapLines
     };
   } catch {
     return defaults;
@@ -47,11 +43,11 @@ function applySettings(settings: StoredSettings) {
       : settings.theme;
   root.dataset.theme = resolvedTheme;
   root.dataset.themePreference = settings.theme;
-  root.dataset.readingWidth =
-    settings.contentWidth >= 80 ? 'full' : settings.contentWidth >= 60 ? 'wide' : 'focused';
+  root.dataset.readingWidth = settings.contentWidth >= 80 ? 'full' : settings.contentWidth >= 60 ? 'wide' : 'focused';
   root.style.setProperty('--font-size', `${settings.fontSize}px`);
   root.style.setProperty('--reading-width', `${settings.contentWidth}rem`);
   root.style.setProperty('--code-font-size', `${settings.codeFontSize}px`);
+  root.dataset.wrapLines = String(settings.wrapLines);
 }
 
 interface Props {
@@ -95,11 +91,7 @@ export default function ReadingSettings({ idPrefix = 'reading' }: Props) {
   }
 
   return (
-    <section
-      className="reading-settings"
-      aria-busy={!hydrated}
-      aria-labelledby={`${idPrefix}-settings-title`}
-    >
+    <section className="reading-settings" aria-busy={!hydrated} aria-labelledby={`${idPrefix}-settings-title`}>
       <h2 id={`${idPrefix}-settings-title`}>閱讀偏好</h2>
       <fieldset className="settings-group">
         <legend>主題</legend>
@@ -169,6 +161,19 @@ export default function ReadingSettings({ idPrefix = 'reading' }: Props) {
           onChange={(event) => updateNumber('codeFontSize', Number(event.target.value))}
         />
       </div>
+      <label className="settings-checkbox">
+        <input
+          type="checkbox"
+          checked={settings.wrapLines}
+          disabled={!hydrated}
+          onChange={(event) => {
+            const next = { ...settings, wrapLines: event.target.checked };
+            setSettings(next);
+            void persist(next);
+          }}
+        />
+        程式碼長行換行
+      </label>
       <div className="settings-actions">
         <button className="button secondary" type="button" disabled={!hydrated} onClick={reset}>
           恢復預設

@@ -2,8 +2,7 @@ import { assertOrigin, corsHeaders, json } from '../_shared/http.ts';
 import { requireUser, serviceClient } from '../_shared/supabase.ts';
 
 Deno.serve(async (request: Request) => {
-  if (request.method === 'OPTIONS')
-    return new Response(null, { status: 204, headers: corsHeaders(request) });
+  if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: corsHeaders(request) });
   try {
     assertOrigin(request);
     const user = await requireUser(request);

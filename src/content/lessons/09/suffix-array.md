@@ -47,7 +47,7 @@ review_status: verified
 2. 對每個位置取 `(rank[i], rank[i+k])` 為雙關鍵字排序；
 3. 重新分配排名，相同則同排名；
 4. k 倍增直到 k >= n；
-5. 用 Kasai 算法從左到右計算 height / LCP。
+5. 用 Kasai 演算法從左到右計算 height / LCP。
 
 ## C++17 模板
 
@@ -65,7 +65,7 @@ std::vector<int> build_suffix_array(const std::string& s) {
     }
     for (int k = 1; k < n; k <<= 1) {
         auto cmp = [&](int i, int j) {
-            if (rank[i] != rank[j]) return rank[i] < rank[j];
+            if (rank[i] != rank[j]) { return rank[i] < rank[j]; }
             int ri = i + k < n ? rank[i + k] : -1;
             int rj = j + k < n ? rank[j + k] : -1;
             return ri < rj;
@@ -78,7 +78,7 @@ std::vector<int> build_suffix_array(const std::string& s) {
         for (int i = 0; i < n; ++i) {
             rank[i] = tmp[i];
         }
-        if (rank[sa[n - 1]] == n - 1) break;
+        if (rank[sa[n - 1]] == n - 1) { break; }
     }
     return sa;
 }
@@ -92,11 +92,11 @@ std::vector<int> build_lcp(const std::string& s, const std::vector<int>& sa) {
     std::vector<int> lcp(n - 1);
     int h = 0;
     for (int i = 0; i < n; ++i) {
-        if (rank[i] == 0) continue;
+        if (rank[i] == 0) { continue; }
         int j = sa[rank[i] - 1];
-        while (i + h < n && j + h < n && s[i + h] == s[j + h]) ++h;
+        while (i + h < n && j + h < n && s[i + h] == s[j + h]) { ++h; }
         lcp[rank[i] - 1] = h;
-        if (h > 0) --h;
+        if (h > 0) { --h; }
     }
     return lcp;
 }

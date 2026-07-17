@@ -14,8 +14,7 @@ const chapters = curriculum.chapters.filter((chapter) => chapter.volume === volu
 
 <BaseLayout title={info.display_name} wide>
   <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><span>{info.display_name}</span
-    >
+    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><span>{info.display_name}</span>
   </nav>
   <p class="eyebrow">{volume === 'upper' ? 'Volume I' : 'Volume II'}</p>
   <h1>{info.display_name}</h1>
@@ -27,8 +26,7 @@ const chapters = curriculum.chapters.filter((chapter) => chapter.volume === volu
     }
   </p>
   <div class="meta">
-    <span>{chapters.length} 章</span><span
-      >{chapters.reduce((sum, item) => sum + item.sections.length, 0)} 節</span
+    <span>{chapters.length} 章</span><span>{chapters.reduce((sum, item) => sum + item.sections.length, 0)} 節</span
     ><span>來源 PDF {info.pdf_pages} 頁</span>
   </div>
   <div class="grid" style="margin-top:2rem">

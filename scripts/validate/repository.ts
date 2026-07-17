@@ -35,8 +35,7 @@ const forbidden = fg.sync(['**/*.pdf', '**/*.png', '**/*.ocr.txt'], {
 if (forbidden.length) errors.push(`Forbidden publication artifacts: ${forbidden.join(', ')}`);
 
 const appendix = readFileSync('src/pages/appendix/index.astro', 'utf8');
-if (/```python/i.test(appendix))
-  errors.push('Appendix public teaching must not contain reader-facing Python code');
+if (/```python/i.test(appendix)) errors.push('Appendix public teaching must not contain reader-facing Python code');
 
 if (errors.length) {
   console.error(errors.join('\n'));

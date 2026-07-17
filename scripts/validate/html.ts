@@ -3,11 +3,11 @@ import { dirname, join, normalize } from 'node:path';
 import fg from 'fast-glob';
 
 const root = 'dist';
-const repositoryName =
-  process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'competitive-programming-handbook';
-const base = (
-  process.env.PUBLIC_BASE_PATH ?? (process.env.GITHUB_ACTIONS ? `/${repositoryName}` : '/')
-).replace(/\/$/, '');
+const repositoryName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'competitive-programming-handbook';
+const base = (process.env.PUBLIC_BASE_PATH ?? (process.env.GITHUB_ACTIONS ? `/${repositoryName}` : '/')).replace(
+  /\/$/,
+  ''
+);
 const htmlFiles = fg.sync('**/*.html', { cwd: root });
 const errors: string[] = [];
 
@@ -29,8 +29,7 @@ for (const file of htmlFiles) {
   const html = readFileSync(join(root, file), 'utf8');
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]!);
   const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
-  if (duplicates.length)
-    errors.push(`${file}: duplicate ids ${[...new Set(duplicates)].join(', ')}`);
+  if (duplicates.length) errors.push(`${file}: duplicate ids ${[...new Set(duplicates)].join(', ')}`);
 
   for (const image of html.matchAll(/<img\b[^>]*>/g)) {
     if (!/\salt="[^"]*"/.test(image[0])) errors.push(`${file}: image missing alt`);
@@ -59,6 +58,4 @@ if (errors.length) {
   if (errors.length > 100) console.error(`...and ${errors.length - 100} more`);
   process.exit(1);
 }
-console.log(
-  `Validated ${htmlFiles.length} HTML files: internal links, anchors, image alt, and duplicate IDs.`
-);
+console.log(`Validated ${htmlFiles.length} HTML files: internal links, anchors, image alt, and duplicate IDs.`);

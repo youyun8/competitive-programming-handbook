@@ -48,16 +48,16 @@ cpp_solution: |
   class UnionFind {
   public:
       explicit UnionFind(int n) : parent_(n), size_(n, 1) {
-          for (int i = 0; i < n; ++i) parent_[i] = i;
+          for (int i = 0; i < n; ++i) { parent_[i] = i; }
       }
       int find(int x) {
-          if (parent_[x] == x) return x;
+          if (parent_[x] == x) { return x; }
           return parent_[x] = find(parent_[x]);
       }
       bool unite(int a, int b) {
           a = find(a); b = find(b);
-          if (a == b) return false;
-          if (size_[a] < size_[b]) std::swap(a, b);
+          if (a == b) { return false; }
+          if (size_[a] < size_[b]) { std::swap(a, b); }
           parent_[b] = a;
           size_[a] += size_[b];
           return true;
@@ -88,8 +88,8 @@ cpp_solution: |
               ++count;
           }
       }
-      if (count == n - 1) std::cout << total << "\n";
-      else std::cout << -1 << "\n";
+      if (count == n - 1) { std::cout << total << "\n"; }
+      else { std::cout << -1 << "\n"; }
   }
 source_book_pages:
   - 600

@@ -138,16 +138,16 @@ static vector<Point> convex_hull(vector<Point> points) {
                         [](const Point& a, const Point& b) { return a.x == b.x && a.y == b.y; }),
                  points.end());
     const int n = static_cast<int>(points.size());
-    if (n < 3) return points;
+    if (n < 3) { return points; }
     vector<Point> hull(2 * static_cast<size_t>(n));
     int k = 0;
     for (int i = 0; i < n; ++i) {
-        while (k >= 2 && cross(hull[k - 2], hull[k - 1], points[i]) <= 0) --k;
+        while (k >= 2 && cross(hull[k - 2], hull[k - 1], points[i]) <= 0) { --k; }
         hull[k++] = points[i];
     }
     int lower = k + 1;
     for (int i = n - 2; i >= 0; --i) {
-        while (k >= lower && cross(hull[k - 2], hull[k - 1], points[i]) <= 0) --k;
+        while (k >= lower && cross(hull[k - 2], hull[k - 1], points[i]) <= 0) { --k; }
         hull[k++] = points[i];
     }
     hull.resize(static_cast<size_t>(k - 1));
@@ -156,9 +156,9 @@ static vector<Point> convex_hull(vector<Point> points) {
 
 int main() {
     int n;
-    if (!(cin >> n)) return 0;
+    if (!(cin >> n)) { return 0; }
     vector<Point> points(n);
-    for (Point& p : points) cin >> p.x >> p.y;
+    for (Point& p : points) { cin >> p.x >> p.y; }
     vector<Point> hull = convex_hull(points);
     double perimeter = 0.0;
     for (size_t i = 0; i < hull.size(); ++i) {
@@ -185,9 +185,9 @@ using namespace std;
 // 有向面積（shoelace）：回傳簡單多邊形面積，與頂點給定順序無關。
 int main() {
     int n;
-    if (!(cin >> n)) return 0;
+    if (!(cin >> n)) { return 0; }
     vector<long long> x(n), y(n);
-    for (int i = 0; i < n; ++i) cin >> x[i] >> y[i];
+    for (int i = 0; i < n; ++i) { cin >> x[i] >> y[i]; }
     long long twice = 0;
     for (int i = 0; i < n; ++i) {
         int j = (i + 1) % n;
@@ -195,7 +195,7 @@ int main() {
     }
     twice = llabs(twice);
     cout << twice / 2;
-    if (twice % 2 != 0) cout << ".5";
+    if (twice % 2 != 0) { cout << ".5"; }
     cout << '\n';
     return 0;
 }

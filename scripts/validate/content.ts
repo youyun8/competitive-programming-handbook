@@ -14,9 +14,7 @@ const exercises = fg.sync('src/content/exercises/**/*.{md,mdx}').map((path) => (
   ...readFrontmatter(path)
 }));
 
-const sectionIds = new Set(
-  toc.chapters.flatMap((chapter) => chapter.sections.map((section) => section.id))
-);
+const sectionIds = new Set(toc.chapters.flatMap((chapter) => chapter.sections.map((section) => section.id)));
 for (const section of toc.appendix.sections) sectionIds.add(section.id);
 for (const lesson of lessons) {
   const data = lesson.data;
@@ -27,8 +25,7 @@ for (const lesson of lessons) {
   if (!Array.isArray(data.source_pdf_pages) || data.source_pdf_pages.length !== 2) {
     errors.push(`${lesson.path}: source_pdf_pages must be a pair`);
   }
-  if (data.review_status === 'needs-review')
-    errors.push(`${lesson.path}: needs-review content must not be public`);
+  if (data.review_status === 'needs-review') errors.push(`${lesson.path}: needs-review content must not be public`);
   const requiredHeadings = [
     '這個技術解決什麼問題',
     '辨識題型的訊號',
@@ -44,17 +41,14 @@ for (const lesson of lessons) {
     '本節重點速查'
   ];
   for (const heading of requiredHeadings) {
-    if (!lesson.body.includes(`## ${heading}`))
-      errors.push(`${lesson.path}: missing heading "${heading}"`);
+    if (!lesson.body.includes(`## ${heading}`)) errors.push(`${lesson.path}: missing heading "${heading}"`);
   }
 }
 
 const lessonIds = new Set(lessons.map((lesson) => lesson.data.id));
 const publishedLessonSections = new Set(lessons.map((lesson) => lesson.data.section));
 const sectionGuideSource = readFileSync('src/components/lessons/SectionGuide.astro', 'utf8');
-const guidedSections = new Set(
-  [...sectionGuideSource.matchAll(/^ {2}'(\d+\.\d+)':/gm)].map((match) => match[1])
-);
+const guidedSections = new Set([...sectionGuideSource.matchAll(/^ {2}'(\d+\.\d+)':/gm)].map((match) => match[1]));
 for (const sectionId of sectionIds) {
   if (!publishedLessonSections.has(sectionId) && !guidedSections.has(sectionId)) {
     errors.push(`Section ${sectionId} has neither a deep lesson nor a core guide`);
@@ -64,8 +58,7 @@ for (const sectionId of sectionIds) {
 for (const exercise of exercises) {
   const data = exercise.data;
   for (const field of ['source_book_pages', 'source_pdf_pages', 'hints']) {
-    if (!Array.isArray(data[field]) || data[field].length === 0)
-      errors.push(`${exercise.path}: ${field} is required`);
+    if (!Array.isArray(data[field]) || data[field].length === 0) errors.push(`${exercise.path}: ${field} is required`);
   }
   if (!Array.isArray(data.samples)) {
     errors.push(`${exercise.path}: samples must be an array`);
@@ -81,8 +74,7 @@ for (const exercise of exercises) {
   ]) {
     if (!data[field]) errors.push(`${exercise.path}: ${field} is required for every public card`);
   }
-  if (data.review_status === 'needs-review')
-    errors.push(`${exercise.path}: needs-review content must not be public`);
+  if (data.review_status === 'needs-review') errors.push(`${exercise.path}: needs-review content must not be public`);
 }
 
 for (const lesson of lessons) {
@@ -103,9 +95,7 @@ if (textbookCatalog.counts.examples < 90) {
   errors.push(`Expected all labeled textbook examples, found ${textbookCatalog.counts.examples}`);
 }
 if (textbookCatalog.counts.exercises < 300) {
-  errors.push(
-    `Expected full textbook exercise inventory, found ${textbookCatalog.counts.exercises}`
-  );
+  errors.push(`Expected full textbook exercise inventory, found ${textbookCatalog.counts.exercises}`);
 }
 const textbookItemIds = new Set<string>();
 for (const item of textbookCatalog.items) {

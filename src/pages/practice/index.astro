@@ -21,25 +21,21 @@ const exercises = await getCollection('exercises', ({ data }) => data.review_sta
       <label for="chapter-filter">章節</label>
       <select id="chapter-filter"
         ><option value="">全部</option>{
-          Array.from({ length: 10 }, (_, index) => (
-            <option value={index + 1}>第 {index + 1} 章</option>
-          ))
+          Array.from({ length: 10 }, (_, index) => <option value={index + 1}>第 {index + 1} 章</option>)
         }</select
       >
     </div>
     <div class="field">
       <label for="difficulty-filter">難度</label>
       <select id="difficulty-filter"
-        ><option value="">全部</option>{
-          [1, 2, 3, 4, 5].map((level) => <option value={level}>{level}</option>)
-        }</select
+        ><option value="">全部</option>{[1, 2, 3, 4, 5].map((level) => <option value={level}>{level}</option>)}</select
       >
     </div>
     <div class="field">
       <label for="status-filter">學習狀態</label>
       <select id="status-filter"
-        ><option value="">全部</option><option value="not-started">未開始</option><option
-          value="in-progress">練習中</option
+        ><option value="">全部</option><option value="not-started">未開始</option><option value="in-progress"
+          >練習中</option
         ><option value="needs-review">待複習</option><option value="solved">已解決</option></select
       >
     </div>
@@ -75,19 +71,13 @@ const exercises = await getCollection('exercises', ({ data }) => data.review_sta
                 rel="noopener noreferrer"
               >
                 {exercise.data.external_relation === 'original' ? '前往原題' : '前往相關原題'}：
-                {exercise.data.external_platform} {exercise.data.external_problem_id}{' '}
-                {exercise.data.external_title} ↗
+                {exercise.data.external_platform} {exercise.data.external_problem_id} {exercise.data.external_title} ↗
               </a>
             </p>
           )}
           <div class="exercise-card-actions">
             <ExerciseStatusControl client:load exerciseId={exercise.data.id} compact />
-            <ExerciseNotes
-              client:load
-              exerciseId={exercise.data.id}
-              title={exercise.data.title}
-              compact
-            />
+            <ExerciseNotes client:load exerciseId={exercise.data.id} title={exercise.data.title} compact />
           </div>
         </article>
       ))
@@ -104,8 +94,7 @@ const exercises = await getCollection('exercises', ({ data }) => data.review_sta
     function filter() {
       let visible = 0;
       for (const card of cards) {
-        const exerciseStatus =
-          localStorage.getItem(`ac-exercise:${card.dataset.id}`) ?? 'not-started';
+        const exerciseStatus = localStorage.getItem(`ac-exercise:${card.dataset.id}`) ?? 'not-started';
         const matches =
           (!search?.value || card.dataset.title?.includes(search.value.toLowerCase())) &&
           (!chapter?.value || card.dataset.chapter === chapter.value) &&
@@ -116,8 +105,7 @@ const exercises = await getCollection('exercises', ({ data }) => data.review_sta
       }
       if (empty) empty.hidden = visible !== 0;
     }
-    for (const input of [search, chapter, difficulty, status])
-      input?.addEventListener('input', filter);
+    for (const input of [search, chapter, difficulty, status]) input?.addEventListener('input', filter);
     window.addEventListener('ac:exercise-status-change', filter);
   </script>
 </BaseLayout>

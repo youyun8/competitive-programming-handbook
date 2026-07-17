@@ -63,7 +63,7 @@ public:
             dp[u][0] = 0; // u 不選
             dp[u][1] = 1; // u 選，權重為 1
             for (int v : tree[u]) {
-                if (v == parent) continue;
+                if (v == parent) { continue; }
                 dfs(v, u);
                 dp[u][0] += max(dp[v][0], dp[v][1]);
                 dp[u][1] += dp[v][0];
@@ -84,7 +84,7 @@ public:
                 dp[u][c] = value[u];
             }
             for (int v : tree[u]) {
-                if (v == parent) continue;
+                if (v == parent) { continue; }
                 dfs(v, u);
                 for (int c = capacity; c >= weight[u]; --c) {
                     for (int k = 0; k <= c - weight[u]; ++k) {

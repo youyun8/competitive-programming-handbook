@@ -109,10 +109,10 @@ public:
             while (!queue.empty()) {
                 const auto [dist, node] = queue.top();
                 queue.pop();
-                if (dist != distance[node]) continue;
+                if (dist != distance[node]) { continue; }
                 for (int i = 0; i < static_cast<int>(graph_[node].size()); ++i) {
                     const McmfEdge& edge = graph_[node][i];
-                    if (edge.cap <= 0) continue;
+                    if (edge.cap <= 0) { continue; }
                     long long reduced = edge.cost + potential_[node] - potential_[edge.to];
                     if (distance[edge.to] > distance[node] + reduced) {
                         distance[edge.to] = distance[node] + reduced;
@@ -123,10 +123,10 @@ public:
                 }
             }
 
-            if (distance[sink] == infinity) break;
+            if (distance[sink] == infinity) { break; }
 
             for (size_t i = 0; i < graph_.size(); ++i) {
-                if (distance[i] != infinity) potential_[i] += distance[i];
+                if (distance[i] != infinity) { potential_[i] += distance[i]; }
             }
 
             long long add_flow = max_flow - flow;

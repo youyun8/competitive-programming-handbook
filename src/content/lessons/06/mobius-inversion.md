@@ -64,7 +64,7 @@ std::vector<int> mobius_sieve(int n) {
         }
         for (int p : primes) {
             long long v = 1LL * i * p;
-            if (v > n) break;
+            if (v > n) { break; }
             is_composite[v] = true;
             if (i % p == 0) {
                 mu[v] = 0;

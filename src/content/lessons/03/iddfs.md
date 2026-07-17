@@ -78,7 +78,7 @@ struct Solver {
     int heuristic(const State& s, const State& goal) {
         int dist = 0;
         for (size_t i = 0; i < s.size(); ++i) {
-            if (s[i] != goal[i]) ++dist;
+            if (s[i] != goal[i]) { ++dist; }
         }
         return dist;
     }
@@ -93,8 +93,8 @@ struct Solver {
         while (true) {
             int next_bound = std::numeric_limits<int>::max();
             int result = search(start, goal, 0, bound, next_bound);
-            if (result >= 0) return result;
-            if (next_bound == std::numeric_limits<int>::max()) return -1;
+            if (result >= 0) { return result; }
+            if (next_bound == std::numeric_limits<int>::max()) { return -1; }
             bound = next_bound;
         }
     }
@@ -106,11 +106,11 @@ struct Solver {
             next_bound = std::min(next_bound, f);
             return -1;
         }
-        if (node == goal) return g;
+        if (node == goal) { return g; }
         for (const auto& nxt : neighbors(node)) {
-            if (parent && nxt == *parent) continue;
+            if (parent && nxt == *parent) { continue; }
             int result = search(nxt, goal, g + 1, bound, next_bound, const_cast<State*>(&node));
-            if (result >= 0) return result;
+            if (result >= 0) { return result; }
         }
         return -1;
     }

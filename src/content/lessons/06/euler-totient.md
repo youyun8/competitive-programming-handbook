@@ -54,21 +54,22 @@ long long euler_totient(long long n) {
     long long result = n;
     for (long long p = 2; p * p <= n; ++p) {
         if (n % p == 0) {
-            while (n % p == 0) n /= p;
+            while (n % p == 0) { n /= p; }
             result -= result / p;
         }
     }
-    if (n > 1) result -= result / n;
+    if (n > 1) { result -= result / n; }
     return result;
 }
 
 std::vector<int> totient_sieve(int n) {
     std::vector<int> phi(n + 1);
-    for (int i = 0; i <= n; ++i) phi[i] = i;
+    for (int i = 0; i <= n; ++i) { phi[i] = i; }
     for (int i = 2; i <= n; ++i) {
         if (phi[i] == i) {
-            for (int j = i; j <= n; j += i)
+            for (int j = i; j <= n; j += i) {
                 phi[j] -= phi[j] / i;
+            }
         }
     }
     return phi;

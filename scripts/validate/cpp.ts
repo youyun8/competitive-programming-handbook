@@ -3,13 +3,13 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { basename } from 'node:path';
 import fg from 'fast-glob';
 import { readFrontmatter } from './frontmatter';
+import { chapterExerciseCode } from '../../src/lib/chapter-exercise-code';
 import { chapterExamples } from '../../src/lib/chapter-examples';
 
 const outputDirectory = 'tmp/validate/cpp';
 rmSync(outputDirectory, { recursive: true, force: true });
 mkdirSync(outputDirectory, { recursive: true });
-const sources: Array<{ name: string; code: string; sample?: { input: string; output: string } }> =
-  [];
+const sources: Array<{ name: string; code: string; sample?: { input: string; output: string } }> = [];
 
 for (const path of fg.sync('src/content/lessons/**/*.{md,mdx}')) {
   const source = readFileSync(path, 'utf8');
@@ -37,6 +37,10 @@ for (const [chapter, examples] of Object.entries(chapterExamples)) {
   for (const [index, example] of examples.entries()) {
     sources.push({ name: `chapter-${chapter}-example-${index}`, code: example.code });
   }
+}
+
+for (const [title, code] of Object.entries(chapterExerciseCode)) {
+  sources.push({ name: `chapter-exercise-${title}`, code });
 }
 
 for (const [index, source] of sources.entries()) {

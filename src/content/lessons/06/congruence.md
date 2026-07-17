@@ -65,9 +65,9 @@ long long ex_gcd(long long a, long long b, long long& x, long long& y) {
 long long mod_inverse(long long a, long long mod) {
     long long x = 0, y = 0;
     long long g = ex_gcd(a, mod, x, y);
-    if (g != 1) return -1; // no inverse
+    if (g != 1) { return -1; } // no inverse
     x %= mod;
-    if (x < 0) x += mod;
+    if (x < 0) { x += mod; }
     return x;
 }
 ```

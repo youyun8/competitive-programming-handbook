@@ -26,10 +26,7 @@ for (const file of files) {
   if (value.includes(0)) continue;
   const text = value
     .toString('utf8')
-    .replaceAll(
-      'postgresql://postgres:postgres@127.0.0.1:54322/postgres',
-      '[local-development-database]'
-    );
+    .replaceAll('postgresql://postgres:postgres@127.0.0.1:54322/postgres', '[local-development-database]');
   if (patterns.some((pattern) => pattern.test(text))) findings.push(file);
 }
 if (findings.length) {

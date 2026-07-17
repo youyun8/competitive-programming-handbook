@@ -96,12 +96,13 @@ using namespace std;
 int main() {
     int n;
     long long p;
-    if (!(cin >> n >> p)) return 0;
+    if (!(cin >> n >> p)) { return 0; }
     vector<vector<long long>> c(n + 1, vector<long long>(n + 1, 0));
     for (int i = 0; i <= n; ++i) {
         c[i][0] = 1 % p;
-        for (int j = 1; j <= i; ++j)
+        for (int j = 1; j <= i; ++j) {
             c[i][j] = (c[i - 1][j - 1] + c[i - 1][j]) % p;
+        }
     }
     int q;
     cin >> q;
@@ -127,12 +128,13 @@ using namespace std;
 // 錯排數 D(n)：容斥 D(n) = n! * sum_{k=0}^{n} (-1)^k / k!，用遞推 D(n)=(n-1)(D(n-1)+D(n-2)).
 int main() {
     int n;
-    if (!(cin >> n)) return 0;
+    if (!(cin >> n)) { return 0; }
     vector<long long> d(max(n + 1, 2), 0);
     d[0] = 1;
-    if (n >= 1) d[1] = 0;
-    for (int i = 2; i <= n; ++i)
+    if (n >= 1) { d[1] = 0; }
+    for (int i = 2; i <= n; ++i) {
         d[i] = static_cast<long long>(i - 1) * (d[i - 1] + d[i - 2]);
+    }
     cout << d[n] << '\n';
     return 0;
 }

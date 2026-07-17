@@ -22,9 +22,7 @@ export default function ExerciseNotes({ exerciseId, title, compact = false }: Pr
   return (
     <>
       <button
-        className={
-          compact ? 'button secondary note-button compact' : 'button secondary note-button'
-        }
+        className={compact ? 'button secondary note-button compact' : 'button secondary note-button'}
         type="button"
         onClick={() => setOpen(true)}
       >
@@ -243,11 +241,7 @@ function ExerciseNotesDialog({
             <div className="notes-panel">
               <div className="notes-toolbar">
                 <div className="notes-view-toggle">
-                  <button
-                    type="button"
-                    aria-pressed={thoughtView === 'edit'}
-                    onClick={() => setThoughtView('edit')}
-                  >
+                  <button type="button" aria-pressed={thoughtView === 'edit'} onClick={() => setThoughtView('edit')}>
                     編輯
                   </button>
                   <button
@@ -280,9 +274,7 @@ function ExerciseNotesDialog({
                       setThought(event.target.value);
                       setSaved(false);
                     }}
-                    placeholder={
-                      '記錄如何建模、使用的不變量、邊界處理與下次複習提醒。支援 Markdown。'
-                    }
+                    placeholder={'記錄如何建模、使用的不變量、邊界處理與下次複習提醒。支援 Markdown。'}
                     maxLength={32768}
                   />
                 </>

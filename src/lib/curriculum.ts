@@ -36,9 +36,7 @@ export function chapterByNumber(chapter: number) {
 }
 
 export function sectionById(id: string) {
-  return curriculum.chapters
-    .flatMap((chapter) => chapter.sections)
-    .find((section) => section.id === id);
+  return curriculum.chapters.flatMap((chapter) => chapter.sections).find((section) => section.id === id);
 }
 
 export function sectionSlug(section: CurriculumSection) {

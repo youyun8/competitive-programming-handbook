@@ -61,7 +61,7 @@ cpp_solution: |
   }
 
   std::vector<Point> convex_hull(std::vector<Point>& points) {
-      if (points.size() <= 1) return points;
+      if (points.size() <= 1) { return points; }
       std::sort(points.begin(), points.end());
       std::vector<Point> lower, upper;
       for (const Point& p : points) {
@@ -89,7 +89,7 @@ cpp_solution: |
       int n = 0;
       std::cin >> n;
       std::vector<Point> points(n);
-      for (Point& p : points) std::cin >> p.x >> p.y;
+      for (Point& p : points) { std::cin >> p.x >> p.y; }
       auto hull = convex_hull(points);
       std::cout << hull.size() << "\n";
       for (const Point& p : hull) {

@@ -84,7 +84,7 @@ static Circle circle_from(const Point& a, const Point& b) {
 
 static Circle circle_from(const Point& a, const Point& b, const Point& cc) {
     double d = 2.0 * (a.x * (b.y - cc.y) + b.x * (cc.y - a.y) + cc.x * (a.y - b.y));
-    if (std::abs(d) < 1e-12) return circle_from(a, b);
+    if (std::abs(d) < 1e-12) { return circle_from(a, b); }
     double ux = ((a.x * a.x + a.y * a.y) * (b.y - cc.y)
                + (b.x * b.x + b.y * b.y) * (cc.y - a.y)
                + (cc.x * cc.x + cc.y * cc.y) * (a.y - b.y)) / d;
@@ -98,14 +98,14 @@ static Circle circle_from(const Point& a, const Point& b, const Point& cc) {
 
 static Circle welzl_helper(std::vector<Point>& pts, std::vector<Point> boundary, int n) {
     if (n == 0 || boundary.size() == 3) {
-        if (boundary.size() == 0) return {{0, 0}, 0};
-        if (boundary.size() == 1) return {boundary[0], 0};
-        if (boundary.size() == 2) return circle_from(boundary[0], boundary[1]);
+        if (boundary.size() == 0) { return {{0, 0}, 0}; }
+        if (boundary.size() == 1) { return {boundary[0], 0}; }
+        if (boundary.size() == 2) { return circle_from(boundary[0], boundary[1]); }
         return circle_from(boundary[0], boundary[1], boundary[2]);
     }
     int idx = n - 1;
     Circle c = welzl_helper(pts, boundary, n - 1);
-    if (inside(c, pts[idx])) return c;
+    if (inside(c, pts[idx])) { return c; }
     boundary.push_back(pts[idx]);
     return welzl_helper(pts, boundary, n - 1);
 }

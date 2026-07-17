@@ -88,10 +88,10 @@ void search_with_pruning(const std::string& start) {
         std::string state = frontier.back();
         frontier.pop_back();
 
-        if (!is_feasible(state)) continue;
+        if (!is_feasible(state)) { continue; }
 
         const int cost = 0; // 實際應根據已走步數計算
-        if (cost + heuristic_cost(state) >= best_cost) continue;
+        if (cost + heuristic_cost(state) >= best_cost) { continue; }
 
         if (state == "target") {
             best_cost = std::min(best_cost, cost);

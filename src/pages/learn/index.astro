@@ -18,9 +18,7 @@ const orderedIds = [
   'dijkstra',
   'max-flow'
 ];
-const ordered = orderedIds
-  .map((id) => lessons.find((lesson) => lesson.data.id === id))
-  .filter(Boolean);
+const ordered = orderedIds.map((id) => lessons.find((lesson) => lesson.data.id === id)).filter(Boolean);
 ---
 
 <BaseLayout title="學習路線" wide>

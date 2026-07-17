@@ -55,7 +55,7 @@ review_status: verified
 
 long long normalize(long long x, long long mod) {
     x %= mod;
-    if (x < 0) x += mod;
+    if (x < 0) { x += mod; }
     return x;
 }
 
@@ -69,7 +69,7 @@ long long sub_mod(long long a, long long b, long long mod) {
     a = normalize(a, mod);
     b = normalize(b, mod);
     long long diff = a - b;
-    if (diff < 0) diff += mod;
+    if (diff < 0) { diff += mod; }
     return diff;
 }
 
@@ -78,7 +78,7 @@ long long mul_mod(long long a, long long b, long long mod) {
     b = normalize(b, mod);
     long long result = 0;
     while (b > 0) {
-        if (b & 1LL) result = add_mod(result, a, mod);
+        if (b & 1LL) { result = add_mod(result, a, mod); }
         a = add_mod(a, a, mod);
         b >>= 1LL;
     }

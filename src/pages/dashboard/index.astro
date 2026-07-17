@@ -21,24 +21,16 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     async function renderDashboard() {
       const snapshot = await readGuestSnapshot();
-      const completedLessons = snapshot.lessons.filter(
-        (lesson) => lesson.status === 'completed'
-      ).length;
-      const solvedExercises = snapshot.exercises.filter(
-        (exercise) => exercise.status === 'solved'
-      ).length;
-      const reviewExercises = snapshot.exercises.filter(
-        (exercise) => exercise.status === 'needs-review'
-      ).length;
-      document.querySelector('#dashboard-lessons')!.textContent =
-        `已完成 ${completedLessons} 篇核心教學。`;
+      const completedLessons = snapshot.lessons.filter((lesson) => lesson.status === 'completed').length;
+      const solvedExercises = snapshot.exercises.filter((exercise) => exercise.status === 'solved').length;
+      const reviewExercises = snapshot.exercises.filter((exercise) => exercise.status === 'needs-review').length;
+      document.querySelector('#dashboard-lessons')!.textContent = `已完成 ${completedLessons} 篇核心教學。`;
       document.querySelector('#dashboard-exercises')!.textContent =
         `已解決 ${solvedExercises} 題；共有 ${snapshot.exercises.length} 題留下學習狀態。`;
       document.querySelector('#dashboard-review')!.textContent = reviewExercises
         ? `有 ${reviewExercises} 題標記為待複習。`
         : '尚無標記為待複習的題目。';
-      document.querySelector('#dashboard-notes')!.textContent =
-        `已為 ${snapshot.notes.length} 題保存解答或思路。`;
+      document.querySelector('#dashboard-notes')!.textContent = `已為 ${snapshot.notes.length} 題保存解答或思路。`;
     }
     renderDashboard();
   </script>

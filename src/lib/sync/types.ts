@@ -5,6 +5,7 @@ export interface ReadingSettings {
   fontSize: number;
   contentWidth: number;
   codeFontSize: number;
+  wrapLines: boolean;
   updatedAt: string;
 }
 
@@ -49,13 +50,7 @@ export interface GuestSnapshot {
 export interface SyncEvent {
   id: string;
   idempotencyKey: string;
-  entity:
-    | 'settings'
-    | 'lesson_progress'
-    | 'exercise_progress'
-    | 'exercise_note'
-    | 'bookmark'
-    | 'merge';
+  entity: 'settings' | 'lesson_progress' | 'exercise_progress' | 'exercise_note' | 'bookmark' | 'merge';
   operation: 'upsert' | 'delete' | 'merge';
   payload: unknown;
   createdAt: string;

@@ -74,7 +74,7 @@ struct Student {
 void sort_students(std::vector<Student>& students) {
     std::sort(students.begin(), students.end(),
         [](const Student& a, const Student& b) {
-            if (a.score != b.score) return a.score > b.score;
+            if (a.score != b.score) { return a.score > b.score; }
             return a.name < b.name;
         });
 }

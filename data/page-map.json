@@ -9,9 +9,7 @@
     "source_file": "upper-volume",
     "pdf_pages": 406,
     "toc_pdf_pages": [11, 17],
-    "body_segments": [
-      { "book_pages": [1, 385], "pdf_pages": [19, 403], "offset": 18, "status": "sampled" }
-    ],
+    "body_segments": [{ "book_pages": [1, 385], "pdf_pages": [19, 403], "offset": 18, "status": "sampled" }],
     "checks": [
       {
         "label": "chapter-1-start",
@@ -41,9 +39,7 @@
     "pdf_pages": 330,
     "toc_pdf_pages": [11, 16],
     "chapter_cover_pdf_page": 17,
-    "body_segments": [
-      { "book_pages": [387, 693], "pdf_pages": [17, 323], "offset": -370, "status": "sampled" }
-    ],
+    "body_segments": [{ "book_pages": [387, 693], "pdf_pages": [17, 323], "offset": -370, "status": "sampled" }],
     "checks": [
       {
         "label": "chapter-6-cover",

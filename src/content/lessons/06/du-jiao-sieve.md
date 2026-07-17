@@ -74,8 +74,8 @@ public:
 
     // Compute prefix sum of phi: sum_{i=1}^{n} phi(i)
     int64_t phi_sum(int64_t n) {
-        if (n <= precomputed_limit_) return phi_prefix_[n];
-        if (phi_memo_.count(n)) return phi_memo_[n];
+        if (n <= precomputed_limit_) { return phi_prefix_[n]; }
+        if (phi_memo_.count(n)) { return phi_memo_[n]; }
 
         int64_t result = n * (n + 1) / 2; // sum of i = sum of phi * 1 = sum_{d}(phi(d) * floor(n/d))
         // Actually phi * 1 = id, so sum phi(d) * floor(n/d) = n*(n+1)/2
@@ -93,8 +93,8 @@ public:
 
     // Compute prefix sum of mobius: sum_{i=1}^{n} mu(i)
     int64_t mobius_sum(int64_t n) {
-        if (n <= precomputed_limit_) return mobius_prefix_[n];
-        if (mobius_memo_.count(n)) return mobius_memo_[n];
+        if (n <= precomputed_limit_) { return mobius_prefix_[n]; }
+        if (mobius_memo_.count(n)) { return mobius_memo_[n]; }
 
         int64_t result = 1; // sum of mu * 1 = epsilon, so sum_{d=1}^{n} mu(d)*floor(n/d) = 1
         // Rearranged: S_mu(n) = 1 - sum_{d=2}^{n} S_mu(n/d)
@@ -136,7 +136,7 @@ private:
             }
             for (int p : primes) {
                 int64_t v = 1LL * i * p;
-                if (v > threshold) break;
+                if (v > threshold) { break; }
                 is_composite[v] = true;
                 if (i % p == 0) {
                     phi[v] = phi[i] * p;

@@ -70,7 +70,7 @@ struct RollingHash {
 
     long long get_substring(size_t left, size_t right) const {
         long long value = prefix_hash[right] - (prefix_hash[left] * power[right - left]) % MOD;
-        if (value < 0) value += MOD;
+        if (value < 0) { value += MOD; }
         return value;
     }
 };

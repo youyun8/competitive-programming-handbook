@@ -5,7 +5,7 @@ source_file: lower-volume
 chapter: 10
 section: '10.5'
 title: 有向圖連通性：強連通分量與縮點
-summary: 以 Kosaraju 或 Tarjan 算法找出強連通分量，將有向圖縮成 DAG 以利後續處理。
+summary: 以 Kosaraju 或 Tarjan 演算法找出強連通分量，將有向圖縮成 DAG 以利後續處理。
 prerequisites: [graphs, dfs]
 learning_goals:
   - 實作 Kosaraju 與 Tarjan SCC
@@ -79,7 +79,7 @@ struct TarjanSCC {
                 stack.pop_back();
                 on_stack[v] = false;
                 component[v] = component_count;
-                if (v == u) break;
+                if (v == u) { break; }
             }
             ++component_count;
         }

@@ -62,23 +62,26 @@ std::vector<double> gaussian_elimination(std::vector<std::vector<double>> a) {
     std::vector<int> where(m - 1, -1);
     for (int col = 0, row = 0; col < m - 1 && row < n; ++col) {
         int sel = row;
-        for (int i = row; i < n; ++i)
-            if (std::fabs(a[i][col]) > std::fabs(a[sel][col])) sel = i;
-        if (std::fabs(a[sel][col]) < EPS) continue;
+        for (int i = row; i < n; ++i) {
+            if (std::fabs(a[i][col]) > std::fabs(a[sel][col])) { sel = i; }
+        }
+        if (std::fabs(a[sel][col]) < EPS) { continue; }
         std::swap(a[sel], a[row]);
         where[col] = row;
         for (int i = 0; i < n; ++i) {
             if (i != row) {
                 double coeff = a[i][col] / a[row][col];
-                for (int j = col; j < m; ++j)
+                for (int j = col; j < m; ++j) {
                     a[i][j] -= coeff * a[row][j];
+                }
             }
         }
         ++row;
     }
     std::vector<double> ans(m - 1, 0);
-    for (int i = 0; i < m - 1; ++i)
-        if (where[i] != -1) ans[i] = a[where[i]][m - 1] / a[where[i]][i];
+    for (int i = 0; i < m - 1; ++i) {
+        if (where[i] != -1) { ans[i] = a[where[i]][m - 1] / a[where[i]][i]; }
+    }
     return ans;
 }
 ```

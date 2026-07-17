@@ -17,14 +17,7 @@
       "source_file": "upper-volume",
       "source_book_pages": [2, 3],
       "source_pdf_pages": [20, 21],
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -40,14 +33,7 @@
       "source_pdf_pages": [20, 22],
       "platform": "洛谷",
       "problem_id": "P1996",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -63,14 +49,7 @@
       "source_pdf_pages": [24],
       "platform": "洛谷",
       "problem_id": "P1160",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -84,14 +63,7 @@
       "source_file": "upper-volume",
       "source_book_pages": [7],
       "source_pdf_pages": [25],
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -107,14 +79,7 @@
       "source_pdf_pages": [26],
       "platform": "洛谷",
       "problem_id": "P1540",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -128,14 +93,7 @@
       "source_file": "upper-volume",
       "source_book_pages": [10],
       "source_pdf_pages": [28],
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -151,14 +109,7 @@
       "source_pdf_pages": [28, 30],
       "platform": "洛谷",
       "problem_id": "P1886",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -174,14 +125,7 @@
       "source_pdf_pages": [31],
       "platform": "HDU",
       "problem_id": "1003",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -197,14 +141,7 @@
       "source_pdf_pages": [34],
       "platform": "洛谷",
       "problem_id": "P1440",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -220,14 +157,7 @@
       "source_pdf_pages": [34],
       "platform": "洛谷",
       "problem_id": "P2776",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -243,14 +173,7 @@
       "source_pdf_pages": [34],
       "platform": "洛谷",
       "problem_id": "P3957",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -264,14 +187,7 @@
       "source_file": "upper-volume",
       "source_book_pages": [17],
       "source_pdf_pages": [35],
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -287,14 +203,7 @@
       "source_pdf_pages": [35],
       "platform": "HDU",
       "problem_id": "1062",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -308,14 +217,7 @@
       "source_file": "upper-volume",
       "source_book_pages": [18],
       "source_pdf_pages": [36],
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -331,14 +233,7 @@
       "source_pdf_pages": [41],
       "platform": "HDU",
       "problem_id": "1710",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -354,14 +249,7 @@
       "source_pdf_pages": [44],
       "platform": "POJ",
       "problem_id": "1521",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -377,14 +265,7 @@
       "source_pdf_pages": [45],
       "platform": "HDU",
       "problem_id": "2527",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },
@@ -400,14 +281,7 @@
       "source_pdf_pages": [48, 49],
       "platform": "洛谷",
       "problem_id": "P3378",
-      "learning_focus": [
-        "動態鏈結串列",
-        "靜態鏈結串列",
-        "STL list",
-        "STL queue",
-        "循環佇列",
-        "雙端佇列"
-      ],
+      "learning_focus": ["動態鏈結串列", "靜態鏈結串列", "STL list", "STL queue", "循環佇列", "雙端佇列"],
       "summary": "以容器操作、元素順序與結構不變量為核心，練習選擇合適的基礎資料結構。",
       "review_status": "verified-metadata"
     },

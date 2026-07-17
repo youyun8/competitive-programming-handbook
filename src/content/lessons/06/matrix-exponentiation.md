@@ -59,7 +59,7 @@ Matrix multiply(const Matrix& a, const Matrix& b, long long mod) {
     Matrix result(n, std::vector<long long>(n, 0));
     for (std::size_t i = 0; i < n; ++i) {
         for (std::size_t k = 0; k < n; ++k) {
-            if (a[i][k] == 0) continue;
+            if (a[i][k] == 0) { continue; }
             for (std::size_t j = 0; j < n; ++j) {
                 result[i][j] = (result[i][j] + a[i][k] * b[k][j]) % mod;
             }
@@ -71,10 +71,10 @@ Matrix multiply(const Matrix& a, const Matrix& b, long long mod) {
 Matrix matrix_power(Matrix base, long long exponent, long long mod) {
     const std::size_t n = base.size();
     Matrix result(n, std::vector<long long>(n, 0));
-    for (std::size_t i = 0; i < n; ++i) result[i][i] = 1;
+    for (std::size_t i = 0; i < n; ++i) { result[i][i] = 1; }
 
     while (exponent > 0) {
-        if (exponent & 1LL) result = multiply(result, base, mod);
+        if (exponent & 1LL) { result = multiply(result, base, mod); }
         base = multiply(base, base, mod);
         exponent >>= 1;
     }

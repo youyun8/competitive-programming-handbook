@@ -38,7 +38,7 @@ std::cin.tie(nullptr);`;
     `boost::multiprecision::cpp_int`
     提供任意精度整數，可直接做加減乘除、位元運算與輸入輸出。它沒有固定上限，但時間與記憶體成本會隨位數成長，也不能直接混用所有標準數學函式。
   </p>
-  <Code code={bigIntegerCode} lang="cpp" theme="github-dark-default" wrap />
+  <Code code={bigIntegerCode} lang="cpp" theme="github-dark-default" />
   <div class="callout">
     若題目只需要十進位加減，可以用低位在前的 <code>vector&lt;int&gt;</code
     >；若需要高效乘法與除法，手寫成本很高，先確認題目是否其實只要求取模。
@@ -46,21 +46,16 @@ std::cin.tie(nullptr);`;
 
   <h2>A.2 建構測試資料與對拍</h2>
   <p>
-    固定 seed
-    是重現錯誤的關鍵。亂數之外，還要主動加入空間最小值、最大值、重複值、已排序、反向排序與答案在邊界等測資。
+    固定 seed 是重現錯誤的關鍵。亂數之外，還要主動加入空間最小值、最大值、重複值、已排序、反向排序與答案在邊界等測資。
   </p>
-  <Code code={generatorCode} lang="cpp" theme="github-dark-default" wrap />
-  <p>
-    差分測試把小資料交給明顯正確的暴力解與待驗證的最佳化解。發現不一致時，輸出
-    seed、測試編號與完整輸入後立刻停止。
-  </p>
+  <Code code={generatorCode} lang="cpp" theme="github-dark-default" />
+  <p>差分測試把小資料交給明顯正確的暴力解與待驗證的最佳化解。發現不一致時，輸出 seed、測試編號與完整輸入後立刻停止。</p>
 
   <h2>A.3 高效輸入／輸出</h2>
-  <Code code={fastIoCode} lang="cpp" theme="github-dark-default" wrap />
+  <Code code={fastIoCode} lang="cpp" theme="github-dark-default" />
   <p>
     關閉同步後不要再混用 <code>scanf/printf</code> 與
-    <code>cin/cout</code>。大量逐行輸出可先累積到字串；互動題則要在每次詢問後
-    flush。格式化輸出要留意
+    <code>cin/cout</code>。大量逐行輸出可先累積到字串；互動題則要在每次詢問後 flush。格式化輸出要留意
     <code>fixed</code>、<code>setprecision</code> 的狀態會持續影響後續輸出。
   </p>
 

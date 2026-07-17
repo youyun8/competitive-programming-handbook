@@ -42,7 +42,7 @@ review_status: verified
 
 ## 不變量或正確性證明
 
-歸併排序的不變量：當遞迴回到區間 [l, r] 時，左右兩半 [l, mid] 與 [mid+1, r] 都已是各自有序的。合併過程比較兩端最小值並放入緩衝區，因此緩衝區結果也是全局有序的。基例區間長度為 1 時自然有序。由數學歸納法，歸併排序正確。
+歸併排序的不變量：當遞迴回到區間 [l, r] 時，左右兩半 [l, mid] 與 [mid+1, r] 都已是各自有序的。合併過程比較兩端最小值並放入緩衝區，因此緩衝區結果也是全域有序的。基例區間長度為 1 時自然有序。由數學歸納法，歸併排序正確。
 
 ## 逐步演算法
 
@@ -78,7 +78,7 @@ long long fast_power(long long base, long long exp, long long mod) {
 }
 
 void merge_sort(std::vector<int>& values, int left, int right, std::vector<int>& buffer) {
-    if (left >= right) return;
+    if (left >= right) { return; }
     const int mid = left + (right - left) / 2;
     merge_sort(values, left, mid, buffer);
     merge_sort(values, mid + 1, right, buffer);
@@ -93,8 +93,8 @@ void merge_sort(std::vector<int>& values, int left, int right, std::vector<int>&
             buffer[k++] = values[j++];
         }
     }
-    while (i <= mid) buffer[k++] = values[i++];
-    while (j <= right) buffer[k++] = values[j++];
+    while (i <= mid) { buffer[k++] = values[i++]; }
+    while (j <= right) { buffer[k++] = values[j++]; }
     for (int p = left; p <= right; ++p) {
         values[p] = buffer[p];
     }

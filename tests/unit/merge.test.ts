@@ -10,6 +10,7 @@ describe('guest/cloud merge', () => {
           fontSize: 18,
           contentWidth: 50,
           codeFontSize: 15,
+          wrapLines: true,
           updatedAt: '2026-07-16T10:00:00Z'
         },
         lessons: [
@@ -37,9 +38,7 @@ describe('guest/cloud merge', () => {
             updatedAt: '2026-07-16T09:30:00Z'
           }
         ],
-        bookmarks: [
-          { itemType: 'lesson', itemId: 'binary-search', createdAt: '2026-07-16T08:00:00Z' }
-        ]
+        bookmarks: [{ itemType: 'lesson', itemId: 'binary-search', createdAt: '2026-07-16T08:00:00Z' }]
       },
       {
         settings: {
@@ -47,6 +46,7 @@ describe('guest/cloud merge', () => {
           fontSize: 16,
           contentWidth: 44,
           codeFontSize: 13,
+          wrapLines: false,
           updatedAt: '2026-07-16T11:00:00Z'
         },
         lessons: [
@@ -74,9 +74,7 @@ describe('guest/cloud merge', () => {
             updatedAt: '2026-07-16T10:30:00Z'
           }
         ],
-        bookmarks: [
-          { itemType: 'exercise', itemId: 'first-not-less', createdAt: '2026-07-16T10:00:00Z' }
-        ]
+        bookmarks: [{ itemType: 'exercise', itemId: 'first-not-less', createdAt: '2026-07-16T10:00:00Z' }]
       }
     );
     expect(merged.settings?.theme).toBe('light');

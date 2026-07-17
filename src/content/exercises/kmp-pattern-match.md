@@ -44,8 +44,8 @@ cpp_solution: |
       std::vector<int> pi(m, 0);
       for (int i = 1; i < m; ++i) {
           int j = pi[i - 1];
-          while (j > 0 && pattern[i] != pattern[j]) j = pi[j - 1];
-          if (pattern[i] == pattern[j]) ++j;
+          while (j > 0 && pattern[i] != pattern[j]) { j = pi[j - 1]; }
+          if (pattern[i] == pattern[j]) { ++j; }
           pi[i] = j;
       }
       return pi;
@@ -62,8 +62,8 @@ cpp_solution: |
       std::vector<int> matches;
       int j = 0;
       for (int i = 0; i < n; ++i) {
-          while (j > 0 && text[i] != pattern[j]) j = pi[j - 1];
-          if (text[i] == pattern[j]) ++j;
+          while (j > 0 && text[i] != pattern[j]) { j = pi[j - 1]; }
+          if (text[i] == pattern[j]) { ++j; }
           if (j == m) {
               matches.push_back(i - m + 2);
               j = pi[j - 1];
@@ -71,10 +71,10 @@ cpp_solution: |
       }
       std::cout << matches.size() << "\n";
       for (size_t i = 0; i < matches.size(); ++i) {
-          if (i) std::cout << " ";
+          if (i) { std::cout << " "; }
           std::cout << matches[i];
       }
-      if (!matches.empty()) std::cout << "\n";
+      if (!matches.empty()) { std::cout << "\n"; }
   }
 source_book_pages:
   - 549
@@ -86,6 +86,6 @@ review_status: verified
 external_url: https://www.luogu.com.cn/problem/P3375
 external_platform: 洛谷
 external_problem_id: P3375
-external_title: 【模板】KMP字符串匹配
+external_title: 【模板】KMP字串匹配
 external_relation: related
 ---

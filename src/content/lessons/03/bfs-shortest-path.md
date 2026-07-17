@@ -78,9 +78,9 @@ std::vector<int> bfs_shortest_path(
     while (!q.empty()) {
         const int u = q.front();
         q.pop();
-        if (u == target) break;
+        if (u == target) { break; }
         for (int v : graph[u]) {
-            if (distance[v] != -1) continue;
+            if (distance[v] != -1) { continue; }
             distance[v] = distance[u] + 1;
             predecessor[v] = u;
             q.push(v);
@@ -132,9 +132,9 @@ using namespace std;
 // 網格無權最短路：BFS 求最短步數並還原一條路徑。
 int main() {
     int rows, cols;
-    if (!(cin >> rows >> cols)) return 0;
+    if (!(cin >> rows >> cols)) { return 0; }
     vector<string> grid(rows);
-    for (string& row : grid) cin >> row;
+    for (string& row : grid) { cin >> row; }
     int start = 0, goal = rows * cols - 1;
     vector<int> distance(rows * cols, -1), parent(rows * cols, -1);
     queue<int> frontier;
@@ -148,10 +148,10 @@ int main() {
         int r = cell / cols, c = cell % cols;
         for (int k = 0; k < 4; ++k) {
             int nr = r + dr[k], nc = c + dc[k];
-            if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) continue;
-            if (grid[nr][nc] == '#') continue;
+            if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) { continue; }
+            if (grid[nr][nc] == '#') { continue; }
             int next = nr * cols + nc;
-            if (distance[next] != -1) continue;
+            if (distance[next] != -1) { continue; }
             distance[next] = distance[cell] + 1;
             parent[next] = cell;
             frontier.push(next);
@@ -163,10 +163,11 @@ int main() {
     }
     cout << distance[goal] << '\n';
     vector<int> path;
-    for (int cell = goal; cell != -1; cell = parent[cell]) path.push_back(cell);
+    for (int cell = goal; cell != -1; cell = parent[cell]) { path.push_back(cell); }
     reverse(path.begin(), path.end());
-    for (size_t i = 0; i < path.size(); ++i)
+    for (size_t i = 0; i < path.size(); ++i) {
         cout << '(' << path[i] / cols << ',' << path[i] % cols << ')' << " \n"[i + 1 == path.size()];
+    }
     return 0;
 }
 ```
@@ -184,7 +185,7 @@ using namespace std;
 // 0-1 BFS：邊權只有 0 或 1 的單源最短路，用 deque 維持距離非遞減。
 int main() {
     int n, m, source;
-    if (!(cin >> n >> m >> source)) return 0;
+    if (!(cin >> n >> m >> source)) { return 0; }
     vector<vector<pair<int, int>>> adjacency(n);  // (to, weight in {0,1})
     for (int i = 0; i < m; ++i) {
         int u, v, w;
@@ -201,13 +202,14 @@ int main() {
         for (auto [v, w] : adjacency[u]) {
             if (distance[u] + w < distance[v]) {
                 distance[v] = distance[u] + w;
-                if (w == 0) frontier.push_front(v);
-                else frontier.push_back(v);
+                if (w == 0) { frontier.push_front(v); }
+                else { frontier.push_back(v); }
             }
         }
     }
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < n; ++i) {
         cout << (distance[i] == INT_MAX ? -1 : distance[i]) << " \n"[i + 1 == n];
+    }
     return 0;
 }
 ```

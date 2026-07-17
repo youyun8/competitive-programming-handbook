@@ -49,8 +49,7 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
       } else {
         const legacyLocal: Record<string, string | null> = {};
         for (const key of Object.keys(localStorage)) {
-          if (key.startsWith('ac-') && !key.includes('session'))
-            legacyLocal[key] = localStorage.getItem(key);
+          if (key.startsWith('ac-') && !key.includes('session')) legacyLocal[key] = localStorage.getItem(key);
         }
         exported = {
           exportedAt: new Date().toISOString(),

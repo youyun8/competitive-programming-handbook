@@ -37,7 +37,7 @@ cpp_solution: |
 
   long long huffman_total_length(const std::vector<long long>& freq) {
       std::priority_queue<long long, std::vector<long long>, std::greater<long long>> min_heap;
-      for (long long f : freq) min_heap.push(f);
+      for (long long f : freq) { min_heap.push(f); }
       long long total = 0;
       while (min_heap.size() > 1) {
           long long a = min_heap.top(); min_heap.pop();
@@ -55,7 +55,7 @@ cpp_solution: |
       int n = 0;
       std::cin >> n;
       std::vector<long long> freq(n);
-      for (long long& f : freq) std::cin >> f;
+      for (long long& f : freq) { std::cin >> f; }
       std::cout << huffman_total_length(freq) << "\n";
   }
 source_book_pages: [1, 31]

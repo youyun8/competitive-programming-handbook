@@ -1,8 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('home, chapter, lesson, visualizer, and progress work under project base path', async ({
-  page
-}) => {
+test('home, chapter, lesson, visualizer, and progress work under project base path', async ({ page }) => {
   await page.goto('./');
   await expect(page.getByRole('heading', { name: /把演算法/ })).toBeVisible();
   await page.getByRole('link', { name: '從二分搜尋開始' }).click();
@@ -13,9 +11,7 @@ test('home, chapter, lesson, visualizer, and progress work under project base pa
   await expect(page.getByRole('button', { name: /已完成/ })).toBeVisible();
 });
 
-test('every curriculum section has a published guide instead of an expansion placeholder', async ({
-  page
-}) => {
+test('every curriculum section has a published guide instead of an expansion placeholder', async ({ page }) => {
   await page.goto('./chapters/1/');
   await expect(page.getByText('內容擴充中')).toHaveCount(0);
   await page.getByRole('link', { name: '鏈結串列', exact: true }).click();
@@ -61,16 +57,19 @@ test('practice cards, external links, hints, solution, and progress status', asy
   await expect(page.getByLabel('學習狀態')).toHaveValue('needs-review');
 });
 
-test('reading settings, auth callback mock, dashboard, offline status, profile, and 404', async ({
-  page,
-  context
-}) => {
+test('reading settings, auth callback mock, dashboard, offline status, profile, and 404', async ({ page, context }) => {
   await page.goto('./');
   await page.getByRole('button', { name: '開啟閱讀設定' }).click();
   await page.getByRole('button', { name: '深色', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await page.getByRole('button', { name: '全螢幕' }).click();
   await expect(page.locator('html')).toHaveAttribute('data-reading-width', 'full');
+  const wrap_lines = page.getByLabel('程式碼長行換行');
+  await expect(wrap_lines).toBeChecked();
+  await wrap_lines.uncheck();
+  await expect(page.locator('html')).toHaveAttribute('data-wrap-lines', 'false');
+  await wrap_lines.check();
+  await expect(page.locator('html')).toHaveAttribute('data-wrap-lines', 'true');
   await page.getByLabel(/正文字級/).fill('20');
   await page.getByRole('button', { name: '關閉閱讀設定' }).click();
   await page.reload();

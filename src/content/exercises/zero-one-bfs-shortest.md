@@ -72,10 +72,10 @@ cpp_solution: |
           int u = dq.front(); dq.pop_front();
           for (const Edge& e : g[u]) {
               const int next_distance = dist[u] + e.weight;
-              if (next_distance >= dist[e.to]) continue;
+              if (next_distance >= dist[e.to]) { continue; }
               dist[e.to] = next_distance;
-              if (e.weight == 0) dq.push_front(e.to);
-              else dq.push_back(e.to);
+              if (e.weight == 0) { dq.push_front(e.to); }
+              else { dq.push_back(e.to); }
           }
       }
       std::cout << (dist[t] == infinity ? -1 : dist[t]) << "\n";

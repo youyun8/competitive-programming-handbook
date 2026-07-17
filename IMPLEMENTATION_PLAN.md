@@ -39,7 +39,7 @@
 ## Auth、資料與同步
 
 - [x] 完成電子郵件註冊／登入／驗證／忘記與重設密碼
-- [x] 完成 GitHub OAuth callback、返回原頁、refresh、登出與跨分頁同步
+- [x] 完成 GitHub OAuth callback、回傳原頁、refresh、登出與跨分頁同步
 - [x] 建立 PostgreSQL migrations、完整限制、UTC 時間與索引
 - [x] 為公開 schema 啟用 RLS，隔離各使用者的進度與解題筆記
 - [x] 完成訪客 IndexedDB queue、首次登入合併、衝突偵測與離線重送

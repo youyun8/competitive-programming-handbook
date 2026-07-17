@@ -31,7 +31,7 @@ review_status: verified
 
 ## 核心想法與直覺
 
-二分圖沒有奇數長度的環，可以用兩種顏色染色成功。最大匹配是不相鄰邊的最大集合。匈牙利算法不斷尋找增廣路來擴大匹配。Hopcroft-Karp 一次找出多條最短的增廣路，時間更優。
+二分圖沒有奇數長度的環，可以用兩種顏色染色成功。最大匹配是不相鄰邊的最大集合。匈牙利演算法不斷尋找增廣路來擴大匹配。Hopcroft-Karp 一次找出多條最短的增廣路，時間更優。
 
 ## 狀態／資料結構定義
 
@@ -66,7 +66,7 @@ struct BipartiteMatching {
 
     bool dfs(int u) {
         for (int v : graph[u]) {
-            if (visited[v]) continue;
+            if (visited[v]) { continue; }
             visited[v] = true;
             if (match_to[v] == -1 || dfs(match_to[v])) {
                 match_to[v] = u;
@@ -81,7 +81,7 @@ struct BipartiteMatching {
         int result = 0;
         for (int u = 0; u < static_cast<int>(graph.size()); ++u) {
             visited.assign(right_count, false);
-            if (dfs(u)) ++result;
+            if (dfs(u)) { ++result; }
         }
         return result;
     }
@@ -98,7 +98,7 @@ struct BipartiteMatching {
 
 ## 與相似技巧的比較
 
-一般圖最大匹配需 Blossom 算法，遠比二分圖複雜。最大流也能解二分圖匹配，但匈牙利更直接且常數小。最小點覆蓋與最大獨立集在一般圖上是 NP-難，但在二分圖上可透過匹配在多項式時間解決。
+一般圖最大匹配需 Blossom 演算法，遠比二分圖複雜。最大流也能解二分圖匹配，但匈牙利更直接且常數小。最小點覆蓋與最大獨立集在一般圖上是 NP-難，但在二分圖上可透過匹配在多項式時間解決。
 
 ## 例題與分級練習
 

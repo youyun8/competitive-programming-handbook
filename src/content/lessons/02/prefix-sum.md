@@ -95,7 +95,7 @@ public:
 ## 常見錯誤與邊界條件
 
 - 二維前綴和的四項加減符號寫錯。
-- 差分忘記在 r+1 處減回來，導致後半段陣列持續累積错误值。
+- 差分忘記在 r+1 處減回來，導致後半段陣列持續累積錯誤值。
 - 索引從 0 開始時，l-1 可能為 -1，需用 prefix[-1] = 0 的慣例或統一轉為 1-based。
 - 差分與前綴和混合使用時，資料型別溢出；建議結果用 long long。
 
@@ -122,7 +122,7 @@ using namespace std;
 // 一維前綴和：O(1) 回答任意區間 [l, r] 的和（1-based, 含端點）。
 int main() {
     int n, q;
-    if (!(cin >> n >> q)) return 0;
+    if (!(cin >> n >> q)) { return 0; }
     vector<long long> prefix(n + 1, 0);
     for (int i = 1; i <= n; ++i) {
         long long value;
@@ -151,7 +151,7 @@ using namespace std;
 // 二維差分：多次矩形加值後輸出整張網格。單次修改 O(1)，最後還原 O(n*m)。
 int main() {
     int n, m, ops;
-    if (!(cin >> n >> m >> ops)) return 0;
+    if (!(cin >> n >> m >> ops)) { return 0; }
     vector<vector<long long>> diff(n + 2, vector<long long>(m + 2, 0));
     while (ops--) {
         int r1, c1, r2, c2;

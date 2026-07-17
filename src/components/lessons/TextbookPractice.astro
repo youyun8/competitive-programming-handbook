@@ -1,6 +1,7 @@
 ---
 import { Code } from 'astro:components';
 import type { CurriculumChapter, CurriculumSection } from '@/lib/curriculum';
+import { chapterExerciseCode } from '@/lib/chapter-exercise-code';
 import { chapterExerciseSolutions } from '@/lib/chapter-exercise-solutions';
 import { chapterExamples } from '@/lib/chapter-examples';
 import { chapterWorkshops } from '@/lib/chapter-workshops';
@@ -15,9 +16,7 @@ const examples = chapterExamples[chapter.chapter] ?? [];
 const workshop = chapterWorkshops[chapter.chapter]!;
 const sectionIndex = chapter.sections.findIndex((item) => item.id === section.id);
 const example = examples.length > 0 ? examples[sectionIndex % examples.length]! : null;
-const exercises = [0, 1].map(
-  (offset) => workshop.exercises[(sectionIndex * 2 + offset) % workshop.exercises.length]!
-);
+const exercises = [0, 1].map((offset) => workshop.exercises[(sectionIndex * 2 + offset) % workshop.exercises.length]!);
 const normalizeTitle = (title: string) => title.replace(/\s+/g, '');
 ---
 
@@ -47,7 +46,7 @@ const normalizeTitle = (title: string) => title.replace(/\s+/g, '');
         <h4>解題想法</h4>
         <p>{example.idea}</p>
         <h4>C++17 參考解答</h4>
-        <Code code={example.code} lang="cpp" theme="github-dark-default" wrap />
+        <Code code={example.code} lang="cpp" theme="github-dark-default" />
         <p>
           <strong>複雜度：</strong>
           {example.complexity}
@@ -60,12 +59,15 @@ const normalizeTitle = (title: string) => title.replace(/\s+/g, '');
     {
       exercises.map((exercise) => {
         const solution = chapterExerciseSolutions[normalizeTitle(exercise.title)];
+        const solutionCode = chapterExerciseCode[normalizeTitle(exercise.title)];
         return (
           <article class="card">
             <span class="badge">{exercise.level}</span>
             <h3>{exercise.title}</h3>
+            <h4>題目</h4>
             <p>{exercise.prompt}</p>
-            <p class="meta">訓練重點：{exercise.focus}</p>
+            <h4>訓練重點</h4>
+            <p>{exercise.focus}</p>
             {solution ? (
               <>
                 <h4>演算法</h4>
@@ -74,6 +76,12 @@ const normalizeTitle = (title: string) => title.replace(/\s+/g, '');
                 <p>{solution.correctness}</p>
                 <h4>複雜度</h4>
                 <p>{solution.complexity}</p>
+                <h4>C++17 實作</h4>
+                {solutionCode ? (
+                  <Code code={solutionCode} lang="cpp" theme="github-dark-default" />
+                ) : (
+                  <p>目前尚未附上程式碼實作。</p>
+                )}
               </>
             ) : (
               <p>先依「{exercise.focus}」建立不變量，再逐步驗證每次更新不會排除正確答案。</p>
@@ -119,5 +127,11 @@ const normalizeTitle = (title: string) => title.replace(/\s+/g, '');
 
   .exercise-grid article p {
     margin-top: 0.2rem;
+  }
+
+  .exercise-grid :global(pre) {
+    max-height: 38rem;
+    margin: 0.6rem 0 0;
+    overflow: auto;
   }
 </style>

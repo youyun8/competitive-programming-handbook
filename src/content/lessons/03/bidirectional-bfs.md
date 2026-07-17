@@ -45,7 +45,7 @@ review_status: verified
 
 ## 不變量或正確性證明
 
-設最短路徑長度為 d。單向 BFS 會展開所有距離 <= d 的節點。雙向 BFS 中，當兩個 frontier 第一次相遇於狀態 x 時，存在一條從起點到 x 的路徑長度為 ds，以及從終點到 x 的路徑長度為 dt。因為兩側都是按層展開，ds 與 dt 分別不超過各自側的最短路徑。總長度 ds + dt 即為全局最短路徑長度，否則存在更短的單向路徑會導致更早相遇。
+設最短路徑長度為 d。單向 BFS 會展開所有距離 <= d 的節點。雙向 BFS 中，當兩個 frontier 第一次相遇於狀態 x 時，存在一條從起點到 x 的路徑長度為 ds，以及從終點到 x 的路徑長度為 dt。因為兩側都是按層展開，ds 與 dt 分別不超過各自側的最短路徑。總長度 ds + dt 即為全域最短路徑長度，否則存在更短的單向路徑會導致更早相遇。
 
 ## 逐步演算法
 
@@ -68,7 +68,7 @@ review_status: verified
 
 int bidirectional_bfs(const std::string& start, const std::string& target,
                       const std::vector<std::string>& (*get_neighbors)(const std::string&)) {
-    if (start == target) return 0;
+    if (start == target) { return 0; }
 
     std::unordered_map<std::string, int> dist_a, dist_b;
     std::queue<std::string> qa, qb;
@@ -86,7 +86,7 @@ int bidirectional_bfs(const std::string& start, const std::string& target,
             const auto cur = q_from.front();
             q_from.pop();
             for (const auto& nxt : get_neighbors(cur)) {
-                if (dist_from.count(nxt)) continue;
+                if (dist_from.count(nxt)) { continue; }
                 dist_from[nxt] = dist_from[cur] + 1;
                 if (dist_to.count(nxt)) {
                     return dist_from[nxt] + dist_to[nxt];

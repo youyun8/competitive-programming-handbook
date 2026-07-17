@@ -120,12 +120,12 @@ static void sliding_window_extremes(const vector<int>& a, int k,
     deque<int> increasing;  // index，值遞增，隊首為最小值
     deque<int> decreasing;  // index，值遞減，隊首為最大值
     for (int i = 0; i < static_cast<int>(a.size()); ++i) {
-        while (!increasing.empty() && a[increasing.back()] >= a[i]) increasing.pop_back();
+        while (!increasing.empty() && a[increasing.back()] >= a[i]) { increasing.pop_back(); }
         increasing.push_back(i);
-        while (!decreasing.empty() && a[decreasing.back()] <= a[i]) decreasing.pop_back();
+        while (!decreasing.empty() && a[decreasing.back()] <= a[i]) { decreasing.pop_back(); }
         decreasing.push_back(i);
-        if (increasing.front() <= i - k) increasing.pop_front();
-        if (decreasing.front() <= i - k) decreasing.pop_front();
+        if (increasing.front() <= i - k) { increasing.pop_front(); }
+        if (decreasing.front() <= i - k) { decreasing.pop_front(); }
         if (i >= k - 1) {
             mins.push_back(a[increasing.front()]);
             maxs.push_back(a[decreasing.front()]);
@@ -135,13 +135,13 @@ static void sliding_window_extremes(const vector<int>& a, int k,
 
 int main() {
     int n, k;
-    if (!(cin >> n >> k)) return 0;
+    if (!(cin >> n >> k)) { return 0; }
     vector<int> a(n);
-    for (int& value : a) cin >> value;
+    for (int& value : a) { cin >> value; }
     vector<int> mins, maxs;
     sliding_window_extremes(a, k, mins, maxs);
-    for (size_t i = 0; i < mins.size(); ++i) cout << mins[i] << " \n"[i + 1 == mins.size()];
-    for (size_t i = 0; i < maxs.size(); ++i) cout << maxs[i] << " \n"[i + 1 == maxs.size()];
+    for (size_t i = 0; i < mins.size(); ++i) { cout << mins[i] << " \n"[i + 1 == mins.size()]; }
+    for (size_t i = 0; i < maxs.size(); ++i) { cout << maxs[i] << " \n"[i + 1 == maxs.size()]; }
     return 0;
 }
 ```
@@ -167,13 +167,13 @@ public:
         return static_cast<int>((tail_ + buffer_.size() - head_) % buffer_.size());
     }
     bool push(int value) {
-        if (full()) return false;
+        if (full()) { return false; }
         buffer_[tail_] = value;
         tail_ = (tail_ + 1) % buffer_.size();
         return true;
     }
     bool pop() {
-        if (empty()) return false;
+        if (empty()) { return false; }
         head_ = (head_ + 1) % buffer_.size();
         return true;
     }

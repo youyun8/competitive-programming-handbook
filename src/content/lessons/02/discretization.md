@@ -44,7 +44,7 @@ review_status: verified
 
 ## 不變量或正確性證明
 
-排序後的 all 滿足 `all[i] < all[i+1]`。對任意兩個原始值 a < b，因為 lower_bound 返回的是第一個不小於目標的位置，而 all 嚴格遞增，所以 `rank(a) < rank(b)`。這保證了全序關係的保真性。
+排序後的 all 滿足 `all[i] < all[i+1]`。對任意兩個原始值 a < b，因為 lower_bound 回傳的是第一個不小於目標的位置，而 all 嚴格遞增，所以 `rank(a) < rank(b)`。這保證了全序關係的保真性。
 
 ## 逐步演算法
 

@@ -7,10 +7,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { withBase } from '@/lib/site';
 
 export async function getStaticPaths() {
-  const exercises = await getCollection(
-    'exercises',
-    ({ data }) => data.review_status === 'verified'
-  );
+  const exercises = await getCollection('exercises', ({ data }) => data.review_status === 'verified');
   return exercises.map((exercise) => ({ params: { id: exercise.data.id }, props: { exercise } }));
 }
 
@@ -20,21 +17,16 @@ const { Content } = await render(exercise);
 
 <BaseLayout title={exercise.data.title} wide>
   <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><a
-      href={withBase('/practice/')}>題庫</a
-    ><span aria-hidden="true">/</span><span>{exercise.data.title}</span>
+    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><a href={withBase('/practice/')}>題庫</a><span
+      aria-hidden="true">/</span
+    ><span>{exercise.data.title}</span>
   </nav>
   <p class="eyebrow">第 {exercise.data.chapter} 章 · 難度 {exercise.data.difficulty}</p>
   <h1>{exercise.data.title}</h1>
   {
     exercise.data.external_url && (
       <p>
-        <a
-          class="button secondary"
-          href={exercise.data.external_url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a class="button secondary" href={exercise.data.external_url} target="_blank" rel="noopener noreferrer">
           {exercise.data.external_relation === 'original' ? '前往原題' : '前往相關原題'}：
           {exercise.data.external_platform} {exercise.data.external_problem_id} ↗
         </a>
@@ -134,7 +126,7 @@ const { Content } = await render(exercise);
           <>
             <>
               <h3>參考 C++17</h3>
-              <Code code={exercise.data.cpp_solution} lang="cpp" theme="github-dark-default" wrap />
+              <Code code={exercise.data.cpp_solution} lang="cpp" theme="github-dark-default" />
             </>
           </>
         )
@@ -142,9 +134,7 @@ const { Content } = await render(exercise);
     </details>
     <Content />
     <p class="meta">
-      來源書頁 {exercise.data.source_book_pages.join('、')}；PDF 頁 {
-        exercise.data.source_pdf_pages.join('、')
-      }。
+      來源書頁 {exercise.data.source_book_pages.join('、')}；PDF 頁 {exercise.data.source_pdf_pages.join('、')}。
     </p>
   </article>
 </BaseLayout>

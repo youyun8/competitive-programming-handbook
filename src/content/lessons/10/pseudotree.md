@@ -73,7 +73,7 @@ std::vector<int> find_cycle_nodes(const std::vector<std::vector<int>>& graph) {
         int u = queue.front();
         queue.pop();
         for (int v : graph[u]) {
-            if (removed[v]) continue;
+            if (removed[v]) { continue; }
             if (--degree[v] <= 1) {
                 removed[v] = true;
                 queue.push(v);

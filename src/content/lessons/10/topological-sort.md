@@ -8,7 +8,7 @@ title: 拓撲排序：有向無環圖的線性展開
 summary: 利用入度或 DFS 後序，把 DAG 的節點排成所有邊都往前指的順序。
 prerequisites: [graphs, bfs, dfs]
 learning_goals:
-  - 用 Kahn 算法與 DFS 後序兩種方式輸出拓撲序
+  - 用 Kahn 演算法與 DFS 後序兩種方式輸出拓撲序
   - 判斷圖是否含有環
   - 處理字典序最小或多組解的情況
 concepts: [topological-sort, dag, in-degree]
@@ -31,7 +31,7 @@ review_status: verified
 
 ## 核心想法與直覺
 
-Kahn 算法：不斷取出沒有前驅的點，相當於「沒有任何未處理依賴的任務可以先執行」。DFS 後序：走到盡頭再記錄，相當於「完成所有後繼任務後才輪到自己」。
+Kahn 演算法：不斷取出沒有前驅的點，相當於「沒有任何未處理依賴的任務可以先執行」。DFS 後序：走到盡頭再記錄，相當於「完成所有後繼任務後才輪到自己」。
 
 ## 狀態／資料結構定義
 
@@ -97,7 +97,7 @@ std::vector<int> topological_sort(const std::vector<std::vector<int>>& graph) {
 
 ## 與相似技巧的比較
 
-DFS 後序可自然產生拓撲序，但檢測環需要顏色標記。Kahn 算法更直觀，且容易改成求字典序最小（改用最小堆）。
+DFS 後序可自然產生拓撲序，但檢測環需要顏色標記。Kahn 演算法更直觀，且容易改成求字典序最小（改用最小堆）。
 
 ## 例題與分級練習
 
@@ -118,7 +118,7 @@ using namespace std;
 // Kahn + 小根堆：輸出字典序最小拓撲序，有環則回報。
 int main() {
     int n, m;
-    if (!(cin >> n >> m)) return 0;
+    if (!(cin >> n >> m)) { return 0; }
     vector<vector<int>> adjacency(n);
     vector<int> indegree(n, 0);
     for (int i = 0; i < m; ++i) {
@@ -128,21 +128,23 @@ int main() {
         ++indegree[v];
     }
     priority_queue<int, vector<int>, greater<int>> ready;
-    for (int i = 0; i < n; ++i)
-        if (indegree[i] == 0) ready.push(i);
+    for (int i = 0; i < n; ++i) {
+        if (indegree[i] == 0) { ready.push(i); }
+    }
     vector<int> order;
     while (!ready.empty()) {
         int u = ready.top();
         ready.pop();
         order.push_back(u);
-        for (int v : adjacency[u])
-            if (--indegree[v] == 0) ready.push(v);
+        for (int v : adjacency[u]) {
+            if (--indegree[v] == 0) { ready.push(v); }
+        }
     }
     if (static_cast<int>(order.size()) != n) {
         cout << "cycle\n";
         return 0;
     }
-    for (size_t i = 0; i < order.size(); ++i) cout << order[i] << " \n"[i + 1 == order.size()];
+    for (size_t i = 0; i < order.size(); ++i) { cout << order[i] << " \n"[i + 1 == order.size()]; }
     return 0;
 }
 ```
@@ -163,8 +165,9 @@ public:
     explicit TarjanScc(const vector<vector<int>>& graph)
         : graph_(graph), n_(static_cast<int>(graph.size())), dfn_(n_, -1), low_(n_, 0),
           on_stack_(n_, false), component_(n_, -1) {
-        for (int v = 0; v < n_; ++v)
-            if (dfn_[v] == -1) dfs(v);
+        for (int v = 0; v < n_; ++v) {
+            if (dfn_[v] == -1) { dfs(v); }
+        }
     }
     int count() const { return component_count_; }
     const vector<int>& component() const { return component_; }
@@ -188,7 +191,7 @@ private:
                 stack_.pop_back();
                 on_stack_[w] = false;
                 component_[w] = component_count_;
-                if (w == u) break;
+                if (w == u) { break; }
             }
             ++component_count_;
         }
@@ -206,7 +209,7 @@ private:
 
 int main() {
     int n, m;
-    if (!(cin >> n >> m)) return 0;
+    if (!(cin >> n >> m)) { return 0; }
     vector<vector<int>> graph(n);
     for (int i = 0; i < m; ++i) {
         int u, v;
@@ -216,7 +219,7 @@ int main() {
     TarjanScc scc(graph);
     cout << scc.count() << '\n';
     const vector<int>& component = scc.component();
-    for (int i = 0; i < n; ++i) cout << component[i] << " \n"[i + 1 == n];
+    for (int i = 0; i < n; ++i) { cout << component[i] << " \n"[i + 1 == n]; }
     return 0;
 }
 ```

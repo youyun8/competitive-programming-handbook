@@ -79,7 +79,7 @@ Cost bfs_01(const std::vector<std::vector<std::pair<int, Cost>>>& graph,
     while (!dq.empty()) {
         const int u = dq.front();
         dq.pop_front();
-        if (u == target) continue; // optional early exit not guaranteed optimal here
+        if (u == target) { continue; } // optional early exit not guaranteed optimal here
         for (const auto& [v, w] : graph[u]) {
             if (dist[u] + w < dist[v]) {
                 dist[v] = dist[u] + w;

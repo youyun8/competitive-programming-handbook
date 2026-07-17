@@ -19,16 +19,14 @@ function snakeCasePayload(payload: Record<string, unknown>) {
 }
 
 Deno.serve(async (request) => {
-  if (request.method === 'OPTIONS')
-    return new Response(null, { status: 204, headers: corsHeaders(request) });
+  if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: corsHeaders(request) });
   try {
     assertOrigin(request);
     if (request.method !== 'POST') return json(request, { error: 'method_not_allowed' }, 405);
     const user = await requireUser(request);
     const database = serviceClient();
     const { events } = (await request.json()) as { events: SyncEvent[] };
-    if (!Array.isArray(events) || events.length > 100)
-      return json(request, { error: 'invalid_events' }, 400);
+    if (!Array.isArray(events) || events.length > 100) return json(request, { error: 'invalid_events' }, 400);
     const acceptedIds: string[] = [];
     const conflicts: string[] = [];
 
@@ -54,10 +52,7 @@ Deno.serve(async (request) => {
           .eq('user_id', user.id)
           .eq('lesson_id', lessonId)
           .maybeSingle();
-        if (
-          cloud &&
-          Date.parse(String(cloud.updated_at)) > Date.parse(String(payload.updated_at))
-        ) {
+        if (cloud && Date.parse(String(cloud.updated_at)) > Date.parse(String(payload.updated_at))) {
           if (cloud.status !== 'completed' && Number(cloud.percent) < Number(payload.percent)) {
             conflicts.push(event.id);
             continue;
@@ -66,15 +61,11 @@ Deno.serve(async (request) => {
         await database.from('lesson_progress').upsert({
           user_id: user.id,
           lesson_id: lessonId,
-          status:
-            cloud?.status === 'completed' || payload.status === 'completed'
-              ? 'completed'
-              : payload.status,
+          status: cloud?.status === 'completed' || payload.status === 'completed' ? 'completed' : payload.status,
           percent: Math.max(Number(cloud?.percent ?? 0), Number(payload.percent ?? 0)),
           last_anchor: payload.last_anchor,
           last_read_at: payload.updated_at,
-          completed_at:
-            cloud?.completed_at ?? (payload.status === 'completed' ? payload.updated_at : null)
+          completed_at: cloud?.completed_at ?? (payload.status === 'completed' ? payload.updated_at : null)
         });
       } else if (event.entity === 'exercise_progress' && event.operation === 'upsert') {
         const exerciseId = String(payload.exercise_id ?? '');
@@ -84,10 +75,7 @@ Deno.serve(async (request) => {
           .eq('user_id', user.id)
           .eq('exercise_id', exerciseId)
           .maybeSingle();
-        if (
-          cloud &&
-          Date.parse(String(cloud.updated_at)) > Date.parse(String(payload.updated_at))
-        ) {
+        if (cloud && Date.parse(String(cloud.updated_at)) > Date.parse(String(payload.updated_at))) {
           conflicts.push(event.id);
           continue;
         }
@@ -102,11 +90,7 @@ Deno.serve(async (request) => {
       } else if (event.entity === 'exercise_note') {
         const exerciseId = String(payload.exercise_id ?? '');
         if (event.operation === 'delete') {
-          await database
-            .from('exercise_notes')
-            .delete()
-            .eq('user_id', user.id)
-            .eq('exercise_id', exerciseId);
+          await database.from('exercise_notes').delete().eq('user_id', user.id).eq('exercise_id', exerciseId);
         } else {
           const solution = String(payload.solution ?? '').slice(0, 65536);
           const thought = String(payload.thought ?? '').slice(0, 32768);
@@ -116,19 +100,12 @@ Deno.serve(async (request) => {
             .eq('user_id', user.id)
             .eq('exercise_id', exerciseId)
             .maybeSingle();
-          if (
-            cloud &&
-            Date.parse(String(cloud.updated_at)) > Date.parse(String(payload.updated_at))
-          ) {
+          if (cloud && Date.parse(String(cloud.updated_at)) > Date.parse(String(payload.updated_at))) {
             conflicts.push(event.id);
             continue;
           }
           if (!solution.trim() && !thought.trim()) {
-            await database
-              .from('exercise_notes')
-              .delete()
-              .eq('user_id', user.id)
-              .eq('exercise_id', exerciseId);
+            await database.from('exercise_notes').delete().eq('user_id', user.id).eq('exercise_id', exerciseId);
           } else {
             await database.from('exercise_notes').upsert({
               user_id: user.id,
@@ -146,10 +123,7 @@ Deno.serve(async (request) => {
           .select('updated_at')
           .eq('user_id', user.id)
           .single();
-        if (
-          cloud &&
-          Date.parse(String(cloud.updated_at)) > Date.parse(String(payload.updated_at))
-        ) {
+        if (cloud && Date.parse(String(cloud.updated_at)) > Date.parse(String(payload.updated_at))) {
           conflicts.push(event.id);
           continue;
         }
@@ -165,9 +139,7 @@ Deno.serve(async (request) => {
             .eq('item_type', itemType)
             .eq('item_id', itemId);
         } else {
-          await database
-            .from('bookmarks')
-            .upsert({ user_id: user.id, item_type: itemType, item_id: itemId });
+          await database.from('bookmarks').upsert({ user_id: user.id, item_type: itemType, item_id: itemId });
         }
       } else if (event.entity === 'merge') {
         // Merge is idempotent. Solved status wins during the first guest/cloud merge.
@@ -201,14 +173,10 @@ Deno.serve(async (request) => {
           await database.from('exercise_progress').upsert({
             user_id: user.id,
             exercise_id: progress.exerciseId,
-            status:
-              cloud?.status === 'solved' || progress.status === 'solved'
-                ? 'solved'
-                : progress.status,
+            status: cloud?.status === 'solved' || progress.status === 'solved' ? 'solved' : progress.status,
             review_note: progress.reviewNote ?? cloud?.review_note,
             last_practiced_at: progress.lastPracticedAt ?? cloud?.last_practiced_at,
-            completed_at:
-              cloud?.completed_at ?? (progress.status === 'solved' ? progress.updatedAt : null)
+            completed_at: cloud?.completed_at ?? (progress.status === 'solved' ? progress.updatedAt : null)
           });
         }
         for (const note of snapshot.notes ?? []) {

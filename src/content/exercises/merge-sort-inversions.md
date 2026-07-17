@@ -34,7 +34,7 @@ cpp_solution: |
   #include <vector>
 
   long long merge_sort_count(std::vector<int>& a, std::vector<int>& temp, int left, int right) {
-      if (left >= right) return 0;
+      if (left >= right) { return 0; }
       int mid = left + (right - left) / 2;
       long long count = 0;
       count += merge_sort_count(a, temp, left, mid);
@@ -48,9 +48,9 @@ cpp_solution: |
               count += (mid - i + 1);
           }
       }
-      while (i <= mid) temp[k++] = a[i++];
-      while (j <= right) temp[k++] = a[j++];
-      for (i = left; i <= right; ++i) a[i] = temp[i];
+      while (i <= mid) { temp[k++] = a[i++]; }
+      while (j <= right) { temp[k++] = a[j++]; }
+      for (i = left; i <= right; ++i) { a[i] = temp[i]; }
       return count;
   }
 
@@ -60,7 +60,7 @@ cpp_solution: |
       int n = 0;
       std::cin >> n;
       std::vector<int> a(n);
-      for (int& v : a) std::cin >> v;
+      for (int& v : a) { std::cin >> v; }
       std::vector<int> temp(n);
       std::cout << merge_sort_count(a, temp, 0, n - 1) << "\n";
   }
@@ -70,6 +70,6 @@ review_status: verified
 external_url: https://www.luogu.com.cn/problem/P1908
 external_platform: 洛谷
 external_problem_id: P1908
-external_title: 逆序对
+external_title: 逆序對
 external_relation: related
 ---

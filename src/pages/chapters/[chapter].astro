@@ -23,8 +23,7 @@ const examples = chapterExamples[chapter.chapter] ?? [];
 
 <BaseLayout title={`第 ${chapter.chapter} 章 ${chapter.title}`} wide>
   <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><a
-      href={withBase(`/volumes/${chapter.volume}/`)}
+    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><a href={withBase(`/volumes/${chapter.volume}/`)}
       >{chapter.volume === 'upper' ? '上冊' : '下冊'}</a
     ><span aria-hidden="true">/</span><span>第 {chapter.chapter} 章</span>
   </nav>
@@ -36,9 +35,7 @@ const examples = chapterExamples[chapter.chapter] ?? [];
   <div class="meta">
     <span>書本 {chapter.book_pages[0]}–{chapter.book_pages[1]} 頁</span>
     <span>PDF {chapter.pdf_pages[0]}–{chapter.pdf_pages[1]} 頁</span>
-    <span
-      >{exercises.filter((item) => item.data.chapter === chapter.chapter).length} 道已發布練習</span
-    >
+    <span>{exercises.filter((item) => item.data.chapter === chapter.chapter).length} 道已發布練習</span>
   </div>
   <ul class="section-list">
     {
@@ -93,7 +90,7 @@ const examples = chapterExamples[chapter.chapter] ?? [];
             <h4>解題想法</h4>
             <p>{example.idea}</p>
             <h4>C++17 參考解答</h4>
-            <Code code={example.code} lang="cpp" theme="github-dark-default" wrap />
+            <Code code={example.code} lang="cpp" theme="github-dark-default" />
             <p>
               <strong>複雜度：</strong>
               {example.complexity}

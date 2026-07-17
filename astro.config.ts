@@ -10,10 +10,8 @@ const [repositoryOwner, repositoryName] = process.env.GITHUB_REPOSITORY?.split('
   process.env.GITHUB_REPOSITORY_OWNER ?? 'youyun8',
   'competitive-programming-handbook'
 ];
-const site =
-  process.env.PUBLIC_SITE_URL ?? `https://${repositoryOwner}.github.io/${repositoryName}/`;
-const base =
-  process.env.PUBLIC_BASE_PATH ?? (process.env.GITHUB_ACTIONS ? `/${repositoryName}` : '/');
+const site = process.env.PUBLIC_SITE_URL ?? `https://${repositoryOwner}.github.io/${repositoryName}/`;
+const base = process.env.PUBLIC_BASE_PATH ?? (process.env.GITHUB_ACTIONS ? `/${repositoryName}` : '/');
 
 export default defineConfig({
   site,
@@ -31,7 +29,7 @@ export default defineConfig({
     }),
     shikiConfig: {
       theme: 'github-dark-default',
-      wrap: true
+      wrap: false
     }
   },
   vite: {

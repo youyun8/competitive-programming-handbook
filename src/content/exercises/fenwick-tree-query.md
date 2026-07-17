@@ -97,6 +97,6 @@ review_status: verified
 external_url: https://www.luogu.com.cn/problem/P3374
 external_platform: 洛谷
 external_problem_id: P3374
-external_title: 【模板】树状数组 1
+external_title: 【模板】樹狀陣列 1
 external_relation: related
 ---

@@ -51,7 +51,7 @@ review_status: verified
 
 ```cpp
 bool wilson_test(long long p) {
-    if (p <= 1) return false;
+    if (p <= 1) { return false; }
     long long fact = 1;
     for (long long i = 2; i < p; ++i) {
         fact = (fact * i) % p;

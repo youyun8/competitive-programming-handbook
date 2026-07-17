@@ -65,7 +65,7 @@ Flood Fill 的不變量：當一個格子被標記為 visited 時，從起始格
 
 int count_islands(std::vector<std::string>& grid) {
     const int rows = static_cast<int>(grid.size());
-    if (rows == 0) return 0;
+    if (rows == 0) { return 0; }
     const int cols = static_cast<int>(grid[0].size());
 
     const int dx[4] = {-1, 1, 0, 0};
@@ -74,7 +74,7 @@ int count_islands(std::vector<std::string>& grid) {
 
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
-            if (grid[i][j] != '1') continue;
+            if (grid[i][j] != '1') { continue; }
 
             ++island_count;
             std::queue<std::pair<int, int>> q;
@@ -87,8 +87,8 @@ int count_islands(std::vector<std::string>& grid) {
                 for (int d = 0; d < 4; ++d) {
                     const int nx = x + dx[d];
                     const int ny = y + dy[d];
-                    if (nx < 0 || nx >= rows || ny < 0 || ny >= cols) continue;
-                    if (grid[nx][ny] != '1') continue;
+                    if (nx < 0 || nx >= rows || ny < 0 || ny >= cols) { continue; }
+                    if (grid[nx][ny] != '1') { continue; }
                     grid[nx][ny] = '0';
                     q.emplace(nx, ny);
                 }

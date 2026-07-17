@@ -129,6 +129,13 @@ pre {
   font-size: var(--code-font-size);
   line-height: 1.55;
   tab-size: 2;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+:root[data-wrap-lines='false'] pre {
+  white-space: pre;
+  overflow-wrap: normal;
 }
 
 code {
@@ -661,6 +668,19 @@ a.card:hover,
   padding: 0;
   font-size: 0.85rem;
   font-weight: 700;
+}
+
+.settings-checkbox {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  cursor: pointer;
+}
+
+.settings-checkbox input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--accent);
 }
 
 .segmented-control {

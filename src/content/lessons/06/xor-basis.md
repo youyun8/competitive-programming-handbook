@@ -75,7 +75,7 @@ public:
     long long max_xor() const {
         long long result = 0;
         for (int i = 60; i >= 0; --i) {
-            if ((result ^ basis_[i]) > result) result ^= basis_[i];
+            if ((result ^ basis_[i]) > result) { result ^= basis_[i]; }
         }
         return result;
     }
@@ -83,7 +83,7 @@ public:
     bool can_represent(long long x) const {
         for (int i = 60; i >= 0; --i) {
             if ((x >> i) & 1LL) {
-                if (basis_[i] == 0) return false;
+                if (basis_[i] == 0) { return false; }
                 x ^= basis_[i];
             }
         }

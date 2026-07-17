@@ -60,10 +60,7 @@ export default function AuthForm({ mode, basePath }: Props) {
 
       const client = getSupabaseClient();
       const callback = new URL(`${basePath}/auth/callback/`, location.origin);
-      callback.searchParams.set(
-        'next',
-        sessionStorage.getItem('ac-auth-return') || `${basePath}/dashboard/`
-      );
+      callback.searchParams.set('next', sessionStorage.getItem('ac-auth-return') || `${basePath}/dashboard/`);
       if (mode === 'login') {
         const { error: authError } = await client.auth.signInWithPassword({ email, password });
         if (authError) throw authError;
@@ -107,10 +104,7 @@ export default function AuthForm({ mode, basePath }: Props) {
       return;
     }
     const callback = new URL(`${basePath}/auth/callback/`, location.origin);
-    callback.searchParams.set(
-      'next',
-      sessionStorage.getItem('ac-auth-return') || `${basePath}/dashboard/`
-    );
+    callback.searchParams.set('next', sessionStorage.getItem('ac-auth-return') || `${basePath}/dashboard/`);
     const { error: authError } = await getSupabaseClient().auth.signInWithOAuth({
       provider: 'github',
       options: { redirectTo: callback.toString() }

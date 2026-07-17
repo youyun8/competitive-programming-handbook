@@ -65,13 +65,13 @@ public:
                 return;
             }
             const int mid = (left + right) / 2;
-            if (pos <= mid) update(node * 2, left, mid, pos, val);
-            else update(node * 2 + 1, mid + 1, right, pos, val);
+            if (pos <= mid) { update(node * 2, left, mid, pos, val); }
+            else { update(node * 2 + 1, mid + 1, right, pos, val); }
             seg[node] = max(seg[node * 2], seg[node * 2 + 1]);
         };
         function<int(int, int, int, int, int)> query = [&](int node, int left, int right, int qleft, int qright) -> int {
-            if (qright < left || right < qleft) return 0;
-            if (qleft <= left && right <= qright) return seg[node];
+            if (qright < left || right < qleft) { return 0; }
+            if (qleft <= left && right <= qright) { return seg[node]; }
             const int mid = (left + right) / 2;
             return max(query(node * 2, left, mid, qleft, qright),
                        query(node * 2 + 1, mid + 1, right, qleft, qright));

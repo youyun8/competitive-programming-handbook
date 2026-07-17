@@ -42,9 +42,6 @@ export function readMockUser(): MockUser | null {
 export function writeMockUser(user: MockUser | null) {
   if (user) localStorage.setItem(mockSessionKey, JSON.stringify(user));
   else localStorage.removeItem(mockSessionKey);
-  localStorage.setItem(
-    'ac-auth-event',
-    JSON.stringify({ at: Date.now(), signedIn: Boolean(user) })
-  );
+  localStorage.setItem('ac-auth-event', JSON.stringify({ at: Date.now(), signedIn: Boolean(user) }));
   window.dispatchEvent(new CustomEvent('ac:auth-change', { detail: user }));
 }

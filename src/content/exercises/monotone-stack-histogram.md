@@ -56,7 +56,7 @@ cpp_solution: |
       int n = 0;
       std::cin >> n;
       std::vector<long long> h(n);
-      for (long long& v : h) std::cin >> v;
+      for (long long& v : h) { std::cin >> v; }
       std::cout << max_histogram_area(h) << "\n";
   }
 source_book_pages: [1, 31]

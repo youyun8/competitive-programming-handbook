@@ -41,14 +41,14 @@ cpp_solution: |
       int n = 0, k = 0;
       std::cin >> n >> k;
       std::vector<int> a(n);
-      for (int& v : a) std::cin >> v;
+      for (int& v : a) { std::cin >> v; }
       std::deque<int> dq;
       for (int i = 0; i < n; ++i) {
-          while (!dq.empty() && dq.front() <= i - k) dq.pop_front();
-          while (!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back();
+          while (!dq.empty() && dq.front() <= i - k) { dq.pop_front(); }
+          while (!dq.empty() && a[dq.back()] <= a[i]) { dq.pop_back(); }
           dq.push_back(i);
           if (i >= k - 1) {
-              if (i > k - 1) std::cout << " ";
+              if (i > k - 1) { std::cout << " "; }
               std::cout << a[dq.front()];
           }
       }
@@ -60,6 +60,6 @@ review_status: verified
 external_url: https://www.luogu.com.cn/problem/P1886
 external_platform: 洛谷
 external_problem_id: P1886
-external_title: 滑动窗口 / 单调队列
+external_title: 滑動窗口 / 單调佇列
 external_relation: related
 ---

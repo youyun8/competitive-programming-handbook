@@ -46,7 +46,7 @@ review_status: verified
 ## 逐步演算法
 
 1. 定義點／向量結構與基本運算。
-2. 以叉積判斷點是否在线段同側、是否共線。
+2. 以叉積判斷點是否在線段同側、是否共線。
 3. 以單調鏈建立凸包：排序去重；正反向各建一次單調鏈。
 4. 凸包上應用旋轉卡尺：對邊依面積最大化移動對向點。
 
@@ -94,7 +94,7 @@ long long dist2(const Point& a, const Point& b) {
 std::vector<Point> convex_hull(std::vector<Point> points) {
     std::sort(points.begin(), points.end());
     points.erase(std::unique(points.begin(), points.end()), points.end());
-    if (points.size() <= 1) return points;
+    if (points.size() <= 1) { return points; }
 
     std::vector<Point> hull;
     for (int pass = 0; pass < 2; ++pass) {

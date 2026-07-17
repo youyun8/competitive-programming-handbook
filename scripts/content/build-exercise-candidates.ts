@@ -52,12 +52,8 @@ for (const volume of ['upper', 'lower'] as const) {
   }
 
   for (const [label, records] of byLabel) {
-    const pdfPages = [...new Set(records.map((record) => record.page))].sort(
-      (left, right) => left - right
-    );
-    const bookPages = pdfPages
-      .map((page) => bookPage(volume, page))
-      .filter((page): page is number => page !== null);
+    const pdfPages = [...new Set(records.map((record) => record.page))].sort((left, right) => left - right);
+    const bookPages = pdfPages.map((page) => bookPage(volume, page)).filter((page): page is number => page !== null);
     const confidences = records.map((record) => record.ocr_confidence ?? 0);
     candidates.push({
       id: `${volume}-example-${slug(label)}`,
@@ -92,9 +88,7 @@ for (const volume of ['upper', 'lower'] as const) {
 }
 
 candidates.sort(
-  (left, right) =>
-    left.volume.localeCompare(right.volume) ||
-    left.source_pdf_pages[0]! - right.source_pdf_pages[0]!
+  (left, right) => left.volume.localeCompare(right.volume) || left.source_pdf_pages[0]! - right.source_pdf_pages[0]!
 );
 
 const output = {
@@ -105,12 +99,9 @@ const output = {
     'Metadata-only OCR candidate inventory. No OCR prose, problem statements, samples, code, or URLs are publishable until human review.',
   counts: {
     total: candidates.length,
-    labeled_examples: candidates.filter(
-      (candidate) => candidate.candidate_kind === 'labeled-example'
-    ).length,
-    unlabeled_external_oj_pages: candidates.filter(
-      (candidate) => candidate.candidate_kind === 'external-oj-page'
-    ).length
+    labeled_examples: candidates.filter((candidate) => candidate.candidate_kind === 'labeled-example').length,
+    unlabeled_external_oj_pages: candidates.filter((candidate) => candidate.candidate_kind === 'external-oj-page')
+      .length
   },
   candidates
 };

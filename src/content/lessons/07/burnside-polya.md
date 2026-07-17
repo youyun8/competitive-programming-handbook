@@ -58,7 +58,7 @@ Burnside：$|X/G| = \frac{1}{|G|} \sum_{g \in G} |X^g|$。等式來自對所有 
 long long mod_pow(long long a, long long e, long long mod) {
     long long r = 1 % mod;
     while (e) {
-        if (e & 1) r = r * a % mod;
+        if (e & 1) { r = r * a % mod; }
         a = a * a % mod;
         e >>= 1;
     }

@@ -53,7 +53,7 @@ cpp_solution: |
               std::cin >> x;
               q.push(x);
           } else if (type == 2) {
-              if (!q.empty()) q.pop();
+              if (!q.empty()) { q.pop(); }
           } else if (type == 3) {
               std::cout << (q.empty() ? -1 : q.front()) << "\n";
           }

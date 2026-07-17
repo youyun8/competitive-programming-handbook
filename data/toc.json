@@ -4,13 +4,13 @@
   "volumes": {
     "upper": {
       "source_file": "upper-volume",
-      "display_name": "《算法竞赛》上册",
+      "display_name": "《演算法競賽》上冊",
       "pdf_pages": 406,
       "sha256": "05d471dc258775779925dc705864f20519a6966aa9b45f05620706787e5dd75d"
     },
     "lower": {
       "source_file": "lower-volume",
-      "display_name": "《算法竞赛》下册",
+      "display_name": "《演算法競賽》下冊",
       "pdf_pages": 330,
       "sha256": "885c201be96b05a146d8dd3f493d848231b1e7fa8b2d82a13aa1aa8fbbdb04f5"
     }
@@ -107,15 +107,7 @@
         {
           "id": "4.3",
           "title": "線段樹",
-          "topics": [
-            "區間查詢",
-            "Lazy Tag",
-            "區間最值",
-            "歷史最值",
-            "區間合併",
-            "掃描線",
-            "二維線段樹"
-          ]
+          "topics": ["區間查詢", "Lazy Tag", "區間最值", "歷史最值", "區間合併", "掃描線", "二維線段樹"]
         },
         {
           "id": "4.4",
@@ -259,16 +251,7 @@
         {
           "id": "8.1",
           "title": "二維幾何",
-          "topics": [
-            "點與向量",
-            "點積／叉積",
-            "點與線",
-            "多邊形",
-            "凸包",
-            "最近點對",
-            "旋轉卡尺",
-            "半平面交"
-          ]
+          "topics": ["點與向量", "點積／叉積", "點與線", "多邊形", "凸包", "最近點對", "旋轉卡尺", "半平面交"]
         },
         { "id": "8.2", "title": "圓", "topics": ["基本定義與計算", "最小圓覆蓋"] },
         {
@@ -318,15 +301,7 @@
         {
           "id": "10.8",
           "title": "最短路徑",
-          "topics": [
-            "Floyd-Warshall",
-            "傳遞閉包",
-            "Dijkstra",
-            "Bellman-Ford",
-            "SPFA",
-            "負環",
-            "差分約束"
-          ]
+          "topics": ["Floyd-Warshall", "傳遞閉包", "Dijkstra", "Bellman-Ford", "SPFA", "負環", "差分約束"]
         },
         { "id": "10.9", "title": "最小生成樹", "topics": ["Kruskal", "Prim", "擴展問題"] },
         {

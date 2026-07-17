@@ -83,8 +83,8 @@ Cost best_first_search(
     while (!pq.empty()) {
         const auto [cost, u] = pq.top();
         pq.pop();
-        if (cost != dist[u]) continue;
-        if (u == target) return cost;
+        if (cost != dist[u]) { continue; }
+        if (u == target) { return cost; }
         for (const auto& [v, w] : graph[u]) {
             if (dist[u] + w < dist[v]) {
                 dist[v] = dist[u] + w;

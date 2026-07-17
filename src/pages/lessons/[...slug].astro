@@ -34,8 +34,8 @@ const next = allSections[currentIndex + 1];
 
 <BaseLayout title={lesson?.data.title ?? `${section.id} ${section.title}`}>
   <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><a
-      href={withBase(`/chapters/${chapter.chapter}/`)}>第 {chapter.chapter} 章</a
+    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><a href={withBase(`/chapters/${chapter.chapter}/`)}
+      >第 {chapter.chapter} 章</a
     ><span aria-hidden="true">/</span><span>{section.id}</span>
   </nav>
   <p class="eyebrow">Lesson {section.id}</p>
@@ -51,9 +51,7 @@ const next = allSections[currentIndex + 1];
   {
     lesson && Content ? (
       <>
-        {lesson.data.visualizer && (
-          <AlgorithmVisualizer client:visible kind={lesson.data.visualizer} />
-        )}
+        {lesson.data.visualizer && <AlgorithmVisualizer client:visible kind={lesson.data.visualizer} />}
         <Content />
       </>
     ) : (

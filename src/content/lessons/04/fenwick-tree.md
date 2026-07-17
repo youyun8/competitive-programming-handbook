@@ -123,14 +123,14 @@ public:
         iota(parent_.begin(), parent_.end(), 0);
     }
     int find(int x) {
-        while (parent_[x] != x) x = parent_[x] = parent_[parent_[x]];
+        while (parent_[x] != x) { x = parent_[x] = parent_[parent_[x]]; }
         return x;
     }
     void unite(int a, int b) {
         a = find(a);
         b = find(b);
-        if (a == b) return;
-        if (size_[a] < size_[b]) swap(a, b);
+        if (a == b) { return; }
+        if (size_[a] < size_[b]) { swap(a, b); }
         parent_[b] = a;
         size_[a] += size_[b];
     }
@@ -143,13 +143,13 @@ private:
 
 int main() {
     int n, q;
-    if (!(cin >> n >> q)) return 0;
+    if (!(cin >> n >> q)) { return 0; }
     DisjointSet dsu(n);
     while (q--) {
         int type, a, b;
         cin >> type >> a >> b;
-        if (type == 1) dsu.unite(a, b);
-        else cout << (dsu.connected(a, b) ? "YES" : "NO") << '\n';
+        if (type == 1) { dsu.unite(a, b); }
+        else { cout << (dsu.connected(a, b) ? "YES" : "NO") << '\n'; }
     }
     return 0;
 }
@@ -170,12 +170,13 @@ class FenwickTree {
 public:
     explicit FenwickTree(int n) : tree_(static_cast<size_t>(n) + 1, 0) {}
     void add(int index, long long delta) {
-        for (; index < static_cast<int>(tree_.size()); index += index & (-index))
+        for (; index < static_cast<int>(tree_.size()); index += index & (-index)) {
             tree_[index] += delta;
+        }
     }
     long long prefix_sum(int index) const {
         long long sum = 0;
-        for (; index > 0; index -= index & (-index)) sum += tree_[index];
+        for (; index > 0; index -= index & (-index)) { sum += tree_[index]; }
         return sum;
     }
     long long range_sum(int l, int r) const { return prefix_sum(r) - prefix_sum(l - 1); }
@@ -186,7 +187,7 @@ private:
 
 int main() {
     int n, q;
-    if (!(cin >> n >> q)) return 0;
+    if (!(cin >> n >> q)) { return 0; }
     FenwickTree tree(n);
     for (int i = 1; i <= n; ++i) {
         long long value;
@@ -196,8 +197,8 @@ int main() {
     while (q--) {
         int type, a, b;
         cin >> type >> a >> b;
-        if (type == 1) tree.add(a, b);
-        else cout << tree.range_sum(a, b) << '\n';
+        if (type == 1) { tree.add(a, b); }
+        else { cout << tree.range_sum(a, b) << '\n'; }
     }
     return 0;
 }

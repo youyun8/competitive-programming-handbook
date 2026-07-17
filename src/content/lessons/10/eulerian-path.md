@@ -9,7 +9,7 @@ summary: 以度數條件判定歐拉路存在性，並用 DFS 搭配刪邊輸出
 prerequisites: [graphs, dfs]
 learning_goals:
   - 判斷歐拉路與歐拉迴路的存在條件
-  - 實作 Hierholzer 算法輸出路徑
+  - 實作 Hierholzer 演算法輸出路徑
   - 區分有向圖與無向圖的度數條件差異
 concepts: [eulerian-path, eulerian-circuit, degree-condition]
 complexity:
@@ -39,7 +39,7 @@ review_status: verified
 
 ## 不變量或正確性證明
 
-Hierholzer 算法：從起點出發 DFS，走到無路時把該點壓入答案；回溯時把中間點也壓入。因為每次刪邊都保證了該邊只走一次，且度數條件保證了「走進一點必能走出」（除了起終點），所以過程不會被困在中間點。最終答案反轉即為歐拉路。
+Hierholzer 演算法：從起點出發 DFS，走到無路時把該點壓入答案；回溯時把中間點也壓入。因為每次刪邊都保證了該邊只走一次，且度數條件保證了「走進一點必能走出」（除了起終點），所以過程不會被困在中間點。最終答案反轉即為歐拉路。
 
 ## 逐步演算法
 
@@ -74,7 +74,7 @@ std::vector<int> hierholzer(int node_count, const std::vector<std::vector<Euleri
     auto dfs = [&](auto&& self, int u) -> void {
         while (ptr[u] < static_cast<int>(adj[u].size())) {
             const EulerianEdge& edge = adj[u][ptr[u]++];
-            if (used[edge.index]) continue;
+            if (used[edge.index]) { continue; }
             used[edge.index] = true;
             self(self, edge.to);
         }

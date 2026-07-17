@@ -126,7 +126,7 @@ static long long multiply_mod(long long left, long long right, long long modulus
     unsigned long long m = static_cast<unsigned long long>(modulus);
     unsigned long long result = 0;
     while (b > 0) {
-        if ((b & 1ULL) != 0ULL) result = (result + a) % m;
+        if ((b & 1ULL) != 0ULL) { result = (result + a) % m; }
         a = (a + a) % m;
         b >>= 1ULL;
     }
@@ -137,9 +137,9 @@ static long long multiply_mod(long long left, long long right, long long modulus
 static long long modular_power(long long base, long long exponent, long long modulus) {
     long long result = 1 % modulus;
     base %= modulus;
-    if (base < 0) base += modulus;
+    if (base < 0) { base += modulus; }
     while (exponent > 0) {
-        if ((exponent & 1LL) != 0) result = multiply_mod(result, base, modulus);
+        if ((exponent & 1LL) != 0) { result = multiply_mod(result, base, modulus); }
         base = multiply_mod(base, base, modulus);
         exponent >>= 1;
     }
@@ -148,7 +148,7 @@ static long long modular_power(long long base, long long exponent, long long mod
 
 int main() {
     long long base, exponent, modulus;
-    if (!(cin >> base >> exponent >> modulus)) return 0;
+    if (!(cin >> base >> exponent >> modulus)) { return 0; }
     cout << modular_power(base, exponent, modulus) << '\n';
     return 0;
 }
@@ -181,7 +181,7 @@ static long long extended_gcd(long long a, long long b, long long& x, long long&
 // 解 a*x ≡ b (mod m)，回傳最小非負解或回報無解。
 int main() {
     long long a, b, m;
-    if (!(cin >> a >> b >> m)) return 0;
+    if (!(cin >> a >> b >> m)) { return 0; }
     long long x, y;
     long long g = extended_gcd(a, m, x, y);
     if (b % g != 0) {

@@ -49,42 +49,48 @@ cpp_solution: |
 
   int manhattan() {
       int sum = 0;
-      for (int i = 0; i < 3; ++i)
-          for (int j = 0; j < 3; ++j)
+      for (int i = 0; i < 3; ++i) {
+          for (int j = 0; j < 3; ++j) {
               if (board[i][j] != 0) {
                   int v = board[i][j] - 1;
                   sum += std::abs(i - v/3) + std::abs(j - v%3);
               }
+          }
+      }
       return sum;
   }
 
   int ida_star(int g, int bound, int prev) {
       int h = manhattan();
       int f = g + h;
-      if (f > bound) return f;
-      if (h == 0) return -1;
+      if (f > bound) { return f; }
+      if (h == 0) { return -1; }
       int min_exceed = 1000000;
       int zx = -1, zy = -1;
-      for (int i = 0; i < 3; ++i)
-          for (int j = 0; j < 3; ++j)
+      for (int i = 0; i < 3; ++i) {
+          for (int j = 0; j < 3; ++j) {
               if (board[i][j] == 0) { zx = i; zy = j; }
+          }
+      }
       for (int d = 0; d < 4; ++d) {
-          if (d == prev) continue;
+          if (d == prev) { continue; }
           int nx = zx + dx[d], ny = zy + dy[d];
-          if (nx < 0 || nx >= 3 || ny < 0 || ny >= 3) continue;
+          if (nx < 0 || nx >= 3 || ny < 0 || ny >= 3) { continue; }
           std::swap(board[zx][zy], board[nx][ny]);
           int t = ida_star(g + 1, bound, d ^ 1);
           std::swap(board[zx][zy], board[nx][ny]);
-          if (t == -1) return -1;
-          if (t < min_exceed) min_exceed = t;
+          if (t == -1) { return -1; }
+          if (t < min_exceed) { min_exceed = t; }
       }
       return min_exceed;
   }
 
   int main() {
-      for (int i = 0; i < 3; ++i)
-          for (int j = 0; j < 3; ++j)
+      for (int i = 0; i < 3; ++i) {
+          for (int j = 0; j < 3; ++j) {
               std::cin >> board[i][j];
+          }
+      }
       int bound = manhattan();
       while (true) {
           int t = ida_star(0, bound, -1);
@@ -103,6 +109,6 @@ review_status: verified
 external_url: https://www.luogu.com.cn/problem/P1379
 external_platform: 洛谷
 external_problem_id: P1379
-external_title: 八数码难题
+external_title: 八數码难题
 external_relation: related
 ---

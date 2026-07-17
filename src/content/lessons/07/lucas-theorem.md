@@ -64,7 +64,7 @@ struct Lucas {
         long long res = 1 % prime;
         base %= prime;
         while (exp > 0) {
-            if (exp & 1LL) res = res * base % prime;
+            if (exp & 1LL) { res = res * base % prime; }
             base = base * base % prime;
             exp >>= 1LL;
         }
@@ -73,15 +73,16 @@ struct Lucas {
 
     explicit Lucas(int p) : prime(p) {
         fact.assign(p, 1);
-        for (int i = 1; i < p; ++i) fact[i] = fact[i - 1] * i % prime;
+        for (int i = 1; i < p; ++i) { fact[i] = fact[i - 1] * i % prime; }
         inv_fact.assign(p, 1);
         inv_fact[p - 1] = mod_pow(fact[p - 1], prime - 2);
-        for (int i = p - 2; i >= 0; --i)
+        for (int i = p - 2; i >= 0; --i) {
             inv_fact[i] = inv_fact[i + 1] * (i + 1LL) % prime;
+        }
     }
 
     long long comb_small(long long n, long long k) const {
-        if (k < 0 || k > n) return 0;
+        if (k < 0 || k > n) { return 0; }
         return fact[n] * inv_fact[k] % prime * inv_fact[n - k] % prime;
     }
 
@@ -90,7 +91,7 @@ struct Lucas {
         while (n > 0 || k > 0) {
             int ni = static_cast<int>(n % prime);
             int ki = static_cast<int>(k % prime);
-            if (ki > ni) return 0;
+            if (ki > ni) { return 0; }
             res = res * comb_small(ni, ki) % prime;
             n /= prime;
             k /= prime;

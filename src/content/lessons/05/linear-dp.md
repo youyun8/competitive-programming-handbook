@@ -135,7 +135,7 @@ static int longest_common_subsequence(const string& x, const string& y) {
 
 int main() {
     string x, y;
-    if (!(cin >> x >> y)) return 0;
+    if (!(cin >> x >> y)) { return 0; }
     cout << longest_common_subsequence(x, y) << '\n';
     return 0;
 }
@@ -156,7 +156,7 @@ static int edit_distance(const string& a, const string& b) {
     const int n = static_cast<int>(a.size());
     const int m = static_cast<int>(b.size());
     vector<int> previous(m + 1), current(m + 1);
-    for (int j = 0; j <= m; ++j) previous[j] = j;
+    for (int j = 0; j <= m; ++j) { previous[j] = j; }
     for (int i = 1; i <= n; ++i) {
         current[0] = i;
         for (int j = 1; j <= m; ++j) {
@@ -173,7 +173,7 @@ static int edit_distance(const string& a, const string& b) {
 
 int main() {
     string a, b;
-    if (!(cin >> a >> b)) return 0;
+    if (!(cin >> a >> b)) { return 0; }
     cout << edit_distance(a, b) << '\n';
     return 0;
 }
@@ -205,9 +205,9 @@ static int longest_increasing_subsequence(const vector<int>& sequence) {
 
 int main() {
     int n;
-    if (!(cin >> n)) return 0;
+    if (!(cin >> n)) { return 0; }
     vector<int> sequence(n);
-    for (int& value : sequence) cin >> value;
+    for (int& value : sequence) { cin >> value; }
     cout << longest_increasing_subsequence(sequence) << '\n';
     return 0;
 }
@@ -229,7 +229,7 @@ static bool subset_sum_exists(const vector<int>& items, int target) {
     dp[0] = 1;
     for (int value : items) {
         for (int sum = target; sum >= value; --sum) {
-            if (dp[sum - value]) dp[sum] = 1;
+            if (dp[sum - value]) { dp[sum] = 1; }
         }
     }
     return dp[target] != 0;
@@ -237,9 +237,9 @@ static bool subset_sum_exists(const vector<int>& items, int target) {
 
 int main() {
     int n, target;
-    if (!(cin >> n >> target)) return 0;
+    if (!(cin >> n >> target)) { return 0; }
     vector<int> items(n);
-    for (int& value : items) cin >> value;
+    for (int& value : items) { cin >> value; }
     cout << (subset_sum_exists(items, target) ? "YES" : "NO") << '\n';
     return 0;
 }
@@ -269,7 +269,7 @@ static long long count_ways(int n) {
 
 int main() {
     int n;
-    if (!(cin >> n)) return 0;
+    if (!(cin >> n)) { return 0; }
     cout << count_ways(n) << '\n';
     return 0;
 }

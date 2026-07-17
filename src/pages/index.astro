@@ -22,8 +22,7 @@ const chapterColors: Record<string, string> = {
     <p class="eyebrow">給懂基礎 C++ 的系統化路線</p>
     <h1>把演算法從「看過」變成<br />能辨識、能證明、能寫對</h1>
     <p class="lede">
-      依上下冊十章編排的繁體中文互動筆記，從題型訊號、核心不變量、C++17
-      模板到分級練習建立完整學習路線。
+      依上下冊十章編排的繁體中文互動筆記，從題型訊號、核心不變量、C++17 模板到分級練習建立完整學習路線。
     </p>
     <div class="hero-actions">
       <a class="button" href={withBase('/lessons/binary-search/')}>從二分搜尋開始</a>
@@ -37,10 +36,7 @@ const chapterColors: Record<string, string> = {
     <div class="grid">
       {
         curriculum.chapters.map((chapter) => (
-          <article
-            class="card chapter-card"
-            style={`--chapter-color:${chapterColors[chapter.color]}`}
-          >
+          <article class="card chapter-card" style={`--chapter-color:${chapterColors[chapter.color]}`}>
             <p class="eyebrow">
               {chapter.volume === 'upper' ? '上冊' : '下冊'} · 第 {chapter.chapter} 章
             </p>
@@ -100,7 +96,6 @@ const chapterColors: Record<string, string> = {
       (key) => key.startsWith('ac-progress:') && localStorage.getItem(key) === 'completed'
     ).length;
     const progress = document.querySelector('#home-progress');
-    if (progress && completed > 0)
-      progress.textContent = `已完成 ${completed} 篇核心教學；可登入同步到其他裝置。`;
+    if (progress && completed > 0) progress.textContent = `已完成 ${completed} 篇核心教學；可登入同步到其他裝置。`;
   </script>
 </BaseLayout>

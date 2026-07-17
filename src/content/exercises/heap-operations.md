@@ -50,17 +50,17 @@ cpp_solution: |
           return data_.empty() ? -1 : data_[0];
       }
       void delete_min() {
-          if (data_.empty()) return;
+          if (data_.empty()) { return; }
           data_[0] = data_.back();
           data_.pop_back();
-          if (!data_.empty()) bubble_down(0);
+          if (!data_.empty()) { bubble_down(0); }
       }
   private:
       std::vector<int> data_;
       void bubble_up(int index) {
           while (index > 0) {
               int parent = (index - 1) / 2;
-              if (data_[parent] <= data_[index]) break;
+              if (data_[parent] <= data_[index]) { break; }
               std::swap(data_[parent], data_[index]);
               index = parent;
           }
@@ -71,9 +71,9 @@ cpp_solution: |
               int left = 2 * index + 1;
               int right = 2 * index + 2;
               int smallest = index;
-              if (left < n && data_[left] < data_[smallest]) smallest = left;
-              if (right < n && data_[right] < data_[smallest]) smallest = right;
-              if (smallest == index) break;
+              if (left < n && data_[left] < data_[smallest]) { smallest = left; }
+              if (right < n && data_[right] < data_[smallest]) { smallest = right; }
+              if (smallest == index) { break; }
               std::swap(data_[index], data_[smallest]);
               index = smallest;
           }

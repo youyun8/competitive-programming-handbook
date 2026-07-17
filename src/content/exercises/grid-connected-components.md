@@ -49,14 +49,14 @@ cpp_solution: |
       int n = 0, m = 0;
       std::cin >> n >> m;
       std::vector<std::string> grid(n);
-      for (int i = 0; i < n; ++i) std::cin >> grid[i];
+      for (int i = 0; i < n; ++i) { std::cin >> grid[i]; }
       std::vector<std::vector<bool>> vis(n, std::vector<bool>(m, false));
       int count = 0;
       const int dx[4] = {-1, 1, 0, 0};
       const int dy[4] = {0, 0, -1, 1};
       for (int i = 0; i < n; ++i) {
           for (int j = 0; j < m; ++j) {
-              if (grid[i][j] == '#' || vis[i][j]) continue;
+              if (grid[i][j] == '#' || vis[i][j]) { continue; }
               ++count;
               std::queue<std::pair<int,int>> q;
               q.push({i, j});
@@ -65,8 +65,8 @@ cpp_solution: |
                   auto [x, y] = q.front(); q.pop();
                   for (int d = 0; d < 4; ++d) {
                       int nx = x + dx[d], ny = y + dy[d];
-                      if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-                      if (grid[nx][ny] == '#' || vis[nx][ny]) continue;
+                      if (nx < 0 || nx >= n || ny < 0 || ny >= m) { continue; }
+                      if (grid[nx][ny] == '#' || vis[nx][ny]) { continue; }
                       vis[nx][ny] = true;
                       q.push({nx, ny});
                   }

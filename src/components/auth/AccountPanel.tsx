@@ -19,9 +19,7 @@ export default function AccountPanel({ basePath }: { basePath: string }) {
     const client = getSupabaseClient();
     client.auth
       .getUser()
-      .then(({ data }) =>
-        setAccount(data.user ? { id: data.user.id, email: data.user.email } : null)
-      );
+      .then(({ data }) => setAccount(data.user ? { id: data.user.id, email: data.user.email } : null));
     const { data } = client.auth.onAuthStateChange((_event, session) => {
       setAccount(session?.user ? { id: session.user.id, email: session.user.email } : null);
     });
@@ -31,9 +29,7 @@ export default function AccountPanel({ basePath }: { basePath: string }) {
   async function sync() {
     setSyncMessage('同步中…');
     const result = await flushSyncQueue();
-    setSyncMessage(
-      result.status === 'synced' ? `已同步 ${result.processed} 筆事件` : result.status
-    );
+    setSyncMessage(result.status === 'synced' ? `已同步 ${result.processed} 筆事件` : result.status);
   }
 
   async function logout() {

@@ -23,14 +23,10 @@ interface CatalogItem {
 
 const chapterForPage = (volume: Volume, pdfPage: number) =>
   toc.chapters.find(
-    (chapter) =>
-      chapter.volume === volume &&
-      pdfPage >= chapter.pdf_pages[0]! &&
-      pdfPage <= chapter.pdf_pages[1]!
+    (chapter) => chapter.volume === volume && pdfPage >= chapter.pdf_pages[0]! && pdfPage <= chapter.pdf_pages[1]!
   );
 
-const bookPage = (volume: Volume, pdfPage: number) =>
-  volume === 'upper' ? pdfPage - 18 : pdfPage + 370;
+const bookPage = (volume: Volume, pdfPage: number) => (volume === 'upper' ? pdfPage - 18 : pdfPage + 370);
 
 const normalizeLabel = (label: string) =>
   label
@@ -51,8 +47,7 @@ const chapterSummary: Record<number, string> = {
   10: '先定義圖的方向、權重與容量，再選擇遍歷、連通、路徑、生成樹或網路流方法。'
 };
 
-const exampleCandidates = JSON.parse(readFileSync('data/exercise-candidates.json', 'utf8'))
-  .candidates as Array<{
+const exampleCandidates = JSON.parse(readFileSync('data/exercise-candidates.json', 'utf8')).candidates as Array<{
   candidate_kind: string;
   original_label?: string;
   volume: Volume;
@@ -73,12 +68,12 @@ for (const candidate of exampleCandidates) {
   if (pageChapter?.chapter !== chapterNumber) continue;
   const key = `${candidate.volume}-${label}`;
   const existing = exampleMap.get(key);
-  const pdfPages = [
-    ...new Set([...(existing?.source_pdf_pages ?? []), ...candidate.source_pdf_pages])
-  ].sort((left, right) => left - right);
-  const bookPages = [
-    ...new Set([...(existing?.source_book_pages ?? []), ...candidate.source_book_pages])
-  ].sort((left, right) => left - right);
+  const pdfPages = [...new Set([...(existing?.source_pdf_pages ?? []), ...candidate.source_pdf_pages])].sort(
+    (left, right) => left - right
+  );
+  const bookPages = [...new Set([...(existing?.source_book_pages ?? []), ...candidate.source_book_pages])].sort(
+    (left, right) => left - right
+  );
   exampleMap.set(key, {
     id: `${candidate.volume}-example-${match[1]}-${match[2]}`,
     kind: 'example',
@@ -165,6 +160,4 @@ writeFileSync(
   )}\n`
 );
 
-console.log(
-  `Generated ${items.length} textbook items: ${exampleMap.size} examples, ${exerciseMap.size} exercises.`
-);
+console.log(`Generated ${items.length} textbook items: ${exampleMap.size} examples, ${exerciseMap.size} exercises.`);

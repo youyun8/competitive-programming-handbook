@@ -70,7 +70,7 @@ struct ArticulationBridge {
         dfn[u] = low[u] = ++timer;
         int child_count = 0;
         for (const GraphEdge& edge : graph[u]) {
-            if (edge.index == parent_edge) continue;
+            if (edge.index == parent_edge) { continue; }
             int v = edge.to;
             if (!dfn[v]) {
                 ++child_count;

@@ -73,7 +73,7 @@ struct TwoSat {
     void dfs1(const std::vector<std::vector<int>>& g, std::vector<bool>& used, std::vector<int>& order, int u) {
         used[u] = true;
         for (int v : g[u]) {
-            if (!used[v]) dfs1(g, used, order, v);
+            if (!used[v]) { dfs1(g, used, order, v); }
         }
         order.push_back(u);
     }
@@ -81,7 +81,7 @@ struct TwoSat {
     void dfs2(const std::vector<std::vector<int>>& rg, int u, int label) {
         component[u] = label;
         for (int v : rg[u]) {
-            if (component[v] == -1) dfs2(rg, v, label);
+            if (component[v] == -1) { dfs2(rg, v, label); }
         }
     }
 
@@ -89,7 +89,7 @@ struct TwoSat {
         std::vector<bool> used(2 * n);
         std::vector<int> order;
         for (int i = 0; i < 2 * n; ++i) {
-            if (!used[i]) dfs1(graph, used, order, i);
+            if (!used[i]) { dfs1(graph, used, order, i); }
         }
         std::vector<std::vector<int>> reverse_graph(2 * n);
         for (int u = 0; u < 2 * n; ++u) {

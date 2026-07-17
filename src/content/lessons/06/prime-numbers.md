@@ -55,21 +55,22 @@ std::vector<int> linear_sieve(int n) {
     std::vector<int> primes;
     is_prime[0] = is_prime[1] = false;
     for (int i = 2; i <= n; ++i) {
-        if (is_prime[i]) primes.push_back(i);
+        if (is_prime[i]) { primes.push_back(i); }
         for (int p : primes) {
             long long v = 1LL * i * p;
-            if (v > n) break;
+            if (v > n) { break; }
             is_prime[v] = false;
-            if (i % p == 0) break;
+            if (i % p == 0) { break; }
         }
     }
     return primes;
 }
 
 bool is_prime_trial(long long x) {
-    if (x < 2) return false;
-    for (long long d = 2; d * d <= x; ++d)
-        if (x % d == 0) return false;
+    if (x < 2) { return false; }
+    for (long long d = 2; d * d <= x; ++d) {
+        if (x % d == 0) { return false; }
+    }
     return true;
 }
 ```

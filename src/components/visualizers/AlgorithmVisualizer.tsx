@@ -455,12 +455,7 @@ export default function AlgorithmVisualizer({ kind }: Props) {
         >
           下一步
         </button>
-        <button
-          className="button"
-          type="button"
-          onClick={() => setPlaying((value) => !value)}
-          disabled={!hydrated}
-        >
+        <button className="button" type="button" onClick={() => setPlaying((value) => !value)} disabled={!hydrated}>
           {playing ? '暫停' : '播放'}
         </button>
       </div>

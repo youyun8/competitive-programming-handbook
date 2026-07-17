@@ -69,7 +69,7 @@ struct MultiplicativeSieve {
             }
             for (int p : primes) {
                 long long v = 1LL * i * p;
-                if (v > n) break;
+                if (v > n) { break; }
                 min_pf[v] = p;
                 if (i % p == 0) {
                     f[v] = f[i] * p;

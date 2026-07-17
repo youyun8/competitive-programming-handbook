@@ -77,7 +77,7 @@ bool has_duplicate_mod(const std::vector<int>& values, int modulus) {
 
 ## 與相似技巧的比較
 
-鴿巢給存在性但不構造實例；若題目要求構造或計數，需改用排列組合、DP 或搜索。
+鴿巢給存在性但不構造實例；若題目要求構造或計數，需改用排列組合、DP 或搜尋。
 
 ## 例題與分級練習
 

@@ -39,7 +39,7 @@ review_status: verified
 
 ## 不變量或正確性證明
 
-函數 `f(r) = max(Σp - r*Σc)` 對 `r` 嚴格遞減。`f(r) >= 0` 時最優值 `>= r`；`f(r) < 0` 時最優值 `< r`。二分搜索的單調性保證正確收斂。
+函數 `f(r) = max(Σp - r*Σc)` 對 `r` 嚴格遞減。`f(r) >= 0` 時最優值 `>= r`；`f(r) < 0` 時最優值 `< r`。二分搜尋的單調性保證正確收斂。
 
 ## 逐步演算法
 
@@ -61,8 +61,9 @@ bool check(
     const std::vector<double>& cost
 ) {
     double total = 0;
-    for (std::size_t i = 0; i < profit.size(); ++i)
+    for (std::size_t i = 0; i < profit.size(); ++i) {
         total += profit[i] - ratio * cost[i];
+    }
     return total >= 0;
 }
 
@@ -74,8 +75,9 @@ double fractional_programming(
 ) {
     for (int iter = 0; iter < 60; ++iter) {
         double mid = (low + high) / 2.0;
-        if (check(mid, profit, cost))
+        if (check(mid, profit, cost)) {
             low = mid;
+        }
         else
             high = mid;
     }
@@ -93,11 +95,11 @@ double fractional_programming(
 
 ## 與相似技巧的比較
 
-二分搜索適合任何單調判定；Dinkelbach 收斂快但要求內層問題能求到最大解；與拉格朗日鬆弛同一精神但不用推導對偶。
+二分搜尋適合任何單調判定；Dinkelbach 收斂快但要求內層問題能求到最大解；與拉格朗日鬆弛同一精神但不用推導對偶。
 
 ## 例題與分級練習
 
-初級：選 k 個物品使平均值最大；中級：分數規劃最短路；高級：參數搜索結合最大流或最小割。
+初級：選 k 個物品使平均值最大；中級：分數規劃最短路；高級：參數搜尋結合最大流或最小割。
 
 ## 本節重點速查
 

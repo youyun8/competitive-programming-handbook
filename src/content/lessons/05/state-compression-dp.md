@@ -61,10 +61,10 @@ public:
         dp[1][0] = 0; // 從 0 出發
         for (int mask = 1; mask <= full_mask; ++mask) {
             for (int last = 0; last < n; ++last) {
-                if (!(mask & (1 << last))) continue;
-                if (dp[mask][last] >= INT_MAX / 2) continue;
+                if (!(mask & (1 << last))) { continue; }
+                if (dp[mask][last] >= INT_MAX / 2) { continue; }
                 for (int nxt = 0; nxt < n; ++nxt) {
-                    if (mask & (1 << nxt)) continue;
+                    if (mask & (1 << nxt)) { continue; }
                     const int next_mask = mask | (1 << nxt);
                     dp[next_mask][nxt] = min(dp[next_mask][nxt],
                                              dp[mask][last] + dist[last][nxt]);

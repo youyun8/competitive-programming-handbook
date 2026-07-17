@@ -39,12 +39,7 @@ export default function ProgressActions({ lessonId }: Props) {
       <button className="button" type="button" onClick={complete} aria-pressed={completed}>
         {completed ? '✓ 已完成' : '標記為完成'}
       </button>
-      <button
-        className="button secondary"
-        type="button"
-        onClick={bookmark}
-        aria-pressed={bookmarked}
-      >
+      <button className="button secondary" type="button" onClick={bookmark} aria-pressed={bookmarked}>
         {bookmarked ? '★ 已加入書籤' : '☆ 加入書籤'}
       </button>
     </div>

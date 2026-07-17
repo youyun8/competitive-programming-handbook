@@ -99,8 +99,8 @@ static vector<int> prefix_function(const string& s) {
     vector<int> pi(n, 0);
     for (int i = 1; i < n; ++i) {
         int j = pi[i - 1];
-        while (j > 0 && s[i] != s[j]) j = pi[j - 1];
-        if (s[i] == s[j]) ++j;
+        while (j > 0 && s[i] != s[j]) { j = pi[j - 1]; }
+        if (s[i] == s[j]) { ++j; }
         pi[i] = j;
     }
     return pi;
@@ -108,9 +108,9 @@ static vector<int> prefix_function(const string& s) {
 
 int main() {
     string s;
-    if (!(cin >> s)) return 0;
+    if (!(cin >> s)) { return 0; }
     vector<int> pi = prefix_function(s);
-    for (size_t i = 0; i < pi.size(); ++i) cout << pi[i] << " \n"[i + 1 == pi.size()];
+    for (size_t i = 0; i < pi.size(); ++i) { cout << pi[i] << " \n"[i + 1 == pi.size()]; }
     return 0;
 }
 ```
@@ -137,8 +137,8 @@ static int longest_palindrome(const string& s) {
     vector<int> radius(n, 0);
     int center = 0, right = 0, best = 0;
     for (int i = 1; i + 1 < n; ++i) {
-        if (i < right) radius[i] = min(right - i, radius[2 * center - i]);
-        while (t[i + radius[i] + 1] == t[i - radius[i] - 1]) ++radius[i];
+        if (i < right) { radius[i] = min(right - i, radius[2 * center - i]); }
+        while (t[i + radius[i] + 1] == t[i - radius[i] - 1]) { ++radius[i]; }
         if (i + radius[i] > right) {
             center = i;
             right = i + radius[i];
@@ -150,7 +150,7 @@ static int longest_palindrome(const string& s) {
 
 int main() {
     string s;
-    if (!(cin >> s)) return 0;
+    if (!(cin >> s)) { return 0; }
     cout << longest_palindrome(s) << '\n';
     return 0;
 }

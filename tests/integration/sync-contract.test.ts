@@ -13,8 +13,6 @@ describe('sync API contract', () => {
   });
 
   it('does not silently overwrite newer settings', () => {
-    expect(syncFunction).toContain(
-      'Date.parse(String(cloud.updated_at)) > Date.parse(String(payload.updated_at))'
-    );
+    expect(syncFunction).toContain('Date.parse(String(cloud.updated_at)) > Date.parse(String(payload.updated_at))');
   });
 });
