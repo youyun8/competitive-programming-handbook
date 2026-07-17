@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
-  <title id="title">演算法競賽互動學習網站預覽</title>
-  <desc id="desc">左側章節導覽、右側首頁課程地圖的示意圖。實際畫面由 Playwright 視覺檢查。</desc>
+  <title id="title">競賽演算法筆記網站預覽</title>
+  <desc id="desc">左側章節導覽、右側總覽課程地圖的示意圖。實際畫面由 Playwright 視覺檢查。</desc>
   <rect width="1200" height="675" fill="#f7f8fa"/>
   <rect width="1200" height="64" fill="#fff" stroke="#d7e0e7"/>
   <rect x="24" y="16" width="32" height="32" rx="7" fill="#0c7183"/>
-  <text x="68" y="40" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#17212b">演算法競賽互動學習</text>
+  <text x="68" y="40" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#17212b">競賽演算法筆記</text>
   <rect y="64" width="240" height="611" fill="#fff" stroke="#d7e0e7"/>
   <g font-family="system-ui,sans-serif" font-size="14" fill="#5f6f7d">
     <text x="24" y="105" font-weight="700">學習路線</text>

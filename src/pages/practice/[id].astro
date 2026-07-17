@@ -17,7 +17,7 @@ const { Content } = await render(exercise);
 
 <BaseLayout title={exercise.data.title} wide>
   <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><a href={withBase('/practice/')}>題庫</a><span
+    <a href={withBase('/')}>總覽</a><span aria-hidden="true">/</span><a href={withBase('/practice/')}>題庫</a><span
       aria-hidden="true">/</span
     ><span>{exercise.data.title}</span>
   </nav>

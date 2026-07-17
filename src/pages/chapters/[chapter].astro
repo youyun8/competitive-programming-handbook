@@ -23,7 +23,7 @@ const examples = chapterExamples[chapter.chapter] ?? [];
 
 <BaseLayout title={`第 ${chapter.chapter} 章 ${chapter.title}`} wide>
   <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><a href={withBase(`/volumes/${chapter.volume}/`)}
+    <a href={withBase('/')}>總覽</a><span aria-hidden="true">/</span><a href={withBase(`/volumes/${chapter.volume}/`)}
       >{chapter.volume === 'upper' ? '上冊' : '下冊'}</a
     ><span aria-hidden="true">/</span><span>第 {chapter.chapter} 章</span>
   </nav>

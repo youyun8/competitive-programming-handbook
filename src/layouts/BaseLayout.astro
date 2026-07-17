@@ -1,7 +1,7 @@
 ---
 import ReadingSettings from '@/components/progress/ReadingSettings';
 import { curriculum } from '@/lib/curriculum';
-import { withBase } from '@/lib/site';
+import { homeLabel, siteName, withBase } from '@/lib/site';
 import '@/styles/global.css';
 
 interface Props {
@@ -10,9 +10,10 @@ interface Props {
   wide?: boolean;
 }
 
-const { title, description = '以繁體中文重新整理的演算法競賽互動學習筆記。', wide = false } = Astro.props;
+const { title, description = '以繁體中文重新整理的競賽演算法學習筆記。', wide = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const currentPath = Astro.url.pathname;
+const pageTitle = title === homeLabel ? siteName : `${title}｜${siteName}`;
 ---
 
 <!doctype html>
@@ -25,32 +26,34 @@ const currentPath = Astro.url.pathname;
     <meta name="theme-color" content="#0c7183" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
-    <title>{title}</title></head
-  >｜演算法競賽互動學習
-  <script is:inline>
-    (() => {
-      try {
-        const settings = JSON.parse(localStorage.getItem('ac-reading-settings') || '{}');
-        const preference = settings.theme || localStorage.getItem('ac-theme') || 'system';
-        const dark = matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.dataset.theme = preference === 'system' ? (dark ? 'dark' : 'light') : preference;
-        document.documentElement.dataset.themePreference = preference;
-        if (settings.fontSize) document.documentElement.style.setProperty('--font-size', `${settings.fontSize}px`);
-        if (settings.contentWidth) {
-          document.documentElement.style.setProperty('--reading-width', `${settings.contentWidth}rem`);
-          document.documentElement.dataset.readingWidth =
-            settings.contentWidth >= 80 ? 'full' : settings.contentWidth >= 60 ? 'wide' : 'focused';
+    <title>{pageTitle}</title>
+    <script is:inline>
+      (() => {
+        try {
+          const settings = JSON.parse(localStorage.getItem('ac-reading-settings') || '{}');
+          const preference = settings.theme || localStorage.getItem('ac-theme') || 'system';
+          const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.dataset.theme = preference === 'system' ? (dark ? 'dark' : 'light') : preference;
+          document.documentElement.dataset.themePreference = preference;
+          if (settings.fontSize) document.documentElement.style.setProperty('--font-size', `${settings.fontSize}px`);
+          if (settings.contentWidth) {
+            document.documentElement.style.setProperty('--reading-width', `${settings.contentWidth}rem`);
+            document.documentElement.dataset.readingWidth =
+              settings.contentWidth >= 80 ? 'full' : settings.contentWidth >= 60 ? 'wide' : 'focused';
+          }
+          if (settings.codeFontSize)
+            document.documentElement.style.setProperty('--code-font-size', `${settings.codeFontSize}px`);
+          document.documentElement.dataset.wrapLines =
+            typeof settings.wrapLines === 'boolean' ? String(settings.wrapLines) : 'true';
+        } catch {
+          document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+          document.documentElement.dataset.wrapLines = 'true';
         }
-        if (settings.codeFontSize)
-          document.documentElement.style.setProperty('--code-font-size', `${settings.codeFontSize}px`);
-        document.documentElement.dataset.wrapLines =
-          typeof settings.wrapLines === 'boolean' ? String(settings.wrapLines) : 'true';
-      } catch {
-        document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        document.documentElement.dataset.wrapLines = 'true';
-      }
-    })();
-  </script>
+      })();
+    </script></head
+  >
 
   <body>
     <a class="skip-link" href="#main">跳至主要內容</a>
@@ -63,9 +66,9 @@ const currentPath = Astro.url.pathname;
           aria-label="開啟導覽"
           aria-expanded="false">☰</button
         >
-        <a class="brand" href={withBase('/')} aria-label="演算法競賽互動學習首頁">
+        <a class="brand" href={withBase('/')} aria-label={`${siteName}${homeLabel}`}>
           <span class="brand-mark" aria-hidden="true">AC</span>
-          <span>演算法競賽互動學習</span>
+          <span>{siteName}</span>
         </a>
         <nav class="header-nav" aria-label="主要導覽">
           <a class="desktop-only" href={withBase('/learn/')}>學習路線</a>
@@ -193,6 +196,4 @@ const currentPath = Astro.url.pathname;
       updateConnectivity();
     </script>
   </body>
-
-
 </html>

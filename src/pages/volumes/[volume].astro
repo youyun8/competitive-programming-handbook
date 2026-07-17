@@ -14,7 +14,7 @@ const chapters = curriculum.chapters.filter((chapter) => chapter.volume === volu
 
 <BaseLayout title={info.display_name} wide>
   <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><span>{info.display_name}</span>
+    <a href={withBase('/')}>總覽</a><span aria-hidden="true">/</span><span>{info.display_name}</span>
   </nav>
   <p class="eyebrow">{volume === 'upper' ? 'Volume I' : 'Volume II'}</p>
   <h1>{info.display_name}</h1>

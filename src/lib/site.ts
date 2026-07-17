@@ -1,4 +1,6 @@
 export const appBase = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+export const siteName = '競賽演算法筆記';
+export const homeLabel = '總覽';
 
 export function withBase(path = '/') {
   const normalized = path.startsWith('/') ? path : `/${path}`;
