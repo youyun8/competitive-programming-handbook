@@ -1,8 +1,22 @@
 ---
+import { getCollection } from 'astro:content';
 import textbookCatalog from '../../../data/textbook-items.json';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { curriculum } from '@/lib/curriculum';
 import { withBase } from '@/lib/site';
+
+const exerciseEntries = await getCollection(
+  'exercises',
+  ({ data }) => data.review_status === 'verified'
+);
+
+const externalLinkByProblem = new Map<string, string>();
+for (const entry of exerciseEntries) {
+  const { external_platform, external_problem_id, external_url } = entry.data;
+  if (external_platform && external_problem_id && external_url) {
+    externalLinkByProblem.set(`${external_platform}:${external_problem_id}`, external_url);
+  }
+}
 
 const chapters = curriculum.chapters.map((chapter) => {
   const items = textbookCatalog.items.filter((item) => item.chapter === chapter.chapter);
@@ -72,7 +86,7 @@ const chapters = curriculum.chapters.map((chapter) => {
                 書頁 {item.source_book_pages.join('、')} · PDF 頁 {item.source_pdf_pages.join('、')}
               </p>
               <p>
-                <a href={`#${item.id}`}>範例連結</a>
+                <a href={withBase(`/chapters/${chapter.chapter}/`)}>前往本章教學 →</a>
               </p>
             </article>
           ))}
@@ -80,24 +94,34 @@ const chapters = curriculum.chapters.map((chapter) => {
 
         <h3>教材習題</h3>
         <div class="textbook-item-grid compact">
-          {exercises.map((item) => (
-            <article id={item.id} class="textbook-item">
-              <div class="textbook-item-heading">
-                <strong>
-                  <a href={`#${item.id}`}>{item.label}</a>
-                </strong>
-                <span class="badge">習題</span>
-              </div>
-              <p>{item.summary}</p>
-              <p class="textbook-focus">建議複習：{item.learning_focus.join('、')}</p>
-              <p class="meta">
-                書頁 {item.source_book_pages.join('、')} · PDF 頁 {item.source_pdf_pages.join('、')}
-              </p>
-              <p>
-                <a href={`#${item.id}`}>題目連結</a>
-              </p>
-            </article>
-          ))}
+          {exercises.map((item) => {
+            const externalUrl = externalLinkByProblem.get(`${item.platform}:${item.problem_id}`);
+            return (
+              <article id={item.id} class="textbook-item">
+                <div class="textbook-item-heading">
+                  <strong>
+                    <a href={`#${item.id}`}>{item.label}</a>
+                  </strong>
+                  <span class="badge">習題</span>
+                </div>
+                <p>{item.summary}</p>
+                <p class="textbook-focus">建議複習：{item.learning_focus.join('、')}</p>
+                <p class="meta">
+                  書頁 {item.source_book_pages.join('、')} · PDF 頁{' '}
+                  {item.source_pdf_pages.join('、')}
+                </p>
+                <p>
+                  {externalUrl ? (
+                    <a href={externalUrl} target="_blank" rel="noopener noreferrer">
+                      前往 {item.platform} {item.problem_id} 題目 ↗
+                    </a>
+                  ) : (
+                    <span class="meta">題目連結待確認</span>
+                  )}
+                </p>
+              </article>
+            );
+          })}
         </div>
       </section>
     ))
