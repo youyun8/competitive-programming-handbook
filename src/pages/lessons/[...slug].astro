@@ -44,7 +44,7 @@ const next = allSections[currentIndex + 1];
     <span>{chapter.volume === 'upper' ? '上冊' : '下冊'}</span>
     <span>書頁 {lesson?.data.source_book_pages.join('–') ?? chapter.book_pages.join('–')}</span>
     <span>PDF 頁 {lesson?.data.source_pdf_pages.join('–') ?? chapter.pdf_pages.join('–')}</span>
-    <span class="badge verified">{lesson ? '原創深度教學' : '原創核心導讀'}</span>
+    <span class="badge verified">{lesson ? '深度教學' : '核心導讀'}</span>
   </div>
   <ProgressActions client:load lessonId={lesson?.data.id ?? `section-${section.id}`} />
   {
@@ -57,8 +57,9 @@ const next = allSections[currentIndex + 1];
         <aside class="callout">
           <strong>來源追溯</strong>
           <p>
-            本文是原創繁體中文教學；參考範圍為書本第 {lesson.data.source_book_pages.join('–')} 頁、
-            PDF 第 {lesson.data.source_pdf_pages.join('–')} 頁。未公開 OCR 文字或掃描版面。
+            來源識別為 {lesson.data.source_file}；參考範圍為書本第{' '}
+            {lesson.data.source_book_pages.join('–')} 頁、PDF 第{' '}
+            {lesson.data.source_pdf_pages.join('–')} 頁。
           </p>
         </aside>
       </>
@@ -68,10 +69,9 @@ const next = allSections[currentIndex + 1];
         <aside class="callout">
           <strong>來源追溯</strong>
           <p>
-            本頁是依已確認章節目錄撰寫的原創繁體中文導讀；來源識別為{' '}
-            {chapter.volume === 'upper' ? 'upper-volume' : 'lower-volume'}，參考範圍為書本第{' '}
-            {chapter.book_pages.join('–')} 頁、PDF 第 {chapter.pdf_pages.join('–')}{' '}
-            頁。細分頁碼、原書例題與 OCR 候選仍維持不公開，直到人工逐項確認。
+            來源識別為 {chapter.volume === 'upper' ? 'upper-volume' : 'lower-volume'}
+            ；本節目前沿用章級範圍： 書本第 {chapter.book_pages.join('–')} 頁、PDF 第{' '}
+            {chapter.pdf_pages.join('–')} 頁。
           </p>
         </aside>
       </>

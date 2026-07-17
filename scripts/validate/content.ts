@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import fg from 'fast-glob';
+import textbookCatalog from '../../data/textbook-items.json' with { type: 'json' };
 import toc from '../../data/toc.json' with { type: 'json' };
 import { readFrontmatter } from './frontmatter';
 
@@ -92,10 +93,44 @@ const sectionCount = toc.chapters.reduce((sum, chapter) => sum + chapter.section
 if (sectionCount < 90) errors.push(`Expected complete section structure, found ${sectionCount}`);
 if (lessonIds.size < 12) errors.push('At least 12 complete core lessons are required');
 
+if (textbookCatalog.counts.examples < 90) {
+  errors.push(`Expected all labeled textbook examples, found ${textbookCatalog.counts.examples}`);
+}
+if (textbookCatalog.counts.exercises < 300) {
+  errors.push(
+    `Expected full textbook exercise inventory, found ${textbookCatalog.counts.exercises}`
+  );
+}
+const textbookItemIds = new Set<string>();
+for (const item of textbookCatalog.items) {
+  if (textbookItemIds.has(item.id)) errors.push(`Duplicate textbook item id: ${item.id}`);
+  textbookItemIds.add(item.id);
+  const chapter = toc.chapters.find((entry) => entry.chapter === item.chapter);
+  if (!chapter) {
+    errors.push(`Textbook item ${item.id}: unknown chapter ${item.chapter}`);
+    continue;
+  }
+  if (item.volume !== chapter.volume) {
+    errors.push(`Textbook item ${item.id}: volume does not match chapter ${item.chapter}`);
+  }
+  if (!item.source_book_pages.length || !item.source_pdf_pages.length) {
+    errors.push(`Textbook item ${item.id}: missing source pages`);
+  }
+}
+for (const chapter of toc.chapters) {
+  const chapterItems = textbookCatalog.items.filter((item) => item.chapter === chapter.chapter);
+  if (!chapterItems.some((item) => item.kind === 'example')) {
+    errors.push(`Chapter ${chapter.chapter}: missing textbook examples`);
+  }
+  if (!chapterItems.some((item) => item.kind === 'exercise')) {
+    errors.push(`Chapter ${chapter.chapter}: missing textbook exercises`);
+  }
+}
+
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
 console.log(
-  `Content validation passed: ${toc.chapters.length} chapters, ${sectionCount} covered sections, ${lessons.length} deep lessons, ${guidedSections.size} core guides, ${exercises.length} exercises.`
+  `Content validation passed: ${toc.chapters.length} chapters, ${sectionCount} covered sections, ${lessons.length} deep lessons, ${guidedSections.size} core guides, ${exercises.length} interactive exercises, ${textbookCatalog.counts.examples} textbook examples, ${textbookCatalog.counts.exercises} textbook exercises.`
 );

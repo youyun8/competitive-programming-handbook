@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
+import textbookCatalog from '../../../data/textbook-items.json';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { chapterWorkshops } from '@/lib/chapter-workshops';
 import { curriculum, sectionSlug } from '@/lib/curriculum';
 import { withBase } from '@/lib/site';
 
@@ -14,6 +16,10 @@ export function getStaticPaths() {
 const { chapter } = Astro.props;
 const lessons = await getCollection('lessons');
 const exercises = await getCollection('exercises');
+const workshop = chapterWorkshops[chapter.chapter]!;
+const textbookItems = textbookCatalog.items.filter((item) => item.chapter === chapter.chapter);
+const textbookExampleCount = textbookItems.filter((item) => item.kind === 'example').length;
+const textbookExerciseCount = textbookItems.filter((item) => item.kind === 'exercise').length;
 ---
 
 <BaseLayout title={`第 ${chapter.chapter} 章 ${chapter.title}`} wide>
@@ -26,7 +32,7 @@ const exercises = await getCollection('exercises');
   <p class="eyebrow">{chapter.volume === 'upper' ? '上冊' : '下冊'} · Chapter {chapter.chapter}</p>
   <h1>{chapter.title}</h1>
   <p class="lede">
-    本章共 {chapter.sections.length} 節，每節都有可直接閱讀的原創核心導讀；其中部分主題另有含完整程式模板與視覺化的深度教學。
+    本章共 {chapter.sections.length} 節，每節都有可直接閱讀的核心導讀；其中部分主題另有含完整程式模板與視覺化的深度教學。
   </p>
   <div class="meta">
     <span>書本 {chapter.book_pages[0]}–{chapter.book_pages[1]} 頁</span>
@@ -35,6 +41,11 @@ const exercises = await getCollection('exercises');
       >{exercises.filter((item) => item.data.chapter === chapter.chapter).length} 道已發布練習</span
     >
   </div>
+  <p>
+    <a class="button secondary" href={withBase(`/textbook/#chapter-${chapter.chapter}`)}>
+      查看本章全部 {textbookExampleCount} 個教材範例與 {textbookExerciseCount} 個習題
+    </a>
+  </p>
   <ul class="section-list">
     {
       chapter.sections.map((section) => {
@@ -54,4 +65,55 @@ const exercises = await getCollection('exercises');
       })
     }
   </ul>
+
+  <section aria-labelledby="chapter-overview-title">
+    <h2 id="chapter-overview-title">本章深入導讀</h2>
+    <p class="lede">{workshop.overview}</p>
+    <ul>
+      {workshop.connections.map((connection) => <li>{connection}</li>)}
+    </ul>
+  </section>
+
+  <section aria-labelledby="chapter-examples-title">
+    <h2 id="chapter-examples-title">教材範例導讀</h2>
+    <div class="grid">
+      {
+        workshop.examples.map((example) => (
+          <article class="card">
+            <p class="eyebrow">{example.sourceLabel}</p>
+            <h3>{example.title}</h3>
+            <p>{example.setup}</p>
+            <ol>
+              {example.reasoning.map((step) => (
+                <li>{step}</li>
+              ))}
+            </ol>
+            <p>
+              <strong>帶走的觀念：</strong>
+              {example.takeaway}
+            </p>
+            <p class="meta">
+              書頁 {example.sourceBookPages.join('–')} · PDF 頁 {example.sourcePdfPages.join('–')}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section aria-labelledby="chapter-practice-title">
+    <h2 id="chapter-practice-title">章末分級習題</h2>
+    <div class="grid">
+      {
+        workshop.exercises.map((exercise) => (
+          <article class="card">
+            <span class="badge">{exercise.level}</span>
+            <h3>{exercise.title}</h3>
+            <p>{exercise.prompt}</p>
+            <p class="meta">訓練重點：{exercise.focus}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 </BaseLayout>

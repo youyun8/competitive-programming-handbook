@@ -1,0 +1,134 @@
+---
+import textbookCatalog from '../../../data/textbook-items.json';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { curriculum } from '@/lib/curriculum';
+import { withBase } from '@/lib/site';
+
+const chapters = curriculum.chapters.map((chapter) => {
+  const items = textbookCatalog.items.filter((item) => item.chapter === chapter.chapter);
+  return {
+    chapter,
+    examples: items.filter((item) => item.kind === 'example'),
+    exercises: items.filter((item) => item.kind === 'exercise')
+  };
+});
+---
+
+<BaseLayout title="教材範例與習題總表" wide>
+  <nav class="breadcrumb" aria-label="麵包屑">
+    <a href={withBase('/')}>首頁</a><span aria-hidden="true">/</span><span>教材題目總表</span>
+  </nav>
+  <p class="eyebrow">Textbook examples and exercises</p>
+  <h1>教材範例與習題總表</h1>
+  <p class="lede">
+    依上下冊逐頁整理，共收錄 {textbookCatalog.counts.examples} 個有編號範例與 {
+      textbookCatalog.counts.exercises
+    } 個可確認的練習題目。每筆資料均保留教材標籤、章節、書頁與 PDF 頁碼。
+  </p>
+
+  <div class="meta">
+    <span>{textbookCatalog.counts.total} 筆題目資料</span>
+    <span>{textbookCatalog.counts.examples} 個教材範例</span>
+    <span>{textbookCatalog.counts.exercises} 個 OJ 習題</span>
+  </div>
+
+  <nav class="page-actions" aria-label="章節快速跳轉">
+    {
+      chapters.map(({ chapter }) => (
+        <a class="button secondary" href={`#chapter-${chapter.chapter}`}>
+          第 {chapter.chapter} 章
+        </a>
+      ))
+    }
+  </nav>
+
+  {
+    chapters.map(({ chapter, examples, exercises }) => (
+      <section
+        id={`chapter-${chapter.chapter}`}
+        aria-labelledby={`chapter-${chapter.chapter}-title`}
+      >
+        <h2 id={`chapter-${chapter.chapter}-title`}>
+          第 {chapter.chapter} 章 — {chapter.title}
+        </h2>
+        <p class="meta">
+          {examples.length} 個範例 · {exercises.length} 個習題 · 書頁 {chapter.book_pages.join('–')}{' '}
+          · PDF 頁 {chapter.pdf_pages.join('–')}
+        </p>
+
+        <h3>教材範例</h3>
+        <div class="textbook-item-grid">
+          {examples.map((item) => (
+            <article class="textbook-item">
+              <div class="textbook-item-heading">
+                <strong>{item.label}</strong>
+                <span class="badge">範例</span>
+              </div>
+              <p>{item.summary}</p>
+              <p class="textbook-focus">重點：{item.learning_focus.join('、')}</p>
+              <p class="meta">
+                書頁 {item.source_book_pages.join('、')} · PDF 頁 {item.source_pdf_pages.join('、')}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        <h3>教材習題</h3>
+        <div class="textbook-item-grid compact">
+          {exercises.map((item) => (
+            <article class="textbook-item">
+              <div class="textbook-item-heading">
+                <strong>{item.label}</strong>
+                <span class="badge">習題</span>
+              </div>
+              <p>{item.summary}</p>
+              <p class="textbook-focus">建議複習：{item.learning_focus.join('、')}</p>
+              <p class="meta">
+                書頁 {item.source_book_pages.join('、')} · PDF 頁 {item.source_pdf_pages.join('、')}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))
+  }
+</BaseLayout>
+
+<style>
+  section {
+    scroll-margin-top: 5rem;
+  }
+
+  .textbook-item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: 0.8rem;
+  }
+
+  .textbook-item-grid.compact {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  }
+
+  .textbook-item {
+    border: 1px solid var(--border);
+    border-radius: 0.6rem;
+    background: var(--surface);
+    padding: 0.85rem;
+  }
+
+  .textbook-item-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+  }
+
+  .textbook-item p {
+    margin: 0.45rem 0 0;
+  }
+
+  .textbook-focus {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+</style>

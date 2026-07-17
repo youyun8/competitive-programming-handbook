@@ -2,15 +2,10 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="資料來源與改寫原則">
+<BaseLayout title="教材來源與頁碼對照">
   <p class="eyebrow">About sources</p>
-  <h1>資料來源、頁碼對照與公開界線</h1>
-  <div class="callout">
-    <strong>非官方學習筆記</strong>
-    <p>
-      本站依據使用者合法持有的教材，重新撰寫為繁體中文學習內容；不代表作者、出版社或原題 OJ 背書。
-    </p>
-  </div>
+  <h1>教材來源與頁碼對照</h1>
+  <p class="lede">本頁列出課程編排所參考的書目，以及網站章節使用的書頁與 PDF 頁碼對照。</p>
 
   <h2>參考書目</h2>
   <ul>
@@ -18,12 +13,11 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     <li>同系列下冊（接續第 6 章），羅勇軍、郭衛斌，清華大學出版社。</li>
   </ul>
 
-  <h2>改寫原則</h2>
+  <h2>內容編排</h2>
   <ul>
-    <li>以自己的語言解釋概念、推導、不變量與解題模式。</li>
-    <li>不逐頁重製，不公開掃描頁、出版社版面、插圖或 QR 圖片。</li>
-    <li>C++ 程式重新命名、重構並加上本站說明；題目只保留改寫後理解問題所需資訊。</li>
-    <li>未確認 OCR 一律留在私有校對流程，不顯示在公開頁面。</li>
+    <li>依十章主題整理概念、推導、不變量、複雜度與解題模式。</li>
+    <li>C++17 範例統一採可讀的命名、明確介面與邊界條件。</li>
+    <li>每篇教學標示分冊、來源識別、書頁、PDF 頁碼與校對狀態。</li>
   </ul>
 
   <h2>頁碼對照</h2>
@@ -43,5 +37,5 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
   </table>
 
   <h2>勘誤</h2>
-  <p>回報時請附網站 URL、章節、疑問與可公開的更正說明；請勿上傳原書掃描頁到公開 issue。</p>
+  <p>回報時請附網站 URL、章節、疑問與建議更正內容，方便定位與複查。</p>
 </BaseLayout>

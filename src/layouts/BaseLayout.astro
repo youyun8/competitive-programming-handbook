@@ -96,6 +96,7 @@ const currentPath = Astro.url.pathname;
         <div class="sidebar-label">開始</div>
         <a class="sidebar-link" href={withBase('/learn/')}>依先備關係學習</a>
         <a class="sidebar-link" href={withBase('/patterns/')}>跨章解題模式</a>
+        <a class="sidebar-link" href={withBase('/textbook/')}>教材範例與習題</a>
         <a class="sidebar-link" href={withBase('/glossary/')}>術語表</a>
         <div class="sidebar-label">章節</div>
         {
@@ -125,8 +126,7 @@ const currentPath = Astro.url.pathname;
       <main class:list={['main-content', { reading: !wide }]} id="main" data-pagefind-body>
         <slot />
         <footer class="footer">
-          <p>非官方、原創改寫的學習筆記。掃描 PDF、OCR 中間資料與原書版面不會部署。</p>
-          <p><a href={withBase('/about/sources/')}>資料來源、頁碼對照與著作權界線</a></p>
+          <p><a href={withBase('/about/sources/')}>教材來源與頁碼對照</a></p>
         </footer>
       </main>
     </div>

@@ -1,4 +1,5 @@
 ---
+import { Code } from 'astro:components';
 import type { CurriculumChapter, CurriculumSection } from '@/lib/curriculum';
 
 interface Props {
@@ -333,8 +334,7 @@ const nextQuestions = section.topics.map((topic, index) => ({
 <section class="callout">
   <strong>閱讀定位</strong>
   <p>
-    這是依已確認目錄與通用演算法知識撰寫的原創核心導讀，不含 OCR
-    文字、掃描圖或原書程式碼。它提供完整的入門決策框架；需要競賽模板時，再沿本頁的狀態與不變量自行實作。
+    本節先建立題型辨識、狀態設計、正確性與複雜度分析的完整框架；需要競賽模板時，再沿本頁的狀態與不變量完成實作。
   </p>
 </section>
 
@@ -390,7 +390,7 @@ const nextQuestions = section.topics.map((topic, index) => ({
 
 <h2>C++17 起手架構</h2>
 <p>以下只固定介面與不變量檢查點；核心操作應依題目語意完成，避免把不相容的模板直接套用。</p>
-<pre><code class="language-cpp">{guide.code}</code></pre>
+<Code code={guide.code} lang="cpp" theme="github-dark-default" wrap />
 
 <h2>時間與空間複雜度</h2>
 <p>{guide.complexity}</p>

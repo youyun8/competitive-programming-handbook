@@ -27,6 +27,7 @@
     "extract:pdf": "python3 scripts/pdf/extract.py",
     "content:stats": "tsx scripts/content/stats.ts",
     "content:candidates": "tsx scripts/content/build-exercise-candidates.ts",
+    "content:textbook": "tsx scripts/content/build-textbook-catalog.ts",
     "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm validate:content && pnpm validate:cpp && pnpm build"
   },
   "dependencies": {
