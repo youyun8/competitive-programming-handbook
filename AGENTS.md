@@ -11,10 +11,9 @@
 
 ## Content Rules
 
-- Write original Traditional Chinese teaching notes; never reproduce scans, layouts, long passages, figures, QR images, or substantial book code.
-- Every published lesson and exercise must include volume, source file identifier, book pages, PDF pages, and review status.
-- OCR is evidence, not truth. Ambiguous text stays `needs-review` in `reports/content-review.md` and must not be rendered publicly.
-- Use rewritten problem statements and independently written C++17 solutions. Variables, parameters, functions, methods, and lambda variables use `snake_case`; classes and structs use `PascalCase`.
+- Write Traditional Chinese teaching notes; never reproduce scans and QR images.
+- OCR is evidence, not truth. You have to confirm its contents yourself.
+- Use the problem statements and independently written C++17 solutions. Variables, parameters, functions, methods, and lambda variables use `snake_case`; classes and structs use `PascalCase`.
 - External OJ links may be published only after confirming the URL and attribution.
 
 ## Commands

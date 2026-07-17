@@ -3,6 +3,7 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { basename } from 'node:path';
 import fg from 'fast-glob';
 import { readFrontmatter } from './frontmatter';
+import { chapterExamples } from '../../src/lib/chapter-examples';
 
 const outputDirectory = 'tmp/validate/cpp';
 rmSync(outputDirectory, { recursive: true, force: true });
@@ -30,6 +31,12 @@ for (const path of fg.sync('src/content/exercises/**/*.{md,mdx}')) {
 
 for (const path of fg.sync('examples/**/*.cpp')) {
   sources.push({ name: basename(path), code: readFileSync(path, 'utf8') });
+}
+
+for (const [chapter, examples] of Object.entries(chapterExamples)) {
+  for (const [index, example] of examples.entries()) {
+    sources.push({ name: `chapter-${chapter}-example-${index}`, code: example.code });
+  }
 }
 
 for (const [index, source] of sources.entries()) {

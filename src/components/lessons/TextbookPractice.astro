@@ -1,6 +1,8 @@
 ---
+import { Code } from 'astro:components';
 import type { CurriculumChapter, CurriculumSection } from '@/lib/curriculum';
 import { chapterExerciseSolutions } from '@/lib/chapter-exercise-solutions';
+import { chapterExamples } from '@/lib/chapter-examples';
 import { chapterWorkshops } from '@/lib/chapter-workshops';
 
 interface Props {
@@ -9,9 +11,10 @@ interface Props {
 }
 
 const { chapter, section } = Astro.props;
+const examples = chapterExamples[chapter.chapter] ?? [];
 const workshop = chapterWorkshops[chapter.chapter]!;
 const sectionIndex = chapter.sections.findIndex((item) => item.id === section.id);
-const example = workshop.examples[sectionIndex % workshop.examples.length]!;
+const example = examples.length > 0 ? examples[sectionIndex % examples.length]! : null;
 const exercises = [0, 1].map(
   (offset) => workshop.exercises[(sectionIndex * 2 + offset) % workshop.exercises.length]!
 );
@@ -20,25 +23,38 @@ const normalizeTitle = (title: string) => title.replace(/\s+/g, '');
 
 <section class="textbook-practice" aria-labelledby="textbook-practice-title">
   <h2 id="textbook-practice-title">教材範例與習題</h2>
-  <p>
-    以下內容依本節主題「{section.topics.join('、')}」重新編寫；題意、推導與解答皆為本站原創整理。
-  </p>
 
-  <article class="card worked-example">
-    <p class="eyebrow">{example.sourceLabel} · 改寫導讀</p>
-    <h3>{example.title}</h3>
-    <p>{example.setup}</p>
-    <h4>參考解答</h4>
-    <ol>
-      {example.reasoning.map((step) => <li>{step}</li>)}
-    </ol>
-    <p><strong>結論：</strong>{example.takeaway}</p>
-    <p class="meta">
-      來源識別 {chapter.volume === 'upper' ? 'upper-volume' : 'lower-volume'} · 書頁 {
-        example.sourceBookPages.join('、')
-      } · PDF 頁 {example.sourcePdfPages.join('、')} · reviewed
-    </p>
-  </article>
+  {
+    example && (
+      <article class="card worked-example">
+        <p class="eyebrow">
+          {example.label}
+          {example.source ? ` · ${example.source}` : ''}
+        </p>
+        <h3>{example.title}</h3>
+        <h4>題目</h4>
+        {example.statement.split('\n').map((line) => (
+          <p class="statement-line">{line}</p>
+        ))}
+        {example.url && (
+          <p class="oj-link">
+            外部題目連結：
+            <a href={example.url} target="_blank" rel="noreferrer noopener">
+              {example.source || example.url}
+            </a>
+          </p>
+        )}
+        <h4>解題想法</h4>
+        <p>{example.idea}</p>
+        <h4>C++17 參考解答</h4>
+        <Code code={example.code} lang="cpp" theme="github-dark-default" wrap />
+        <p>
+          <strong>複雜度：</strong>
+          {example.complexity}
+        </p>
+      </article>
+    )
+  }
 
   <div class="grid exercise-grid">
     {
@@ -83,6 +99,14 @@ const normalizeTitle = (title: string) => title.replace(/\s+/g, '');
   .worked-example,
   .exercise-grid article {
     scroll-margin-top: 5rem;
+  }
+
+  .statement-line {
+    margin: 0.2rem 0;
+  }
+
+  .oj-link {
+    margin-top: 0.5rem;
   }
 
   .exercise-grid {

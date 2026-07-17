@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
+import { Code } from 'astro:components';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { chapterWorkshops } from '@/lib/chapter-workshops';
+import { chapterExamples } from '@/lib/chapter-examples';
 import { curriculum, sectionSlug } from '@/lib/curriculum';
 import { withBase } from '@/lib/site';
 
@@ -16,6 +18,7 @@ const { chapter } = Astro.props;
 const lessons = await getCollection('lessons');
 const exercises = await getCollection('exercises');
 const workshop = chapterWorkshops[chapter.chapter]!;
+const examples = chapterExamples[chapter.chapter] ?? [];
 ---
 
 <BaseLayout title={`第 ${chapter.chapter} 章 ${chapter.title}`} wide>
@@ -66,25 +69,34 @@ const workshop = chapterWorkshops[chapter.chapter]!;
   </section>
 
   <section aria-labelledby="chapter-examples-title">
-    <h2 id="chapter-examples-title">教材範例導讀</h2>
+    <h2 id="chapter-examples-title">教材經典例題與 C++ 解答</h2>
     <div class="grid">
       {
-        workshop.examples.map((example) => (
+        examples.map((example) => (
           <article class="card">
-            <p class="eyebrow">{example.sourceLabel}</p>
-            <h3>{example.title}</h3>
-            <p>{example.setup}</p>
-            <ol>
-              {example.reasoning.map((step) => (
-                <li>{step}</li>
-              ))}
-            </ol>
-            <p>
-              <strong>帶走的觀念：</strong>
-              {example.takeaway}
+            <p class="eyebrow">
+              {example.label}
+              {example.source ? ` · ${example.source}` : ''}
             </p>
-            <p class="meta">
-              書頁 {example.sourceBookPages.join('–')} · PDF 頁 {example.sourcePdfPages.join('–')}
+            <h3>{example.title}</h3>
+            {example.statement.split('\n').map((line) => (
+              <p class="statement-line">{line}</p>
+            ))}
+            {example.url && (
+              <p>
+                外部題目連結：
+                <a href={example.url} target="_blank" rel="noreferrer noopener">
+                  {example.source || example.url}
+                </a>
+              </p>
+            )}
+            <h4>解題想法</h4>
+            <p>{example.idea}</p>
+            <h4>C++17 參考解答</h4>
+            <Code code={example.code} lang="cpp" theme="github-dark-default" wrap />
+            <p>
+              <strong>複雜度：</strong>
+              {example.complexity}
             </p>
           </article>
         ))
