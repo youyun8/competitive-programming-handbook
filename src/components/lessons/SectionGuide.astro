@@ -321,7 +321,6 @@ const sectionFocus: Record<string, string> = {
 
 const guide = chapterGuides[chapter.chapter]!;
 const focus = sectionFocus[section.id] ?? guide.model;
-const sourceFile = chapter.volume === 'upper' ? 'upper-volume' : 'lower-volume';
 const nextQuestions = section.topics.map((topic, index) => ({
   topic,
   question:
@@ -426,11 +425,6 @@ const nextQuestions = section.topics.map((topic, index) => ({
   <li>主題：{section.topics.join('、')}。</li>
   <li>先定義狀態與不變量，再選資料結構或演算法。</li>
   <li>複雜度要包含預處理、單次操作、總查詢數與記憶體。</li>
-  <li>
-    來源識別：{sourceFile}；書頁 {chapter.book_pages.join('–')}；PDF 頁 {
-      chapter.pdf_pages.join('–')
-    }。
-  </li>
 </ul>
 
 <style>

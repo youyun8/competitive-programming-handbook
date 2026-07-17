@@ -55,26 +55,10 @@ const next = allSections[currentIndex + 1];
           <AlgorithmVisualizer client:visible kind={lesson.data.visualizer} />
         )}
         <Content />
-        <aside class="callout">
-          <strong>來源追溯</strong>
-          <p>
-            來源識別為 {lesson.data.source_file}；參考範圍為書本第{' '}
-            {lesson.data.source_book_pages.join('–')} 頁、PDF 第{' '}
-            {lesson.data.source_pdf_pages.join('–')} 頁。
-          </p>
-        </aside>
       </>
     ) : (
       <>
         <SectionGuide chapter={chapter} section={section} />
-        <aside class="callout">
-          <strong>來源追溯</strong>
-          <p>
-            來源識別為 {chapter.volume === 'upper' ? 'upper-volume' : 'lower-volume'}
-            ；本節目前沿用章級範圍： 書本第 {chapter.book_pages.join('–')} 頁、PDF 第{' '}
-            {chapter.pdf_pages.join('–')} 頁。
-          </p>
-        </aside>
       </>
     )
   }
