@@ -1,9 +1,7 @@
 ---
-import textbookCatalog from '../../../data/textbook-items.json';
 import type { CurriculumChapter, CurriculumSection } from '@/lib/curriculum';
 import { chapterExerciseSolutions } from '@/lib/chapter-exercise-solutions';
 import { chapterWorkshops } from '@/lib/chapter-workshops';
-import { withBase } from '@/lib/site';
 
 interface Props {
   chapter: CurriculumChapter;
@@ -18,17 +16,6 @@ const exercises = [0, 1].map(
   (offset) => workshop.exercises[(sectionIndex * 2 + offset) % workshop.exercises.length]!
 );
 const normalizeTitle = (title: string) => title.replace(/\s+/g, '');
-const sectionKey = section.id.replace('.', '-');
-const exampleId = `example-${sectionKey}`;
-const catalogExample = textbookCatalog.items.find(
-  (item) =>
-    item.kind === 'example' &&
-    item.chapter === chapter.chapter &&
-    item.label === example.sourceLabel
-);
-const catalogTarget = catalogExample
-  ? `/textbook/#${catalogExample.id}`
-  : `/textbook/#chapter-${chapter.chapter}`;
 ---
 
 <section class="textbook-practice" aria-labelledby="textbook-practice-title">
@@ -37,9 +24,9 @@ const catalogTarget = catalogExample
     以下內容依本節主題「{section.topics.join('、')}」重新編寫；題意、推導與解答皆為本站原創整理。
   </p>
 
-  <article id={exampleId} class="card worked-example">
+  <article class="card worked-example">
     <p class="eyebrow">{example.sourceLabel} · 改寫導讀</p>
-    <h3><a href={`#${exampleId}`}>{example.title}</a></h3>
+    <h3>{example.title}</h3>
     <p>{example.setup}</p>
     <h4>參考解答</h4>
     <ol>
@@ -51,44 +38,30 @@ const catalogTarget = catalogExample
         example.sourceBookPages.join('、')
       } · PDF 頁 {example.sourcePdfPages.join('、')} · reviewed
     </p>
-    <p>
-      <a href={withBase(catalogTarget)}>查看教材目錄中的原始範例索引 →</a>
-    </p>
   </article>
 
   <div class="grid exercise-grid">
     {
-      exercises.map((exercise, exerciseIndex) => {
+      exercises.map((exercise) => {
         const solution = chapterExerciseSolutions[normalizeTitle(exercise.title)];
-        const exerciseId = `exercise-${sectionKey}-${exerciseIndex + 1}`;
         return (
-          <article id={exerciseId} class="card">
+          <article class="card">
             <span class="badge">{exercise.level}</span>
-            <h3>
-              <a href={`#${exerciseId}`}>{exercise.title}</a>
-            </h3>
+            <h3>{exercise.title}</h3>
             <p>{exercise.prompt}</p>
             <p class="meta">訓練重點：{exercise.focus}</p>
-            <p>
-              <a href={`#${exerciseId}`} aria-label={`${exercise.title}的永久連結`}>
-                題目連結
-              </a>
-            </p>
-            <details>
-              <summary>展開參考解答</summary>
-              {solution ? (
-                <>
-                  <h4>演算法</h4>
-                  <p>{solution.approach}</p>
-                  <h4>正確性</h4>
-                  <p>{solution.correctness}</p>
-                  <h4>複雜度</h4>
-                  <p>{solution.complexity}</p>
-                </>
-              ) : (
-                <p>先依「{exercise.focus}」建立不變量，再逐步驗證每次更新不會排除正確答案。</p>
-              )}
-            </details>
+            {solution ? (
+              <>
+                <h4>演算法</h4>
+                <p>{solution.approach}</p>
+                <h4>正確性</h4>
+                <p>{solution.correctness}</p>
+                <h4>複雜度</h4>
+                <p>{solution.complexity}</p>
+              </>
+            ) : (
+              <p>先依「{exercise.focus}」建立不變量，再逐步驗證每次更新不會排除正確答案。</p>
+            )}
           </article>
         );
       })
@@ -116,15 +89,11 @@ const catalogTarget = catalogExample
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
   }
 
-  details {
-    margin-top: 0.8rem;
-  }
-
-  details h4 {
+  .exercise-grid h4 {
     margin-bottom: 0.2rem;
   }
 
-  details p {
+  .exercise-grid article p {
     margin-top: 0.2rem;
   }
 </style>

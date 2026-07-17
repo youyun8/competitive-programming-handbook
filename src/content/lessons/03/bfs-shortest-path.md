@@ -117,6 +117,103 @@ std::vector<int> bfs_shortest_path(
 
 先以迷宮最短路徑建立路徑還原能力，再練習多源 BFS 求每個格子到最近障礙物的距離。進階可嘗試最少轉彎次數的變形 BFS。
 
+## 教材經典例題與 C++ 解答
+
+以下例題對應本章教材的 BFS 與 0-1 BFS 主題。題意皆為本站重新敘述，程式為獨立撰寫、可直接編譯的 C++17，讀完即得完整解法。
+
+### 例題一：網格無權最短路並還原路徑
+
+在一張 `#` 為障礙、`.` 為可走的網格上，求從左上角走到右下角的最少步數，並還原一條最短路徑。BFS 按距離逐層展開，節點第一次入隊時就是最短距離；同時記錄 `parent`，最後沿 `parent` 反推即可還原路徑。時間 O(rows·cols)。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// 網格無權最短路：BFS 求最短步數並還原一條路徑。
+int main() {
+    int rows, cols;
+    if (!(cin >> rows >> cols)) return 0;
+    vector<string> grid(rows);
+    for (string& row : grid) cin >> row;
+    int start = 0, goal = rows * cols - 1;
+    vector<int> distance(rows * cols, -1), parent(rows * cols, -1);
+    queue<int> frontier;
+    distance[start] = 0;
+    frontier.push(start);
+    const int dr[] = {-1, 1, 0, 0};
+    const int dc[] = {0, 0, -1, 1};
+    while (!frontier.empty()) {
+        int cell = frontier.front();
+        frontier.pop();
+        int r = cell / cols, c = cell % cols;
+        for (int k = 0; k < 4; ++k) {
+            int nr = r + dr[k], nc = c + dc[k];
+            if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) continue;
+            if (grid[nr][nc] == '#') continue;
+            int next = nr * cols + nc;
+            if (distance[next] != -1) continue;
+            distance[next] = distance[cell] + 1;
+            parent[next] = cell;
+            frontier.push(next);
+        }
+    }
+    if (distance[goal] == -1) {
+        cout << "-1\n";
+        return 0;
+    }
+    cout << distance[goal] << '\n';
+    vector<int> path;
+    for (int cell = goal; cell != -1; cell = parent[cell]) path.push_back(cell);
+    reverse(path.begin(), path.end());
+    for (size_t i = 0; i < path.size(); ++i)
+        cout << '(' << path[i] / cols << ',' << path[i] % cols << ')' << " \n"[i + 1 == path.size()];
+    return 0;
+}
+```
+
+對 3×3 網格 `... / .#. / ...` 會輸出步數 `4` 與一條路徑 `(0,0) (1,0) (2,0) (2,1) (2,2)`。
+
+### 例題二：0-1 BFS
+
+當圖的邊權只有 0 或 1 時，不必動用 Dijkstra：改用雙端佇列，鬆弛出的 0 權節點放前端、1 權節點放後端，佇列中的距離就保持非遞減，等價於這個特例上的 Dijkstra。時間 O(V + E)。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// 0-1 BFS：邊權只有 0 或 1 的單源最短路，用 deque 維持距離非遞減。
+int main() {
+    int n, m, source;
+    if (!(cin >> n >> m >> source)) return 0;
+    vector<vector<pair<int, int>>> adjacency(n);  // (to, weight in {0,1})
+    for (int i = 0; i < m; ++i) {
+        int u, v, w;
+        cin >> u >> v >> w;
+        adjacency[u].push_back({v, w});
+    }
+    vector<int> distance(n, INT_MAX);
+    deque<int> frontier;
+    distance[source] = 0;
+    frontier.push_back(source);
+    while (!frontier.empty()) {
+        int u = frontier.front();
+        frontier.pop_front();
+        for (auto [v, w] : adjacency[u]) {
+            if (distance[u] + w < distance[v]) {
+                distance[v] = distance[u] + w;
+                if (w == 0) frontier.push_front(v);
+                else frontier.push_back(v);
+            }
+        }
+    }
+    for (int i = 0; i < n; ++i)
+        cout << (distance[i] == INT_MAX ? -1 : distance[i]) << " \n"[i + 1 == n];
+    return 0;
+}
+```
+
+四個節點、邊 `0→1(1)`、`1→2(0)`、`0→2(1)`、`2→3(1)`，從 0 出發的距離是 `0 1 1 2`：走 `0→1→2` 用一條 1 權加一條 0 權，與 `0→2` 同為 1。
+
 ## 本節重點速查
 
 BFS 求無權最短路徑；入隊時設 distance 與 predecessor；記得檢查 target 是否可達；多源 BFS 要同時初始化所有起點。

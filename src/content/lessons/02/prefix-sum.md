@@ -107,6 +107,73 @@ public:
 
 先練習一維區間和查詢與差分區間加值，再挑戰二維子矩陣和最大值的枚舉。進階可試以三維前綴和解決空間立方體求和。
 
+## 教材經典例題與 C++ 解答
+
+以下例題對應本章教材的前綴和與差分主題。題意皆為本站重新敘述，程式為獨立撰寫、可直接編譯的 C++17，讀完即得完整解法。
+
+### 例題一：一維靜態區間和
+
+給定一個長度為 `n` 的序列與大量詢問，每次詢問區間 `[l, r]`（1-based、含端點）的元素和。先預處理前綴和 `prefix[i] = prefix[i-1] + a[i]`，之後每次查詢就是 `prefix[r] - prefix[l-1]`。預處理 O(n)，單次查詢 O(1)。累加可能溢位，用 `long long`。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// 一維前綴和：O(1) 回答任意區間 [l, r] 的和（1-based, 含端點）。
+int main() {
+    int n, q;
+    if (!(cin >> n >> q)) return 0;
+    vector<long long> prefix(n + 1, 0);
+    for (int i = 1; i <= n; ++i) {
+        long long value;
+        cin >> value;
+        prefix[i] = prefix[i - 1] + value;
+    }
+    while (q--) {
+        int l, r;
+        cin >> l >> r;
+        cout << prefix[r] - prefix[l - 1] << '\n';
+    }
+    return 0;
+}
+```
+
+輸入序列 `1 2 3 4 5`，查詢 `[1,3]` 得 `6`、`[2,5]` 得 `14`。
+
+### 例題二：二維矩形批次加值
+
+在 `n×m` 網格上執行多次「矩形加值」，最後輸出整張網格。用二維差分：每次矩形 `[(r1,c1),(r2,c2)]` 加 `d` 只更新四個角點，把單次修改壓到 O(1)；所有操作完成後做一次二維前綴還原。總成本 O(n·m + 操作數)，而輸出本身就需要 O(n·m)。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// 二維差分：多次矩形加值後輸出整張網格。單次修改 O(1)，最後還原 O(n*m)。
+int main() {
+    int n, m, ops;
+    if (!(cin >> n >> m >> ops)) return 0;
+    vector<vector<long long>> diff(n + 2, vector<long long>(m + 2, 0));
+    while (ops--) {
+        int r1, c1, r2, c2;
+        long long d;
+        cin >> r1 >> c1 >> r2 >> c2 >> d;
+        diff[r1][c1] += d;
+        diff[r1][c2 + 1] -= d;
+        diff[r2 + 1][c1] -= d;
+        diff[r2 + 1][c2 + 1] += d;
+    }
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j <= m; ++j) {
+            diff[i][j] += diff[i - 1][j] + diff[i][j - 1] - diff[i - 1][j - 1];
+            cout << diff[i][j] << " \n"[j == m];
+        }
+    }
+    return 0;
+}
+```
+
+在 3×3 網格上先對 `[(1,1),(2,2)]` 加 1、再對 `[(2,2),(3,3)]` 加 2，輸出會是 `1 1 0 / 1 3 2 / 0 2 2`，中央格因兩次矩形重疊而累加。差分的角點加減互為容斥，是「先修改、最後一次查詢」情境最簡潔的作法。
+
 ## 本節重點速查
 
 前綴和把區間求和變兩點相減；差分把區間加法變兩點單點修改；二維公式四項加減、三維八項；注意 long long。

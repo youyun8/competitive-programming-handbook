@@ -107,6 +107,96 @@ long long modular_power(long long base, long long exponent, long long modulus) {
 
 先算模冪，再做矩陣 Fibonacci，最後做快速套用置換或線性轉移。
 
+## 教材經典例題與 C++ 解答
+
+以下例題對應本章教材的快速冪與擴展歐幾里得主題。題意皆為本站重新敘述，程式為獨立撰寫、可直接編譯的 C++17，讀完即得完整解法。
+
+### 例題一：模快速冪
+
+計算 `base^exponent mod modulus`，並容許負底數。快速冪維持不變量「已累積答案 × 剩餘基底效果」：指數為奇數時把當前基底乘入答案，之後基底平方、指數右移。中間乘積可能溢位，這裡用逐位相加的 `multiply_mod` 取代 `__int128`，時間 O(log exponent)。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// 位元加法版的模乘，避免中間值溢位（不依賴 __int128）。
+static long long multiply_mod(long long left, long long right, long long modulus) {
+    unsigned long long a = static_cast<unsigned long long>(left % modulus);
+    unsigned long long b = static_cast<unsigned long long>(right % modulus);
+    unsigned long long m = static_cast<unsigned long long>(modulus);
+    unsigned long long result = 0;
+    while (b > 0) {
+        if ((b & 1ULL) != 0ULL) result = (result + a) % m;
+        a = (a + a) % m;
+        b >>= 1ULL;
+    }
+    return static_cast<long long>(result);
+}
+
+// 模快速冪：計算 base^exponent mod modulus，支援負底數。
+static long long modular_power(long long base, long long exponent, long long modulus) {
+    long long result = 1 % modulus;
+    base %= modulus;
+    if (base < 0) base += modulus;
+    while (exponent > 0) {
+        if ((exponent & 1LL) != 0) result = multiply_mod(result, base, modulus);
+        base = multiply_mod(base, base, modulus);
+        exponent >>= 1;
+    }
+    return result;
+}
+
+int main() {
+    long long base, exponent, modulus;
+    if (!(cin >> base >> exponent >> modulus)) return 0;
+    cout << modular_power(base, exponent, modulus) << '\n';
+    return 0;
+}
+```
+
+輸入 `2 10 1000000007` 得 `1024`；輸入 `-2 3 1000` 得 `992`（即 -8 對 1000 取模後的非負值）。
+
+### 例題二：擴展歐幾里得與線性同餘
+
+解一次同餘方程 `a·x ≡ b (mod m)`。把它改寫成 `a·x + m·y = b`，用擴展歐幾里得求 `g = gcd(a, m)` 與一組係數：若 `g` 不整除 `b` 則無解，否則縮放係數並對 `m/g` 正規化，得到最小非負解。時間 O(log min(a, m))。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// 擴展歐幾里得：回傳 gcd(a,b) 並求出 a*x + b*y = gcd 的一組係數。
+static long long extended_gcd(long long a, long long b, long long& x, long long& y) {
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    }
+    long long x1, y1;
+    long long g = extended_gcd(b, a % b, x1, y1);
+    x = y1;
+    y = x1 - (a / b) * y1;
+    return g;
+}
+
+// 解 a*x ≡ b (mod m)，回傳最小非負解或回報無解。
+int main() {
+    long long a, b, m;
+    if (!(cin >> a >> b >> m)) return 0;
+    long long x, y;
+    long long g = extended_gcd(a, m, x, y);
+    if (b % g != 0) {
+        cout << "no solution\n";
+        return 0;
+    }
+    long long modulus = m / g;
+    long long solution = ((x * (b / g)) % modulus + modulus) % modulus;
+    cout << solution << '\n';
+    return 0;
+}
+```
+
+`14·x ≡ 30 (mod 100)`：`gcd(14,100)=2` 整除 30，最小非負解為 `45`。而 `2·x ≡ 3 (mod 4)` 因 `gcd(2,4)=2` 不整除 3，輸出 `no solution`。
+
 ## 本節重點速查
 
 不變量是 `result × base^exponent`；注意乘法中間值；模除法需要逆元。

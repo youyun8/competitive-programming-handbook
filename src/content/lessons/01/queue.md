@@ -102,6 +102,105 @@ std::vector<int> sliding_window_max(const std::vector<int>& values, int window_s
 
 先實作循環佇列模擬快取，再用單調佇列解決滑動視窗最大值，最後練習優先佇列合併多個有序串流。
 
+## 教材經典例題與 C++ 解答
+
+以下例題對應本章教材的單調佇列與循環佇列主題。題意皆為本站重新敘述，程式為獨立撰寫、可直接編譯的 C++17，讀完即得完整解法，不必再點連結轉來轉去。
+
+### 例題一：滑動窗口的最小值與最大值
+
+窗口長度固定為 `k`，由左向右移動；對每個窗口同時輸出其中的最小值與最大值。維護兩個保存「索引」的單調雙端佇列：一個值遞增（隊首是最小值），一個值遞減（隊首是最大值）。加入新元素前先從隊尾刪掉被它支配的舊索引，再從隊首丟掉已離開窗口的索引。每個索引最多進出各一次，總時間 O(n)。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// 對每個長度 k 的窗口同時輸出最小值與最大值（單調佇列，總時間 O(n)）。
+static void sliding_window_extremes(const vector<int>& a, int k,
+                                    vector<int>& mins, vector<int>& maxs) {
+    deque<int> increasing;  // index，值遞增，隊首為最小值
+    deque<int> decreasing;  // index，值遞減，隊首為最大值
+    for (int i = 0; i < static_cast<int>(a.size()); ++i) {
+        while (!increasing.empty() && a[increasing.back()] >= a[i]) increasing.pop_back();
+        increasing.push_back(i);
+        while (!decreasing.empty() && a[decreasing.back()] <= a[i]) decreasing.pop_back();
+        decreasing.push_back(i);
+        if (increasing.front() <= i - k) increasing.pop_front();
+        if (decreasing.front() <= i - k) decreasing.pop_front();
+        if (i >= k - 1) {
+            mins.push_back(a[increasing.front()]);
+            maxs.push_back(a[decreasing.front()]);
+        }
+    }
+}
+
+int main() {
+    int n, k;
+    if (!(cin >> n >> k)) return 0;
+    vector<int> a(n);
+    for (int& value : a) cin >> value;
+    vector<int> mins, maxs;
+    sliding_window_extremes(a, k, mins, maxs);
+    for (size_t i = 0; i < mins.size(); ++i) cout << mins[i] << " \n"[i + 1 == mins.size()];
+    for (size_t i = 0; i < maxs.size(); ++i) cout << maxs[i] << " \n"[i + 1 == maxs.size()];
+    return 0;
+}
+```
+
+輸入 `8 3` 與 `1 3 -1 -3 5 3 6 7`，會先輸出各窗口最小值 `-1 -3 -3 -3 3 3`，再輸出最大值 `3 3 5 5 6 7`。
+
+### 例題二：循環佇列
+
+用固定大小的陣列實作 `push`、`pop`、`front`、`size`，並正確處理索引繞回。關鍵是多配置一格：`head == tail` 代表空，`(tail + 1) % size == head` 代表滿，如此空與滿才有不同的表示，不會混淆。每個操作都是 O(1)。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// 以固定大小陣列實作循環佇列，保留一格分辨空與滿。
+class CircularQueue {
+public:
+    explicit CircularQueue(int capacity)
+        : buffer_(static_cast<size_t>(capacity) + 1), head_(0), tail_(0) {}
+    bool empty() const { return head_ == tail_; }
+    bool full() const { return (tail_ + 1) % buffer_.size() == head_; }
+    int size() const {
+        return static_cast<int>((tail_ + buffer_.size() - head_) % buffer_.size());
+    }
+    bool push(int value) {
+        if (full()) return false;
+        buffer_[tail_] = value;
+        tail_ = (tail_ + 1) % buffer_.size();
+        return true;
+    }
+    bool pop() {
+        if (empty()) return false;
+        head_ = (head_ + 1) % buffer_.size();
+        return true;
+    }
+    int front() const { return buffer_[head_]; }
+
+private:
+    vector<int> buffer_;
+    size_t head_;
+    size_t tail_;
+};
+
+int main() {
+    CircularQueue queue(3);
+    queue.push(1);
+    queue.push(2);
+    queue.push(3);
+    cout << queue.push(4) << '\n';   // 已滿，輸出 0
+    cout << queue.front() << '\n';   // 1
+    queue.pop();
+    queue.push(4);                   // 現在有空位
+    cout << queue.size() << '\n';    // 3
+    return 0;
+}
+```
+
+程式會依序輸出 `0`（滿載時 push 失敗）、`1`（隊首）、`3`（pop 後再 push 仍有三個元素）。保留一格是分辨空與滿最簡潔的作法。
+
 ## 本節重點速查
 
 佇列變形關鍵在於「哪端進、哪端出」與「是否維護單調性」；單調佇列用雙端佇列維護，過期清頭、無用清尾、保證均攤線性。

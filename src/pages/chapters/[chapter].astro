@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import textbookCatalog from '../../../data/textbook-items.json';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { chapterWorkshops } from '@/lib/chapter-workshops';
 import { curriculum, sectionSlug } from '@/lib/curriculum';
@@ -17,9 +16,6 @@ const { chapter } = Astro.props;
 const lessons = await getCollection('lessons');
 const exercises = await getCollection('exercises');
 const workshop = chapterWorkshops[chapter.chapter]!;
-const textbookItems = textbookCatalog.items.filter((item) => item.chapter === chapter.chapter);
-const textbookExampleCount = textbookItems.filter((item) => item.kind === 'example').length;
-const textbookExerciseCount = textbookItems.filter((item) => item.kind === 'exercise').length;
 ---
 
 <BaseLayout title={`第 ${chapter.chapter} 章 ${chapter.title}`} wide>
@@ -41,11 +37,6 @@ const textbookExerciseCount = textbookItems.filter((item) => item.kind === 'exer
       >{exercises.filter((item) => item.data.chapter === chapter.chapter).length} 道已發布練習</span
     >
   </div>
-  <p>
-    <a class="button secondary" href={withBase(`/textbook/#chapter-${chapter.chapter}`)}>
-      查看本章全部 {textbookExampleCount} 個教材範例與 {textbookExerciseCount} 個習題
-    </a>
-  </p>
   <ul class="section-list">
     {
       chapter.sections.map((section) => {
