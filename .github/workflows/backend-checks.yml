@@ -27,6 +27,8 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm validate:content
+      - name: Install Boost headers for C++ validation
+        run: sudo apt-get update && sudo apt-get install -y libboost-dev
       - run: pnpm validate:cpp
       - run: pnpm validate:secrets
       - run: pnpm build
@@ -49,7 +51,7 @@ jobs:
         run: psql postgresql://postgres:postgres@127.0.0.1:54322/postgres -f tests/rls/rls.sql
       - name: Type-check Edge Functions
         run: >-
-          deno check
+          deno check --node-modules-dir=none
           supabase/functions/sync-progress/index.ts
           supabase/functions/account-data/index.ts
       - name: Stop local Supabase
