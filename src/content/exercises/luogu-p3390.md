@@ -1,0 +1,152 @@
+---
+id: luogu-p3390
+volume: lower
+source_file: lower-volume
+title: 洛谷 P3390 矩陣快速冪：把遞推壓成 O(log k)
+chapter: 6
+section: '6.3'
+kind: external-oj
+difficulty: 3
+topics: ['矩陣快速冪', '快速冪', '矩陣乘法']
+prerequisites: ['matrix-exponentiation', 'fast-power']
+statement: |-
+  給定一個 n×n 的矩陣 A 與指數 k，求 A^k，每個元素對 10^9+7 取模。
+  本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
+constraints:
+  - 'k 可以大到 10^12，不能逐次相乘'
+  - '矩陣元素相乘會超過 32 位元，需用 long long'
+  - '完整限制條件請參閱外部題目頁面'
+input_format: '第一行兩個整數 n 與 k；接下來 n 行，每行 n 個整數表示矩陣 A。'
+output_format: '輸出 n 行，每行 n 個整數，表示 A^k 的每個元素對 10^9+7 取模的結果。'
+samples:
+  - input: |
+      2 3
+      1 1
+      1 0
+    output: |
+      3 2
+      2 1
+    explanation: |-
+      這是費波那契的轉移矩陣，立方後左上角是 F(4)=3、右上與左下是 F(3)=2、右下是 F(2)=1。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+hints:
+  - |-
+    整數快速冪把 a^k 拆成 k 的二進位：某位為 1 就把當前的 a 乘進答案，每輪把 a 平方。矩陣快速冪一模一樣，只是「乘法」換成矩陣乘法。
+  - |-
+    快速冪能成立只需要兩個性質：乘法**結合律**，以及存在**單位元**。矩陣乘法兩者皆有——單位元就是單位矩陣（對角線為 1）。所以初始答案要設成單位矩陣，而不是零矩陣；k = 0 時答案正是它。
+  - |-
+    矩陣乘法的三層迴圈裡，`a[i][k] * b[k][j]` 兩個乘數都可能接近 10^9，乘積接近 10^18，必須用 long long 承接後再取模。
+  - |-
+    把迴圈順序寫成 i-k-j（而不是 i-j-k）能讓記憶體存取連續，還能在 `a[i][k] == 0` 時直接跳過一整列，實測快不少。
+  - |-
+    這題本身是模板，真正的用途是加速線性遞推：把遞推式寫成向量乘轉移矩陣，n 項遞推就能在 O(n³ log k) 內求出第 k 項。費波那契的轉移矩陣就是本範例的 [[1,1],[1,0]]。
+solution_outline: |-
+  實作矩陣乘法（中間值用 long long，逐項取模），再把整數快速冪的框架照搬：答案初始化為單位矩陣，掃 k 的二進位，該位為 1 就把當前底數乘進答案，每輪底數平方。共 O(log k) 次矩陣乘法。
+proof_or_invariant: |-
+  快速冪的正確性只依賴結合律與單位元。迴圈不變量是「result × base^(剩餘的 k) 恆等於原始的 A^k」：每次把最低位處理掉時，若該位為 1 就把 base 併入 result，然後 base 平方、k 右移，等式兩邊仍相等。k 減到 0 時 result 即為答案。
+complexity:
+  time: 'O(n³ log k)'
+  space: 'O(n²)'
+cpp_skeleton: |
+  #include <bits/stdc++.h>
+  using namespace std;
+
+  static const long long kMod = 1000000007;
+  using Matrix = vector<vector<long long>>;
+
+  // 已備好：矩陣乘法。中間值用 long long 承接後再取模。
+  static Matrix multiply(const Matrix& a, const Matrix& b) {
+      const size_t n = a.size();
+      Matrix result(n, vector<long long>(n, 0));
+      for (size_t i = 0; i < n; ++i) {
+          for (size_t k = 0; k < n; ++k) {
+              if (a[i][k] == 0) { continue; }
+              for (size_t j = 0; j < n; ++j) {
+                  result[i][j] = (result[i][j] + a[i][k] * b[k][j]) % kMod;
+              }
+          }
+      }
+      return result;
+  }
+
+  int main() {
+      ios::sync_with_stdio(false);
+      cin.tie(nullptr);
+      long long n, k;
+      if (!(cin >> n >> k)) { return 0; }
+      const size_t size = static_cast<size_t>(n);
+      Matrix base(size, vector<long long>(size));
+      for (size_t i = 0; i < size; ++i) {
+          for (size_t j = 0; j < size; ++j) { cin >> base[i][j]; base[i][j] %= kMod; }
+      }
+
+      // 單位矩陣是矩陣乘法的單位元，就像整數快速冪裡的 1；k = 0 時答案就是它。
+      Matrix result(size, vector<long long>(size, 0));
+      for (size_t i = 0; i < size; ++i) { result[i][i] = 1; }
+
+      // TODO：把這個乘 k 次的迴圈換成快速冪。
+      //   k 的二進位某位為 1 時，把當前的 base 乘進 result；
+      //   每輪把 base 平方、k 右移一位，總共只需 O(log k) 次矩陣乘法。
+      //   k 可以大到 10^12，乘 k 次一定超時。
+      for (long long step = 0; step < k; ++step) { result = multiply(result, base); }
+
+      for (size_t i = 0; i < size; ++i) {
+          for (size_t j = 0; j < size; ++j) { cout << result[i][j] << " \n"[j + 1 == size]; }
+      }
+      return 0;
+  }
+cpp_solution: |
+  #include <bits/stdc++.h>
+  using namespace std;
+
+  static const long long kMod = 1000000007;
+
+  using Matrix = vector<vector<long long>>;
+
+  static Matrix multiply(const Matrix& a, const Matrix& b) {
+      const size_t n = a.size();
+      Matrix result(n, vector<long long>(n, 0));
+      for (size_t i = 0; i < n; ++i) {
+          for (size_t k = 0; k < n; ++k) {
+              if (a[i][k] == 0) { continue; }  // 稀疏時省下一整列乘法
+              for (size_t j = 0; j < n; ++j) {
+                  result[i][j] = (result[i][j] + a[i][k] * b[k][j]) % kMod;
+              }
+          }
+      }
+      return result;
+  }
+
+  int main() {
+      ios::sync_with_stdio(false);
+      cin.tie(nullptr);
+      long long n, k;
+      if (!(cin >> n >> k)) { return 0; }
+      const size_t size = static_cast<size_t>(n);
+      Matrix base(size, vector<long long>(size));
+      for (size_t i = 0; i < size; ++i) {
+          for (size_t j = 0; j < size; ++j) { cin >> base[i][j]; base[i][j] %= kMod; }
+      }
+      // 單位矩陣是矩陣乘法的單位元，等同於快速冪裡的 1。
+      Matrix result(size, vector<long long>(size, 0));
+      for (size_t i = 0; i < size; ++i) { result[i][i] = 1; }
+      while (k > 0) {
+          if (k & 1) { result = multiply(result, base); }
+          base = multiply(base, base);
+          k >>= 1;
+      }
+      for (size_t i = 0; i < size; ++i) {
+          for (size_t j = 0; j < size; ++j) { cout << result[i][j] << " \n"[j + 1 == size]; }
+      }
+      return 0;
+  }
+external_url: https://www.luogu.com.cn/problem/P3390
+external_platform: 洛谷
+external_problem_id: P3390
+external_title: '【模板】矩陣快速冪'
+external_relation: original
+source_book_pages: [390, 396]
+source_pdf_pages: [20, 26]
+review_status: verified
+---
+
+矩陣快速冪是把「線性遞推」加速到對數級的通用武器。先確認你的遞推能寫成矩陣形式，剩下的就是模板。
