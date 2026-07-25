@@ -1185,6 +1185,58 @@ summary {
   }
 }
 
+.problem-chapter {
+  margin-top: 2.4rem;
+}
+
+.problem-section {
+  margin-top: 1.4rem;
+}
+
+.problem-section h3 {
+  margin-bottom: 0.5rem;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+}
+
+.problem-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.problem-table th,
+.problem-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.45rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.problem-table thead th {
+  background: var(--surface-muted);
+  font-size: 0.82rem;
+}
+
+.problem-table tbody tr:last-child th,
+.problem-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.problem-table td.nowrap {
+  white-space: nowrap;
+}
+
+.badge.example {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
