@@ -82,6 +82,7 @@ const exercises = defineCollection({
       time: z.string().min(1),
       space: z.string().min(1)
     }),
+    cpp_skeleton: z.string().optional(),
     cpp_solution: z.string().optional(),
     external_url: z.url().optional(),
     external_platform: z.string().optional(),
