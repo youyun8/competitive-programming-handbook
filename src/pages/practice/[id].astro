@@ -105,6 +105,17 @@ const { Content } = await render(exercise);
         </details>
       ))
     }
+    {
+      exercise.data.cpp_skeleton && (
+        <>
+          <>
+            <h2>C++ 起手骨架</h2>
+            <p>骨架已處理輸入輸出與資料結構宣告，核心邏輯留給你補上；可直接編譯，先跑通流程再想演算法。</p>
+            <Code code={exercise.data.cpp_skeleton} lang="cpp" theme="github-dark-default" />
+          </>
+        </>
+      )
+    }
     <details>
       <summary>解答與證明（預設收合）</summary>
       <h3>解法概要</h3><p>{exercise.data.solution_outline}</p>

@@ -20,6 +20,9 @@ for (const path of fg.sync('src/content/lessons/**/*.{md,mdx}')) {
 
 for (const path of fg.sync('src/content/exercises/**/*.{md,mdx}')) {
   const { data } = readFrontmatter(path);
+  if (data.cpp_skeleton) {
+    sources.push({ name: `${basename(path)}-skeleton`, code: data.cpp_skeleton });
+  }
   if (data.cpp_solution) {
     sources.push({
       name: `${basename(path)}-solution`,
