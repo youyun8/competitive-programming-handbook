@@ -1,0 +1,58 @@
+---
+import { getCollection, render } from 'astro:content';
+import AlgorithmVisualizer from '@/components/visualizers/AlgorithmVisualizer';
+import ProgressActions from '@/components/progress/ProgressActions';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { chapterByNumber, sectionById, sectionSlug } from '@/lib/curriculum';
+import { withBase } from '@/lib/site';
+
+// 一個小節可以有多篇深度教學，但小節頁只內嵌第一篇。這條路由讓每篇教學
+// 都有自己的穩定網址，其餘各篇才不會變成連不到的內容。
+export async function getStaticPaths() {
+  const lessons = await getCollection('lessons');
+  return lessons.map((lesson) => ({ params: { id: lesson.data.id }, props: { lesson } }));
+}
+
+const { lesson } = Astro.props;
+const { Content } = await render(lesson);
+const chapter = chapterByNumber(lesson.data.chapter);
+const section = sectionById(lesson.data.section);
+---
+
+<BaseLayout title={lesson.data.title}>
+  <nav class="breadcrumb" aria-label="麵包屑">
+    <a href={withBase('/')}>總覽</a><span aria-hidden="true">/</span><a
+      href={withBase(`/chapters/${lesson.data.chapter}/`)}>第 {lesson.data.chapter} 章</a
+    >{
+      section && (
+        <>
+          <span aria-hidden="true">/</span>
+          <a href={withBase(`/lessons/${sectionSlug(section)}/`)}>
+            {section.id} {section.title}
+          </a>
+        </>
+      )
+    }<span aria-hidden="true">/</span><span>{lesson.data.title}</span>
+  </nav>
+  <p class="eyebrow">Lesson {lesson.data.section}</p>
+  <h1>{lesson.data.title}</h1>
+  <p class="lede">{lesson.data.summary}</p>
+  <div class="meta">
+    <span>{lesson.data.volume === 'upper' ? '上冊' : '下冊'}</span>
+    <span>書頁 {lesson.data.source_book_pages.join('–')}</span>
+    <span>PDF 頁 {lesson.data.source_pdf_pages.join('–')}</span>
+    <span class="badge verified">深度教學</span>
+  </div>
+  <ProgressActions client:load lessonId={lesson.data.id} />
+  {lesson.data.visualizer && <AlgorithmVisualizer client:visible kind={lesson.data.visualizer} />}
+  <Content />
+  {
+    chapter && section && (
+      <nav class="page-actions" aria-label="回到小節">
+        <a class="button secondary" href={withBase(`/lessons/${sectionSlug(section)}/`)}>
+          ← 回到 {section.id} {section.title}
+        </a>
+      </nav>
+    )
+  }
+</BaseLayout>
