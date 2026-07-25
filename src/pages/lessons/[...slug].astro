@@ -12,16 +12,22 @@ export async function getStaticPaths() {
   const entries = await getCollection('lessons');
   return curriculum.chapters.flatMap((chapter) =>
     chapter.sections.map((section) => {
-      const lesson = entries.find((item) => item.data.section === section.id);
+      // 一個小節可能有多篇深度教學。以小節的正規 slug 選出主課程（例如 4.3 對應
+      // segment-tree），其餘列成連結，由 /lessons/topic/[id] 各自成頁；這樣既不會有
+      // 連不到的內容，新增教學也不會因為檔名排序而擠掉原本的主課程。
+      const slug = sectionSlug(section);
+      const sectionLessons = entries.filter((item) => item.data.section === section.id);
+      const lesson = sectionLessons.find((item) => item.data.id === slug) ?? sectionLessons[0];
+      const siblings = sectionLessons.filter((item) => item.data.id !== lesson?.data.id);
       return {
-        params: { slug: sectionSlug(section) },
-        props: { chapter, section, lesson }
+        params: { slug },
+        props: { chapter, section, lesson, siblings }
       };
     })
   );
 }
 
-const { chapter, section, lesson } = Astro.props;
+const { chapter, section, lesson, siblings } = Astro.props;
 const rendered = lesson ? await render(lesson) : null;
 const Content = rendered?.Content;
 const allSections = curriculum.chapters.flatMap((item) =>
@@ -58,6 +64,22 @@ const next = allSections[currentIndex + 1];
       <>
         <SectionGuide chapter={chapter} section={section} />
       </>
+    )
+  }
+  {
+    siblings.length > 0 && (
+      <section class="card">
+        <h2>本節其他深度主題</h2>
+        <p>這一節還有以下獨立教學，各自有完整模板、複雜度分析與可編譯的 C++17 解答。</p>
+        <ul>
+          {siblings.map((item) => (
+            <li>
+              <a href={withBase(`/lessons/topic/${item.data.id}/`)}>{item.data.title}</a>
+              <span class="meta"> — {item.data.summary}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
     )
   }
   <TextbookPractice chapter={chapter} section={section} />
