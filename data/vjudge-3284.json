@@ -901,9 +901,9 @@
       "platform": "Luogu",
       "platform_label": "洛谷",
       "problem_id": "P1883",
-      "title": "三分 / 函数 / [ICPC",
-      "solved": 2010,
-      "contest_source": "Chengdu R] Error Curves",
+      "title": "三分 / 函数 / [ICPC 2010 Chengdu R] Error Curves",
+      "solved": null,
+      "contest_source": "",
       "url": "https://www.luogu.com.cn/problem/P1883"
     },
     {
@@ -1111,7 +1111,7 @@
       "platform": "Luogu",
       "platform_label": "洛谷",
       "problem_id": "P5012",
-      "title": "水   数列",
+      "title": "水 数列",
       "solved": 881,
       "contest_source": "",
       "url": "https://www.luogu.com.cn/problem/P5012"
@@ -1411,9 +1411,9 @@
       "platform": "Luogu",
       "platform_label": "洛谷",
       "problem_id": "P2097",
-      "title": "资料分发",
-      "solved": 1,
-      "contest_source": "9724",
+      "title": "资料分发 1",
+      "solved": 9724,
+      "contest_source": "",
       "url": "https://www.luogu.com.cn/problem/P2097"
     },
     {
@@ -3301,9 +3301,9 @@
       "platform": "Luogu",
       "platform_label": "洛谷",
       "problem_id": "P3372",
-      "title": "线段树",
-      "solved": 1,
-      "contest_source": "259480 模板",
+      "title": "线段树 1",
+      "solved": 259480,
+      "contest_source": "模板",
       "url": "https://www.luogu.com.cn/problem/P3372"
     },
     {
@@ -3526,9 +3526,9 @@
       "platform": "Luogu",
       "platform_label": "洛谷",
       "problem_id": "P3374",
-      "title": "树状数组",
-      "solved": 1,
-      "contest_source": "159072 模板",
+      "title": "树状数组 1",
+      "solved": 159072,
+      "contest_source": "模板",
       "url": "https://www.luogu.com.cn/problem/P3374"
     },
     {
@@ -3541,9 +3541,9 @@
       "platform": "Luogu",
       "platform_label": "洛谷",
       "problem_id": "P3368",
-      "title": "树状数组",
-      "solved": 2,
-      "contest_source": "101388 模板",
+      "title": "树状数组 2",
+      "solved": 101388,
+      "contest_source": "模板",
       "url": "https://www.luogu.com.cn/problem/P3368"
     },
     {
@@ -4276,9 +4276,9 @@
       "platform": "Luogu",
       "platform_label": "洛谷",
       "problem_id": "P3373",
-      "title": "线段树",
-      "solved": 2,
-      "contest_source": "110823 模板",
+      "title": "线段树 2",
+      "solved": 110823,
+      "contest_source": "模板",
       "url": "https://www.luogu.com.cn/problem/P3373"
     },
     {
@@ -4501,9 +4501,9 @@
       "platform": "Luogu",
       "platform_label": "洛谷",
       "problem_id": "P3834",
-      "title": "可持久化线段树",
-      "solved": 2,
-      "contest_source": "63448 模板",
+      "title": "可持久化线段树 2",
+      "solved": 63448,
+      "contest_source": "模板",
       "url": "https://www.luogu.com.cn/problem/P3834"
     },
     {
@@ -4681,9 +4681,9 @@
       "platform": "Luogu",
       "platform_label": "洛谷",
       "problem_id": "P3834",
-      "title": "可持久化线段树",
-      "solved": 2,
-      "contest_source": "63448 模板",
+      "title": "可持久化线段树 2",
+      "solved": 63448,
+      "contest_source": "模板",
       "url": "https://www.luogu.com.cn/problem/P3834"
     },
     {
@@ -7471,9 +7471,9 @@
       "platform": "CodeForces",
       "platform_label": "Codeforces",
       "problem_id": "1199F",
-      "title": "Rectangle Painting",
-      "solved": 1,
-      "contest_source": "147 Codeforces Round 576 (D",
+      "title": "Rectangle Painting 1",
+      "solved": 147,
+      "contest_source": "Codeforces Round 576 (D",
       "url": "https://codeforces.com/problemset/problem/1199/F"
     },
     {
@@ -9871,9 +9871,9 @@
       "platform": "Luogu",
       "platform_label": "洛谷",
       "problem_id": "P5431",
-      "title": "模意义下的乘法逆元",
-      "solved": 2,
-      "contest_source": "14784 模板",
+      "title": "模意义下的乘法逆元 2",
+      "solved": 14784,
+      "contest_source": "模板",
       "url": "https://www.luogu.com.cn/problem/P5431"
     },
     {
@@ -12181,7 +12181,7 @@
       "platform": "Luogu",
       "platform_label": "洛谷",
       "problem_id": "P9335",
-      "title": "雪   咲   花",
+      "title": "雪 咲 花",
       "solved": 599,
       "contest_source": "Ynoi2001",
       "url": "https://www.luogu.com.cn/problem/P9335"
@@ -12301,9 +12301,9 @@
       "platform": "Luogu",
       "platform_label": "洛谷",
       "problem_id": "P8164",
-      "title": "沙堡",
-      "solved": 2,
-      "contest_source": "/ Sandcastle 2          227 JOI 2022 Final",
+      "title": "沙堡 2 / Sandcastle 2",
+      "solved": 227,
+      "contest_source": "JOI 2022 Final",
       "url": "https://www.luogu.com.cn/problem/P8164"
     },
     {
