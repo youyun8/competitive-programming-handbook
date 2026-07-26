@@ -55,38 +55,9 @@ pnpm test:e2e
 
 - `data/toc.json`：十章、各節與附錄 A 的公開課程結構。
 - `data/page-map.json`：上下冊獨立頁碼映射與抽查狀態。
-- `data/extraction-manifest.json`：736 頁的 checksum、OCR 狀態、信心與例題／URL 候選 metadata。
-- `data/exercise-candidates.json`：只含頁碼與標籤 metadata 的候選題清單；未包含 OCR 題目文字。
 - `src/content/lessons/`：原創教學；每篇固定包含問題、訊號、直覺、狀態、不變量、步驟、C++、複雜度、陷阱、比較、練習與速查。
 - `src/content/exercises/`：改寫或自行設計的題目、提示、解答、證明、C++ 與已確認的外部原題連結。
 - `reports/content-review.md`：所有待人工確認項目。未確認 OCR 不會渲染到公開頁面。
-
-目前擷取統計（2026-07-16）：736/736 頁已完成 OCR 與本機 QR 掃描，偵測到 103
-個例題標籤候選，正規化為 252 筆待人工確認的題目／外部 OJ 頁面候選；尚未人工確認的 736
-頁都維持待校對狀態。公開站目前有 102 個課程節點、12 篇完整核心教學、3
-道具備外部原題連結、進度與私人筆記的題目卡，以及 3 組術語條目。
-
-新增 lesson 時，必須填寫 `volume`、`source_file`、章節、書頁、PDF 頁、先備、學習目標與 `review_status`。完整 schema 位於 `src/content.config.ts`。
-
-## PDF 與 OCR 校對
-
-兩份來源檔應放在：
-
-```text
-source/900782057-算法竞赛-上册-罗勇军-郭卫斌.pdf
-source/算法竞赛（清华科技大讲堂）.pdf
-```
-
-`source/`、`tmp/ocr/`、rendered pages 與原始 OCR 都已加入 `.gitignore`。
-
-```bash
-python3 scripts/pdf/extract.py
-python3 scripts/pdf/extract.py --scan --workers 8 --dpi 140
-python3 scripts/pdf/extract.py --qr-scan --workers 8 --dpi 180
-pnpm content:stats
-```
-
-擷取器可續跑，會驗證頁數與 SHA-256。OCR 只建立候選例題、URL 與版面特徵；公式、程式碼、題目框、外部連結與 QR 解碼結果仍須逐項人工比對。公開前將 `manual_review` 更新為 verified，並用自己的語言重新撰寫。
 
 ## 本機 Supabase
 
@@ -160,7 +131,3 @@ Supabase migration／Functions 需獨立部署，不能由 GitHub Pages 代替�
 - PostgreSQL 使用 Supabase 排程備份或 `pg_dump` 的加密私有備份；dump 不進 Git。
 - 復原時先套 migration，再還原使用者進度、題目狀態、私人筆記、書籤與設定。
 - 使用者刪除流程利用 FK cascade 清除個人資料與儲存物件。
-
-## 著作權界線
-
-本專案是依使用者合法持有資料製作的非官方學習筆記，不暗示作者或出版社背書。禁止 commit／部署 PDF、掃描頁、逐頁 OCR、出版社插圖、QR 圖片、長篇逐字內容或大量原書程式碼。外部 OJ 題只保留改寫敘述與必要 attribution，確認 URL 後才發布。

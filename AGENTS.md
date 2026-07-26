@@ -39,7 +39,7 @@
 
 ## Never Do
 
-- Do not commit `source/`, PDFs, OCR/render caches, scans, credentials, production data, or generated artifacts.
+- Do not commit PDFs, OCR/render caches, scans, credentials, production data, or generated artifacts.
 - Do not expose service-role keys, OAuth secrets, private notes, or solution code in logs/analytics.
 - Do not guess OCR text or silently overwrite newer cloud progress.
 - Do not use destructive Git commands or overwrite unrelated user changes.
