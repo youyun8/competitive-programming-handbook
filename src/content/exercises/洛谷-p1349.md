@@ -1,6 +1,8 @@
 ---
 volume: lower
 source_file: lower-volume
+source_book_pages: [387, 461]
+source_pdf_pages: [17, 91]
 chapter: 6
 section: '6.3'
 kind: external-oj
