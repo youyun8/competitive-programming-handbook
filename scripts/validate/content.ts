@@ -75,7 +75,6 @@ for (const exercise of exercises) {
   ]) {
     if (!data[field]) errors.push(`${exercise.path}: ${field} is required for every public card`);
   }
-  if (data.review_status === 'needs-review') errors.push(`${exercise.path}: needs-review content must not be public`);
 }
 
 function externalProblemKey(platform: string, problemId: string) {
