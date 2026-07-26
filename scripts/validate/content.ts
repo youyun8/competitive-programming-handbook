@@ -98,18 +98,40 @@ for (const exercise of exercises) {
     exerciseByExternalProblem.set(key, exercise);
   }
 }
-const chapterOneProblems = new Map(
-  problemList.items
-    .filter((item) => item.chapter === 1)
-    .map((item) => [externalProblemKey(item.platform_label, item.problem_id), item])
-);
-for (const [key, problem] of chapterOneProblems) {
+const uniqueProblemListItems = new Map<string, (typeof problemList.items)[number]>();
+for (const item of problemList.items) {
+  const key = externalProblemKey(item.platform_label, item.problem_id);
+  if (!uniqueProblemListItems.has(key)) uniqueProblemListItems.set(key, item);
+}
+for (const [key, problem] of uniqueProblemListItems) {
   const exercise = exerciseByExternalProblem.get(key);
   if (!exercise) {
-    errors.push(`Chapter 1 problem ${problem.platform_label} ${problem.problem_id}: missing exercise card`);
+    errors.push(
+      `Chapter ${problem.chapter} problem ${problem.platform_label} ${problem.problem_id}: missing exercise card`
+    );
     continue;
   }
   const data = exercise.data;
+  if (data.chapter !== problem.chapter) {
+    errors.push(`${exercise.path}: chapter does not match the problem list's first occurrence`);
+  }
+  if (data.external_relation !== 'original') {
+    errors.push(`${exercise.path}: problem-list cards must identify the original external problem`);
+  }
+  if (data.review_status === 'needs-review') {
+    const roadmapText = `${data.title} ${data.solution_outline} ${exercise.body}`.toLowerCase();
+    if (!roadmapText.includes('roadmap') && !roadmapText.includes('路線圖')) {
+      errors.push(`${exercise.path}: needs-review problem must include a reviewed roadmap`);
+    }
+    if (data.cpp_skeleton || data.cpp_solution) {
+      errors.push(`${exercise.path}: reviewed roadmap must not publish unverified C++ code`);
+    }
+    continue;
+  }
+  if (data.review_status !== 'verified') {
+    errors.push(`${exercise.path}: problem-list card must be verified or an explicit reviewed roadmap`);
+    continue;
+  }
   for (const field of [
     'core_knowledge',
     'judgment',
@@ -120,14 +142,14 @@ for (const [key, problem] of chapterOneProblems) {
   ]) {
     const value = data[field];
     if (!value || (Array.isArray(value) && value.length === 0)) {
-      errors.push(`${exercise.path}: ${field} is required for a complete Chapter 1 card`);
+      errors.push(`${exercise.path}: ${field} is required for a complete problem-list card`);
     }
   }
   if (data.hints?.length !== 3) {
-    errors.push(`${exercise.path}: complete Chapter 1 cards require exactly three hints`);
+    errors.push(`${exercise.path}: complete problem-list cards require exactly three hints`);
   }
   if (!data.samples?.length || data.samples.some((sample: { explanation?: string }) => !sample.explanation)) {
-    errors.push(`${exercise.path}: complete Chapter 1 cards require a sample walkthrough`);
+    errors.push(`${exercise.path}: complete problem-list cards require a sample walkthrough`);
   }
 }
 
