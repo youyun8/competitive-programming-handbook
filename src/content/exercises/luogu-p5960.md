@@ -10,6 +10,11 @@ kind: external-oj
 difficulty: 3
 topics: ['差分約束', 'SPFA', '最短路徑', '三角不等式']
 prerequisites: ['dijkstra']
+core_knowledge:
+  - 將 x_a-x_b≤y 改寫為 x_a≤x_b+y，並建立 b→a、權重 y 的有向邊
+  - 由虛擬源點向所有變數連零權邊，使每個連通分量都能被鬆弛與檢查
+  - 圖中存在負環等價於約束互相矛盾；沒有負環時最短距離本身就是一組可行解
+judgment: 若 Bellman-Ford／SPFA 在加入虛擬源點後偵測到負環，沿環相加會得到 0<負數的矛盾，故輸出 NO；否則所有最短距離都滿足每條 dist[a]≤dist[b]+y，可直接作答。
 statement: |-
   給定 m 條形如 x_a − x_b <= y 的約束，求一組滿足全部約束的整數解；若無解則輸出 NO。
   本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。

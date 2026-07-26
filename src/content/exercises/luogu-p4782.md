@@ -10,6 +10,11 @@ kind: external-oj
 difficulty: 4
 topics: ['2-SAT', '強連通分量', 'Tarjan', '蘊含圖']
 prerequisites: ['directed-connectivity']
+core_knowledge:
+  - 每個布林變數拆成代表 x_i=0 與 x_i=1 的一對互補文字節點
+  - 子句「x_i=a 或 x_j=b」建成「x_i≠a → x_j=b」與「x_j≠b → x_i=a」兩條蘊含邊
+  - 以 SCC 判斷矛盾，並依縮點 DAG 的逆拓撲順序選出一組合法賦值
+judgment: 若某個變數的 0、1 文字位於同一強連通分量，兩者會互相蘊含而必定無解；否則每對互補 SCC 可依逆拓撲序擇一為真，得到可驗證的完整賦值。
 statement: |-
   給定 n 個布林變數與 m 個形如「x_i = a 或 x_j = b」的子句，判斷是否存在一組賦值滿足全部子句，有的話輸出任意一組。
   本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。

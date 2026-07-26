@@ -53,7 +53,7 @@ external_title: 禮物
 external_relation: original
 source_book_pages: [610]
 source_pdf_pages: [240]
-review_status: verified
+review_status: needs-review
 ---
 
 ## 來源狀態

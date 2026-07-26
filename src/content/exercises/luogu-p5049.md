@@ -32,7 +32,7 @@ external_title: '[NOIP2018 提高組] 旅行（加強版）'
 external_relation: original
 source_book_pages: [600, 683]
 source_pdf_pages: [230, 313]
-review_status: verified
+review_status: needs-review
 ---
 
 ## Reviewed roadmap 證據
