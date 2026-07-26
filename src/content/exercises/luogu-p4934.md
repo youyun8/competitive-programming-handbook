@@ -3,7 +3,7 @@ id: luogu-p4934
 volume: lower
 source_file: lower-volume
 original_label: 洛谷 P4934
-title: 禮物（待解除來源封鎖）
+title: 禮物：reviewed roadmap（待解除來源封鎖）
 chapter: 10
 section: '10.2'
 kind: external-oj

@@ -1,10 +1,10 @@
 ---
 id: openj-bailian-3435
-volume: lower
-source_file: lower-volume
+volume: upper
+source_file: upper-volume
 title: 百練 3435 Borg Maze：BFS 建圖與最小生成樹
-chapter: 10
-section: '10.9'
+chapter: 3
+section: '3.3'
 kind: external-oj
 difficulty: 3
 topics: [網格 BFS, 最小生成樹, Prim]
@@ -68,8 +68,8 @@ external_platform: OpenJudge 百練
 external_problem_id: '3435'
 external_title: Borg Maze
 external_relation: original
-source_book_pages: [659, 662]
-source_pdf_pages: [289, 292]
+source_book_pages: [97, 149]
+source_pdf_pages: [115, 167]
 review_status: verified
 ---
 
