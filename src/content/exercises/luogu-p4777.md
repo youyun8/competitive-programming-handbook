@@ -15,15 +15,14 @@ topics:
 prerequisites:
   - congruence
   - extended-gcd
-statement: |-
-  給定 n 條同餘方程 x ≡ r_i (mod m_i)，模數 m_i 不保證兩兩互質，求最小的非負整數解 x。
-  本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
+statement: 給定 n 條 x ≡ b_i (mod a_i)，模數不要求互質；資料保證有解，求最小非負整數解。
 constraints:
-  - 模數不保證互質，不能直接套用中國剩餘定理
-  - 中間乘法會超過 64 位元，需要防溢位的乘法取模
-  - 完整限制條件請參閱外部題目頁面
-input_format: 第一行一個整數 n；接下來 n 行，每行兩個整數 m_i 與 r_i。
-output_format: 一行一個整數，表示最小的非負整數解。
+  - 1 <= n <= 100000
+  - 1 <= a_i,b_i <= 10^12
+  - 所有 a_i 的最小公倍數不超過 10^18
+  - 資料保證有解
+input_format: 第一行為 n；接著 n 行各給 a_i、b_i。
+output_format: 輸出方程組的最小非負整數解。
 samples:
   - input: |
       3
@@ -32,9 +31,7 @@ samples:
       33 17
     output: |
       809
-    explanation:
-      809 = 11×73 + 6、= 25×32 + 9、= 33×24 + 17，三條同餘式都滿足，且是最小的非負解。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ
-      網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+    explanation: 809 = 11×73 + 6、= 25×32 + 9、= 33×24 + 17，三條同餘式都滿足，且是最小的非負解。 本示例依官方輸入輸出格式設計。
 hints:
   - 一般的中國剩餘定理要求模數兩兩互質。這題不保證，所以要改成**逐條合併**：先把前兩條併成一條，再拿結果去併第三條，依此類推。
   - 設已合併的結果是 x ≡ remainder (mod modulus)，新的一條是 x ≡ next_remainder (mod next_modulus)。把 x 寫成 remainder + modulus·t
@@ -151,9 +148,10 @@ cpp_solution: |
           if (difference % g != 0) { cout << -1 << '\n'; return 0; }  // 兩條式子矛盾
           const long long step = next_modulus / g;
           const long long t = mul_mod(((x % step) + step) % step, (difference / g) % step, step);
-          remainder += modulus * t;
-          modulus *= step;  // 新模數是兩者的最小公倍數
-          remainder = ((remainder % modulus) + modulus) % modulus;
+          const long long merged_modulus = modulus * step;  // 題目保證所有模數的 lcm 不超過 10^18
+          const long long increment = mul_mod(modulus % merged_modulus, t, merged_modulus);
+          remainder = (remainder + increment) % merged_modulus;
+          modulus = merged_modulus;
       }
       cout << remainder << '\n';
       return 0;

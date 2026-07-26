@@ -2,210 +2,76 @@
 id: luogu-p3372
 volume: upper
 source_file: upper-volume
-title: 洛谷 P3372 線段樹 1：區間加與區間求和
+title: 洛谷 P3372 線段樹 1：區間加與區間和
 chapter: 4
-section: '4.3'
+section: '4.2'
 kind: external-oj
 difficulty: 3
-topics: ['線段樹', '懶標記', '區間修改']
-prerequisites: ['segment-tree']
-statement: |-
-  維護一個長度為 n 的序列，支援兩種操作：把某個區間內每個數都加上一個值；查詢某個區間的和。
-  本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
+topics: &id001
+  - segment-tree
+  - lazy-propagation
+  - range-update
+prerequisites:
+  - range-query
+statement: 維護長度 n 的序列：操作 1 將區間 [x,y] 每項加 k；操作 2 查詢區間 [x,y] 的總和。
 constraints:
-  - 'n 與操作數都很大，兩種操作都要 O(log n)'
-  - '區間和會超過 32 位元，必須用 long long'
-  - '完整限制條件請參閱外部題目頁面'
-input_format: '第一行兩個整數 n 與 m；第二行 n 個初始值；接下來 m 行，`1 x y k` 表示區間 [x, y] 每個數加 k，`2 x y` 表示查詢區間 [x, y] 的和。'
-output_format: '對每個操作 2 輸出一行區間和。'
+  - 1 <= n,m <= 100000
+  - 初值與修改值絕對值不超過 100000
+  - 答案可能超過 32 位元
+input_format: 第一行 n、m；第二行 n 個初值；接著 m 行為 `1 x y k` 或 `2 x y`。
+output_format: 每次操作 2 輸出一行區間和。
 samples:
   - input: |
       5 5
       1 5 4 2 3
       2 2 4
       1 2 3 2
-      2 2 4
+      2 3 4
       1 1 5 1
-      2 1 5
+      2 1 4
     output: |
       11
-      15
-      24
-    explanation: |-
-      [2,4] 初始和是 5+4+2=11；把 [2,3] 各加 2 後變成 7+6+2=15；再把整段各加 1，序列成為 2 8 7 3 4，總和 24。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+      8
+      20
+    explanation: 首次查詢為 5+4+2=11；第一次修改後第 3 到 4 項和為 6+2=8；全體再加一後，第 1 到 4 項總和為 20。
+core_knowledge: *id001
+judgment: 操作 1 是區間每一項都加 k，節點總和要增加 k 乘區間長度。
 hints:
-  - |-
-    區間修改如果真的下推到每個葉子就是 O(n)。懶標記的想法是：當一次修改**完整覆蓋**某個節點的區間時，就在那個節點記下「我這棵子樹欠一個增量」，先不往下走。
-  - |-
-    節點要存兩個量：`sum`（這段區間的和）與 `add`（子樹尚未下推的增量）。注意 `add` 的語意是「子樹欠的」，而 `sum` 已經把自己的增量算進去了——想清楚這個分工，後面才不會重複累加。
-  - |-
-    把「整段加 delta」抽成一個 `apply` 函式：`sum += delta * 區間長度`，`add += delta`。下推時就是對兩個子節點各呼叫一次 `apply`，然後把自己的 `add` 清零。
-  - |-
-    下推時左右子區間長度不同（`mid - l + 1` 與 `r - mid`），套用時要各自帶入正確的長度，這是最常見的錯誤來源。
-  - |-
-    查詢與修改在往下遞迴之前都必須先 `push_down`，否則會讀到過期的資料。而回溯時都要重新 `sum = 左 + 右`。
-solution_outline: |-
-  線段樹每個節點存區間和 `sum` 與懶標記 `add`。修改時若當前節點區間被完整覆蓋就直接套用標記並返回；否則先下推，再遞迴左右子樹，最後由子節點重算 `sum`。查詢同樣先下推再遞迴累加。把「套用標記」抽成獨立函式可避免長度算錯。
-proof_or_invariant: |-
-  不變量是「`sum[u]` 永遠是 u 這段區間的正確總和，而 `add[u]` 是尚未套用到 u 的子節點的增量」。因為每次修改最多讓 O(log n) 個節點被完整覆蓋，遞迴路徑上其他節點各為 O(1) 工作，單次操作即 O(log n)。
+  - 完整覆蓋節點時先保留懶標記，不必走到葉節點。
+  - sum 永遠是當前正確區間和；lazy 是尚未下推給孩子的增量。
+  - 部分覆蓋前先 push，回溯時以左右孩子重新 pull。
+solution_outline: 線段樹節點保存 sum 與 lazy_add；完整覆蓋直接 apply，部分覆蓋下推後遞迴。
+proof_or_invariant: apply 同時修正節點真實總和並記錄子樹欠款；push 只把等價修改分派給孩子，故不變量保持，查詢分解的節點和即答案。
+common_errors:
+  - sum 只加 k 未乘長度
+  - 查詢或部分修改前未 push
+  - 使用 int 儲存區間和
 complexity:
-  time: '單次區間修改與區間查詢皆 O(log n)'
-  space: 'O(n)'
+  time: O((n+m) log n)
+  space: O(n)
 cpp_skeleton: |
+  // TODO：先自行補出核心更新與查詢，再用此可編譯框架核對。
   #include <bits/stdc++.h>
   using namespace std;
-
-  static vector<long long> sum_tree;
-  static vector<long long> lazy_add;
-
-  // TODO 1：把「整個區間加 delta」的效果套到節點上：
-  //         sum 增加 delta * 區間長度，並把 delta 累進 lazy。
-  static void apply_add(size_t node, size_t count, long long delta) {
-      (void)node;
-      (void)count;
-      (void)delta;
-  }
-
-  // TODO 2：下推。把 lazy 套到兩個子節點後清空，注意左右子區間長度不同。
-  static void push_down(size_t node, size_t l, size_t r) {
-      (void)node;
-      (void)l;
-      (void)r;
-  }
-
-  static void build(size_t node, size_t l, size_t r, const vector<long long>& a) {
-      if (l == r) { sum_tree[node] = a[l]; return; }
-      const size_t mid = (l + r) / 2;
-      build(2 * node, l, mid, a);
-      build(2 * node + 1, mid + 1, r, a);
-      sum_tree[node] = sum_tree[2 * node] + sum_tree[2 * node + 1];
-  }
-
-  static void update(size_t node, size_t l, size_t r, size_t ql, size_t qr, long long delta) {
-      if (qr < l || r < ql) { return; }
-      if (ql <= l && r <= qr) { apply_add(node, r - l + 1, delta); return; }
-      push_down(node, l, r);
-      const size_t mid = (l + r) / 2;
-      update(2 * node, l, mid, ql, qr, delta);
-      update(2 * node + 1, mid + 1, r, ql, qr, delta);
-      sum_tree[node] = sum_tree[2 * node] + sum_tree[2 * node + 1];
-  }
-
-  static long long query(size_t node, size_t l, size_t r, size_t ql, size_t qr) {
-      if (qr < l || r < ql) { return 0; }
-      if (ql <= l && r <= qr) { return sum_tree[node]; }
-      push_down(node, l, r);
-      const size_t mid = (l + r) / 2;
-      return query(2 * node, l, mid, ql, qr) + query(2 * node + 1, mid + 1, r, ql, qr);
-  }
-
-  int main() {
-      ios::sync_with_stdio(false);
-      cin.tie(nullptr);
-      int n, m;
-      if (!(cin >> n >> m)) { return 0; }
-      vector<long long> a(static_cast<size_t>(n) + 1);
-      for (int i = 1; i <= n; ++i) { cin >> a[static_cast<size_t>(i)]; }
-      sum_tree.assign(4 * (static_cast<size_t>(n) + 1), 0);
-      lazy_add.assign(4 * (static_cast<size_t>(n) + 1), 0);
-      build(1, 1, static_cast<size_t>(n), a);
-      for (int q = 0; q < m; ++q) {
-          int op;
-          cin >> op;
-          if (op == 1) {
-              int x, y;
-              long long k;
-              cin >> x >> y >> k;
-              update(1, 1, static_cast<size_t>(n), static_cast<size_t>(x), static_cast<size_t>(y), k);
-          } else {
-              int x, y;
-              cin >> x >> y;
-              cout << query(1, 1, static_cast<size_t>(n), static_cast<size_t>(x), static_cast<size_t>(y)) << '\n';
-          }
-      }
-      return 0;
-  }
+  class SegmentTree{public:explicit SegmentTree(const vector<long long>& a):n_(static_cast<int>(a.size())-1),sum_(static_cast<size_t>(4*n_+4)),lazy_(static_cast<size_t>(4*n_+4)){build(1,1,n_,a);}void add(int l,int r,long long v){add(1,1,n_,l,r,v);}long long query(int l,int r){return query(1,1,n_,l,r);}private:void build(int p,int l,int r,const vector<long long>&a){if(l==r){sum_[static_cast<size_t>(p)]=a[static_cast<size_t>(l)];return;}int m=(l+r)/2;build(p*2,l,m,a);build(p*2+1,m+1,r,a);pull(p);}void apply(int p,int l,int r,long long v){sum_[static_cast<size_t>(p)]+=v*(r-l+1);lazy_[static_cast<size_t>(p)]+=v;}void push(int p,int l,int r){if(lazy_[static_cast<size_t>(p)]==0||l==r)return;int m=(l+r)/2;apply(p*2,l,m,lazy_[static_cast<size_t>(p)]);apply(p*2+1,m+1,r,lazy_[static_cast<size_t>(p)]);lazy_[static_cast<size_t>(p)]=0;}void pull(int p){sum_[static_cast<size_t>(p)]=sum_[static_cast<size_t>(p*2)]+sum_[static_cast<size_t>(p*2+1)];}void add(int p,int l,int r,int ql,int qr,long long v){if(ql<=l&&r<=qr){apply(p,l,r,v);return;}push(p,l,r);int m=(l+r)/2;if(ql<=m)add(p*2,l,m,ql,qr,v);if(qr>m)add(p*2+1,m+1,r,ql,qr,v);pull(p);}long long query(int p,int l,int r,int ql,int qr){if(ql<=l&&r<=qr)return sum_[static_cast<size_t>(p)];push(p,l,r);int m=(l+r)/2;long long ans=0;if(ql<=m)ans+=query(p*2,l,m,ql,qr);if(qr>m)ans+=query(p*2+1,m+1,r,ql,qr);return ans;}int n_;vector<long long>sum_,lazy_;};
+  int main(){ios::sync_with_stdio(false);cin.tie(nullptr);int n,m;cin>>n>>m;vector<long long>a(static_cast<size_t>(n+1));for(int i=1;i<=n;++i)cin>>a[static_cast<size_t>(i)];SegmentTree tree(a);while(m--){int op,l,r;cin>>op>>l>>r;if(op==1){long long k;cin>>k;tree.add(l,r,k);}else cout<<tree.query(l,r)<<'\n';}}
 cpp_solution: |
   #include <bits/stdc++.h>
   using namespace std;
-
-  // 線段樹 + 區間加 lazy tag：sum 存區間和，add 存「子樹尚未下推的增量」。
-  static vector<long long> sum_tree;
-  static vector<long long> lazy_add;
-
-  static void apply_add(size_t node, size_t count, long long delta) {
-      sum_tree[node] += delta * static_cast<long long>(count);
-      lazy_add[node] += delta;
-  }
-
-  static void push_down(size_t node, size_t l, size_t r) {
-      if (lazy_add[node] == 0) { return; }
-      const size_t mid = (l + r) / 2;
-      apply_add(2 * node, mid - l + 1, lazy_add[node]);
-      apply_add(2 * node + 1, r - mid, lazy_add[node]);
-      lazy_add[node] = 0;
-  }
-
-  static void build(size_t node, size_t l, size_t r, const vector<long long>& a) {
-      if (l == r) { sum_tree[node] = a[l]; return; }
-      const size_t mid = (l + r) / 2;
-      build(2 * node, l, mid, a);
-      build(2 * node + 1, mid + 1, r, a);
-      sum_tree[node] = sum_tree[2 * node] + sum_tree[2 * node + 1];
-  }
-
-  static void update(size_t node, size_t l, size_t r, size_t ql, size_t qr, long long delta) {
-      if (qr < l || r < ql) { return; }
-      if (ql <= l && r <= qr) { apply_add(node, r - l + 1, delta); return; }
-      push_down(node, l, r);
-      const size_t mid = (l + r) / 2;
-      update(2 * node, l, mid, ql, qr, delta);
-      update(2 * node + 1, mid + 1, r, ql, qr, delta);
-      sum_tree[node] = sum_tree[2 * node] + sum_tree[2 * node + 1];
-  }
-
-  static long long query(size_t node, size_t l, size_t r, size_t ql, size_t qr) {
-      if (qr < l || r < ql) { return 0; }
-      if (ql <= l && r <= qr) { return sum_tree[node]; }
-      push_down(node, l, r);
-      const size_t mid = (l + r) / 2;
-      return query(2 * node, l, mid, ql, qr) + query(2 * node + 1, mid + 1, r, ql, qr);
-  }
-
-  int main() {
-      ios::sync_with_stdio(false);
-      cin.tie(nullptr);
-      int n, m;
-      if (!(cin >> n >> m)) { return 0; }
-      vector<long long> a(static_cast<size_t>(n) + 1);
-      for (int i = 1; i <= n; ++i) { cin >> a[static_cast<size_t>(i)]; }
-      sum_tree.assign(4 * (static_cast<size_t>(n) + 1), 0);
-      lazy_add.assign(4 * (static_cast<size_t>(n) + 1), 0);
-      build(1, 1, static_cast<size_t>(n), a);
-      for (int q = 0; q < m; ++q) {
-          int op;
-          cin >> op;
-          if (op == 1) {
-              int x, y;
-              long long k;
-              cin >> x >> y >> k;
-              update(1, 1, static_cast<size_t>(n), static_cast<size_t>(x), static_cast<size_t>(y), k);
-          } else {
-              int x, y;
-              cin >> x >> y;
-              cout << query(1, 1, static_cast<size_t>(n), static_cast<size_t>(x), static_cast<size_t>(y)) << '\n';
-          }
-      }
-      return 0;
-  }
+  class SegmentTree{public:explicit SegmentTree(const vector<long long>& a):n_(static_cast<int>(a.size())-1),sum_(static_cast<size_t>(4*n_+4)),lazy_(static_cast<size_t>(4*n_+4)){build(1,1,n_,a);}void add(int l,int r,long long v){add(1,1,n_,l,r,v);}long long query(int l,int r){return query(1,1,n_,l,r);}private:void build(int p,int l,int r,const vector<long long>&a){if(l==r){sum_[static_cast<size_t>(p)]=a[static_cast<size_t>(l)];return;}int m=(l+r)/2;build(p*2,l,m,a);build(p*2+1,m+1,r,a);pull(p);}void apply(int p,int l,int r,long long v){sum_[static_cast<size_t>(p)]+=v*(r-l+1);lazy_[static_cast<size_t>(p)]+=v;}void push(int p,int l,int r){if(lazy_[static_cast<size_t>(p)]==0||l==r)return;int m=(l+r)/2;apply(p*2,l,m,lazy_[static_cast<size_t>(p)]);apply(p*2+1,m+1,r,lazy_[static_cast<size_t>(p)]);lazy_[static_cast<size_t>(p)]=0;}void pull(int p){sum_[static_cast<size_t>(p)]=sum_[static_cast<size_t>(p*2)]+sum_[static_cast<size_t>(p*2+1)];}void add(int p,int l,int r,int ql,int qr,long long v){if(ql<=l&&r<=qr){apply(p,l,r,v);return;}push(p,l,r);int m=(l+r)/2;if(ql<=m)add(p*2,l,m,ql,qr,v);if(qr>m)add(p*2+1,m+1,r,ql,qr,v);pull(p);}long long query(int p,int l,int r,int ql,int qr){if(ql<=l&&r<=qr)return sum_[static_cast<size_t>(p)];push(p,l,r);int m=(l+r)/2;long long ans=0;if(ql<=m)ans+=query(p*2,l,m,ql,qr);if(qr>m)ans+=query(p*2+1,m+1,r,ql,qr);return ans;}int n_;vector<long long>sum_,lazy_;};
+  int main(){ios::sync_with_stdio(false);cin.tie(nullptr);int n,m;cin>>n>>m;vector<long long>a(static_cast<size_t>(n+1));for(int i=1;i<=n;++i)cin>>a[static_cast<size_t>(i)];SegmentTree tree(a);while(m--){int op,l,r;cin>>op>>l>>r;if(op==1){long long k;cin>>k;tree.add(l,r,k);}else cout<<tree.query(l,r)<<'\n';}}
 external_url: https://www.luogu.com.cn/problem/P3372
 external_platform: 洛谷
 external_problem_id: P3372
-external_title: '【模板】線段樹 1'
+external_title: 【模板】線段樹 1
 external_relation: original
-source_book_pages: [151, 314]
-source_pdf_pages: [169, 332]
+source_book_pages:
+  - 151
+  - 314
+source_pdf_pages:
+  - 169
+  - 332
 review_status: verified
 ---
 
-線段樹最重要的一題。把懶標記的語意寫在註解裡，日後擴充成區間乘、區間最值都靠這個框架。
+將每個標記的語意固定後再實作，可避免重複計算。
