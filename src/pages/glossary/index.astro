@@ -3,8 +3,19 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { withBase } from '@/lib/site';
 
-const entries = await getCollection('glossary');
-const extra = [
+interface GlossaryCard {
+  traditional: string;
+  simplified: string;
+  english: string;
+  definition: string;
+  aliases: string[];
+  lessons: { id: string; title: string }[];
+}
+
+const [glossaryEntries, lessonEntries] = await Promise.all([getCollection('glossary'), getCollection('lessons')]);
+const lessonTitles = new Map<string, string>(lessonEntries.map((lesson) => [lesson.data.id, lesson.data.title]));
+
+const extra: [string, string, string, string][] = [
   ['佇列', '佇列', 'queue', '先進先出的容器。'],
   ['堆疊', '棧', 'stack', '後進先出的容器。'],
   ['線段樹', '線段樹', 'segment tree', '維護可合併區間摘要的平衡二元樹。'],
@@ -12,6 +23,29 @@ const extra = [
   ['最近公共祖先', '最近公共祖先', 'lowest common ancestor', '兩節點共同祖先中深度最大者。'],
   ['凸包', '凸包', 'convex hull', '包含點集的最小凸集合。']
 ];
+
+const cards: GlossaryCard[] = [
+  ...glossaryEntries.map((entry) => ({
+    traditional: entry.data.traditional,
+    simplified: entry.data.simplified,
+    english: entry.data.english,
+    definition: entry.data.definition,
+    aliases: entry.data.aliases,
+    // 只連結真的存在的教學，標題取自 lesson 本身，避免整排都叫「相關教學」。
+    lessons: entry.data.related_lessons.flatMap((id) => {
+      const title = lessonTitles.get(id);
+      return title ? [{ id, title }] : [];
+    })
+  })),
+  ...extra.map(([traditional, simplified, english, definition]) => ({
+    traditional,
+    simplified,
+    english,
+    definition,
+    aliases: [],
+    lessons: []
+  }))
+].sort((a, b) => a.traditional.localeCompare(b.traditional, 'zh-Hant'));
 ---
 
 <BaseLayout title="術語表" wide>
@@ -20,43 +54,56 @@ const extra = [
   <div class="field" style="max-width:30rem">
     <label for="glossary-search">搜尋術語</label><input id="glossary-search" type="search" />
   </div>
-  <div class="grid" id="glossary-list" style="margin-top:1rem">
+  <div class="grid glossary-grid" id="glossary-list">
     {
-      entries.map((entry) => (
+      cards.map((card) => (
         <article
           class="card glossary-entry"
-          data-terms={`${entry.data.traditional} ${entry.data.simplified} ${entry.data.english} ${entry.data.aliases.join(' ')}`.toLowerCase()}
+          data-terms={`${card.traditional} ${card.simplified} ${card.english} ${card.aliases.join(' ')}`.toLowerCase()}
         >
-          <p>{entry.data.definition}</p>
-          {entry.data.related_lessons.map((id) => (
-            <a href={withBase(`/lessons/${id}/`)}>相關教學</a>
-          ))}
-        </article>
-      ))
-    }
-    {
-      extra.map(([traditional, simplified, english, definition]) => (
-        <article class="card glossary-entry" data-terms={`${traditional} ${simplified} ${english}`.toLowerCase()}>
-          <>
-            <h2>{traditional}</h2>
-            <p>
-              <strong>簡：</strong>
-              {simplified}
-              <br />
-              <strong>EN：</strong>
-              {english}
+          <h2>{card.traditional}</h2>
+          <dl class="glossary-terms">
+            {card.simplified !== card.traditional && (
+              <>
+                <dt>簡</dt>
+                <dd>{card.simplified}</dd>
+              </>
+            )}
+            <dt>EN</dt>
+            <dd lang="en">{card.english}</dd>
+            {card.aliases.length > 0 && (
+              <>
+                <dt>別名</dt>
+                <dd>{card.aliases.join('、')}</dd>
+              </>
+            )}
+          </dl>
+          <p class="glossary-definition">{card.definition}</p>
+          {card.lessons.length > 0 && (
+            <p class="glossary-links">
+              {card.lessons.map((lesson) => (
+                <a href={withBase(`/lessons/${lesson.id}/`)}>{lesson.title}</a>
+              ))}
             </p>
-            <p>{definition}</p>
-          </>
+          )}
         </article>
       ))
     }
   </div>
+  <p id="glossary-empty" hidden>沒有符合的術語。</p>
   <script>
     const input = document.querySelector<HTMLInputElement>('#glossary-search');
     const entries = [...document.querySelectorAll<HTMLElement>('.glossary-entry')];
+    const empty = document.querySelector<HTMLElement>('#glossary-empty');
     input?.addEventListener('input', () => {
-      for (const entry of entries) entry.hidden = !entry.dataset.terms?.includes(input.value.toLowerCase());
+      const term = input.value.trim().toLowerCase();
+      let visible = 0;
+      for (const entry of entries) {
+        const matches = !term || (entry.dataset.terms?.includes(term) ?? false);
+        entry.hidden = !matches;
+        if (matches) visible++;
+      }
+      if (empty) empty.hidden = visible !== 0;
     });
   </script>
 </BaseLayout>

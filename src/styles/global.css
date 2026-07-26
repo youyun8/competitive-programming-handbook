@@ -648,8 +648,8 @@ a.card:hover,
 
 .reading-settings {
   display: grid;
-  gap: 1rem;
-  padding: 0 1.2rem 1.2rem;
+  gap: 1.5rem;
+  padding: 0 1.4rem 1.4rem;
 }
 
 .card > .reading-settings {
@@ -660,59 +660,356 @@ a.card:hover,
   margin: 0;
 }
 
+.settings-header {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.settings-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
 .settings-group {
   display: grid;
-  gap: 0.45rem;
+  gap: 0.6rem;
   min-width: 0;
   margin: 0;
   border: 0;
   padding: 0;
 }
 
-.settings-group legend {
-  padding: 0;
-  font-size: 0.85rem;
-  font-weight: 700;
+/* 分隔線畫在區塊下緣：fieldset 的 legend 會壓在上邊框上，用 border-top 會被切斷。 */
+.reading-settings > .settings-group {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.4rem;
 }
 
-.settings-checkbox {
+.settings-group legend {
+  padding: 0;
+  font-size: 0.95rem;
+  font-weight: 750;
+}
+
+/* legend 不參與 grid 排版，改由 fieldset 的第一個子元素接手上緣間距。 */
+.settings-group legend + .settings-hint {
+  margin-top: 0.35rem;
+}
+
+.settings-row {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.settings-row + .settings-row {
+  margin-top: 1.1rem;
+}
+
+.settings-row-head {
   display: flex;
-  gap: 0.55rem;
-  align-items: center;
+  gap: 0.75rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.settings-row-head label {
+  font-size: 0.95rem;
+  font-weight: 750;
+}
+
+.settings-value {
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  border-radius: 999px;
+  background: var(--accent-soft);
+  padding: 0.05rem 0.6rem;
+  color: var(--accent-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.settings-scale {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.settings-range {
+  width: 100%;
+  height: 1.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  accent-color: var(--accent);
   cursor: pointer;
 }
 
-.settings-checkbox input {
-  width: 1.1rem;
-  height: 1.1rem;
+.settings-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.settings-range::-webkit-slider-runnable-track {
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.settings-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: -0.38rem;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 1px 5px rgb(18 37 53 / 30%);
+}
+
+.settings-range::-moz-range-track {
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.settings-range::-moz-range-thumb {
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 1px 5px rgb(18 37 53 / 30%);
+}
+
+.settings-toggle {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  background: var(--surface-muted);
+  padding: 0.75rem 0.85rem;
+  cursor: pointer;
+}
+
+.settings-toggle:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+.settings-toggle input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0.25rem 0 0;
   accent-color: var(--accent);
+  flex: none;
+}
+
+.settings-toggle-text {
+  display: grid;
+  gap: 0.15rem;
+  line-height: 1.5;
 }
 
 .segmented-control {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.35rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--surface-muted);
+  padding: 0.3rem;
 }
 
 .segmented-control button {
-  min-height: 2.55rem;
-  border: 1px solid var(--border);
+  min-height: 2.6rem;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid transparent;
   border-radius: 0.45rem;
-  background: var(--surface);
-  color: var(--text);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 650;
+  white-space: nowrap;
   cursor: pointer;
+  transition:
+    background 140ms ease,
+    color 140ms ease,
+    border-color 140ms ease;
+}
+
+.segmented-control button:hover:not([aria-pressed='true']):not(:disabled) {
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  color: var(--text);
+}
+
+.segmented-control button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .segmented-control button[aria-pressed='true'] {
-  border-color: var(--accent);
-  background: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  background: var(--surface);
   color: var(--accent-strong);
   font-weight: 750;
+  box-shadow: 0 1px 3px rgb(18 37 53 / 12%);
 }
 
 .settings-actions {
   display: flex;
   justify-content: flex-end;
+  border-top: 1px solid var(--border);
+  padding-top: 1.1rem;
+}
+
+/* 偏好頁：閱讀設定佔主欄，帳戶與資料權利放在側欄，避免 auto-fit 把每張卡壓成窄欄。 */
+.profile-layout {
+  display: grid;
+  gap: 1.2rem;
+  align-items: start;
+  max-width: 68rem;
+  margin-top: 1.8rem;
+}
+
+@media (min-width: 62rem) {
+  .profile-layout {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  }
+
+  .profile-account {
+    grid-column: 1 / -1;
+  }
+}
+
+.profile-side {
+  display: grid;
+  align-content: start;
+  gap: 1.2rem;
+}
+
+.profile-account > .callout,
+.profile-account > .card {
+  margin: 0;
+}
+
+.account-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.account-identity {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.account-identity h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.account-email {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-weight: 650;
+}
+
+.account-panel .page-actions {
+  margin: 0;
+}
+
+.profile-settings {
+  padding: 1.4rem 1.5rem;
+}
+
+.profile-data-card {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 0.7rem;
+}
+
+.profile-data-card h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.profile-data-card.danger {
+  border-left: 4px solid color-mix(in srgb, var(--danger) 55%, var(--border));
+}
+
+.profile-data-card #delete-status:empty {
+  display: none;
+}
+
+.glossary-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  margin-top: 1.5rem;
+}
+
+.glossary-entry {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+}
+
+.glossary-entry h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.glossary-terms {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.15rem 0.6rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.glossary-terms dt {
+  font-weight: 750;
+}
+
+.glossary-terms dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.glossary-definition {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.glossary-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.glossary-links a {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-muted);
+  padding: 0.12rem 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.glossary-links a:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  background: var(--accent-soft);
 }
 
 .auth-card {
@@ -1206,25 +1503,51 @@ summary {
   overflow-x: auto;
   border: 1px solid var(--border);
   border-radius: 0.6rem;
+  background: var(--surface);
 }
 
+/* 固定表格佈局，讓每個小節的表格欄寬一致、跨區塊也能對齊。 */
 .problem-table {
   width: 100%;
+  min-width: 46rem;
   border-collapse: collapse;
+  table-layout: fixed;
   font-size: 0.92rem;
+}
+
+.problem-table .col-group {
+  width: 5.5rem;
+}
+
+.problem-table .col-origin {
+  width: 9.5rem;
+}
+
+.problem-table .col-source {
+  width: 13rem;
+}
+
+.problem-table .col-learn {
+  width: 8.5rem;
 }
 
 .problem-table th,
 .problem-table td {
   border-bottom: 1px solid var(--border);
-  padding: 0.45rem 0.7rem;
+  padding: 0.5rem 0.7rem;
   text-align: left;
   vertical-align: top;
+  overflow-wrap: anywhere;
 }
 
 .problem-table thead th {
   background: var(--surface-muted);
   font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.problem-table tbody tr:hover {
+  background: color-mix(in srgb, var(--surface-muted) 55%, transparent);
 }
 
 .problem-table tbody tr:last-child th,
@@ -1234,6 +1557,20 @@ summary {
 
 .problem-table td.nowrap {
   white-space: nowrap;
+}
+
+/* 賽事來源欄沿用 .meta 的顏色，但不能用 .meta 的 flex 版面，否則儲存格會脫離表格佈局。 */
+.problem-table td.source {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.problem-table .row-note {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
 }
 
 .badge.example {
