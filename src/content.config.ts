@@ -76,8 +76,12 @@ const exercises = defineCollection({
       )
       .default([]),
     hints: z.array(z.string()),
+    core_knowledge: z.array(z.string()).optional(),
+    judgment: z.string().optional(),
+    walkthrough: z.string().optional(),
     solution_outline: z.string().min(1),
     proof_or_invariant: z.string().optional(),
+    common_errors: z.array(z.string()).optional(),
     complexity: z.object({
       time: z.string().min(1),
       space: z.string().min(1)

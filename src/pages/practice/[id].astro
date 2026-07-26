@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 import ExerciseNotes from '@/components/progress/ExerciseNotes';
 import ExerciseStatusControl from '@/components/progress/ExerciseStatusControl';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { hintStageLabels, threeStageHints } from '@/lib/exercise-content';
 import { withBase } from '@/lib/site';
 
 export async function getStaticPaths() {
@@ -13,6 +14,7 @@ export async function getStaticPaths() {
 
 const { exercise } = Astro.props;
 const { Content } = await render(exercise);
+const hints = threeStageHints(exercise.data.hints);
 ---
 
 <BaseLayout title={exercise.data.title} wide>
@@ -42,6 +44,16 @@ const { Content } = await render(exercise);
     </div>
   </section>
   <article>
+    <section>
+      <h2>核心知識點與判斷方法</h2>
+      <p>
+        <strong>核心知識：</strong>
+        {(exercise.data.core_knowledge ?? exercise.data.topics).join('、')}
+      </p>
+      <p>
+        {exercise.data.judgment ?? '判斷方法尚待逐題複核；請依資料範圍、目標操作與本節不變量選擇合適方法。'}
+      </p>
+    </section>
     <h2>題目</h2>
     <p>{exercise.data.statement}</p>
     {
@@ -79,6 +91,7 @@ const { Content } = await render(exercise);
       )
     }
     <h3>範例</h3>
+    {exercise.data.walkthrough && <p>{exercise.data.walkthrough}</p>}
     {
       exercise.data.samples.map((sample) => (
         <div class="grid">
@@ -96,24 +109,28 @@ const { Content } = await render(exercise);
     }
     <h2>逐層提示</h2>
     {
-      exercise.data.hints.map((hint, index) => (
+      hints.map((hint, index) => (
         <details>
           <>
-            <summary>提示 {index + 1}</summary>
-            <p>{hint}</p>
+            <summary>
+              提示 {index + 1}：{hintStageLabels[index]}
+            </summary>
+            {hint.split('\n\n').map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
           </>
         </details>
       ))
     }
     {
       exercise.data.cpp_skeleton && (
-        <>
-          <>
-            <h2>C++ 起手骨架</h2>
+        <details>
+          <summary>可直接提交的 C++17 skeleton</summary>
+          <div>
             <p>骨架已處理輸入輸出與資料結構宣告，核心邏輯留給你補上；可直接編譯，先跑通流程再想演算法。</p>
             <Code code={exercise.data.cpp_skeleton} lang="cpp" theme="github-dark-default" />
-          </>
-        </>
+          </div>
+        </details>
       )
     }
     <details>
@@ -140,6 +157,20 @@ const { Content } = await render(exercise);
               <Code code={exercise.data.cpp_solution} lang="cpp" theme="github-dark-default" />
             </>
           </>
+        )
+      }
+    </details>
+    <details>
+      <summary>常見錯誤</summary>
+      {
+        exercise.data.common_errors?.length ? (
+          <ul>
+            {exercise.data.common_errors.map((error) => (
+              <li>{error}</li>
+            ))}
+          </ul>
+        ) : (
+          <p class="content-pending">本題常見錯誤尚待依原題與解答逐項複核。</p>
         )
       }
     </details>

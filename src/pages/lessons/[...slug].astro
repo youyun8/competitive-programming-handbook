@@ -2,10 +2,12 @@
 import { getCollection, render } from 'astro:content';
 import SectionGuide from '@/components/lessons/SectionGuide.astro';
 import TextbookPractice from '@/components/lessons/TextbookPractice.astro';
+import ChapterProblemList from '@/components/problems/ChapterProblemList.astro';
 import AlgorithmVisualizer from '@/components/visualizers/AlgorithmVisualizer';
 import ProgressActions from '@/components/progress/ProgressActions';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { curriculum, sectionSlug } from '@/lib/curriculum';
+import { problemEntriesForSection } from '@/lib/problem-list';
 import { withBase } from '@/lib/site';
 
 export async function getStaticPaths() {
@@ -36,6 +38,7 @@ const allSections = curriculum.chapters.flatMap((item) =>
 const currentIndex = allSections.findIndex((item) => item.section.id === section.id);
 const previous = allSections[currentIndex - 1];
 const next = allSections[currentIndex + 1];
+const problemEntries = problemEntriesForSection(section.id);
 ---
 
 <BaseLayout title={lesson?.data.title ?? `${section.id} ${section.title}`}>
@@ -83,6 +86,7 @@ const next = allSections[currentIndex + 1];
     )
   }
   <TextbookPractice chapter={chapter} section={section} />
+  {problemEntries.length > 0 && <ChapterProblemList entries={problemEntries} heading="本節《演算法競賽》對應題目" />}
   <nav class="page-actions" aria-label="前後教學">
     {
       previous && (

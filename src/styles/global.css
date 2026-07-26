@@ -1242,6 +1242,83 @@ summary {
   color: var(--accent-strong);
 }
 
+.chapter-problems {
+  margin-top: 2.5rem;
+}
+
+.problem-section-disclosure > summary,
+.problem-learning-card > summary {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.problem-card-list {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.8rem;
+}
+
+.problem-learning-card {
+  margin: 0;
+}
+
+.problem-learning-card > summary {
+  font-size: 0.95rem;
+}
+
+.problem-learning-content {
+  min-width: 0;
+  padding-top: 0.5rem;
+}
+
+.problem-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.problem-sample {
+  margin: 0.75rem 0;
+}
+
+.problem-sample-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.problem-sample-grid pre {
+  min-width: 0;
+  margin: 0.4rem 0;
+}
+
+.content-pending,
+.content-roadmap {
+  border-left: 0.25rem solid var(--warning);
+  color: var(--muted);
+  padding-left: 0.75rem;
+}
+
+@media (max-width: 560px) {
+  .problem-section-disclosure,
+  .problem-learning-card {
+    padding: 0.55rem 0.65rem;
+  }
+
+  .problem-section-disclosure > summary,
+  .problem-learning-card > summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .problem-sample-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
