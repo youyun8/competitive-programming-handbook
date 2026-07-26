@@ -1,0 +1,55 @@
+---
+import BeginnerRecap from '@/components/strategies/BeginnerRecap.astro';
+import StrategyNav from '@/components/strategies/StrategyNav.astro';
+import StrategyProgress from '@/components/strategies/StrategyProgress';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/site';
+import { strategyProblemsForTopic } from '@/lib/strategy-problems';
+import { navGroups, pageById, pageHref, renderFragment, strategyTopics } from '@/lib/strategies';
+
+export function getStaticPaths() {
+  return strategyTopics.map((topic) => ({ params: { topic: topic.id }, props: { topic } }));
+}
+
+const { topic } = Astro.props;
+const home = pageById(topic, 'index');
+const intro = await renderFragment(topic, 's0-intro');
+const groups = navGroups(topic);
+const problems = strategyProblemsForTopic(topic.id);
+---
+
+<BaseLayout title={`${topic.name}｜策略圖鑑`} description={topic.homeDescription}>
+  <StrategyNav slot="sidebar" topic={topic} current="index" />
+
+  <p class="eyebrow">
+    <a href={withBase('/strategies/')}>策略圖鑑</a>
+  </p>
+  <h1>{topic.icon} {topic.name}</h1>
+  <p class="lede">{topic.tagline}</p>
+
+  <div class="strategy-body" set:html={intro} />
+
+  <section class="card">
+    <h2>本主題章節</h2>
+    <ol class="strategy-chapter-list">
+      {
+        groups.flatMap((group) =>
+          group.items.map((page) => (
+            <li>
+              <a href={pageHref(topic, page)}>{page.nav ?? page.title}</a>
+              {page.desc && <span class="meta">{page.desc}</span>}
+            </li>
+          ))
+        )
+      }
+    </ol>
+    <p class="meta">
+      本主題共收錄 {problems.length} 題，可在<a href={withBase(`/problem-lists/strategies/?topic=${topic.id}`)}
+        >策略題單</a
+      >一次篩選。
+    </p>
+  </section>
+
+  <BeginnerRecap topic={topic} page={home ?? { id: 'index', slug: null, title: topic.name }} />
+  <StrategyProgress client:idle />
+</BaseLayout>

@@ -4,6 +4,7 @@
 
 - Astro static site with strict TypeScript and content collections.
 - Markdown/MDX owns lessons, exercises, glossary entries, patterns, and learning paths.
+- `src/content/strategies/` is the one exception: the strategy atlas keeps its hand-written HTML fragments verbatim. Edit the fragments and the registry in `src/lib/strategy-topics.ts`; never write rendered output back into a fragment.
 - React islands are reserved for stateful UI: auth, sync, practice status, exercise notes, and visualizers.
 - Supabase owns authentication, user data, RLS, and authenticated Edge Functions.
 - Exercises use self-recorded learning status and private notes; the site does not compile or judge user code.

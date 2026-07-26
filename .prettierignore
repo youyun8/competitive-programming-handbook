@@ -8,3 +8,6 @@ playwright-report
 test-results
 pnpm-lock.yaml
 
+
+# 策略圖鑑的內容片段是手寫 HTML，重排會動到教學內容本身
+src/content/strategies

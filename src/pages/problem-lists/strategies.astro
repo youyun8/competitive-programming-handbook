@@ -1,0 +1,205 @@
+---
+import { getCollection } from 'astro:content';
+import ExerciseStatusControl from '@/components/progress/ExerciseStatusControl';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { problemKey } from '@/lib/problem-list';
+import { withBase } from '@/lib/site';
+import {
+  strategyProblemCounts,
+  strategyProblemList,
+  strategyProblemPlatforms,
+  strategyProblemSource,
+  strategyProblemTags,
+  strategyProblemKey
+} from '@/lib/strategy-problems';
+import { pageById, strategyHref, strategyTopics, topicById } from '@/lib/strategies';
+
+const exercises = await getCollection('exercises', ({ data }) => data.review_status === 'verified');
+const exerciseByProblem = new Map<string, (typeof exercises)[number]>();
+for (const exercise of exercises) {
+  if (!exercise.data.external_platform || !exercise.data.external_problem_id) continue;
+  const key = problemKey(exercise.data.external_platform, exercise.data.external_problem_id);
+  const existing = exerciseByProblem.get(key);
+  if (!existing || (existing.data.external_relation !== 'original' && exercise.data.external_relation === 'original')) {
+    exerciseByProblem.set(key, exercise);
+  }
+}
+
+const rows = strategyProblemList.map((problem) => {
+  const topic = topicById.get(problem.topic);
+  const key = strategyProblemKey(problem);
+  const location = problem.strategy_pages[0];
+  const page = topic && location ? pageById(topic, location.page) : undefined;
+  return {
+    problem,
+    exercise: key ? exerciseByProblem.get(key) : undefined,
+    strategyHref: topic && page ? strategyHref(topic.id, page.slug) : undefined,
+    strategyLabel: location?.nav
+  };
+});
+
+const crossListed = rows.filter((row) => row.exercise).length;
+---
+
+<BaseLayout title="策略題單" description="依解題策略分類的競賽題目總表，可依主題、難度、標籤與平臺篩選。" wide>
+  <p class="eyebrow">
+    <a href={withBase('/problem-lists/')}>題單索引</a>
+  </p>
+  <h1>策略題單</h1>
+  <p class="lede">
+    <a href={withBase('/strategies/')}>策略圖鑑</a>四個主題共 {strategyProblemCounts.rows} 筆條目、{
+      strategyProblemCounts.unique
+    } 道不重複題目，其中 {strategyProblemCounts.linked} 題附有線上判題連結。 練習狀態與<a href={withBase('/practice/')}
+      >題庫</a
+    >及策略章節內的題目卡共用同一份進度，在任一處標記都會同步。
+  </p>
+
+  <section class="card">
+    <h2>來源與注意事項</h2>
+    <p>{strategyProblemSource.origin}</p>
+    <ul>
+      {strategyProblemSource.notes.map((note) => <li>{note}</li>)}
+    </ul>
+    <p class="meta">
+      其中 {crossListed} 題同時出現在<a href={withBase('/problem-lists/')}>《演算法競賽》題單索引</a>，
+      已比對平臺與題號後互相連結。
+    </p>
+  </section>
+
+  <div class="filter-bar">
+    <div class="field">
+      <label for="strategy-search">搜尋</label>
+      <input id="strategy-search" type="search" placeholder="題名、題號、標籤、關鍵想法" />
+    </div>
+    <div class="field">
+      <label for="strategy-topic">主題</label>
+      <select id="strategy-topic">
+        <option value="">全部</option>
+        {strategyTopics.map((topic) => <option value={topic.id}>{`${topic.icon} ${topic.name}`}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <label for="strategy-difficulty">難度</label>
+      <select id="strategy-difficulty">
+        <option value="">全部</option>
+        {[1, 2, 3, 4, 5].map((level) => <option value={level}>{'★'.repeat(level)}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <label for="strategy-tag">標籤</label>
+      <select id="strategy-tag">
+        <option value="">全部</option>
+        {strategyProblemTags.map((tag) => <option value={tag}>{tag}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <label for="strategy-platform">平臺</label>
+      <select id="strategy-platform">
+        <option value="">全部</option>
+        {strategyProblemPlatforms.map((platform) => <option value={platform}>{platform}</option>)}
+      </select>
+    </div>
+  </div>
+
+  <div class="table-scroll">
+    <table class="problem-table strategy-problem-table">
+      <thead>
+        <tr>
+          <th scope="col">難度</th>
+          <th scope="col">主題</th>
+          <th scope="col">出處</th>
+          <th scope="col">題目</th>
+          <th scope="col">關鍵想法</th>
+          <th scope="col">策略章節</th>
+          <th scope="col">練習狀態</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map(({ problem, exercise, strategyHref: href, strategyLabel }) => (
+            <tr
+              class="strategy-problem-row"
+              data-topic={problem.topic}
+              data-difficulty={problem.difficulty}
+              data-tags={problem.tags.join('|')}
+              data-platform={problem.platform_label}
+              data-search={`${problem.title} ${problem.platform_label} ${problem.problem_id} ${problem.tags.join(' ')} ${problem.idea} ${strategyLabel ?? ''}`.toLowerCase()}
+            >
+              <td class="nowrap">
+                <span class="difficulty" data-level={problem.difficulty} aria-label={`難度 ${problem.difficulty} 星`}>
+                  {'★'.repeat(problem.difficulty)}
+                </span>
+              </td>
+              <td class="nowrap">{problem.topic_label}</td>
+              <td class="nowrap">
+                {problem.platform_label} {problem.problem_id}
+              </td>
+              <td>
+                {problem.url ? (
+                  <a href={problem.url} target="_blank" rel="noopener noreferrer nofollow">
+                    {problem.title} ↗
+                  </a>
+                ) : (
+                  problem.title
+                )}
+                <span class="tag-row">
+                  {problem.tags.map((tag) => (
+                    <span class="chip">{tag}</span>
+                  ))}
+                </span>
+                {exercise && (
+                  <small class="meta">
+                    <a href={withBase(`/practice/${exercise.data.id}/`)}>本站題解與筆記</a>
+                  </small>
+                )}
+              </td>
+              <td class="meta">{problem.idea}</td>
+              <td>{href ? <a href={href}>{strategyLabel}</a> : <span class="meta">—</span>}</td>
+              <td>
+                <ExerciseStatusControl client:idle exerciseId={problem.progress_id} compact />
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p id="strategy-empty" hidden>沒有符合條件的題目。</p>
+
+  <script>
+    const search = document.querySelector<HTMLInputElement>('#strategy-search');
+    const topic = document.querySelector<HTMLSelectElement>('#strategy-topic');
+    const difficulty = document.querySelector<HTMLSelectElement>('#strategy-difficulty');
+    const tag = document.querySelector<HTMLSelectElement>('#strategy-tag');
+    const platform = document.querySelector<HTMLSelectElement>('#strategy-platform');
+    const rows = [...document.querySelectorAll<HTMLElement>('.strategy-problem-row')];
+    const empty = document.querySelector<HTMLElement>('#strategy-empty');
+
+    function filter() {
+      const term = search?.value.trim().toLowerCase() ?? '';
+      let visible = 0;
+      for (const row of rows) {
+        const tags = row.dataset.tags?.split('|') ?? [];
+        const matches =
+          (!term || row.dataset.search?.includes(term)) &&
+          (!topic?.value || row.dataset.topic === topic.value) &&
+          (!difficulty?.value || row.dataset.difficulty === difficulty.value) &&
+          (!tag?.value || tags.includes(tag.value)) &&
+          (!platform?.value || row.dataset.platform === platform.value);
+        row.hidden = !matches;
+        if (matches) visible++;
+      }
+      if (empty) empty.hidden = visible !== 0;
+    }
+
+    for (const input of [search, topic, difficulty, tag, platform]) input?.addEventListener('input', filter);
+
+    // 策略章節用 ?topic=greedy 這種網址帶入預設篩選。
+    const requested = new URLSearchParams(location.search).get('topic');
+    if (requested && topic && [...topic.options].some((option) => option.value === requested)) {
+      topic.value = requested;
+    }
+    filter();
+  </script>
+</BaseLayout>

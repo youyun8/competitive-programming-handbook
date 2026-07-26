@@ -1,0 +1,639 @@
+/*
+ * 策略圖鑑專用樣式。
+ *
+ * 內文是手寫 HTML 片段，沿用原本的 class 名稱（.callout / .problem / .chip …），
+ * 但顏色一律取自 global.css 的設計 token，因此深淺色主題與全站同步切換。
+ */
+
+:root {
+  --strategy-idea: #10b981;
+  --strategy-when: #3b82f6;
+  --strategy-warn: #ef4444;
+  --strategy-proof: #a855f7;
+  --strategy-idea-bg: #ecfdf5;
+  --strategy-when-bg: #eff6ff;
+  --strategy-warn-bg: #fef2f2;
+  --strategy-proof-bg: #faf5ff;
+  --strategy-star-1: #16a34a;
+  --strategy-star-2: #65a30d;
+  --strategy-star-3: #d97706;
+  --strategy-star-4: #dc2626;
+  --strategy-star-5: #9333ea;
+}
+
+:root[data-theme='dark'] {
+  --strategy-idea-bg: #0c2b22;
+  --strategy-when-bg: #0e2036;
+  --strategy-warn-bg: #2d1214;
+  --strategy-proof-bg: #231234;
+  --strategy-star-1: #4ade80;
+  --strategy-star-2: #a3e635;
+  --strategy-star-3: #fbbf24;
+  --strategy-star-4: #f87171;
+  --strategy-star-5: #c084fc;
+}
+
+/* ── 策略圖鑑總覽 ───────────────────────────────────────── */
+
+.strategy-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.strategy-topic-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--surface);
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease;
+}
+
+a.strategy-topic-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.strategy-topic-icon {
+  font-size: 1.9rem;
+  line-height: 1;
+}
+
+.strategy-topic-card h2 {
+  margin: 0.6rem 0 0.3rem;
+  font-size: 1.12rem;
+}
+
+.strategy-topic-card p {
+  margin: 0 0 0.4rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.strategy-topic-card-future {
+  border-style: dashed;
+  box-shadow: none;
+}
+
+.strategy-chapter-list {
+  margin: 0;
+  padding-left: 1.3rem;
+}
+
+.strategy-chapter-list li {
+  margin: 0.45rem 0;
+}
+
+.strategy-chapter-list .meta {
+  display: block;
+  font-size: 0.85rem;
+}
+
+/* ── 側欄主題導覽 ───────────────────────────────────────── */
+
+.strategy-switcher {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem;
+  margin: 0.4rem 0 0.9rem;
+}
+
+.strategy-switcher-link {
+  border: 1px solid var(--border);
+  border-radius: 0.45rem;
+  padding: 0.35rem 0.4rem;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.strategy-switcher-link:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.strategy-switcher-link.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+.strategy-nav-label {
+  margin: 0.9rem 0 0.3rem;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.strategy-nav-link {
+  display: block;
+  border-radius: 0.4rem;
+  padding: 0.32rem 0.5rem;
+  color: inherit;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+.strategy-nav-link.level-2 {
+  padding-left: 1.1rem;
+  font-size: 0.85rem;
+}
+
+.strategy-nav-link:hover {
+  background: var(--surface-muted);
+  text-decoration: none;
+}
+
+.strategy-nav-link[aria-current='page'] {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+/* ── 內文 ───────────────────────────────────────────────── */
+
+.strategy-body h2 {
+  margin: 2rem 0 0.8rem;
+}
+
+.strategy-body h3 {
+  margin: 1.6rem 0 0.6rem;
+}
+
+.strategy-body .callout {
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+
+.strategy-body .callout > b:first-child {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.9em;
+  letter-spacing: 0.04em;
+}
+
+.strategy-body .callout.idea,
+.beginner-recap .callout.idea {
+  border-left-color: var(--strategy-idea);
+  background: var(--strategy-idea-bg);
+}
+
+.strategy-body .callout.when {
+  border-left-color: var(--strategy-when);
+  background: var(--strategy-when-bg);
+}
+
+.strategy-body .callout.warn {
+  border-left-color: var(--strategy-warn);
+  background: var(--strategy-warn-bg);
+}
+
+.strategy-body .callout.proof,
+.beginner-guide .callout.proof {
+  border-left-color: var(--strategy-proof);
+  background: var(--strategy-proof-bg);
+}
+
+.strategy-body .tbl-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  margin: 1.1rem 0;
+}
+
+.strategy-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.strategy-body th,
+.strategy-body td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.strategy-body thead th,
+.strategy-body tr:first-child th {
+  background: var(--surface-muted);
+  font-weight: 600;
+}
+
+.strategy-body tr:last-child th,
+.strategy-body tr:last-child td {
+  border-bottom: none;
+}
+
+.strategy-body pre.strategy-code {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  padding: 0.9rem 1rem;
+  font-size: var(--code-font-size);
+  line-height: 1.6;
+}
+
+.strategy-body :not(pre) > code {
+  border-radius: 0.3rem;
+  background: var(--surface-muted);
+  padding: 0.1rem 0.35rem;
+  font-size: 0.9em;
+}
+
+/* ── 題目卡 ─────────────────────────────────────────────── */
+
+.strategy-body .problem {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--surface);
+  padding: 0.8rem 1rem;
+  margin: 0.9rem 0;
+}
+
+.strategy-body .p-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.25rem;
+}
+
+.strategy-body .p-title {
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.strategy-body .stars,
+.strategy-problem-table .difficulty {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.strategy-body .stars.s1 {
+  color: var(--strategy-star-1);
+}
+
+.strategy-body .stars.s2 {
+  color: var(--strategy-star-2);
+}
+
+.strategy-body .stars.s3 {
+  color: var(--strategy-star-3);
+}
+
+.strategy-body .stars.s4 {
+  color: var(--strategy-star-4);
+}
+
+.strategy-body .stars.s5 {
+  color: var(--strategy-star-5);
+}
+
+.chip {
+  display: inline-block;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  padding: 0.1rem 0.55rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.strategy-body .problem details {
+  margin-top: 0.5rem;
+  border-top: 1px dashed var(--border);
+  padding-top: 0.4rem;
+}
+
+.strategy-body .problem summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.strategy-problem-status {
+  margin-top: 0.6rem;
+}
+
+/* ── 初學者導讀與複習 ───────────────────────────────────── */
+
+.beginner-guide,
+.beginner-recap {
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--surface);
+  padding: 1.1rem 1.3rem;
+  margin: 1.5rem 0;
+}
+
+.beginner-guide {
+  border-top: 4px solid var(--accent);
+}
+
+.beginner-recap {
+  margin-top: 2.4rem;
+}
+
+.beginner-guide-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.8rem;
+}
+
+.beginner-guide-head > span {
+  font-size: 1.7rem;
+}
+
+.beginner-guide-head b,
+.beginner-guide-head small {
+  display: block;
+}
+
+.beginner-guide-head small {
+  color: var(--muted);
+}
+
+.beginner-guide h3:first-of-type {
+  margin-top: 1.1rem;
+}
+
+.predict-box {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  margin: 0.9rem 0;
+  padding: 0.5rem 0.8rem;
+}
+
+.predict-box summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.mini-trace {
+  border-top: 1px dashed var(--border);
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+}
+
+.mini-trace h3 {
+  margin-top: 0;
+}
+
+.bug-list li,
+.reference-list li {
+  margin: 0.5rem 0;
+}
+
+/* ── 內文用到的圖示化元件 ───────────────────────────────── */
+
+.strategy-body .formula {
+  overflow-x: auto;
+  border-left: 3px solid var(--accent);
+  background: var(--surface-muted);
+  padding: 0.5rem 0.9rem;
+  margin: 0.9rem 0;
+}
+
+.strategy-body .stage,
+.strategy-body .trace-viewer,
+.strategy-body .tree-diagram,
+.strategy-body .data-example {
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--surface);
+  padding: 0.9rem 1.1rem;
+  margin: 1rem 0;
+}
+
+.strategy-body .stage h3,
+.strategy-body .mini-trace h3 {
+  margin-top: 0;
+}
+
+.strategy-body .data-example {
+  border-left: 4px solid var(--accent);
+}
+
+.strategy-body .figure-caption {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.strategy-body .trace-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.strategy-body .trace-step + .trace-step {
+  border-top: 1px dashed var(--border);
+  padding-top: 0.6rem;
+}
+
+.strategy-body .step-no,
+.strategy-body .sec-no {
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  padding: 0.1rem 0.6rem;
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.strategy-body .tree-level {
+  display: flex;
+  justify-content: center;
+  gap: 1.1rem;
+  margin: 0.8rem 0;
+}
+
+.strategy-body .tree-level.split > .tree-node {
+  width: 42%;
+}
+
+.strategy-body .tree-level.split.four > .tree-node {
+  width: 22%;
+}
+
+.strategy-body .tree-level.leaves {
+  justify-content: space-around;
+  padding: 0 8%;
+}
+
+.strategy-body .tree-node {
+  border: 2px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface-muted);
+  padding: 0.4rem 0.7rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.strategy-body .tree-node small {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.strategy-body .tree-node.active {
+  border-color: var(--accent);
+}
+
+.strategy-body .tree-node.chosen {
+  border-color: var(--strategy-when);
+  background: var(--strategy-when-bg);
+}
+
+.strategy-body .tree-node.passed {
+  border-style: dashed;
+  opacity: 0.78;
+}
+
+.strategy-body .tree-node.answer {
+  border-color: var(--strategy-idea);
+  background: var(--strategy-idea-bg);
+}
+
+.strategy-body .tree-node.muted {
+  opacity: 0.55;
+}
+
+.strategy-body .merge-visual {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 0.9rem 0;
+}
+
+.strategy-body .merge-visual > div:not(.merge-arrow) {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.7rem;
+}
+
+.strategy-body .merge-visual span {
+  border-radius: 0.35rem;
+  background: var(--surface-muted);
+  padding: 0.2rem 0.45rem;
+  font-size: 0.85em;
+}
+
+.strategy-body .merge-arrow {
+  color: var(--accent);
+  font-size: 1.4em;
+  font-weight: 800;
+}
+
+/* ── 上一節／下一節 ─────────────────────────────────────── */
+
+.strategy-pagenav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2.2rem 0 1rem;
+}
+
+.strategy-pagenav a {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--surface);
+  padding: 0.7rem 0.9rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.strategy-pagenav a:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.strategy-pagenav a.next {
+  text-align: right;
+}
+
+.strategy-pagenav .direction {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* ── 策略題單 ───────────────────────────────────────────── */
+
+.strategy-problem-table .tag-row {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-left: 0.4rem;
+}
+
+.strategy-problem-table .meta {
+  font-size: 0.86rem;
+}
+
+.strategy-problem-table small.meta {
+  display: block;
+}
+
+/* 關鍵想法欄位最容易把表格撐寬，限制寬度讓「練習狀態」留在可視範圍內。 */
+.strategy-problem-table td:nth-child(5) {
+  min-width: 12rem;
+  max-width: 18rem;
+}
+
+.strategy-problem-table td:nth-child(4) {
+  min-width: 13rem;
+}
+
+.strategy-problem-table .difficulty[data-level='1'] {
+  color: var(--strategy-star-1);
+}
+
+.strategy-problem-table .difficulty[data-level='2'] {
+  color: var(--strategy-star-2);
+}
+
+.strategy-problem-table .difficulty[data-level='3'] {
+  color: var(--strategy-star-3);
+}
+
+.strategy-problem-table .difficulty[data-level='4'] {
+  color: var(--strategy-star-4);
+}
+
+.strategy-problem-table .difficulty[data-level='5'] {
+  color: var(--strategy-star-5);
+}
+
+@media (max-width: 48rem) {
+  .strategy-pagenav {
+    flex-direction: column;
+  }
+
+  .strategy-pagenav a.next {
+    text-align: left;
+  }
+
+  .strategy-body .tree-level {
+    flex-wrap: wrap;
+  }
+}

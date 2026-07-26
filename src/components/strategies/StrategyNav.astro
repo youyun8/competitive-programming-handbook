@@ -1,0 +1,54 @@
+---
+import { navGroups, pageHref, strategyHref, strategyTopics, type StrategyTopic } from '@/lib/strategies';
+
+interface Props {
+  topic: StrategyTopic;
+  /** 目前所在頁面的 id；主題首頁傳 'index'。 */
+  current: string;
+}
+
+const { topic, current } = Astro.props;
+const groups = navGroups(topic);
+---
+
+<nav class="strategy-nav" aria-label={`${topic.name}章節導覽`}>
+  <div class="strategy-switcher" role="group" aria-label="切換策略主題">
+    {
+      strategyTopics.map((candidate) => (
+        <a
+          href={strategyHref(candidate.id)}
+          class:list={['strategy-switcher-link', { active: candidate.id === topic.id }]}
+          aria-current={candidate.id === topic.id ? 'true' : undefined}
+        >
+          <span aria-hidden="true">{candidate.icon}</span>
+          {candidate.short}
+        </a>
+      ))
+    }
+  </div>
+
+  <a
+    class="strategy-nav-link level-1"
+    href={strategyHref(topic.id)}
+    aria-current={current === 'index' ? 'page' : undefined}
+  >
+    🏠 {topic.name}首頁
+  </a>
+
+  {
+    groups.map((group) => (
+      <>
+        {group.label && <div class="strategy-nav-label">{group.label}</div>}
+        {group.items.map((page) => (
+          <a
+            class:list={['strategy-nav-link', group.label ? 'level-2' : 'level-1']}
+            href={pageHref(topic, page)}
+            aria-current={page.id === current ? 'page' : undefined}
+          >
+            {page.nav ?? page.title}
+          </a>
+        ))}
+      </>
+    ))
+  }
+</nav>

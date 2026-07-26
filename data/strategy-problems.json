@@ -1,0 +1,4789 @@
+{
+  "version": 1,
+  "source": {
+    "title": "演算法策略圖鑑題目總表",
+    "origin": "本站「策略圖鑑」章節自行整理的策略分類題單，原先維護於 youyun8/competitive-programming，已於本 repo 合併保存。",
+    "notes": [
+      "題目連結指向各原始平臺（LeetCode／力扣、Codeforces、AtCoder、洛谷、POJ、UVa、SPOJ），本站僅整理分類與思路說明，不重製題目內容。",
+      "同一道題若從不同策略角度各講一次，會刻意共用同一個進度 id，任一處標記進度都會同步。",
+      "標示為「經典題型」的條目沒有對應的線上判題連結，屬於概念性練習。"
+    ]
+  },
+  "counts": {
+    "rows": 258,
+    "unique_problems": 252,
+    "topics": 4,
+    "linked": 248
+  },
+  "items": [
+    {
+      "progress_id": "lc-455",
+      "title": "LC 455 分發餅乾",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "455",
+      "url": "https://leetcode.cn/problems/assign-cookies/",
+      "difficulty": 1,
+      "tags": ["排序", "雙指針"],
+      "idea": "雙排序後最小可行餅乾餵最小胃口",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 排序貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "misc-01",
+      "title": "部分背包 Fractional Knapsack",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "",
+      "platform_label": "經典題型",
+      "problem_id": "",
+      "url": "",
+      "difficulty": 1,
+      "tags": ["排序"],
+      "idea": "按單位價值 v/w 遞減裝，可分割保證貪心正確",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 排序貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-860",
+      "title": "LC 860 檸檬水找零",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "860",
+      "url": "https://leetcode.cn/problems/lemonade-change/",
+      "difficulty": 1,
+      "tags": ["模擬"],
+      "idea": "找 15 元優先用 10+5，保留萬能的 5 元",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "lc-122",
+      "title": "LC 122 買賣股票的最佳時機 II",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "122",
+      "url": "https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/",
+      "difficulty": 1,
+      "tags": ["數學"],
+      "idea": "答案 = 所有相鄰正日差之和",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p1223",
+      "title": "洛谷 P1223 排隊接水",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1223",
+      "url": "https://www.luogu.com.cn/problem/P1223",
+      "difficulty": 1,
+      "tags": ["排序", "排程"],
+      "idea": "短作業優先（SJF），相鄰交換論證",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "lc-435",
+      "title": "LC 435 無重疊區間",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "435",
+      "url": "https://leetcode.cn/problems/non-overlapping-intervals/",
+      "difficulty": 2,
+      "tags": ["區間"],
+      "idea": "按右端點排序能選就選（活動選擇）",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 區間問題全家桶"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-452",
+      "title": "LC 452 最少箭射氣球",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "452",
+      "url": "https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/",
+      "difficulty": 2,
+      "tags": ["區間"],
+      "idea": "區間選點：右端點排序，箭射在右端點",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 區間問題全家桶"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-179",
+      "title": "LC 179 最大數",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "179",
+      "url": "https://leetcode.cn/problems/largest-number/",
+      "difficulty": 2,
+      "tags": ["排序", "交換論證"],
+      "idea": "comparator：a+b > b+a，注意嚴格弱序",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 排序貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-881",
+      "title": "LC 881 救生艇",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "881",
+      "url": "https://leetcode.cn/problems/boats-to-save-people/",
+      "difficulty": 2,
+      "tags": ["排序", "雙指針"],
+      "idea": "最重配最輕，配不上就單走",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 排序貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-402",
+      "title": "LC 402 移掉 K 位數字",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "402",
+      "url": "https://leetcode.cn/problems/remove-k-digits/",
+      "difficulty": 2,
+      "tags": ["字典序", "單調棧"],
+      "idea": "遞增棧：新數字小就彈棧頂",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 字典序貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1090",
+      "title": "洛谷 P1090 合併果子",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1090",
+      "url": "https://www.luogu.com.cn/problem/P1090",
+      "difficulty": 2,
+      "tags": ["堆", "Huffman"],
+      "idea": "每次合併最小兩堆 = Huffman 樹",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 堆積貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-462",
+      "title": "LC 462 最少移動次數使陣列相等 II",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "462",
+      "url": "https://leetcode.cn/problems/minimum-moves-to-equal-array-elements-ii/",
+      "difficulty": 2,
+      "tags": ["中位數"],
+      "idea": "Σ|a−x| 最小 ⟺ x 取中位數",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 數學貪心與調整法"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-343",
+      "title": "LC 343 整數拆分",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "343",
+      "url": "https://leetcode.cn/problems/integer-break/",
+      "difficulty": 2,
+      "tags": ["數學"],
+      "idea": "拆成盡量多的 3，餘 1 改成 2+2",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 數學貪心與調整法"
+        }
+      ]
+    },
+    {
+      "progress_id": "poj-1328",
+      "title": "POJ 1328 Radar Installation",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "POJ",
+      "platform_label": "POJ",
+      "problem_id": "1328",
+      "url": "http://poj.org/problem?id=1328",
+      "difficulty": 2,
+      "tags": ["區間", "幾何轉化"],
+      "idea": "島 → 可放雷達的 x 區間，化為區間選點",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 排序貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-45",
+      "title": "LC 45 跳躍遊戲 II",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "45",
+      "url": "https://leetcode.cn/problems/jump-game-ii/",
+      "difficulty": 2,
+      "tags": ["區間", "覆蓋"],
+      "idea": "維護當前層可達最遠處，到邊界才起跳",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "lc-1024",
+      "title": "LC 1024 視頻拼接",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "1024",
+      "url": "https://leetcode.cn/problems/video-stitching/",
+      "difficulty": 3,
+      "tags": ["區間", "覆蓋"],
+      "idea": "左端點排序，每步接右端點伸最遠的一段",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 區間問題全家桶"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-134",
+      "title": "LC 134 加油站",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "134",
+      "url": "https://leetcode.cn/problems/gas-station/",
+      "difficulty": 2,
+      "tags": ["掃描", "數學"],
+      "idea": "總和非負必有解；油箱見負即換起點",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p1031",
+      "title": "洛谷 P1031 均分紙牌",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1031",
+      "url": "https://www.luogu.com.cn/problem/P1031",
+      "difficulty": 2,
+      "tags": ["前綴和"],
+      "idea": "從左往右逐位結清，答案 = 非零前綴數",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "lc-630",
+      "title": "LC 630 課程表 III",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "630",
+      "url": "https://leetcode.cn/problems/course-schedule-iii/",
+      "difficulty": 3,
+      "tags": ["反悔貪心", "堆"],
+      "idea": "按截止排序先選，超時彈掉最耗時的",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 反悔貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-871",
+      "title": "LC 871 最低加油次數",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "871",
+      "url": "https://leetcode.cn/problems/minimum-number-of-refueling-stops/",
+      "difficulty": 3,
+      "tags": ["反悔貪心", "堆"],
+      "idea": "路過先存油入堆，不夠時反悔取最大",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 反悔貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1080",
+      "title": "洛谷 P1080 國王遊戲",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1080",
+      "url": "https://www.luogu.com.cn/problem/P1080",
+      "difficulty": 3,
+      "tags": ["排序", "交換論證", "高精度"],
+      "idea": "相鄰交換 ⇒ 按 a×b 遞增排",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 排序貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1842",
+      "title": "洛谷 P1842 奶牛玩雜技",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1842",
+      "url": "https://www.luogu.com.cn/problem/P1842",
+      "difficulty": 3,
+      "tags": ["排序", "交換論證"],
+      "idea": "按 w+s 遞增，風險值交換論證",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "lc-253",
+      "title": "LC 253 會議室 II",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "253",
+      "url": "https://leetcode.cn/problems/meeting-rooms-ii/",
+      "difficulty": 3,
+      "tags": ["區間", "堆", "掃描線"],
+      "idea": "最大重疊數 = 答案；小根堆重用最早空房",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 區間問題全家桶"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-316",
+      "title": "LC 316 去除重複字母",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "316",
+      "url": "https://leetcode.cn/problems/remove-duplicate-letters/",
+      "difficulty": 3,
+      "tags": ["字典序", "單調棧"],
+      "idea": "彈棧條件加上「後面還會出現」的可行性檢查",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 字典序貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "poj-2287",
+      "title": "POJ 2287 田忌賽馬",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "POJ",
+      "platform_label": "POJ",
+      "problem_id": "2287",
+      "url": "http://poj.org/problem?id=2287",
+      "difficulty": 3,
+      "tags": ["排序", "雙指針", "博弈"],
+      "idea": "打得贏就打，打不贏用最慢的墊",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 排序貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "misc-02",
+      "title": "Smith's Rule 加權完成時間",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "",
+      "platform_label": "經典題型",
+      "problem_id": "",
+      "url": "",
+      "difficulty": 3,
+      "tags": ["排程", "交換論證"],
+      "idea": "按 p/w 遞增：短且重要優先",
+      "strategy_pages": [
+        {
+          "page": "s03",
+          "nav": "2.3 交換論證排程"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-295",
+      "title": "LC 295 數據流中位數",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "295",
+      "url": "https://leetcode.cn/problems/find-median-from-data-stream/",
+      "difficulty": 3,
+      "tags": ["堆", "中位數"],
+      "idea": "對頂堆維護動態中位數",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 堆積貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1631",
+      "title": "洛谷 P1631 序列合併",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1631",
+      "url": "https://www.luogu.com.cn/problem/P1631",
+      "difficulty": 3,
+      "tags": ["堆", "多路歸併"],
+      "idea": "n² 個和組織成 n 條有序鏈 k 路歸併",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 堆積貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2678",
+      "title": "洛谷 P2678 跳石頭",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2678",
+      "url": "https://www.luogu.com.cn/problem/P2678",
+      "difficulty": 3,
+      "tags": ["二分+貪心"],
+      "idea": "二分最小距離，貪心數要移幾塊",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 貪心 × 二分答案"
+        }
+      ]
+    },
+    {
+      "progress_id": "poj-2456",
+      "title": "POJ 2456 Aggressive Cows",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "POJ",
+      "platform_label": "POJ",
+      "problem_id": "2456",
+      "url": "http://poj.org/problem?id=2456",
+      "difficulty": 3,
+      "tags": ["二分+貪心"],
+      "idea": "二分最小間距，貪心放牛",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "misc-03",
+      "title": "字典序最小拓撲序",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "",
+      "platform_label": "經典題型",
+      "problem_id": "",
+      "url": "",
+      "difficulty": 3,
+      "tags": ["字典序", "圖", "堆"],
+      "idea": "Kahn + 小根堆；注意與「盡量早」的區別",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 字典序貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3366",
+      "title": "洛谷 P3366 最小生成樹",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3366",
+      "url": "https://www.luogu.com.cn/problem/P3366",
+      "difficulty": 3,
+      "tags": ["圖", "MST"],
+      "idea": "Kruskal：Cut Property 保證貪心正確",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 圖上貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4779",
+      "title": "洛谷 P4779 Dijkstra 標準版",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4779",
+      "url": "https://www.luogu.com.cn/problem/P4779",
+      "difficulty": 3,
+      "tags": ["圖", "最短路"],
+      "idea": "非負權下最近未定點已收斂",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 圖上貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-1526c2",
+      "title": "CF 1526C2 Potions",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "1526C2",
+      "url": "https://codeforces.com/problemset/problem/1526/C2",
+      "difficulty": 3,
+      "tags": ["反悔貪心", "堆"],
+      "idea": "全喝，血負時吐掉最毒的一瓶",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 貪心 × 資料結構"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-406",
+      "title": "LC 406 根據身高重建隊列",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "406",
+      "url": "https://leetcode.cn/problems/queue-reconstruction-by-height/",
+      "difficulty": 3,
+      "tags": ["排序", "構造"],
+      "idea": "高的先排，矮的按 k 插空不影響前者",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "lc-135",
+      "title": "LC 135 分發糖果",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "135",
+      "url": "https://leetcode.cn/problems/candy/",
+      "difficulty": 3,
+      "tags": ["掃描", "調整法"],
+      "idea": "左右各掃一遍取 max，滿足雙向約束",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "misc-04",
+      "title": "USACO Work Scheduling (P2949)",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "",
+      "url": "https://www.luogu.com.cn/problem/P2949",
+      "difficulty": 3,
+      "tags": ["反悔貪心", "堆"],
+      "idea": "報酬版反悔：時間不夠換掉最低報酬",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p1484",
+      "title": "洛谷 P1484 種樹（選 k 不相鄰）",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1484",
+      "url": "https://www.luogu.com.cn/problem/P1484",
+      "difficulty": 4,
+      "tags": ["反悔貪心", "鏈表"],
+      "idea": "選一個點後合併鄰居為反悔選項 l+r−x",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p1248",
+      "title": "洛谷 P1248 加工生產調度",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1248",
+      "url": "https://www.luogu.com.cn/problem/P1248",
+      "difficulty": 4,
+      "tags": ["排程", "交換論證"],
+      "idea": "Johnson's Rule：min(a,b) 分組排序",
+      "strategy_pages": [
+        {
+          "page": "s03",
+          "nav": "2.3 交換論證排程"
+        }
+      ]
+    },
+    {
+      "progress_id": "atcoder-dp-x",
+      "title": "AtCoder DP X - Tower",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "AtCoder",
+      "platform_label": "AtCoder",
+      "problem_id": "",
+      "url": "https://atcoder.jp/contests/dp/tasks/dp_x",
+      "difficulty": 4,
+      "tags": ["交換論證", "貪心+DP"],
+      "idea": "按 w+s 排序定順序，再 0/1 背包",
+      "strategy_pages": [
+        {
+          "page": "s03",
+          "nav": "2.3 交換論證排程"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4053",
+      "title": "洛谷 P4053 建築搶修",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4053",
+      "url": "https://www.luogu.com.cn/problem/P4053",
+      "difficulty": 4,
+      "tags": ["反悔貪心", "堆"],
+      "idea": "LC 630 原型：超期彈最耗時",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 反悔貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-865d",
+      "title": "CF 865D Buy Low Sell High",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "865D",
+      "url": "https://codeforces.com/problemset/problem/865/D",
+      "difficulty": 4,
+      "tags": ["反悔貪心", "堆", "費用流思想"],
+      "idea": "成交後推回反悔券 = 殘量反向邊",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 反悔貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2168",
+      "title": "洛谷 P2168 荷馬史詩",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2168",
+      "url": "https://www.luogu.com.cn/problem/P2168",
+      "difficulty": 4,
+      "tags": ["堆", "Huffman"],
+      "idea": "k 叉 Huffman：補虛點湊滿 (n−1)%(k−1)",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 堆積貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-321",
+      "title": "LC 321 拼接最大數",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "321",
+      "url": "https://leetcode.cn/problems/create-maximum-number/",
+      "difficulty": 4,
+      "tags": ["字典序", "單調棧", "歸併"],
+      "idea": "枚舉分配 + 單調棧取最大子序列 + 貪心歸併",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 字典序貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2512",
+      "title": "洛谷 P2512 糖果傳遞",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2512",
+      "url": "https://www.luogu.com.cn/problem/P2512",
+      "difficulty": 4,
+      "tags": ["中位數", "前綴和"],
+      "idea": "環形均分 → Σ|x−c_i| → 中位數",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 數學貪心與調整法"
+        }
+      ]
+    },
+    {
+      "progress_id": "misc-05",
+      "title": "Job Sequencing + DSU",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "",
+      "platform_label": "經典題型",
+      "problem_id": "",
+      "url": "",
+      "difficulty": 4,
+      "tags": ["DSU", "排程"],
+      "idea": "報酬降序，DSU 找 ≤d 的最晚空槽",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 貪心 × 資料結構"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1250",
+      "title": "洛谷 P1250 種樹（區間約束）",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1250",
+      "url": "https://www.luogu.com.cn/problem/P1250",
+      "difficulty": 4,
+      "tags": ["區間", "DSU"],
+      "idea": "右端點排序，從右往左補種最保值",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 貪心 × 資料結構"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4180",
+      "title": "洛谷 P4180 嚴格次小生成樹",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4180",
+      "url": "https://www.luogu.com.cn/problem/P4180",
+      "difficulty": 4,
+      "tags": ["圖", "MST", "倍增"],
+      "idea": "枚舉非樹邊換掉路徑最大/嚴格次大邊",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 圖上貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-1486d",
+      "title": "CF 1486D Max Median",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "1486D",
+      "url": "https://codeforces.com/problemset/problem/1486/D",
+      "difficulty": 4,
+      "tags": ["二分+貪心", "中位數"],
+      "idea": "二分 x 後 ±1 轉化，找正和子陣列",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 貪心 × 二分答案"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1417",
+      "title": "洛谷 P1417 烹調方案",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1417",
+      "url": "https://www.luogu.com.cn/problem/P1417",
+      "difficulty": 4,
+      "tags": ["交換論證", "貪心+DP"],
+      "idea": "交叉比較 b·c 定序後做背包",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "cf-1203f1",
+      "title": "CF 1203F1 Complete the Projects",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "1203F1",
+      "url": "https://codeforces.com/problemset/problem/1203/F1",
+      "difficulty": 4,
+      "tags": ["交換論證", "貪心+DP"],
+      "idea": "加分的按門檻升序；扣分的交換論證+DP",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p1889",
+      "title": "洛谷 P1889 士兵站隊",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1889",
+      "url": "https://www.luogu.com.cn/problem/P1889",
+      "difficulty": 3,
+      "tags": ["中位數"],
+      "idea": "y 取中位數；x 減下標後取中位數",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "cf-713c",
+      "title": "CF 713C 嚴格遞增最小代價",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "713C",
+      "url": "https://codeforces.com/problemset/problem/713/C",
+      "difficulty": 5,
+      "tags": ["slope trick", "堆"],
+      "idea": "a_i−=i 後大根堆維護凸函數左端斜率",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "apio-2016",
+      "title": "APIO 2016 烟花表演 (P3642)",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "",
+      "url": "https://www.luogu.com.cn/problem/P3642",
+      "difficulty": 5,
+      "tags": ["slope trick", "可並堆"],
+      "idea": "樹上凸函數用左偏樹合併",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "cf-888g",
+      "title": "CF 888G Xor-MST",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "888G",
+      "url": "https://codeforces.com/problemset/problem/888/G",
+      "difficulty": 5,
+      "tags": ["圖", "MST", "01-Trie"],
+      "idea": "Boruvka 每輪用 Trie 找最小 XOR 出邊",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 圖上貪心"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-802o",
+      "title": "CF 802O April Fools' Problem",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "802O",
+      "url": "https://codeforces.com/problemset/problem/802/O",
+      "difficulty": 5,
+      "tags": ["模擬費用流", "反悔貪心", "wqs二分"],
+      "idea": "堆模擬增廣 + wqs 二分處理恰好 k",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-1284g",
+      "title": "CF 1284G Seollal",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "1284G",
+      "url": "https://codeforces.com/problemset/problem/1284/G",
+      "difficulty": 5,
+      "tags": ["擬陣"],
+      "idea": "圖形擬陣 ∩ 分割擬陣的擬陣交增廣",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "poj-2728",
+      "title": "POJ 2728 Desert King",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "POJ",
+      "platform_label": "POJ",
+      "problem_id": "2728",
+      "url": "http://poj.org/problem?id=2728",
+      "difficulty": 5,
+      "tags": ["二分+貪心", "分數規劃", "MST"],
+      "idea": "01 分數規劃：二分 λ 後跑 Prim",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 貪心 × 二分答案"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-70",
+      "title": "LC 70 爬樓梯",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "70",
+      "url": "https://leetcode.cn/problems/climbing-stairs/",
+      "difficulty": 1,
+      "tags": ["線性"],
+      "idea": "枚舉最後一步：dp[i]=dp[i-1]+dp[i-2]",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 線性 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-198",
+      "title": "LC 198 打家劫舍",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "198",
+      "url": "https://leetcode.cn/problems/house-robber/",
+      "difficulty": 1,
+      "tags": ["線性"],
+      "idea": "選/不選：max(dp[i-1], dp[i-2]+a[i])",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 線性 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-53",
+      "title": "LC 53 最大子陣列和",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "53",
+      "url": "https://leetcode.cn/problems/maximum-subarray/",
+      "difficulty": 1,
+      "tags": ["線性"],
+      "idea": "Kadane：以 i 結尾，前綴為負就重開",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 線性 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-62",
+      "title": "LC 62 不同路徑",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "62",
+      "url": "https://leetcode.cn/problems/unique-paths/",
+      "difficulty": 1,
+      "tags": ["網格", "計數"],
+      "idea": "上方+左方，一維滾動",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 網格與座標 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-64",
+      "title": "LC 64 最小路徑和",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "64",
+      "url": "https://leetcode.cn/problems/minimum-path-sum/",
+      "difficulty": 1,
+      "tags": ["網格"],
+      "idea": "計數的 + 換成 min，同一骨架",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 網格與座標 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1216",
+      "title": "洛谷 P1216 數字三角形",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1216",
+      "url": "https://www.luogu.com.cn/problem/P1216",
+      "difficulty": 1,
+      "tags": ["網格"],
+      "idea": "經典入門：由下往上遞推最省事",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "lc-300",
+      "title": "LC 300 最長遞增子序列",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "300",
+      "url": "https://leetcode.cn/problems/longest-increasing-subsequence/",
+      "difficulty": 2,
+      "tags": ["線性", "LIS", "二分"],
+      "idea": "g[k]=長 k+1 的最小結尾，lower_bound 替換",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 線性 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1091",
+      "title": "洛谷 P1091 合唱隊形",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1091",
+      "url": "https://www.luogu.com.cn/problem/P1091",
+      "difficulty": 2,
+      "tags": ["線性", "LIS"],
+      "idea": "正反兩次 LIS 拼接取 max",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 線性 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-455a",
+      "title": "CF 455A Boredom",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "455A",
+      "url": "https://codeforces.com/problemset/problem/455/A",
+      "difficulty": 2,
+      "tags": ["線性"],
+      "idea": "對值域做打家劫舍",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 線性 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1048",
+      "title": "洛谷 P1048 採藥（0/1 背包）",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1048",
+      "url": "https://www.luogu.com.cn/problem/P1048",
+      "difficulty": 2,
+      "tags": ["背包"],
+      "idea": "一維滾動必須倒序枚舉容量",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p1616",
+      "title": "洛谷 P1616 疯狂的采药（完全背包）",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1616",
+      "url": "https://www.luogu.com.cn/problem/P1616",
+      "difficulty": 2,
+      "tags": ["背包"],
+      "idea": "改成正序枚舉 = 允許重複選",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "lc-494",
+      "title": "LC 494 目標和",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "494",
+      "url": "https://leetcode.cn/problems/target-sum/",
+      "difficulty": 2,
+      "tags": ["背包", "計數"],
+      "idea": "轉成選子集湊 (sum+target)/2 的計數背包",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "lc-516",
+      "title": "LC 516 最長迴文子序列",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "516",
+      "url": "https://leetcode.cn/problems/longest-palindromic-subsequence/",
+      "difficulty": 2,
+      "tags": ["區間"],
+      "idea": "看兩端字元：相等縮兩頭，否則丟一頭",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 區間 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-1143",
+      "title": "LC 1143 最長公共子序列",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "1143",
+      "url": "https://leetcode.cn/problems/longest-common-subsequence/",
+      "difficulty": 2,
+      "tags": ["雙序列"],
+      "idea": "末端配對或各自跳過",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 雙序列 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-122",
+      "title": "LC 121/122 股票 I・II",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "122",
+      "url": "https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/",
+      "difficulty": 2,
+      "tags": ["狀態機"],
+      "idea": "hold/free 兩節點狀態機",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 狀態機 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-935",
+      "title": "LC 935 騎士撥號器",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "935",
+      "url": "https://leetcode.cn/problems/knight-dialer/",
+      "difficulty": 2,
+      "tags": ["狀態機", "矩陣冪"],
+      "idea": "鍵盤當自動機；n 大就上矩陣冪",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 狀態機 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1352",
+      "title": "洛谷 P1352 沒有上司的舞會",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1352",
+      "url": "https://www.luogu.com.cn/problem/P1352",
+      "difficulty": 2,
+      "tags": ["樹上"],
+      "idea": "dp[u][0/1]：樹上最大權獨立集",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 樹上 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "tree-diameter",
+      "title": "樹的直徑（DP 解法）",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "",
+      "platform_label": "經典題型",
+      "problem_id": "",
+      "url": "",
+      "difficulty": 2,
+      "tags": ["樹上"],
+      "idea": "維護最大+次大下行鏈，合併時更新答案",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 樹上 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-96",
+      "title": "LC 96 不同的二叉搜尋樹",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "96",
+      "url": "https://leetcode.cn/problems/unique-binary-search-trees/",
+      "difficulty": 2,
+      "tags": ["計數"],
+      "idea": "枚舉根，左右獨立相乘 = 卡特蘭數",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 計數與期望 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "atcoder-dp-g",
+      "title": "AtCoder DP G - Longest Path",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "AtCoder",
+      "platform_label": "AtCoder",
+      "problem_id": "",
+      "url": "https://atcoder.jp/contests/dp/tasks/dp_g",
+      "difficulty": 2,
+      "tags": ["DAG"],
+      "idea": "拓撲序遞推；LIS 的 DAG 觀點",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 圖上與博弈 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "atcoder-dp-k",
+      "title": "AtCoder DP K - Stones",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "AtCoder",
+      "platform_label": "AtCoder",
+      "problem_id": "",
+      "url": "https://atcoder.jp/contests/dp/tasks/dp_k",
+      "difficulty": 2,
+      "tags": ["博弈"],
+      "idea": "能推對手入必敗態即必勝",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 圖上與博弈 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1020",
+      "title": "洛谷 P1020 導彈攔截",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1020",
+      "url": "https://www.luogu.com.cn/problem/P1020",
+      "difficulty": 3,
+      "tags": ["LIS", "問題轉化"],
+      "idea": "Dilworth：最少不上升鏈 = 最長上升子序列",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 線性 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-354",
+      "title": "LC 354 俄羅斯套娃信封",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "354",
+      "url": "https://leetcode.cn/problems/russian-doll-envelopes/",
+      "difficulty": 3,
+      "tags": ["LIS", "問題轉化"],
+      "idea": "w 增 h 減排序後對 h 做 LIS",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 線性 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-174",
+      "title": "LC 174 地下城遊戲",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "174",
+      "url": "https://leetcode.cn/problems/dungeon-game/",
+      "difficulty": 3,
+      "tags": ["網格"],
+      "idea": "倒推定義「從此出發所需最少血」解耦後效性",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 網格與座標 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1004",
+      "title": "洛谷 P1004 方格取數",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1004",
+      "url": "https://www.luogu.com.cn/problem/P1004",
+      "difficulty": 3,
+      "tags": ["網格"],
+      "idea": "兩趟改兩人同步走，i+j=k 消一維",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 網格與座標 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1776",
+      "title": "洛谷 P1776 寶物篩選（多重背包）",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1776",
+      "url": "https://www.luogu.com.cn/problem/P1776",
+      "difficulty": 3,
+      "tags": ["背包"],
+      "idea": "二進位拆分打包成 0/1",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p1757",
+      "title": "洛谷 P1757 通天之分組背包",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1757",
+      "url": "https://www.luogu.com.cn/problem/P1757",
+      "difficulty": 3,
+      "tags": ["背包"],
+      "idea": "組外層、容量倒序中層、組內內層",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "lc-474",
+      "title": "LC 474 一和零",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "474",
+      "url": "https://leetcode.cn/problems/ones-and-zeroes/",
+      "difficulty": 3,
+      "tags": ["背包"],
+      "idea": "二維費用：兩個上限就開兩維都倒序",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p1064",
+      "title": "洛谷 P1064 金明的預算方案",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1064",
+      "url": "https://www.luogu.com.cn/problem/P1064",
+      "difficulty": 3,
+      "tags": ["背包"],
+      "idea": "主件+附件打包成組，退化成分組背包",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p5020",
+      "title": "洛谷 P5020 貨幣系統",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P5020",
+      "url": "https://www.luogu.com.cn/problem/P5020",
+      "difficulty": 3,
+      "tags": ["背包"],
+      "idea": "可行性完全背包判冗餘面額",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p1880",
+      "title": "洛谷 P1880 石子合併（環形）",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1880",
+      "url": "https://www.luogu.com.cn/problem/P1880",
+      "difficulty": 3,
+      "tags": ["區間"],
+      "idea": "環形拆鏈開 2n；相鄰合併必須 DP",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 區間 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-312",
+      "title": "LC 312 戳氣球",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "312",
+      "url": "https://leetcode.cn/problems/burst-balloons/",
+      "difficulty": 3,
+      "tags": ["區間"],
+      "idea": "枚舉「最後一個戳的」解耦子區間",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 區間 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "atcoder-dp-n",
+      "title": "AtCoder DP N - Slimes",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "AtCoder",
+      "platform_label": "AtCoder",
+      "problem_id": "",
+      "url": "https://atcoder.jp/contests/dp/tasks/dp_n",
+      "difficulty": 3,
+      "tags": ["區間"],
+      "idea": "直鏈石子合併模板題",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 區間 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1439",
+      "title": "洛谷 P1439 排列 LCS",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1439",
+      "url": "https://www.luogu.com.cn/problem/P1439",
+      "difficulty": 3,
+      "tags": ["雙序列", "問題轉化"],
+      "idea": "排列無重複 → 位置映射把 LCS 變 LIS",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 雙序列 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-72",
+      "title": "LC 72 編輯距離",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "72",
+      "url": "https://leetcode.cn/problems/edit-distance/",
+      "difficulty": 3,
+      "tags": ["雙序列"],
+      "idea": "插/刪/換對應三個轉移",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 雙序列 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-115",
+      "title": "LC 115 不同的子序列",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "115",
+      "url": "https://leetcode.cn/problems/distinct-subsequences/",
+      "difficulty": 3,
+      "tags": ["雙序列", "計數"],
+      "idea": "按「a[i] 用不用」分類保證不重不漏",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 雙序列 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-44",
+      "title": "LC 44 萬用字元匹配",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "44",
+      "url": "https://leetcode.cn/problems/wildcard-matching/",
+      "difficulty": 3,
+      "tags": ["雙序列"],
+      "idea": "* 匹配空或再吞一個字元",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 雙序列 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-97",
+      "title": "LC 97 交錯字串",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "97",
+      "url": "https://leetcode.cn/problems/interleaving-string/",
+      "difficulty": 3,
+      "tags": ["雙序列"],
+      "idea": "C 的下標 = i+j 是導出量不進狀態",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 雙序列 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-309",
+      "title": "LC 309 股票含冷凍期",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "309",
+      "url": "https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/",
+      "difficulty": 3,
+      "tags": ["狀態機"],
+      "idea": "狀態機加 cooldown 節點",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 狀態機 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-188",
+      "title": "LC 188 股票 IV（至多 k 筆）",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "188",
+      "url": "https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/",
+      "difficulty": 3,
+      "tags": ["狀態機", "wqs二分"],
+      "idea": "次數進狀態；或 wqs 二分消掉次數維",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 狀態機 DP"
+        },
+        {
+          "page": "s12",
+          "nav": "2.12 DP 優化技術"
+        }
+      ]
+    },
+    {
+      "progress_id": "atcoder-dp-o",
+      "title": "AtCoder DP O - Matching",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "AtCoder",
+      "platform_label": "AtCoder",
+      "problem_id": "",
+      "url": "https://atcoder.jp/contests/dp/tasks/dp_o",
+      "difficulty": 3,
+      "tags": ["狀壓", "計數"],
+      "idea": "男生編號 = popcount(S)，一維集合即可",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 位元狀壓 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1171",
+      "title": "洛谷 P1171 售貨員的難題（TSP）",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1171",
+      "url": "https://www.luogu.com.cn/problem/P1171",
+      "difficulty": 3,
+      "tags": ["狀壓"],
+      "idea": "dp[已訪問集合][目前位置]",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 位元狀壓 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1896",
+      "title": "洛谷 P1896 互不侵犯",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1896",
+      "url": "https://www.luogu.com.cn/problem/P1896",
+      "difficulty": 3,
+      "tags": ["狀壓"],
+      "idea": "預枚舉合法行狀態再行間配對",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 位元狀壓 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2657",
+      "title": "洛谷 P2657 windy 數",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2657",
+      "url": "https://www.luogu.com.cn/problem/P2657",
+      "difficulty": 3,
+      "tags": ["數位"],
+      "idea": "記上一位；lead 旗防前導零誤判",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 數位 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2602",
+      "title": "洛谷 P2602 數字計數",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2602",
+      "url": "https://www.luogu.com.cn/problem/P2602",
+      "difficulty": 3,
+      "tags": ["數位", "計數"],
+      "idea": "dfs 同時返回（個數, 出現次數）",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 數位 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-902",
+      "title": "LC 902 最大為 N 的數字組合",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "902",
+      "url": "https://leetcode.cn/problems/numbers-at-most-n-given-digit-set/",
+      "difficulty": 3,
+      "tags": ["數位"],
+      "idea": "tight 旗的純粹練習",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 數位 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "atcoder-dp-s",
+      "title": "AtCoder DP S - Digit Sum",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "AtCoder",
+      "platform_label": "AtCoder",
+      "problem_id": "",
+      "url": "https://atcoder.jp/contests/dp/tasks/dp_s",
+      "difficulty": 3,
+      "tags": ["數位"],
+      "idea": "狀態 = 數位和 mod D；K 一萬位照跑",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 數位 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1025",
+      "title": "洛谷 P1025 數的劃分",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1025",
+      "url": "https://www.luogu.com.cn/problem/P1025",
+      "difficulty": 3,
+      "tags": ["計數"],
+      "idea": "有一份是 1 / 全體減 1 的劃分數遞推",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 計數與期望 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4316",
+      "title": "洛谷 P4316 綠豆蛙的歸宿",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4316",
+      "url": "https://www.luogu.com.cn/problem/P4316",
+      "difficulty": 3,
+      "tags": ["期望", "DAG"],
+      "idea": "反拓撲序逆推期望",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 計數與期望 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "atcoder-dp-j",
+      "title": "AtCoder DP J - Sushi",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "AtCoder",
+      "platform_label": "AtCoder",
+      "problem_id": "",
+      "url": "https://atcoder.jp/contests/dp/tasks/dp_j",
+      "difficulty": 3,
+      "tags": ["期望"],
+      "idea": "對稱性壓縮成 dp[a][b][c]；自環移項",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 計數與期望 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1365",
+      "title": "洛谷 P1365 打 OSU!",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1365",
+      "url": "https://www.luogu.com.cn/problem/P1365",
+      "difficulty": 3,
+      "tags": ["期望"],
+      "idea": "維護 E[len] 推平方得分增量",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 計數與期望 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3387",
+      "title": "洛谷 P3387 縮點",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3387",
+      "url": "https://www.luogu.com.cn/problem/P3387",
+      "difficulty": 3,
+      "tags": ["DAG"],
+      "idea": "Tarjan 縮點後拓撲序 DP",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 圖上與博弈 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "atcoder-dp-l",
+      "title": "AtCoder DP L - Deque",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "AtCoder",
+      "platform_label": "AtCoder",
+      "problem_id": "",
+      "url": "https://atcoder.jp/contests/dp/tasks/dp_l",
+      "difficulty": 3,
+      "tags": ["博弈", "區間"],
+      "idea": "淨差視角把 minimax 塌成單一 max",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 圖上與博弈 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "atcoder-dp-m",
+      "title": "AtCoder DP M - Candies",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "AtCoder",
+      "platform_label": "AtCoder",
+      "problem_id": "",
+      "url": "https://atcoder.jp/contests/dp/tasks/dp_m",
+      "difficulty": 3,
+      "tags": ["前綴和優化", "計數"],
+      "idea": "區間和轉移 → 前綴和 O(1)",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 DP 優化技術"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1725",
+      "title": "洛谷 P1725 琪露諾",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1725",
+      "url": "https://www.luogu.com.cn/problem/P1725",
+      "difficulty": 3,
+      "tags": ["單調佇列"],
+      "idea": "平移窗口 max 用單調遞減佇列",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 DP 優化技術"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3572",
+      "title": "洛谷 P3572 Little Bird",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3572",
+      "url": "https://www.luogu.com.cn/problem/P3572",
+      "difficulty": 3,
+      "tags": ["單調佇列"],
+      "idea": "窗口 min + 多鍵比較器",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 DP 優化技術"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1962",
+      "title": "洛谷 P1962 斐波那契數列",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1962",
+      "url": "https://www.luogu.com.cn/problem/P1962",
+      "difficulty": 3,
+      "tags": ["矩陣冪"],
+      "idea": "固定線性遞推 → O(k³ log n)",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 DP 優化技術"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-597c",
+      "title": "CF 597C Subsequences",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "597C",
+      "url": "https://codeforces.com/problemset/problem/597/C",
+      "difficulty": 3,
+      "tags": ["BIT優化", "計數"],
+      "idea": "每層長度開一個 BIT 做值域前綴和",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 DP 優化技術"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2014",
+      "title": "洛谷 P2014 選課（樹上背包）",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2014",
+      "url": "https://www.luogu.com.cn/problem/P2014",
+      "difficulty": 3,
+      "tags": ["樹上", "背包"],
+      "idea": "子樹當組的分組背包；上下界寫法 O(nm)",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 樹上 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3478",
+      "title": "洛谷 P3478 STA-Station（換根）",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3478",
+      "url": "https://www.luogu.com.cn/problem/P3478",
+      "difficulty": 3,
+      "tags": ["樹上", "換根"],
+      "idea": "f[v] = f[u] + n − 2·sz[v]",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 樹上 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4141",
+      "title": "洛谷 P4141 消失之物（退背包）",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4141",
+      "url": "https://www.luogu.com.cn/problem/P4141",
+      "difficulty": 4,
+      "tags": ["背包"],
+      "idea": "卷積可逆：正序 g[j] -= g[j-w]",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p2704",
+      "title": "洛谷 P2704 炮兵陣地",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2704",
+      "url": "https://www.luogu.com.cn/problem/P2704",
+      "difficulty": 4,
+      "tags": ["狀壓"],
+      "idea": "影響跨兩行 → 狀態記兩行輪廓",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 位元狀壓 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2831",
+      "title": "洛谷 P2831 憤怒的小鳥",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2831",
+      "url": "https://www.luogu.com.cn/problem/P2831",
+      "difficulty": 4,
+      "tags": ["狀壓"],
+      "idea": "固定最小未消滅豬防重複枚舉",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 位元狀壓 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-1187e",
+      "title": "CF 1187E Tree Painting",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "1187E",
+      "url": "https://codeforces.com/problemset/problem/1187/E",
+      "difficulty": 4,
+      "tags": ["樹上", "換根"],
+      "idea": "先化簡成 Σsz 再換根",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 樹上 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "atcoder-dp-v",
+      "title": "AtCoder DP V - Subtree",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "AtCoder",
+      "platform_label": "AtCoder",
+      "problem_id": "",
+      "url": "https://atcoder.jp/contests/dp/tasks/dp_v",
+      "difficulty": 4,
+      "tags": ["樹上", "換根", "計數"],
+      "idea": "模數非質 → 前綴積×後綴積代替除法",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 樹上 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2458",
+      "title": "洛谷 P2458 保安站崗",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2458",
+      "url": "https://www.luogu.com.cn/problem/P2458",
+      "difficulty": 4,
+      "tags": ["樹上"],
+      "idea": "覆蓋三態 + 無人選 0 時補最小差價",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 樹上 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-55d",
+      "title": "CF 55D Beautiful Numbers",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "55D",
+      "url": "https://codeforces.com/problemset/problem/55/D",
+      "difficulty": 4,
+      "tags": ["數位"],
+      "idea": "lcm 都整除 2520：mod 2520 壓縮狀態",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 數位 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "atcoder-dp-t",
+      "title": "AtCoder DP T - Permutation",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "AtCoder",
+      "platform_label": "AtCoder",
+      "problem_id": "",
+      "url": "https://atcoder.jp/contests/dp/tasks/dp_t",
+      "difficulty": 4,
+      "tags": ["計數", "前綴和優化"],
+      "idea": "記相對名次；轉移前綴和 O(n²)",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 計數與期望 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1850",
+      "title": "洛谷 P1850 換教室",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1850",
+      "url": "https://www.luogu.com.cn/problem/P1850",
+      "difficulty": 4,
+      "tags": ["期望"],
+      "idea": "Floyd 預處理 + dp[i][j][申請否] 加權期望",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 計數與期望 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4550",
+      "title": "洛谷 P4550 收集郵票",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4550",
+      "url": "https://www.luogu.com.cn/problem/P4550",
+      "difficulty": 4,
+      "tags": ["期望"],
+      "idea": "費用依賴次數 → 帶期望次數一起遞推",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 計數與期望 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2569",
+      "title": "洛谷 P2569 股票交易",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2569",
+      "url": "https://www.luogu.com.cn/problem/P2569",
+      "difficulty": 4,
+      "tags": ["狀態機", "單調佇列"],
+      "idea": "分離 j/k 後窗口 max 單調佇列",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 狀態機 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4568",
+      "title": "洛谷 P4568 飛行路線（分層圖）",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4568",
+      "url": "https://www.luogu.com.cn/problem/P4568",
+      "difficulty": 4,
+      "tags": ["分層圖"],
+      "idea": "k 次免費 = 狀態加維跑 Dijkstra",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 圖上與博弈 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3195",
+      "title": "洛谷 P3195 玩具裝箱",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3195",
+      "url": "https://www.luogu.com.cn/problem/P3195",
+      "difficulty": 4,
+      "tags": ["斜率優化"],
+      "idea": "交叉項當斜率，單調下凸殼 O(n)",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 DP 優化技術"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3628",
+      "title": "洛谷 P3628 特別行動隊",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3628",
+      "url": "https://www.luogu.com.cn/problem/P3628",
+      "difficulty": 4,
+      "tags": ["斜率優化"],
+      "idea": "求 max → 上凸殼、不等號全反",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 DP 優化技術"
+        }
+      ]
+    },
+    {
+      "progress_id": "poj-1160",
+      "title": "POJ 1160 Post Office",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "POJ",
+      "platform_label": "POJ",
+      "problem_id": "1160",
+      "url": "http://poj.org/problem?id=1160",
+      "difficulty": 4,
+      "tags": ["Knuth", "區間"],
+      "idea": "w 滿足四邊形不等式 → 決策點單調",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 DP 優化技術"
+        }
+      ]
+    },
+    {
+      "progress_id": "poj-2411",
+      "title": "POJ 2411 蒙德里安的夢想",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "POJ",
+      "platform_label": "POJ",
+      "problem_id": "2411",
+      "url": "http://poj.org/problem?id=2411",
+      "difficulty": 4,
+      "tags": ["輪廓線", "計數"],
+      "idea": "逐格轉移，輪廓記突出狀態",
+      "strategy_pages": [
+        {
+          "page": "s13",
+          "nav": "2.13 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-165e",
+      "title": "CF 165E Compatible Numbers",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "165E",
+      "url": "https://codeforces.com/problemset/problem/165/E",
+      "difficulty": 4,
+      "tags": ["SOS"],
+      "idea": "相容 = ~a 的子集：逐位鬆弛 O(2ⁿ·n)",
+      "strategy_pages": [
+        {
+          "page": "s13",
+          "nav": "2.13 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-546",
+      "title": "LC 546 移除盒子",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "546",
+      "url": "https://leetcode.cn/problems/remove-boxes/",
+      "difficulty": 5,
+      "tags": ["區間"],
+      "idea": "dp[l][r][k]：右側黏 k 個同色進狀態",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 區間 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3193",
+      "title": "洛谷 P3193 GT 考試",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3193",
+      "url": "https://www.luogu.com.cn/problem/P3193",
+      "difficulty": 5,
+      "tags": ["狀態機", "矩陣冪"],
+      "idea": "KMP 自動機 × 矩陣冪 O(m³ log n)",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 狀態機 DP"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-321e",
+      "title": "CF 321E Ciel and Gondolas",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "321E",
+      "url": "https://codeforces.com/problemset/problem/321/E",
+      "difficulty": 5,
+      "tags": ["分治優化"],
+      "idea": "決策單調性分治 O(kn log n)",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 DP 優化技術"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4383",
+      "title": "洛谷 P4383 林克卡特樹",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4383",
+      "url": "https://www.luogu.com.cn/problem/P4383",
+      "difficulty": 5,
+      "tags": ["wqs二分", "樹上"],
+      "idea": "恰好 k+1 條路徑 → 罰款二分 × 樹形 DP",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 DP 優化技術"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p5056",
+      "title": "洛谷 P5056 插頭 DP 模板",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P5056",
+      "url": "https://www.luogu.com.cn/problem/P5056",
+      "difficulty": 5,
+      "tags": ["插頭"],
+      "idea": "括號表示法記插頭配對，雜湊存狀態",
+      "strategy_pages": [
+        {
+          "page": "s13",
+          "nav": "2.13 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p5999",
+      "title": "洛谷 P5999 Kangaroo",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P5999",
+      "url": "https://www.luogu.com.cn/problem/P5999",
+      "difficulty": 5,
+      "tags": ["連通塊插入", "計數"],
+      "idea": "按值插入維護連通段數",
+      "strategy_pages": [
+        {
+          "page": "s13",
+          "nav": "2.13 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4719",
+      "title": "洛谷 P4719 動態 DP 模板",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4719",
+      "url": "https://www.luogu.com.cn/problem/P4719",
+      "difficulty": 5,
+      "tags": ["DDP", "樹上"],
+      "idea": "轉移矩陣化 + 樹剖線段樹維護連乘",
+      "strategy_pages": [
+        {
+          "page": "s13",
+          "nav": "2.13 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-713c",
+      "title": "CF 713C 嚴格遞增最小代價",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "713C",
+      "url": "https://codeforces.com/problemset/problem/713/C",
+      "difficulty": 5,
+      "tags": ["slope trick"],
+      "idea": "凸函數當 DP 值，大根堆維護轉折點",
+      "strategy_pages": [
+        {
+          "page": "s13",
+          "nav": "2.13 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4590",
+      "title": "洛谷 P4590 遊園會（DP 套 DP）",
+      "topic": "dp",
+      "topic_label": "動態規劃",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4590",
+      "url": "https://www.luogu.com.cn/problem/P4590",
+      "difficulty": 5,
+      "tags": ["DP套DP", "計數"],
+      "idea": "LCS 整排差分壓位當外層狀態",
+      "strategy_pages": [
+        {
+          "page": "s13",
+          "nav": "2.13 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "misc-06",
+      "title": "硬幣問題：什麼時候找零貪心是對的",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "",
+      "platform_label": "經典題型",
+      "problem_id": "",
+      "url": "",
+      "difficulty": 3,
+      "tags": ["數學", "反例意識"],
+      "idea": "canonical coin system 才能貪心，{1,3,4} 湊 6 是反例",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 數學貪心與調整法"
+        }
+      ]
+    },
+    {
+      "progress_id": "misc-07",
+      "title": "排序不等式應用：僱傭計畫 / 加權匹配",
+      "topic": "greedy",
+      "topic_label": "貪心演算法",
+      "platform": "",
+      "platform_label": "經典題型",
+      "problem_id": "",
+      "url": "",
+      "difficulty": 3,
+      "tags": ["數學", "排序不等式"],
+      "idea": "同序點積最大、反序最小：效率大配難度小",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 數學貪心與調整法"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3370",
+      "title": "洛谷 P3370 字串雜湊模板",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3370",
+      "url": "https://www.luogu.com.cn/problem/P3370",
+      "difficulty": 1,
+      "tags": ["hash"],
+      "idea": "前綴 hash + 去重數本質不同字串",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 字串雜湊"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-28",
+      "title": "LC 28 找出第一個匹配項",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "28",
+      "url": "https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/",
+      "difficulty": 1,
+      "tags": ["hash", "KMP"],
+      "idea": "單模式匹配最小例：暴力/hash/KMP 三寫對照",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 字串雜湊"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-187",
+      "title": "LC 187 重複的 DNA 序列",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "187",
+      "url": "https://leetcode.cn/problems/repeated-dna-sequences/",
+      "difficulty": 2,
+      "tags": ["hash", "滑動窗口"],
+      "idea": "定長窗口 hash 計數；ACGT 可 2bit 無損編碼",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 字串雜湊"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-1200e",
+      "title": "CF 1200E Compress Words",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "1200E",
+      "url": "https://codeforces.com/problemset/problem/1200/E",
+      "difficulty": 3,
+      "tags": ["hash", "border"],
+      "idea": "逐詞找最大重疊：hash O(1) 判後綴=前綴（不可二分）",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 字串雜湊"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-1044",
+      "title": "LC 1044 最長重複子串",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "1044",
+      "url": "https://leetcode.cn/problems/longest-duplicate-substring/",
+      "difficulty": 4,
+      "tags": ["hash", "二分答案"],
+      "idea": "二分長度 + 窗口 hash 撞集合",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 字串雜湊"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2852",
+      "title": "洛谷 P2852 Milk Patterns",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2852",
+      "url": "https://www.luogu.com.cn/problem/P2852",
+      "difficulty": 4,
+      "tags": ["hash", "SA", "二分答案"],
+      "idea": "出現 k 次的最長子串：hash 二分/SA height 分組/SAM 三解",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 字串雜湊"
+        },
+        {
+          "page": "s07",
+          "nav": "2.7 後綴數組"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3375",
+      "title": "洛谷 P3375 KMP 模板",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3375",
+      "url": "https://www.luogu.com.cn/problem/P3375",
+      "difficulty": 2,
+      "tags": ["KMP"],
+      "idea": "fail[i] = 前綴最長 border；文本指標永不後退",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 KMP 與週期"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-459",
+      "title": "LC 459 重複的子字串",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "459",
+      "url": "https://leetcode.cn/problems/repeated-substring-pattern/",
+      "difficulty": 2,
+      "tags": ["KMP", "週期"],
+      "idea": "fail[n]>0 且 (n−fail[n]) | n ⟺ 有循環節",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 KMP 與週期"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4391",
+      "title": "洛谷 P4391 [BOI2009] 無線傳輸",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4391",
+      "url": "https://www.luogu.com.cn/problem/P4391",
+      "difficulty": 3,
+      "tags": ["KMP", "週期"],
+      "idea": "最小週期 = n − fail[n]，不需整除",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 KMP 與週期"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-214",
+      "title": "LC 214 最短迴文串",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "214",
+      "url": "https://leetcode.cn/problems/shortest-palindrome/",
+      "difficulty": 3,
+      "tags": ["KMP", "構造"],
+      "idea": "s+#+rev(s) 的 border = 最長迴文前綴",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 KMP 與週期"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-126b",
+      "title": "CF 126B Password",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "126B",
+      "url": "https://codeforces.com/problemset/problem/126/B",
+      "difficulty": 3,
+      "tags": ["KMP", "border"],
+      "idea": "沿 fail 鏈枚舉 border + 中段出現判定",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 KMP 與週期"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3193",
+      "title": "洛谷 P3193 GT 考試",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3193",
+      "url": "https://www.luogu.com.cn/problem/P3193",
+      "difficulty": 5,
+      "tags": ["KMP自動機", "矩陣冪"],
+      "idea": "匹配進度當狀態，轉移矩陣快速冪",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 KMP 與週期"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p5410",
+      "title": "洛谷 P5410 Z 函數模板",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P5410",
+      "url": "https://www.luogu.com.cn/problem/P5410",
+      "difficulty": 3,
+      "tags": ["Z函數"],
+      "idea": "Z-box 盒內繼承要 min 截斷；exkmp 雙串版",
+      "strategy_pages": [
+        {
+          "page": "s03",
+          "nav": "2.3 Z 函數"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-2223",
+      "title": "LC 2223 構造字串的總得分和",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "2223",
+      "url": "https://leetcode.cn/problems/sum-of-scores-of-built-strings/",
+      "difficulty": 3,
+      "tags": ["Z函數"],
+      "idea": "題目 = Σz[i] 的直譯",
+      "strategy_pages": [
+        {
+          "page": "s03",
+          "nav": "2.3 Z 函數"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-432d",
+      "title": "CF 432D Prefixes and Suffixes",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "432D",
+      "url": "https://codeforces.com/problemset/problem/432/D",
+      "difficulty": 4,
+      "tags": ["Z函數", "計數"],
+      "idea": "z[n−k+1]=k 判前綴=後綴；桶後綴和數出現次數",
+      "strategy_pages": [
+        {
+          "page": "s03",
+          "nav": "2.3 Z 函數"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-1968g1",
+      "title": "CF 1968G1 Division + Score",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "1968G1",
+      "url": "https://codeforces.com/problemset/problem/1968/G1",
+      "difficulty": 4,
+      "tags": ["Z函數", "枚舉"],
+      "idea": "枚舉公共前綴長，z≥L 的位置貪心隔段取",
+      "strategy_pages": [
+        {
+          "page": "s03",
+          "nav": "2.3 Z 函數"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3805",
+      "title": "洛谷 P3805 Manacher 模板",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3805",
+      "url": "https://www.luogu.com.cn/problem/P3805",
+      "difficulty": 3,
+      "tags": ["Manacher"],
+      "idea": "鏡像繼承 + 右邊界單調 = 線性",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 Manacher"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-5",
+      "title": "LC 5 最長迴文子串",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "5",
+      "url": "https://leetcode.cn/problems/longest-palindromic-substring/",
+      "difficulty": 2,
+      "tags": ["Manacher", "中心擴展"],
+      "idea": "n≤1000 中心擴展夠用，Manacher 當練習",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 Manacher"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-647",
+      "title": "LC 647 迴文子串數目",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "647",
+      "url": "https://leetcode.cn/problems/palindromic-substrings/",
+      "difficulty": 2,
+      "tags": ["Manacher", "計數"],
+      "idea": "答案 = Σ⌈p[i]/2⌉，半徑天生是計數",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 Manacher"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1659",
+      "title": "洛谷 P1659 拉拉队排練",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1659",
+      "url": "https://www.luogu.com.cn/problem/P1659",
+      "difficulty": 4,
+      "tags": ["Manacher", "貪心"],
+      "idea": "半徑開桶後綴和，由長到短貪心取 k 個",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 Manacher"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4555",
+      "title": "洛谷 P4555 最長雙迴文串",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4555",
+      "url": "https://www.luogu.com.cn/problem/P4555",
+      "difficulty": 4,
+      "tags": ["Manacher", "DP"],
+      "idea": "以 i 開頭/結尾的最長迴文左右掃遞推",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 Manacher"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-208",
+      "title": "LC 208 實作 Trie",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "208",
+      "url": "https://leetcode.cn/problems/implement-trie-prefix-tree/",
+      "difficulty": 1,
+      "tags": ["Trie"],
+      "idea": "節點池陣列寫法，為 ACAM 打底",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 Trie 與 01-Trie"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p8306",
+      "title": "洛谷 P8306 Trie 模板",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P8306",
+      "url": "https://www.luogu.com.cn/problem/P8306",
+      "difficulty": 2,
+      "tags": ["Trie", "多測"],
+      "idea": "前綴計數；62 字元集 + 只清用過的節點",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 Trie 與 01-Trie"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-421",
+      "title": "LC 421 最大異或值",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "421",
+      "url": "https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array/",
+      "difficulty": 3,
+      "tags": ["01-Trie"],
+      "idea": "高位貪心走相反位",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 Trie 與 01-Trie"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4551",
+      "title": "洛谷 P4551 最長異或路徑",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4551",
+      "url": "https://www.luogu.com.cn/problem/P4551",
+      "difficulty": 3,
+      "tags": ["01-Trie", "樹上前綴"],
+      "idea": "路徑 XOR = 兩點根前綴 XOR，化歸 LC 421",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 Trie 與 01-Trie"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-888g",
+      "title": "CF 888G Xor-MST",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "888G",
+      "url": "https://codeforces.com/problemset/problem/888/G",
+      "difficulty": 5,
+      "tags": ["01-Trie", "Boruvka"],
+      "idea": "Trie 上分治：左右子樹間連一條最小 XOR 邊",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 Trie 與 01-Trie"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3808",
+      "title": "洛谷 P3808 AC 自動機（簡單版）",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3808",
+      "url": "https://www.luogu.com.cn/problem/P3808",
+      "difficulty": 3,
+      "tags": ["ACAM"],
+      "idea": "跳 fail 收標記 + 訪問剪枝",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 AC 自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3796",
+      "title": "洛谷 P3796 AC 自動機（加強版）",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3796",
+      "url": "https://www.luogu.com.cn/problem/P3796",
+      "difficulty": 3,
+      "tags": ["ACAM", "計數"],
+      "idea": "出現最多的模式串；為 fail 樹鋪路",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 AC 自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p5357",
+      "title": "洛谷 P5357 AC 自動機（二次加強版）",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P5357",
+      "url": "https://www.luogu.com.cn/problem/P5357",
+      "difficulty": 4,
+      "tags": ["ACAM", "fail樹"],
+      "idea": "文本打點 + fail 樹子樹和一次收割",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 AC 自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4052",
+      "title": "洛谷 P4052 文本生成器",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4052",
+      "url": "https://www.luogu.com.cn/problem/P4052",
+      "difficulty": 4,
+      "tags": ["ACAM", "DP"],
+      "idea": "補集：自動機上數不含危險節點的路徑",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 AC 自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2414",
+      "title": "洛谷 P2414 阿狸的打字機",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2414",
+      "url": "https://www.luogu.com.cn/problem/P2414",
+      "difficulty": 5,
+      "tags": ["ACAM", "fail樹", "BIT"],
+      "idea": "Trie 上走、fail 樹 DFS 序 BIT 查，離線",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 AC 自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3809",
+      "title": "洛谷 P3809 後綴排序模板",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3809",
+      "url": "https://www.luogu.com.cn/problem/P3809",
+      "difficulty": 4,
+      "tags": ["SA"],
+      "idea": "倍增 + 基數排序 O(n log n)",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 後綴數組"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4051",
+      "title": "洛谷 P4051 字符加密",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4051",
+      "url": "https://www.luogu.com.cn/problem/P4051",
+      "difficulty": 3,
+      "tags": ["SA", "環形"],
+      "idea": "拆環倍長對 s+s 做 SA",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 後綴數組"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2408",
+      "title": "洛谷 P2408 不同子串個數",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2408",
+      "url": "https://www.luogu.com.cn/problem/P2408",
+      "difficulty": 4,
+      "tags": ["SA", "去重計數"],
+      "idea": "n(n+1)/2 − Σheight：height 是重複的度量",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 後綴數組"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4248",
+      "title": "洛谷 P4248 [AHOI2013] 差異",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4248",
+      "url": "https://www.luogu.com.cn/problem/P4248",
+      "difficulty": 5,
+      "tags": ["SA", "單調棧"],
+      "idea": "ΣLCP = 所有區間 min 和，單調棧算支配區間",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 後綴數組"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3804",
+      "title": "洛谷 P3804 SAM 模板",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3804",
+      "url": "https://www.luogu.com.cn/problem/P3804",
+      "difficulty": 5,
+      "tags": ["SAM", "endpos"],
+      "idea": "max cnt×len；cnt 按 len 基數排序後累加",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 後綴自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "strings-distinct-sam",
+      "title": "不同子串個數（SAM 版）",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "",
+      "platform_label": "經典題型",
+      "problem_id": "",
+      "url": "",
+      "difficulty": 4,
+      "tags": ["SAM", "去重計數"],
+      "idea": "Σ(len[u]−len[link[u]])，與 SA 版對照",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 後綴自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "spoj-lcs",
+      "title": "SPOJ LCS 最長公共子串",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "SPOJ",
+      "platform_label": "SPOJ",
+      "problem_id": "LCS",
+      "url": "https://www.spoj.com/problems/LCS/",
+      "difficulty": 4,
+      "tags": ["SAM", "匹配"],
+      "idea": "B 在 A 的 SAM 上走，失配沿 link 退",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 後綴自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-235c",
+      "title": "CF 235C Cyclical Quest",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "235C",
+      "url": "https://codeforces.com/problemset/problem/235/C",
+      "difficulty": 5,
+      "tags": ["SAM", "環形匹配"],
+      "idea": "查詢串倍長滑動匹配，維持長度恰為 |q|",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 後綴自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3975",
+      "title": "洛谷 P3975 [TJOI2015] 弦論",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3975",
+      "url": "https://www.luogu.com.cn/problem/P3975",
+      "difficulty": 5,
+      "tags": ["SAM", "第k小"],
+      "idea": "DAG 上按字典序導航，換權值換語意",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 後綴自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p5496",
+      "title": "洛谷 P5496 迴文自動機模板",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P5496",
+      "url": "https://www.luogu.com.cn/problem/P5496",
+      "difficulty": 4,
+      "tags": ["PAM"],
+      "idea": "以 i 結尾的迴文數 = fail 樹深度",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 迴文自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3649",
+      "title": "洛谷 P3649 [APIO2014] 回文串",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3649",
+      "url": "https://www.luogu.com.cn/problem/P3649",
+      "difficulty": 4,
+      "tags": ["PAM", "endpos"],
+      "idea": "打點 + fail 樹子樹和，max cnt×len",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 迴文自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4287",
+      "title": "洛谷 P4287 [SHOI2011] 雙倍迴文",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4287",
+      "url": "https://www.luogu.com.cn/problem/P4287",
+      "difficulty": 5,
+      "tags": ["PAM", "trans指標"],
+      "idea": "維護長度減半的 trans 指標判 ww^Rww^R",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 迴文自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-906e",
+      "title": "CF 906E Reverses",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "906E",
+      "url": "https://codeforces.com/problemset/problem/906/E",
+      "difficulty": 5,
+      "tags": ["PAM", "DP"],
+      "idea": "偶迴文分解：series link 壓縮等差 fail 鏈",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 迴文自動機"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1368",
+      "title": "洛谷 P1368 最小表示法模板",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1368",
+      "url": "https://www.luogu.com.cn/problem/P1368",
+      "difficulty": 3,
+      "tags": ["最小表示"],
+      "idea": "雙指標一次比較批量淘汰 k+1 個候選",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 最小表示與 Lyndon"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-899",
+      "title": "LC 899 有序隊列",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "899",
+      "url": "https://leetcode.cn/problems/orderly-queue/",
+      "difficulty": 3,
+      "tags": ["最小表示", "觀察"],
+      "idea": "k≥2 可任意排序；k=1 退化為最小表示",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 最小表示與 Lyndon"
+        }
+      ]
+    },
+    {
+      "progress_id": "uva-719",
+      "title": "UVa 719 Glass Beads",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "UVA",
+      "platform_label": "UVa",
+      "problem_id": "719",
+      "url": "https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=660",
+      "difficulty": 3,
+      "tags": ["最小表示"],
+      "idea": "項鍊剪開最小字典序，回傳最小起點",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 最小表示與 Lyndon"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p6114",
+      "title": "洛谷 P6114 Lyndon 分解模板",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P6114",
+      "url": "https://www.luogu.com.cn/problem/P6114",
+      "difficulty": 4,
+      "tags": ["Lyndon"],
+      "idea": "Duval 三指標；最後一塊 = 最小後綴",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 最小表示與 Lyndon"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p5829",
+      "title": "洛谷 P5829 失配樹模板",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P5829",
+      "url": "https://www.luogu.com.cn/problem/P5829",
+      "difficulty": 4,
+      "tags": ["fail樹", "LCA"],
+      "idea": "兩前綴最長公共 border = 失配樹 LCA",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p6139",
+      "title": "洛谷 P6139 廣義 SAM 模板",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P6139",
+      "url": "https://www.luogu.com.cn/problem/P6139",
+      "difficulty": 5,
+      "tags": ["廣義SAM"],
+      "idea": "Trie 上 BFS 構造多串 SAM",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-1037h",
+      "title": "CF 1037H Security",
+      "topic": "strings",
+      "topic_label": "字串演算法",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "1037H",
+      "url": "https://codeforces.com/problemset/problem/1037/H",
+      "difficulty": 5,
+      "tags": ["SAM", "線段樹合併", "貪心"],
+      "idea": "parent 樹線段樹合併實體化 endpos，貪心逐位定答案",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-304",
+      "title": "LC 304 二維區域和檢索",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "304",
+      "url": "https://leetcode.cn/problems/range-sum-query-2d-immutable/",
+      "difficulty": 2,
+      "tags": ["前綴和"],
+      "idea": "二維前綴和 + 容斥四項",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 前綴和・差分・ST 表"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2367",
+      "title": "洛谷 P2367 語文成績",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2367",
+      "url": "https://www.luogu.com.cn/problem/P2367",
+      "difficulty": 1,
+      "tags": ["差分"],
+      "idea": "區間加打端點，收工一次前綴和",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 前綴和・差分・ST 表"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3397",
+      "title": "洛谷 P3397 地毯",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3397",
+      "url": "https://www.luogu.com.cn/problem/P3397",
+      "difficulty": 2,
+      "tags": ["二維差分"],
+      "idea": "四角打點 + 兩次前綴和",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 前綴和・差分・ST 表"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1719",
+      "title": "洛谷 P1719 最大加權矩形",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1719",
+      "url": "https://www.luogu.com.cn/problem/P1719",
+      "difficulty": 2,
+      "tags": ["前綴和", "Kadane"],
+      "idea": "枚舉上下界壓成一維最大子段和",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 前綴和・差分・ST 表"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3865",
+      "title": "洛谷 P3865 ST 表模板",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3865",
+      "url": "https://www.luogu.com.cn/problem/P3865",
+      "difficulty": 2,
+      "tags": ["ST表", "RMQ"],
+      "idea": "可重複貢獻：兩段重疊覆蓋 O(1) 查詢",
+      "strategy_pages": [
+        {
+          "page": "s01",
+          "nav": "2.1 前綴和・差分・ST 表"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-739",
+      "title": "LC 739 每日溫度",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "739",
+      "url": "https://leetcode.cn/problems/daily-temperatures/",
+      "difficulty": 2,
+      "tags": ["單調棧"],
+      "idea": "下一個更大元素：遞減棧存未答者",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 單調堆疊與單調佇列"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-42",
+      "title": "LC 42 接雨水",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "42",
+      "url": "https://leetcode.cn/problems/trapping-rain-water/",
+      "difficulty": 2,
+      "tags": ["單調棧", "雙指針"],
+      "idea": "按列/單調棧/雙指針三解名題",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 單調堆疊與單調佇列"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-84",
+      "title": "LC 84 柱狀圖最大矩形",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "84",
+      "url": "https://leetcode.cn/problems/largest-rectangle-in-histogram/",
+      "difficulty": 3,
+      "tags": ["單調棧"],
+      "idea": "枚舉高度瓶頸，左右第一個更矮定邊界",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 單調堆疊與單調佇列"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-85",
+      "title": "LC 85 最大矩形",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "85",
+      "url": "https://leetcode.cn/problems/maximal-rectangle/",
+      "difficulty": 4,
+      "tags": ["單調棧", "降維"],
+      "idea": "逐行維護向上高度，每行套 LC 84",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 單調堆疊與單調佇列"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1886",
+      "title": "洛谷 P1886 滑動窗口",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1886",
+      "url": "https://www.luogu.com.cn/problem/P1886",
+      "difficulty": 2,
+      "tags": ["單調佇列"],
+      "idea": "隊首過期、隊尾被支配，均攤 O(n)",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 單調堆疊與單調佇列"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1725",
+      "title": "洛谷 P1725 琪露諾",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1725",
+      "url": "https://www.luogu.com.cn/problem/P1725",
+      "difficulty": 3,
+      "tags": ["單調佇列", "DP優化"],
+      "idea": "決策窗口平移 → 單調佇列維護 max",
+      "strategy_pages": [
+        {
+          "page": "s02",
+          "nav": "2.2 單調堆疊與單調佇列"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3378",
+      "title": "洛谷 P3378 堆模板",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3378",
+      "url": "https://www.luogu.com.cn/problem/P3378",
+      "difficulty": 1,
+      "tags": ["堆"],
+      "idea": "priority_queue；手寫一次 up/down",
+      "strategy_pages": [
+        {
+          "page": "s03",
+          "nav": "2.3 堆與對頂堆"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-295",
+      "title": "LC 295 數據流中位數",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "295",
+      "url": "https://leetcode.cn/problems/find-median-from-data-stream/",
+      "difficulty": 3,
+      "tags": ["堆", "對頂堆"],
+      "idea": "兩堆夾中位數，插入後 rebalance",
+      "strategy_pages": [
+        {
+          "page": "s03",
+          "nav": "2.3 堆與對頂堆"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1801",
+      "title": "洛谷 P1801 黑匣子",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1801",
+      "url": "https://www.luogu.com.cn/problem/P1801",
+      "difficulty": 3,
+      "tags": ["對頂堆"],
+      "idea": "分界線可移動的對頂堆；BIT 倍增另解",
+      "strategy_pages": [
+        {
+          "page": "s03",
+          "nav": "2.3 堆與對頂堆"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-480",
+      "title": "LC 480 滑動窗口中位數",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "480",
+      "url": "https://leetcode.cn/problems/sliding-window-median/",
+      "difficulty": 4,
+      "tags": ["對頂堆", "懶刪除"],
+      "idea": "懶刪除 + 有效大小維護不變量",
+      "strategy_pages": [
+        {
+          "page": "s03",
+          "nav": "2.3 堆與對頂堆"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-2102",
+      "title": "LC 2102 序列順序查詢",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "2102",
+      "url": "https://leetcode.cn/problems/sequentially-ordinal-rank-tracker/",
+      "difficulty": 3,
+      "tags": ["對頂堆"],
+      "idea": "查詢閾值單調 +1 → 對頂堆夠用",
+      "strategy_pages": [
+        {
+          "page": "s03",
+          "nav": "2.3 堆與對頂堆"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3367",
+      "title": "洛谷 P3367 並查集模板",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3367",
+      "url": "https://www.luogu.com.cn/problem/P3367",
+      "difficulty": 1,
+      "tags": ["DSU"],
+      "idea": "路徑壓縮 + 按大小合併 ≈ O(α)",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 並查集"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1892",
+      "title": "洛谷 P1892 團伙",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1892",
+      "url": "https://www.luogu.com.cn/problem/P1892",
+      "difficulty": 2,
+      "tags": ["DSU", "種類"],
+      "idea": "拆點：敵人的敵人合併到同陣營",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 並查集"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1197",
+      "title": "洛谷 P1197 星球大戰",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1197",
+      "url": "https://www.luogu.com.cn/problem/P1197",
+      "difficulty": 3,
+      "tags": ["DSU", "離線倒序"],
+      "idea": "時間倒流：刪點變加點",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 並查集"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1955",
+      "title": "洛谷 P1955 程序自動分析",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1955",
+      "url": "https://www.luogu.com.cn/problem/P1955",
+      "difficulty": 3,
+      "tags": ["DSU", "離散化"],
+      "idea": "等式全部先合併，再檢查不等式",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 並查集"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2024",
+      "title": "洛谷 P2024 食物鏈",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2024",
+      "url": "https://www.luogu.com.cn/problem/P2024",
+      "difficulty": 4,
+      "tags": ["DSU", "帶權"],
+      "idea": "拆三倍點或帶權 mod 3，兩解等價",
+      "strategy_pages": [
+        {
+          "page": "s04",
+          "nav": "2.4 並查集"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3374",
+      "title": "洛谷 P3374 BIT 模板一",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3374",
+      "url": "https://www.luogu.com.cn/problem/P3374",
+      "difficulty": 2,
+      "tags": ["BIT"],
+      "idea": "單點加區間和；模板二是差分版",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 樹狀數組 BIT"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1908",
+      "title": "洛谷 P1908 逆序對",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1908",
+      "url": "https://www.luogu.com.cn/problem/P1908",
+      "difficulty": 2,
+      "tags": ["BIT", "權值", "離散化"],
+      "idea": "權值 BIT 第一課；歸併另解對照",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 樹狀數組 BIT"
+        },
+        {
+          "page": "s07",
+          "nav": "2.7 線段樹進階"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-315",
+      "title": "LC 315 右側更小元素個數",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "315",
+      "url": "https://leetcode.cn/problems/count-of-smaller-numbers-after-self/",
+      "difficulty": 3,
+      "tags": ["BIT", "權值"],
+      "idea": "倒序掃 + 權值 BIT 查前綴",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 樹狀數組 BIT"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p5094",
+      "title": "洛谷 P5094 MooFest 加強版",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P5094",
+      "url": "https://www.luogu.com.cn/problem/P5094",
+      "difficulty": 4,
+      "tags": ["BIT", "貢獻拆解"],
+      "idea": "排序消 max + 雙 BIT 拆絕對值",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 樹狀數組 BIT"
+        }
+      ]
+    },
+    {
+      "progress_id": "ds-bit-kth",
+      "title": "BIT 上倍增求第 k 小",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "",
+      "platform_label": "經典題型",
+      "problem_id": "",
+      "url": "",
+      "difficulty": 4,
+      "tags": ["BIT", "倍增"],
+      "idea": "高位試探累計個數，省掉二分的一個 log",
+      "strategy_pages": [
+        {
+          "page": "s05",
+          "nav": "2.5 樹狀數組 BIT"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1531",
+      "title": "洛谷 P1531 I Hate It",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1531",
+      "url": "https://www.luogu.com.cn/problem/P1531",
+      "difficulty": 2,
+      "tags": ["線段樹"],
+      "idea": "單點改區間 max：無標記骨架練習",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 線段樹基礎"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3372",
+      "title": "洛谷 P3372 線段樹模板一",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3372",
+      "url": "https://www.luogu.com.cn/problem/P3372",
+      "difficulty": 3,
+      "tags": ["線段樹", "懶標記"],
+      "idea": "apply/pushdown/pushup 三函式分工",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 線段樹基礎"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3373",
+      "title": "洛谷 P3373 線段樹模板二",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3373",
+      "url": "https://www.luogu.com.cn/problem/P3373",
+      "difficulty": 4,
+      "tags": ["線段樹", "多重標記"],
+      "idea": "標記 = 仿射變換，先乘後加的複合",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 線段樹基礎"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4513",
+      "title": "洛谷 P4513 小白逛公園",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4513",
+      "url": "https://www.luogu.com.cn/problem/P4513",
+      "difficulty": 4,
+      "tags": ["線段樹", "資訊設計"],
+      "idea": "最大子段和四元組：加維修複可合併性",
+      "strategy_pages": [
+        {
+          "page": "s06",
+          "nav": "2.6 線段樹基礎"
+        }
+      ]
+    },
+    {
+      "progress_id": "ds-wseg-inversion",
+      "title": "逆序對（權值線段樹版）",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "",
+      "platform_label": "經典題型",
+      "problem_id": "",
+      "url": "",
+      "difficulty": 2,
+      "tags": ["權值線段樹"],
+      "idea": "與權值 BIT 同構，校準碼量差",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p4097",
+      "title": "洛谷 P4097 [HEOI2013] Segment",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4097",
+      "url": "https://www.luogu.com.cn/problem/P4097",
+      "difficulty": 4,
+      "tags": ["李超樹"],
+      "idea": "優勢線段中點對決，輸的一半遞迴",
+      "strategy_pages": []
+    },
+    {
+      "progress_id": "luogu-p4556",
+      "title": "洛谷 P4556 雨天的尾巴",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4556",
+      "url": "https://www.luogu.com.cn/problem/P4556",
+      "difficulty": 5,
+      "tags": ["線段樹合併", "樹上差分"],
+      "idea": "路徑差分 + DFS 回溯線段樹合併維護眾數",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 線段樹進階"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3960",
+      "title": "洛谷 P3960 [NOIP2017] 列隊",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3960",
+      "url": "https://www.luogu.com.cn/problem/P3960",
+      "difficulty": 5,
+      "tags": ["動態開點", "第k個空位"],
+      "idea": "值域巨大操作稀疏：動態開點找第 k 個活位",
+      "strategy_pages": [
+        {
+          "page": "s07",
+          "nav": "2.7 線段樹進階"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p5490",
+      "title": "洛谷 P5490 掃描線模板",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P5490",
+      "url": "https://www.luogu.com.cn/problem/P5490",
+      "difficulty": 4,
+      "tags": ["掃描線", "線段樹"],
+      "idea": "矩形面積並：覆蓋計數不下傳",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 掃描線與離線分治"
+        }
+      ]
+    },
+    {
+      "progress_id": "lc-218",
+      "title": "LC 218 天際線問題",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "LeetCode",
+      "platform_label": "LeetCode",
+      "problem_id": "218",
+      "url": "https://leetcode.cn/problems/the-skyline-problem/",
+      "difficulty": 3,
+      "tags": ["掃描線", "multiset"],
+      "idea": "事件驅動 + multiset 維護活躍高度",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 掃描線與離線分治"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2163",
+      "title": "洛谷 P2163 園丁的煩惱",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2163",
+      "url": "https://www.luogu.com.cn/problem/P2163",
+      "difficulty": 3,
+      "tags": ["二維數點", "BIT"],
+      "idea": "矩形差分成 4 前綴，按 x 掃 + 權值 BIT",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 掃描線與離線分治"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3810",
+      "title": "洛谷 P3810 三維偏序",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3810",
+      "url": "https://www.luogu.com.cn/problem/P3810",
+      "difficulty": 4,
+      "tags": ["CDQ", "BIT"],
+      "idea": "排序 + 分治歸併 + BIT，逐維降階",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 掃描線與離線分治"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1527",
+      "title": "洛谷 P1527 矩陣乘法",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1527",
+      "url": "https://www.luogu.com.cn/problem/P1527",
+      "difficulty": 5,
+      "tags": ["整體二分", "BIT"],
+      "idea": "所有詢問一起二分答案，二維 BIT 計數",
+      "strategy_pages": [
+        {
+          "page": "s08",
+          "nav": "2.8 掃描線與離線分治"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3369",
+      "title": "洛谷 P3369 普通平衡樹",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3369",
+      "url": "https://www.luogu.com.cn/problem/P3369",
+      "difficulty": 4,
+      "tags": ["平衡樹", "FHQ"],
+      "idea": "六操作全由 split/merge 組裝",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 平衡樹"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3391",
+      "title": "洛谷 P3391 文藝平衡樹",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3391",
+      "url": "https://www.luogu.com.cn/problem/P3391",
+      "difficulty": 4,
+      "tags": ["平衡樹", "區間翻轉"],
+      "idea": "按大小 split + 翻轉懶標記",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 平衡樹"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1486",
+      "title": "洛谷 P1486 郁悶的出納員",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1486",
+      "url": "https://www.luogu.com.cn/problem/P1486",
+      "difficulty": 4,
+      "tags": ["平衡樹", "整體偏移"],
+      "idea": "全域 delta + 按值批量切除子樹",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 平衡樹"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2596",
+      "title": "洛谷 P2596 [ZJOI2006] 書架",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2596",
+      "url": "https://www.luogu.com.cn/problem/P2596",
+      "difficulty": 5,
+      "tags": ["平衡樹", "序列維護"],
+      "idea": "節點向上爬求名次，split 抽單點搬移",
+      "strategy_pages": [
+        {
+          "page": "s09",
+          "nav": "2.9 平衡樹"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2801",
+      "title": "洛谷 P2801 教主的魔法",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2801",
+      "url": "https://www.luogu.com.cn/problem/P2801",
+      "difficulty": 4,
+      "tags": ["分塊"],
+      "idea": "塊內排序副本二分，散塊暴力重排",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 分塊與莫隊"
+        }
+      ]
+    },
+    {
+      "progress_id": "spoj-dquery",
+      "title": "SPOJ DQUERY 區間不同數",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "SPOJ",
+      "platform_label": "SPOJ",
+      "problem_id": "DQUERY",
+      "url": "https://www.spoj.com/problems/DQUERY/",
+      "difficulty": 3,
+      "tags": ["莫隊", "離線BIT"],
+      "idea": "莫隊桶計數；或按 r 離線最後出現位置放 1",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 分塊與莫隊"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1494",
+      "title": "洛谷 P1494 小 Z 的襪子",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1494",
+      "url": "https://www.luogu.com.cn/problem/P1494",
+      "difficulty": 4,
+      "tags": ["莫隊"],
+      "idea": "增量維護 ΣC(cnt,2)，莫隊事實標準模板",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 分塊與莫隊"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p1903",
+      "title": "洛谷 P1903 數顏色",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P1903",
+      "url": "https://www.luogu.com.cn/problem/P1903",
+      "difficulty": 5,
+      "tags": ["帶修莫隊"],
+      "idea": "加時間維三指標，塊長 n^(2/3)",
+      "strategy_pages": [
+        {
+          "page": "s10",
+          "nav": "2.10 分塊與莫隊"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3379",
+      "title": "洛谷 P3379 LCA 模板",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3379",
+      "url": "https://www.luogu.com.cn/problem/P3379",
+      "difficulty": 3,
+      "tags": ["LCA", "倍增"],
+      "idea": "同深後能不跳就不跳，答案 f[0][u]",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 樹上資料結構"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3128",
+      "title": "洛谷 P3128 [USACO] Max Flow",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3128",
+      "url": "https://www.luogu.com.cn/problem/P3128",
+      "difficulty": 3,
+      "tags": ["樹上差分", "LCA"],
+      "idea": "點差分：u,v +1、lca 與父 −1，DFS 收和",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 樹上資料結構"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3178",
+      "title": "洛谷 P3178 樹上操作",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3178",
+      "url": "https://www.luogu.com.cn/problem/P3178",
+      "difficulty": 3,
+      "tags": ["DFS序", "線段樹"],
+      "idea": "子樹 = DFS 序區間；修改查詢貢獻互換",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 樹上資料結構"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3384",
+      "title": "洛谷 P3384 樹鏈剖分模板",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3384",
+      "url": "https://www.luogu.com.cn/problem/P3384",
+      "difficulty": 4,
+      "tags": ["樹剖", "線段樹"],
+      "idea": "路徑 = ≤2log 段重鏈區間",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 樹上資料結構"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-600e",
+      "title": "CF 600E Lomsat gelral",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "600E",
+      "url": "https://codeforces.com/problemset/problem/600/E",
+      "difficulty": 4,
+      "tags": ["DSU on tree"],
+      "idea": "輕子樹清空重算、重兒子保留，O(n log n)",
+      "strategy_pages": [
+        {
+          "page": "s11",
+          "nav": "2.11 樹上資料結構"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3919",
+      "title": "洛谷 P3919 可持久化陣列",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3919",
+      "url": "https://www.luogu.com.cn/problem/P3919",
+      "difficulty": 3,
+      "tags": ["可持久化"],
+      "idea": "改一次複製一條根到葉路徑",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 可持久化"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3834",
+      "title": "洛谷 P3834 靜態區間第 k 小",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3834",
+      "url": "https://www.luogu.com.cn/problem/P3834",
+      "difficulty": 4,
+      "tags": ["主席樹"],
+      "idea": "前綴版本相減 + 樹上二分",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 可持久化"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p4735",
+      "title": "洛谷 P4735 最大異或和",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P4735",
+      "url": "https://www.luogu.com.cn/problem/P4735",
+      "difficulty": 4,
+      "tags": ["可持久化Trie"],
+      "idea": "版本相減判分支存在，貪心走相反位",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 可持久化"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p2617",
+      "title": "洛谷 P2617 Dynamic Rankings",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P2617",
+      "url": "https://www.luogu.com.cn/problem/P2617",
+      "difficulty": 5,
+      "tags": ["樹套樹", "主席樹"],
+      "idea": "BIT 套權值線段樹，log² 帶修第 k 小",
+      "strategy_pages": [
+        {
+          "page": "s12",
+          "nav": "2.12 可持久化"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p6242",
+      "title": "洛谷 P6242 線段樹 3",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P6242",
+      "url": "https://www.luogu.com.cn/problem/P6242",
+      "difficulty": 5,
+      "tags": ["STB", "勢能分析"],
+      "idea": "吉司機：次大值是遞迴終止哨兵",
+      "strategy_pages": [
+        {
+          "page": "s13",
+          "nav": "2.13 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p5787",
+      "title": "洛谷 P5787 二分圖（線段樹分治）",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P5787",
+      "url": "https://www.luogu.com.cn/problem/P5787",
+      "difficulty": 5,
+      "tags": ["線段樹分治", "可撤銷DSU"],
+      "idea": "時間軸掛邊 + DFS 回溯撤銷，擴展域判奇環",
+      "strategy_pages": [
+        {
+          "page": "s13",
+          "nav": "2.13 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "luogu-p3690",
+      "title": "洛谷 P3690 LCT 模板",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Luogu",
+      "platform_label": "洛谷",
+      "problem_id": "P3690",
+      "url": "https://www.luogu.com.cn/problem/P3690",
+      "difficulty": 5,
+      "tags": ["LCT"],
+      "idea": "access 是唯一靈魂函式，其餘皆組裝",
+      "strategy_pages": [
+        {
+          "page": "s13",
+          "nav": "2.13 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "cf-896c",
+      "title": "CF 896C Chtholly and Seniorious",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "Codeforces",
+      "platform_label": "Codeforces",
+      "problem_id": "896C",
+      "url": "https://codeforces.com/problemset/problem/896/C",
+      "difficulty": 4,
+      "tags": ["ODT"],
+      "idea": "set 存同值段，assign 推平銷段均攤",
+      "strategy_pages": [
+        {
+          "page": "s13",
+          "nav": "2.13 專家專題"
+        }
+      ]
+    },
+    {
+      "progress_id": "at-joisc2014c",
+      "title": "AT 歷史研究（回滾莫隊）",
+      "topic": "ds",
+      "topic_label": "競賽資料結構",
+      "platform": "AtCoder",
+      "platform_label": "AtCoder",
+      "problem_id": "",
+      "url": "https://www.luogu.com.cn/problem/AT_joisc2014_c",
+      "difficulty": 5,
+      "tags": ["回滾莫隊"],
+      "idea": "max 不可回退：只加不刪 + 回滾左端點",
+      "strategy_pages": [
+        {
+          "page": "s13",
+          "nav": "2.13 專家專題"
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@
 
 ## 預覽
 
-網站提供桌面固定側欄、手機抽屜、深淺色、中文搜尋、教學進度、題庫篩選、原題連結、解題狀態、解答／思路筆記、十二個演算法視覺化與 Supabase Auth。
+網站提供桌面固定側欄、手機抽屜、深淺色、中文搜尋、教學進度、題庫篩選、原題連結、解題狀態、解答／思路筆記、十二個演算法視覺化、依解題手法分類的策略圖鑑與 Supabase Auth。
 
 ![網站總覽預覽](docs/site-preview.svg)
 
@@ -53,11 +53,32 @@ pnpm test:e2e
 
 ## 內容結構
 
+網站有兩套互補的索引方式，兩者共用同一份練習進度：
+
+- **章節**（`/chapters/`、`/lessons/`）依《演算法競賽》上下冊十章與附錄 A 編排。
+- **策略圖鑑**（`/strategies/`）依解題手法分類，適合賽前複習與遇到新題時查手法。
+
+檔案配置：
+
 - `data/toc.json`：十章、各節與附錄 A 的公開課程結構。
 - `data/page-map.json`：上下冊獨立頁碼映射與抽查狀態。
 - `src/content/lessons/`：原創教學；每篇固定包含問題、訊號、直覺、狀態、不變量、步驟、C++、複雜度、陷阱、比較、練習與速查。
 - `src/content/exercises/`：改寫或自行設計的題目、提示、解答、證明、C++ 與已確認的外部原題連結。
 - `reports/content-review.md`：所有待人工確認項目。未確認 OCR 不會渲染到公開頁面。
+
+### 策略圖鑑
+
+策略圖鑑原本是獨立的靜態網站專案（`youyun8/competitive-programming`），內容已完整併入本 repo，原專案不再更新。
+
+- `src/content/strategies/<主題>/*.html`：教學內容的唯一來源，維持手寫 HTML 片段的原貌（已列入 `.prettierignore`，避免重排動到內容）。每個主題另有一份 `OUTLINE.md` 記錄大綱。
+- `src/lib/strategy-topics.ts`：主題註冊表——哪些片段、以什麼順序、用什麼標題組成一個主題，以及內文錨點（`#s2-1`、`#topic-dp`）對應到哪個頁面。
+- `src/lib/strategy-beginner.ts`：各主題的初學者導讀素材與「最小可手算例子」。
+- `src/lib/strategies.ts`：渲染管線。片段在建置時內嵌，補上站內連結、KaTeX 數學式與 Shiki 程式碼上色；產生物不寫回內容檔。
+- `data/strategy-problems.json`：258 筆策略題單，於 `/problem-lists/strategies/` 呈現。
+
+新增一個策略章節：在 `src/content/strategies/<主題>/` 放入片段檔，並於 `strategy-topics.ts` 對應主題的 `pages` 陣列插入一筆（`id`、`slug`、`title`、`nav`、`desc`、`fragment`）。路由、側欄導覽與上一節／下一節都會自動更新。
+
+題目卡以 `data-problem-id` 標記，進度 id 沿用題庫命名（`lc-455`、`luogu-p1090`），因此同一題在策略章節、策略題單與題庫詳情頁標記任一處都會同步。
 
 ## 本機 Supabase
 
