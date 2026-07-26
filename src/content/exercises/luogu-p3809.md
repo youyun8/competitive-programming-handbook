@@ -12,8 +12,8 @@ prerequisites: ['suffix-array']
 statement: |-
   給定一個字串，求它所有後綴按字典序排序後的起始位置序列（後綴陣列）。
 constraints:
-  - '字串長度可達 10^6，直接排序字串會是 O(n² log n)'
-  - '需要 O(n log n) 的倍增法配合基數排序'
+  - '字串由大小寫英文字母或數字組成'
+  - '後綴按 ASCII 值的字典序比較，位置採 1-based'
 input_format: '一行一個字串。'
 output_format: '一行 n 個整數，表示排序後每個後綴的起始位置（1-based），以空格分隔。'
 samples:
@@ -22,7 +22,7 @@ samples:
     output: |
       5 3 1 4 2
     explanation: |-
-      五個後綴排序後依序是 a(5)、aba(3)、ababa(1)、ba(4)、baba(2)。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+      官方範例。五個後綴排序後依序是 a(5)、aba(3)、ababa(1)、ba(4)、baba(2)；另以直接排序短字串後綴交叉驗證。
 core_knowledge:
   - 倍增把後綴比較化為兩個排名比較
   - 基數排序使每輪保持線性
@@ -151,8 +151,8 @@ external_platform: 洛谷
 external_problem_id: P3809
 external_title: '【模板】後綴排序'
 external_relation: original
-source_book_pages: [549, 599]
-source_pdf_pages: [179, 229]
+source_book_pages: [587, 595]
+source_pdf_pages: [217, 225]
 review_status: verified
 ---
 

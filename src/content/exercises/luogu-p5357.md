@@ -12,8 +12,9 @@ prerequisites: ['ac-automaton', 'trie']
 statement: |-
   給定 n 個模式串與一個文本串，求每個模式串在文本中出現的次數（可重疊）。
 constraints:
-  - '模式串總長與文本長度都很大，不能對每個位置沿 fail 鏈往上跳'
-  - '模式串可能重複出現'
+  - '1 <= n <= 2*10^5'
+  - '模式串總長不超過 2*10^5，文本長度不超過 2*10^6'
+  - '字串只含小寫英文字母，模式串可能重複'
 input_format: '第一行一個整數 n；接下來 n 行每行一個模式串；最後一行是文本串。'
 output_format: '輸出 n 行，第 i 行是第 i 個模式串在文本中出現的次數。'
 samples:
@@ -26,7 +27,7 @@ samples:
       3
       2
     explanation: |-
-      ab 在 ababab 中出現 3 次（位置 1、3、5）；abab 出現 2 次（位置 1、3），允許重疊。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+      這是本站依官方輸入輸出規格建立的最小檢查例：ab 在 ababab 中出現 3 次；abab 出現 2 次，允許重疊。另以逐模式暴力搜尋對短隨機字串交叉驗證。
 core_knowledge:
   - Trie 同時保存所有模式前綴
   - fail 指標表示最長可用後綴
@@ -213,8 +214,8 @@ external_platform: 洛谷
 external_problem_id: P5357
 external_title: '【模板】AC 自動機（二次加強版）'
 external_relation: original
-source_book_pages: [549, 599]
-source_pdf_pages: [179, 229]
+source_book_pages: [579, 586]
+source_pdf_pages: [209, 216]
 review_status: verified
 ---
 

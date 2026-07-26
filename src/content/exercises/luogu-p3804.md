@@ -12,8 +12,8 @@ prerequisites: ['suffix-automaton', 'suffix-array']
 statement: |-
   給定字串 s，在所有出現次數大於 1 的子串中，求「長度 × 出現次數」的最大值。
 constraints:
-  - '字串長度可達 10^6，不能枚舉所有子串'
-  - '答案會超過 32 位元，需用 long long'
+  - '1 <= |S| <= 10^6'
+  - 'S 只含小寫英文字母；答案需用 64 位整數'
 input_format: '一行一個由小寫字母組成的字串。'
 output_format: '一行一個整數，表示最大的「長度 × 出現次數」。'
 samples:
@@ -22,7 +22,7 @@ samples:
     output: |
       4
     explanation: |-
-      子串 ab 出現 2 次，2×2 = 4；子串 a 出現 2 次得 2；aba 只出現 1 次不計。最大值為 4。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+      這是本站依官方規格建立的最小檢查例：ab 出現 2 次，2×2=4；a 出現 2 次得 2；aba 只出現 1 次不計。另以枚舉短字串全部子串的暴力程式交叉驗證。
 core_knowledge:
   - SAM 狀態代表相同 endpos 的子串區間
   - 原生狀態計數一而 clone 計數零
@@ -185,8 +185,8 @@ external_platform: 洛谷
 external_problem_id: P3804
 external_title: '【模板】後綴自動機（SAM）'
 external_relation: original
-source_book_pages: [549, 599]
-source_pdf_pages: [179, 229]
+source_book_pages: [599]
+source_pdf_pages: [229]
 review_status: verified
 ---
 

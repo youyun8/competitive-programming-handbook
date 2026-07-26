@@ -2,6 +2,7 @@
 id: luogu-p4782
 volume: lower
 source_file: lower-volume
+original_label: 洛谷 P4782
 title: 洛谷 P4782 2-SAT：用強連通分量解布林方程
 chapter: 10
 section: '10.7'
@@ -35,15 +36,15 @@ hints:
   - |-
     兩條邊都要加。只加一條會漏掉一半的推導，導致把有解判成無解或給出錯誤賦值。
   - |-
-    有解的充要條件是：對每個變數，它的「真」與「假」兩個節點不在同一個強連通分量裡。因為同一個分量代表兩者互相可推導，也就是 x 能推出 ¬x 且反之，必然矛盾。
-  - |-
-    構造解的規則：兩個節點不同分量時，選**拓撲序較後面**的那一個為真。直覺是「越後面代表越不會再推出別的東西」，選它最安全。
-  - |-
-    Tarjan 求強連通分量時，分量的編號恰好是**反拓撲序**（編號小的在拓撲上靠後）。所以實作上就是「選分量編號較小的那個」，不必額外做一次拓撲排序。
+    有解的充要條件是每個變數的真、假不在同一 SCC。構造時選縮點 DAG 拓撲序較後者；本實作的 Tarjan 編號是反拓撲序，所以選編號較小者。
 solution_outline: |-
   把 x_i 為假、為真分別編號為 2i 與 2i+1。每個子句加兩條蘊含邊。用 Tarjan 求強連通分量後檢查每個變數的兩個節點是否同分量：有則輸出 IMPOSSIBLE。否則對每個變數選分量編號較小者為真（Tarjan 編號是反拓撲序），輸出賦值。
 proof_or_invariant: |-
   蘊含圖具有對稱性：若存在邊 u → v，則必存在 ¬v → ¬u。因此強連通分量成對出現。當 x 與 ¬x 不同分量時，取拓撲序較後者為真不會引發矛盾——若它能推出某個文字，那個文字的拓撲序更後，因而也被選為真，賦值自洽。
+common_errors:
+  - 一個析取子句只加入一條蘊含邊
+  - 未檢查同一變數的真、假是否同 SCC
+  - 混淆所用 SCC 實作的拓撲編號方向，輸出相反賦值
 complexity:
   time: 'O(n + m)'
   space: 'O(n + m)'
@@ -207,8 +208,8 @@ external_platform: 洛谷
 external_problem_id: P4782
 external_title: '【模板】2-SAT'
 external_relation: original
-source_book_pages: [600, 683]
-source_pdf_pages: [230, 313]
+source_book_pages: [632]
+source_pdf_pages: [262]
 review_status: verified
 ---
 
