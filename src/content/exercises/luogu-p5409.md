@@ -6,7 +6,7 @@ title: 洛谷 P5409 第一類 Stirling 數整列
 chapter: 7
 section: '7.6'
 kind: external-oj
-difficulty: 9
+difficulty: 5
 topics: [stirling-number, exponential-generating-function, formal-power-series, ntt]
 prerequisites: [catalan-stirling, ntt, polynomial-log-exp]
 statement: 給 n、k，輸出無號第一類 Stirling 數 c(0,k)..c(n,k)。c(i,k) 是把 i 個不同元素組成 k 個非空圓排列的方案數，答案模 167772161。

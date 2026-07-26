@@ -6,7 +6,7 @@ title: 洛谷 P4827 樹上距離 k 次方和
 chapter: 7
 section: '7.6'
 kind: external-oj
-difficulty: 7
+difficulty: 5
 topics: [stirling-number, tree-dp, rerooting]
 prerequisites: [catalan-stirling, tree-dp]
 statement: 給一棵 n 點、每邊長一的樹與正整數 k。對每個點 u，求所有點 v 的 dist(u,v)^k 之和，答案模 10007。

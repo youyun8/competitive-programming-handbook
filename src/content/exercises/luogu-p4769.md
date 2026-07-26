@@ -6,7 +6,7 @@ title: 洛谷 P4769 好排列的字典序計數
 chapter: 7
 section: '7.6'
 kind: external-oj
-difficulty: 9
+difficulty: 5
 topics: [catalan-number, permutation, combinatorics, fenwick-tree]
 prerequisites: [catalan-stirling, modular-combination]
 statement: 對 1..n 的排列，氣泡排序交換次數的下界為所有元素位移絕對值總和的一半；達到下界者稱為好排列。給定排列 q，求字典序嚴格大於 q 的好排列數，答案模 998244353。

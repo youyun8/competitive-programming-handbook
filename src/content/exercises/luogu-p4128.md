@@ -6,7 +6,7 @@ title: 洛谷 P4128 完全圖邊染色同構計數
 chapter: 7
 section: '7.7'
 kind: external-oj
-difficulty: 8
+difficulty: 5
 topics: [burnside-lemma, graph-isomorphism, integer-partition]
 prerequisites: [burnside-polya]
 statement: 用 m 種顏色為 n 點完全圖的每條邊染色。若重新編號頂點後邊色完全相同，兩方案視為同構。求本質不同方案數模質數 p。

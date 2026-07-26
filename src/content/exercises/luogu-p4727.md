@@ -6,7 +6,7 @@ title: 洛谷 P4727 無標號簡單圖計數
 chapter: 7
 section: '7.7'
 kind: external-oj
-difficulty: 8
+difficulty: 5
 topics: [burnside-lemma, graph-isomorphism, integer-partition]
 prerequisites: [burnside-polya]
 statement: 求 n 個頂點的無標號簡單無向圖數；頂點重新編號後相同的圖只算一次。答案模 997。

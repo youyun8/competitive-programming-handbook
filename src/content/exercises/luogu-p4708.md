@@ -6,7 +6,7 @@ title: 洛谷 P4708 無標號偶度圖計數
 chapter: 7
 section: '7.7'
 kind: external-oj
-difficulty: 10
+difficulty: 5
 topics: [burnside-lemma, graph-isomorphism, parity, disjoint-set]
 prerequisites: [burnside-polya, disjoint-set-union]
 statement: 求 n 個頂點、每個連通塊都有歐拉迴路的無標號簡單無向圖數。孤立點允許；等價地，每個頂點度數皆為偶數。答案模 998244353。

@@ -6,7 +6,7 @@ title: 洛谷 P5408 第一類 Stirling 數整行
 chapter: 7
 section: '7.6'
 kind: external-oj
-difficulty: 8
+difficulty: 5
 topics: [stirling-number, polynomial-shift, ntt, divide-and-conquer]
 prerequisites: [catalan-stirling, ntt]
 statement: 給 n，輸出無號第一類 Stirling 數 c(n,0)..c(n,n)。c(n,k) 是把 n 個不同元素組成 k 個非空圓排列的方案數，答案模 167772161。

@@ -6,7 +6,7 @@ title: 洛谷 P5818 限環長環烷烴同構計數
 chapter: 7
 section: '7.7'
 kind: external-oj
-difficulty: 9
+difficulty: 5
 topics: [burnside-lemma, generating-function, unlabeled-tree, dihedral-group]
 prerequisites: [burnside-polya, generating-functions]
 statement: 一個 n 碳環烷烴是 n 點 n 邊、連通、簡單且最大度數不超過 4 的無向圖，因此由一個基環與向外樹構成。求基環長至多 m 的互不同構結構數模質數 p。

@@ -6,7 +6,7 @@ title: 洛谷 P6597 烯烴同分異構體計數
 chapter: 7
 section: '7.7'
 kind: external-oj
-difficulty: 10
+difficulty: 5
 topics: [burnside-lemma, generating-function, formal-power-series, ntt]
 prerequisites: [burnside-polya, polynomial-newton-iteration]
 statement: 對每個碳數 2..n，求分子式 C_k H_(2k) 的單烯烴結構異構體數；不考慮空間與順反異構。答案模 998244353。

@@ -6,7 +6,7 @@ title: 洛谷 P4463 相異序列乘積和
 chapter: 7
 section: '7.8'
 kind: external-oj
-difficulty: 7
+difficulty: 5
 topics: [dynamic-programming, polynomial, lagrange-interpolation]
 prerequisites: [generating-functions, modular-combination]
 statement: 長 n 序列的每項都在 1..k 且互不相同，序列價值為所有項乘積。求所有合法有序序列的價值總和模質數 p。

@@ -6,7 +6,7 @@ title: 洛谷 P3210 相鄰已空堆取石
 chapter: 7
 section: '7.9'
 kind: external-oj
-difficulty: 8
+difficulty: 5
 topics: [game-theory, greedy, stack]
 prerequisites: [combinatorial-game-theory]
 statement: n 堆石子成列，部分堆初始為 0。每回合可取走一整堆正數石子，但該堆至少有一個相鄰堆已空。雙方都最大化自己的最終石子總數，求兩人所得。

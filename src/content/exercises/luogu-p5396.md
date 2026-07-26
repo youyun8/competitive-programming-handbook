@@ -6,7 +6,7 @@ title: 洛谷 P5396 第二類 Stirling 數整列
 chapter: 7
 section: '7.6'
 kind: external-oj
-difficulty: 8
+difficulty: 5
 topics: [stirling-number, generating-function, ntt, polynomial-inverse]
 prerequisites: [catalan-stirling, ntt]
 statement: 給 n、k，輸出 S(0,k),S(1,k),...,S(n,k)。S(i,k) 是把 i 個不同元素分成 k 個非空無標號集合的方案數，答案模 167772161。

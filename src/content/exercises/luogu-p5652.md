@@ -6,7 +6,7 @@ title: 洛谷 P5652 多區間移動減一博弈
 chapter: 7
 section: '7.9'
 kind: external-oj
-difficulty: 8
+difficulty: 5
 topics: [game-theory, rooted-tree, dfs-order]
 prerequisites: [combinatorial-game-theory]
 statement: 對每個詢問區間 [l,r]，取子序列作遊戲：先把首位置值減一，之後棋子所在 i 的玩家可選 j∈[i,min(i+m,end)] 且值為正的位置，移到 j 並將其值減一；無法操作者輸。求所有先手勝的詢問編號平方和模 2^32。

@@ -6,7 +6,7 @@ title: 洛谷 P6598 烷烴同分異構體計數
 chapter: 7
 section: '7.7'
 kind: external-oj
-difficulty: 10
+difficulty: 5
 topics: [unlabeled-tree, dissymmetry-theorem, generating-function, ntt]
 prerequisites: [burnside-polya, polynomial-newton-iteration]
 statement: 求 n 個碳原子的鏈狀烷烴結構異構體數；等價於 n 點、最大度數不超過 4 的無標號無根樹數。答案模 998244353。

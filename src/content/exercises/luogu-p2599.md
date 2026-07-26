@@ -6,7 +6,7 @@ title: 洛谷 P2599 雙端取石子博弈
 chapter: 7
 section: '7.9'
 kind: external-oj
-difficulty: 7
+difficulty: 5
 topics: [game-theory, interval-dp]
 prerequisites: [combinatorial-game-theory]
 statement: n 堆正數石子排成一列。每回合可從最左或最右堆取任意正數顆，可取完整堆；無法操作的人輸。判斷先手是否必勝。
