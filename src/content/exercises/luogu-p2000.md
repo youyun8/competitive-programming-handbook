@@ -6,7 +6,7 @@ title: 洛谷 P2000 五行石陣法計數
 chapter: 7
 section: '7.8'
 kind: external-oj
-difficulty: 6
+difficulty: 5
 topics: [generating-function, generalized-binomial, big-integer]
 prerequisites: [generating-functions]
 statement: 兩座陣法分別對五類石頭施加「數量為某數倍數」或「數量不超過某上限」的十項限制。把 n 塊石頭全部分配後，求可同時擺出的陣法組合總數。
