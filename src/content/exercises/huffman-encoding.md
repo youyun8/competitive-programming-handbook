@@ -74,7 +74,7 @@ cpp_skeleton: |
           const long long encoded_bits = optimal_bits(text);
           cout << ascii_bits << ' ' << encoded_bits << ' '
                << fixed << setprecision(1)
-               << static_cast<double>(ascii_bits) / encoded_bits << '\n';
+               << static_cast<double>(ascii_bits) / static_cast<double>(encoded_bits) << '\n';
       }
   }
 cpp_solution: |
@@ -111,7 +111,7 @@ cpp_solution: |
           const long long encoded_bits = optimal_bits(text);
           cout << ascii_bits << ' ' << encoded_bits << ' '
                << fixed << setprecision(1)
-               << static_cast<double>(ascii_bits) / encoded_bits << '\n';
+               << static_cast<double>(ascii_bits) / static_cast<double>(encoded_bits) << '\n';
       }
   }
 source_book_pages: [1, 31]
