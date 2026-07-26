@@ -9,13 +9,18 @@ kind: external-oj
 difficulty: 5
 topics: ['可持久化', 'FHQ Treap', 'split', 'merge']
 prerequisites: ['fhq-treap', 'persistent-segment-tree']
+core_knowledge:
+  - FHQ Treap
+  - 寫入時複製
+  - 有序多重集合
+judgment: 六種操作都能由 FHQ Treap 的 split、merge 與子樹大小完成；兩者只改根到葉的路徑，適合以 clone-on-write 保留版本。
 statement: |-
   維護一個支援版本回溯的可重集合，支援插入、刪除、查排名、查第 k 小、查前驅與後繼，每次操作都基於指定版本並產生新版本。
   本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
 constraints:
-  - '每次操作指定一個歷史版本作為基礎'
-  - '前驅／後繼不存在時輸出 ∓2147483647'
-  - '完整限制條件請參閱外部題目頁面'
+  - '1 <= n <= 500000'
+  - '每次操作指定的版本 v 介於 0 與目前操作編號之前'
+  - '前驅不存在輸出 -2147483647，後繼不存在輸出 2147483647'
 input_format: '第一行一個整數 n；接下來 n 行，每行三個整數 v、opt、x，opt 為 1..6 分別對應插入、刪除、查排名、查第 k 小、查前驅、查後繼。'
 output_format: '對 opt 為 3、4、5、6 的操作各輸出一行結果。'
 samples:
@@ -42,10 +47,6 @@ hints:
     唯一要改的是：split 與 merge 在遞迴時**先 clone 一份節點再修改**，而不是就地改。這樣舊版本指向的節點完全不受影響。
   - |-
     每次操作只複製一條根到葉的路徑，額外空間 O(log n)。總空間 O(n log n)。
-  - |-
-    查詢類操作（排名、第 k 小、前驅、後繼）不改變集合內容，新版本直接指向舊根即可——但注意，若你的 split 實作會 clone，那查詢過程產生的那些 clone 是暫時的，不要拿它當新版本的根。
-  - |-
-    前驅與後繼不存在時要輸出 −2147483647 與 2147483647。這兩個邊界值容易漏，記得測空集合與只有一個元素的情況。
 solution_outline: |-
   把 FHQ Treap 的 split 與 merge 改成 clone-on-write：遞迴時先複製節點再修改子指標，回溯時 pull 更新 size。六種操作與非持久化版本相同，只是每次以指定版本的根為起點；查詢型操作把新版本的根指回原版本的根。
 proof_or_invariant: |-
@@ -53,6 +54,10 @@ proof_or_invariant: |-
 complexity:
   time: '期望 O(log n)'
   space: 'O(n log n)'
+common_errors:
+  - split 或 merge 就地修改被舊版本共享的節點
+  - 刪除時移除所有相同值，而非只移除一個
+  - 忽略前驅、後繼不存在時指定的哨兵輸出
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;

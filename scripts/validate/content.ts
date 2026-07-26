@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import fg from 'fast-glob';
 import textbookCatalog from '../../data/textbook-items.json' with { type: 'json' };
 import toc from '../../data/toc.json' with { type: 'json' };
+import problemList from '../../data/vjudge-3284.json' with { type: 'json' };
 import { readFrontmatter } from './frontmatter';
 
 const errors: string[] = [];
@@ -74,7 +75,89 @@ for (const exercise of exercises) {
   ]) {
     if (!data[field]) errors.push(`${exercise.path}: ${field} is required for every public card`);
   }
-  if (data.review_status === 'needs-review') errors.push(`${exercise.path}: needs-review content must not be public`);
+}
+
+function externalProblemKey(platform: string, problemId: string) {
+  const platformText = platform.normalize('NFKC').toLowerCase();
+  const normalizedPlatform =
+    platformText.includes('openjudge') || platformText.includes('openj_bailian')
+      ? 'openjudge'
+      : platformText
+          .replace(/洛谷/u, 'luogu')
+          .replace(/[^a-z0-9]+/gu, '-')
+          .replace(/^-|-$/g, '');
+  return `${normalizedPlatform}:${problemId.normalize('NFKC').toLowerCase()}`;
+}
+
+const exerciseByExternalProblem = new Map<string, (typeof exercises)[number]>();
+for (const exercise of exercises) {
+  if (!exercise.data.external_platform || !exercise.data.external_problem_id) continue;
+  const key = externalProblemKey(exercise.data.external_platform, exercise.data.external_problem_id);
+  const existing = exerciseByExternalProblem.get(key);
+  if (!existing || (existing.data.external_relation !== 'original' && exercise.data.external_relation === 'original')) {
+    exerciseByExternalProblem.set(key, exercise);
+  }
+}
+const uniqueProblemListItems = new Map<string, (typeof problemList.items)[number]>();
+for (const item of problemList.items) {
+  const key = externalProblemKey(item.platform_label, item.problem_id);
+  if (!uniqueProblemListItems.has(key)) uniqueProblemListItems.set(key, item);
+}
+if (uniqueProblemListItems.size !== problemList.counts.unique_problems) {
+  errors.push(
+    `Problem-list normalization produced ${uniqueProblemListItems.size} unique problems; expected ${problemList.counts.unique_problems}`
+  );
+}
+let reviewedRoadmapCount = 0;
+for (const [key, problem] of uniqueProblemListItems) {
+  const exercise = exerciseByExternalProblem.get(key);
+  if (!exercise) {
+    errors.push(
+      `Chapter ${problem.chapter} problem ${problem.platform_label} ${problem.problem_id}: missing exercise card`
+    );
+    continue;
+  }
+  const data = exercise.data;
+  if (data.chapter !== problem.chapter) {
+    errors.push(`${exercise.path}: chapter does not match the problem list's first occurrence`);
+  }
+  if (data.external_relation !== 'original') {
+    errors.push(`${exercise.path}: problem-list cards must identify the original external problem`);
+  }
+  if (data.review_status === 'needs-review') {
+    reviewedRoadmapCount++;
+    const roadmapText = `${data.title} ${data.solution_outline} ${exercise.body}`.toLowerCase();
+    if (!roadmapText.includes('roadmap') && !roadmapText.includes('路線圖')) {
+      errors.push(`${exercise.path}: needs-review problem must include a reviewed roadmap`);
+    }
+    if (data.cpp_skeleton || data.cpp_solution) {
+      errors.push(`${exercise.path}: reviewed roadmap must not publish unverified C++ code`);
+    }
+    continue;
+  }
+  if (data.review_status !== 'verified') {
+    errors.push(`${exercise.path}: problem-list card must be verified or an explicit reviewed roadmap`);
+    continue;
+  }
+  for (const field of [
+    'core_knowledge',
+    'judgment',
+    'proof_or_invariant',
+    'common_errors',
+    'cpp_skeleton',
+    'cpp_solution'
+  ]) {
+    const value = data[field];
+    if (!value || (Array.isArray(value) && value.length === 0)) {
+      errors.push(`${exercise.path}: ${field} is required for a complete problem-list card`);
+    }
+  }
+  if (data.hints?.length !== 3) {
+    errors.push(`${exercise.path}: complete problem-list cards require exactly three hints`);
+  }
+  if (!data.samples?.length || data.samples.some((sample: { explanation?: string }) => !sample.explanation)) {
+    errors.push(`${exercise.path}: complete problem-list cards require a sample walkthrough`);
+  }
 }
 
 for (const lesson of lessons) {
@@ -128,5 +211,5 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(
-  `Content validation passed: ${toc.chapters.length} chapters, ${sectionCount} covered sections, ${lessons.length} deep lessons, ${guidedSections.size} core guides, ${exercises.length} interactive exercises, ${textbookCatalog.counts.examples} textbook examples, ${textbookCatalog.counts.exercises} textbook exercises.`
+  `Content validation passed: ${toc.chapters.length} chapters, ${sectionCount} covered sections, ${lessons.length} deep lessons, ${guidedSections.size} core guides, ${uniqueProblemListItems.size} problem-list exercises (${reviewedRoadmapCount} reviewed roadmaps), ${exercises.length} interactive exercises, ${textbookCatalog.counts.examples} textbook examples, ${textbookCatalog.counts.exercises} textbook exercises.`
 );

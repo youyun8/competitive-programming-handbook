@@ -2,6 +2,7 @@
 id: luogu-p5960
 volume: lower
 source_file: lower-volume
+original_label: 洛谷 P5960
 title: 洛谷 P5960 差分約束：把不等式組變成最短路
 chapter: 10
 section: '10.8'
@@ -9,6 +10,11 @@ kind: external-oj
 difficulty: 3
 topics: ['差分約束', 'SPFA', '最短路徑', '三角不等式']
 prerequisites: ['dijkstra']
+core_knowledge:
+  - 將 x_a-x_b≤y 改寫為 x_a≤x_b+y，並建立 b→a、權重 y 的有向邊
+  - 由虛擬源點向所有變數連零權邊，使每個連通分量都能被鬆弛與檢查
+  - 圖中存在負環等價於約束互相矛盾；沒有負環時最短距離本身就是一組可行解
+judgment: 若 Bellman-Ford／SPFA 在加入虛擬源點後偵測到負環，沿環相加會得到 0<負數的矛盾，故輸出 NO；否則所有最短距離都滿足每條 dist[a]≤dist[b]+y，可直接作答。
 statement: |-
   給定 m 條形如 x_a − x_b <= y 的約束，求一組滿足全部約束的整數解；若無解則輸出 NO。
   本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
@@ -35,11 +41,7 @@ hints:
   - |-
     方向很容易搞反。記法：不等式左邊被減的那個變數是邊的終點，右邊那個是起點。
   - |-
-    有些點可能不在任何約束裡，或整張圖不連通，那樣它們的距離會是無限大。解法是加一個**超級源點**連向所有點、權重 0，保證全部可達，同時也讓「全部取 0」成為合法的起始基準。
-  - |-
-    約束互相矛盾時會出現負環（沿著環走一圈能無限變小），用 SPFA 的邊數計數判定即可：某點的最短路邊數超過 n 就輸出 NO。
-  - |-
-    解不唯一是正常的：把一組解整體平移同一個常數仍然是解，因為所有約束都只涉及差值。所以輸出任何一組都算對。
+    加超級源點以涵蓋不連通的變數，再用 SPFA 求距離並判負環；負環等價於約束互相矛盾。解可整體平移，因此輸出任一組即可。
 solution_outline: |-
   對每條約束 x_a − x_b <= y 建一條 b → a、權重 y 的邊。再加超級源點 0 向所有點連權重 0 的邊。從超級源點跑 SPFA 並用邊數計數偵測負環：有負環輸出 NO，否則 dist[1..n] 就是一組合法解。
 proof_or_invariant: |-
@@ -47,6 +49,10 @@ proof_or_invariant: |-
 complexity:
   time: '最壞 O(nm)'
   space: 'O(n + m)'
+common_errors:
+  - 把 x_a − x_b <= y 建成 a 到 b，方向顛倒
+  - 沒有加入超級源點，漏查不連通部分的負環
+  - 以鬆弛總次數代替當前最短路邊數判負環
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;
@@ -135,8 +141,8 @@ external_platform: 洛谷
 external_problem_id: P5960
 external_title: '【模板】差分約束'
 external_relation: original
-source_book_pages: [600, 683]
-source_pdf_pages: [230, 313]
+source_book_pages: [656]
+source_pdf_pages: [286]
 review_status: verified
 ---
 

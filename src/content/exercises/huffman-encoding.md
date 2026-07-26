@@ -2,68 +2,126 @@
 id: huffman-encoding
 volume: upper
 source_file: upper-volume
-title: 霍夫曼編碼總長度
+title: OpenJudge 1521 Entropy
 chapter: 1
 section: '1.4'
-kind: practice
+kind: external-oj
 difficulty: 2
 topics: [huffman, greedy, priority-queue]
 prerequisites: [priority-queue, trees]
-statement: 給定 n 個字元及其出現次數，求霍夫曼編碼的總加權編碼長度（即霍夫曼樹的加權路徑長度）。
+statement: >-
+  給定若干行只含大寫英文字母、數字與底線的文字（底線代表空白），比較固定使用 8 位元表示每個字元時的長度，
+  與最佳二進位前綴碼所需的最少位元數，並計算兩者的壓縮比。單獨一行 END 表示輸入結束，不納入處理。
 constraints:
-  - 1 <= n <= 100000
-  - 1 <= frequency[i] <= 1000000000
-input_format: 第一行為 n，第二行為 n 個出現次數。
-output_format: 輸出最小加權編碼總長度。
+  - 總時間限制 1000 ms，記憶體限制 65536 kB
+  - 每行只含大寫英文字母、數字與底線；官方題面未另列字串長度上限
+  - 若文字只有一種字元，仍以一位元碼表示每次出現
+input_format: 每行一個待編碼字串；讀到內容恰為 END 的一行時結束。
+output_format: 每筆依序輸出固定 8 位元編碼長度、最佳前綴碼長度，以及前者除以後者的比值（四捨五入至小數一位）。
 samples:
   - input: |
-      4
-      5 9 12 13
-    output: '78'
-    explanation: 合併順序影響樹高，貪心每次取最小的兩個合併。
+      AAAAABCD
+      THE_CAT_IN_THE_HAT
+      END
+    output: |
+      64 13 4.9
+      144 51 2.8
+    explanation: 第一行頻率為 5、1、1、1；依序合併 1+1、1+2、3+5，成本總和為 2+3+8=13。
+core_knowledge:
+  - 最佳二進位前綴碼的總長度等於霍夫曼樹的帶權外部路徑長度
+  - 每次合併兩個最小頻率，可用最小堆實作
+judgment: 每筆答案為三個欄位；壓縮比須使用浮點除法並固定輸出一位小數，END 不得產生輸出。
 hints:
-  - 每次取最小兩個頻率合併，合併後的新頻率放回優先佇列。
-  - 使用最小堆（priority_queue with greater<>）。
-solution_outline: 以最小堆模擬霍夫曼合併，每次取出兩個最小值相加，並把和放回堆中。總長度為每次合併和的累積。
-proof_or_invariant: 霍夫曼貪心法每次把最小頻率的兩個節點放在最深層，任何其他安排都不會比這個選擇更優。
+  - 先只統計每個可出現字元的次數；實際碼字內容不影響答案。
+  - 一棵前綴碼樹最深的一對兄弟葉可以安排給目前頻率最小的兩個字元。
+  - 把這兩個頻率合成一個新頻率放回最小堆；每次合併值的總和就是最佳位元數。
+solution_outline: >-
+  對每行統計字元頻率並放進最小堆。若只有一種字元，最佳長度就是原字串長度；否則反覆取出兩個最小值，
+  將它們的和累加到答案並放回堆，直到只剩一項。固定編碼長度為字串長度乘 8。
+proof_or_invariant: >-
+  在任一最佳前綴碼樹中，可交換葉子而不改變樹形，令最小的兩個權重位於最深的一對兄弟；縮合這對兄弟後，
+  剩下的是權重和取代兩者的同型最佳子問題。反覆套用即得霍夫曼合併，而每次合併和正是兩棵子樹所有葉子深度增加一的成本。
+common_errors:
+  - 把 END 當成資料處理
+  - 唯一字元時讓合併成本保持為 0，而忽略題目採一位元碼
+  - 用整數相除計算壓縮比
 complexity:
-  time: O(n log n)
-  space: O(n)
-cpp_solution: |
-  #include <functional>
-  #include <iostream>
-  #include <queue>
-  #include <vector>
+  time: O(L + a log a)，L 為該行長度，a 為不同字元數且 a <= 37
+  space: O(a)
+cpp_skeleton: |
+  #include <bits/stdc++.h>
+  using namespace std;
 
-  long long huffman_total_length(const std::vector<long long>& freq) {
-      std::priority_queue<long long, std::vector<long long>, std::greater<long long>> min_heap;
-      for (long long f : freq) { min_heap.push(f); }
-      long long total = 0;
-      while (min_heap.size() > 1) {
-          long long a = min_heap.top(); min_heap.pop();
-          long long b = min_heap.top(); min_heap.pop();
-          long long merged = a + b;
-          total += merged;
-          min_heap.push(merged);
+  static long long optimal_bits(const string& text) {
+      array<int, 256> frequency{};
+      for (unsigned char ch : text) { ++frequency[ch]; }
+      priority_queue<long long, vector<long long>, greater<long long>> min_heap;
+      for (int count : frequency) {
+          if (count > 0) { min_heap.push(count); }
       }
-      return total;
+      if (min_heap.size() == 1) { return static_cast<long long>(text.size()); }
+      long long result = 0;
+      // TODO：反覆合併兩個最小頻率，並累加合併成本。
+      return result;
   }
 
   int main() {
-      std::ios::sync_with_stdio(false);
-      std::cin.tie(nullptr);
-      int n = 0;
-      std::cin >> n;
-      std::vector<long long> freq(n);
-      for (long long& f : freq) { std::cin >> f; }
-      std::cout << huffman_total_length(freq) << "\n";
+      ios::sync_with_stdio(false);
+      cin.tie(nullptr);
+      string text;
+      while (getline(cin, text) && text != "END") {
+          const long long ascii_bits = static_cast<long long>(text.size()) * 8;
+          const long long encoded_bits = optimal_bits(text);
+          cout << ascii_bits << ' ' << encoded_bits << ' '
+               << fixed << setprecision(1)
+               << static_cast<double>(ascii_bits) / static_cast<double>(encoded_bits) << '\n';
+      }
+  }
+cpp_solution: |
+  #include <bits/stdc++.h>
+  using namespace std;
+
+  static long long optimal_bits(const string& text) {
+      array<int, 256> frequency{};
+      for (unsigned char ch : text) { ++frequency[ch]; }
+      priority_queue<long long, vector<long long>, greater<long long>> min_heap;
+      for (int count : frequency) {
+          if (count > 0) { min_heap.push(count); }
+      }
+      if (min_heap.size() == 1) { return static_cast<long long>(text.size()); }
+      long long result = 0;
+      while (min_heap.size() > 1) {
+          const long long first = min_heap.top();
+          min_heap.pop();
+          const long long second = min_heap.top();
+          min_heap.pop();
+          const long long merged = first + second;
+          result += merged;
+          min_heap.push(merged);
+      }
+      return result;
+  }
+
+  int main() {
+      ios::sync_with_stdio(false);
+      cin.tie(nullptr);
+      string text;
+      while (getline(cin, text) && text != "END") {
+          const long long ascii_bits = static_cast<long long>(text.size()) * 8;
+          const long long encoded_bits = optimal_bits(text);
+          cout << ascii_bits << ' ' << encoded_bits << ' '
+               << fixed << setprecision(1)
+               << static_cast<double>(ascii_bits) / static_cast<double>(encoded_bits) << '\n';
+      }
   }
 source_book_pages: [1, 31]
 source_pdf_pages: [19, 49]
 review_status: verified
-external_url: http://poj.org/problem?id=1521
-external_platform: POJ
+external_url: http://bailian.openjudge.cn/practice/1521/
+external_platform: OpenJudge 百練
 external_problem_id: '1521'
 external_title: Entropy
-external_relation: related
+external_relation: original
 ---
+
+官方範例可直接看出「固定八位元」與「最佳前綴碼」的差距；本卡只重述計算任務，不重製原題的背景文章。

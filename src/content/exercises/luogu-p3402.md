@@ -9,13 +9,18 @@ kind: external-oj
 difficulty: 5
 topics: ['可持久化並查集', '按秩合併', '可持久化陣列', '版本回溯']
 prerequisites: ['persistent-segment-tree', 'union-find']
+core_knowledge:
+  - 可持久化陣列
+  - 按秩合併
+  - 版本回溯
+judgment: 回到任意版本要求 parent 與 rank 都可持久化；路徑壓縮會大量改寫共享節點，故改用按秩合併控制樹高。
 statement: |-
   維護一個支援版本回溯的並查集：合併兩個集合、回到某個歷史版本、查詢兩點是否同集合。
   本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
 constraints:
-  - '需要支援回到任意歷史版本'
-  - '不能使用路徑壓縮'
-  - '完整限制條件請參閱外部題目頁面'
+  - '1 <= n, m <= 200000'
+  - '節點編號介於 1 與 n'
+  - '回溯操作中的版本 k 介於 0 與目前操作編號之前'
 input_format: '第一行兩個整數 n 與 m；接下來 m 行，`1 a b` 合併、`2 k` 回到第 k 個版本、`3 a b` 查詢是否同集合。'
 output_format: '對每個查詢輸出一行，同集合輸出 1，否則 0。'
 samples:
@@ -40,10 +45,6 @@ hints:
     **絕對不能用路徑壓縮。** 路徑壓縮會一次改寫一整條路徑上的所有 parent，而那些節點正被舊版本共用；改了它們就等於竄改歷史。
   - |-
     沒有路徑壓縮，樹高怎麼辦？用**按秩合併**（把秩較小的樹接到秩較大的下面）。這單獨就能把樹高壓在 O(log n)，不需要路徑壓縮輔助。
-  - |-
-    所以 rank 陣列也要可持久化。find 沿 parent 往上跳 O(log n) 步，每步查一次可持久化陣列又是 O(log n)，單次操作合計 O(log² n)。
-  - |-
-    合併時若兩者的秩相等，接完之後新根的秩要加一；秩不同時秩不變。這一步寫錯不會馬上出錯，但樹高會慢慢退化。
 solution_outline: |-
   parent 與 rank 兩個陣列都用可持久化線段樹維護。find 不做路徑壓縮，純粹沿 parent 往上跳。合併時比較兩根的秩，把秩小的接到秩大的下面，秩相等時新根的秩加一。版本回溯只需把兩個根指標指回指定版本。
 proof_or_invariant: |-
@@ -51,6 +52,10 @@ proof_or_invariant: |-
 complexity:
   time: '單次操作 O(log² n)'
   space: 'O((n + m) log n)'
+common_errors:
+  - 使用路徑壓縮並就地改寫舊版本的 parent
+  - 只持久化 parent，卻直接改動共享的 rank
+  - 查詢或回溯操作沒有建立正確的新版本根
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;

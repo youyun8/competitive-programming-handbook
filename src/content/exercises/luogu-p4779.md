@@ -2,6 +2,7 @@
 id: luogu-p4779
 volume: lower
 source_file: lower-volume
+original_label: 洛谷 P4779
 title: 洛谷 P4779 單源最短路徑：優先佇列版 Dijkstra
 chapter: 10
 section: '10.8'
@@ -9,6 +10,8 @@ kind: external-oj
 difficulty: 3
 topics: ['最短路徑', 'Dijkstra', '優先佇列', '貪心']
 prerequisites: ['dijkstra', 'heap']
+core_knowledge: [非負權最短路, 優先佇列, 惰性刪除]
+judgment: 邊權非負且規模大，使用優先佇列版 Dijkstra。
 statement: |-
   給定一張帶非負權的有向圖與起點，求起點到每個點的最短距離；不可達者輸出 2^31−1。
   本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
@@ -39,10 +42,6 @@ hints:
     樸素實作每輪掃描找最小值是 O(n²)。改用小根堆存 (距離, 節點) 就能 O(log n) 取最小，總複雜度 O((n+m) log n)。
   - |-
     C++ 的 `priority_queue` 沒有 decrease-key。標準做法是**惰性刪除**：距離變短時直接推入一個新項目，取出時若發現「取出的距離 > 已記錄的距離」就跳過。堆裡最多有 O(m) 個項目，複雜度不受影響。
-  - |-
-    `priority_queue<pair<long long,int>, vector<...>, greater<>>` 會依 pair 的第一維（距離）做小根堆，正是我們要的順序。
-  - |-
-    不可達的點要輸出 2147483647，所以直接把初始距離設成這個值最省事——它同時也是題目要求的輸出值。注意用 long long 承接加法避免溢位。
 solution_outline: |-
   用鄰接表存圖，距離陣列初始化為 2147483647（同時也是題目要求的不可達輸出值）。小根堆存 (距離, 節點)，每次取出堆頂；若取出的距離大於已記錄距離就跳過，否則鬆弛所有出邊，變短就更新並推入新項目。
 proof_or_invariant: |-
@@ -50,6 +49,10 @@ proof_or_invariant: |-
 complexity:
   time: 'O((n + m) log n)'
   space: 'O(n + m)'
+common_errors:
+  - 對負權邊使用 Dijkstra
+  - 未跳過優先佇列中的過期距離
+  - 距離加法使用 32 位元造成溢位
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;

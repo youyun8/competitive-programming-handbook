@@ -9,13 +9,15 @@ kind: external-oj
 difficulty: 5
 topics: ['點分樹', '重心樹', '樹狀陣列', '容斥', '強制在線']
 prerequisites: ['tree-divide-and-conquer', 'lca', 'fenwick-tree']
+core_knowledge: [點分樹, 距離桶, 容斥]
+judgment: 修改與距離球查詢都需在線；將點分治層級固化後，每個點只屬於 O(log n) 個重心距離桶，可逐層更新與查詢。
 statement: |-
   給定一棵樹，每個點有權值，支援兩種強制在線的操作：查詢與某點距離不超過 k 的所有點的權值和；把某點的權值改成新值。
   本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
 constraints:
-  - '強制在線：每個操作的參數都要先異或上一次的答案'
-  - '節點數與操作數都很大，不能每次 BFS'
-  - '完整限制條件請參閱外部題目頁面'
+  - '1 <= n, m <= 100000'
+  - '點權、修改值與解碼後的距離參數都是非負整數'
+  - '每次操作的 x、y 都先與上一次查詢答案做位元 XOR'
 input_format: '第一行兩個整數 n 與 m；第二行 n 個初始權值；接下來 n−1 行每行兩個整數表示一條邊；最後 m 行每行三個整數 op、x、y（x 與 y 需異或上一次答案），op 為 0 表示查詢距離 x 不超過 y 的權值和，op 為 1 表示把 x 的權值改成 y。'
 output_format: '對每個查詢輸出一行。'
 samples:
@@ -49,10 +51,6 @@ hints:
     關鍵性質：原樹上任意兩點 x、y 的路徑，一定經過它們在點分樹上的某個共同祖先 c，且 dist(x,y) = dist(x,c) + dist(c,y)。所以「x 的 k 鄰域」可以拆成沿點分樹往上跳的 O(log n) 段。
   - |-
     每個重心 c 掛一棵以「距離」為下標的樹狀陣列 `inside[c]`，記錄 c 到自己連通塊內每個點的距離。查詢時往上跳，每層加上 `inside[父].prefix(k − dist(x, 父))`。
-  - |-
-    但這樣會**重複計算**：從 x 這一側上來的點，在父層又被算了一次。所以每個重心還要掛第二棵 `border[c]`，記錄「c 的點分樹父親」到 c 這個連通塊內每個點的距離，往上跳時把它減掉。這個容斥是點分樹的靈魂。
-  - |-
-    兩點距離用原樹上的 LCA 算（倍增或歐拉序皆可），不要用點分樹上的深度。另外每棵樹狀陣列的大小要開成該連通塊的實際半徑，總空間才是 O(n log n) 而不是 O(n²)。
 solution_outline: |-
   先遞迴找重心建出點分樹並記錄 centroid_parent，同時為每個重心開兩棵樹狀陣列 inside 與 border（大小分別是該塊到自己、到父重心的最大距離）。修改點 x 時沿點分樹往上跳，對每個祖先 c 在 `inside[c]` 的下標 dist(c,x) 加上差值，並在「來時的那個子重心」的 border 同一下標加上差值。查詢 (x,k) 時取 `inside[x].prefix(k)`，再往上跳累加 `inside[c].prefix(k−d)` 並減去 `border[child].prefix(k−d)`。
 proof_or_invariant: |-
@@ -60,6 +58,10 @@ proof_or_invariant: |-
 complexity:
   time: '單次操作 O(log² n)'
   space: 'O(n log n)'
+common_errors:
+  - 只加祖先的 inside 桶，沒有減去來向子塊造成重複計數
+  - 用點分樹深度代替原樹兩點距離
+  - 忘記將在線操作參數與上一次答案做 XOR
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;

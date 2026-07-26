@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { readExerciseProgress, saveExerciseProgress } from '@/lib/sync/store';
 import type { ExerciseProgress } from '@/lib/sync/types';
 
@@ -24,6 +24,7 @@ interface Props {
 }
 
 export default function ExerciseStatusControl({ exerciseId, compact = false }: Props) {
+  const controlId = `exercise-status-${exerciseId}-${useId().replaceAll(':', '')}`;
   const [status, setStatus] = useState<ExerciseStatus>('not-started');
   const [ready, setReady] = useState(false);
 
@@ -62,9 +63,9 @@ export default function ExerciseStatusControl({ exerciseId, compact = false }: P
 
   return (
     <div className={compact ? 'exercise-status compact' : 'exercise-status'}>
-      <label htmlFor={`exercise-status-${exerciseId}`}>學習狀態</label>
+      <label htmlFor={controlId}>學習狀態</label>
       <select
-        id={`exercise-status-${exerciseId}`}
+        id={controlId}
         value={status}
         disabled={!ready}
         onChange={(event) => update(event.target.value as ExerciseStatus)}

@@ -2,9 +2,11 @@
 import { getCollection } from 'astro:content';
 import { Code } from 'astro:components';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import ChapterProblemList from '@/components/problems/ChapterProblemList.astro';
 import { chapterWorkshops } from '@/lib/chapter-workshops';
 import { chapterExamples } from '@/lib/chapter-examples';
 import { curriculum, sectionSlug } from '@/lib/curriculum';
+import { problemEntriesForChapter } from '@/lib/problem-list';
 import { withBase } from '@/lib/site';
 
 export function getStaticPaths() {
@@ -19,6 +21,7 @@ const lessons = await getCollection('lessons');
 const exercises = await getCollection('exercises');
 const workshop = chapterWorkshops[chapter.chapter]!;
 const examples = chapterExamples[chapter.chapter] ?? [];
+const problemEntries = problemEntriesForChapter(chapter.chapter);
 ---
 
 <BaseLayout title={`第 ${chapter.chapter} 章 ${chapter.title}`} wide>
@@ -116,4 +119,5 @@ const examples = chapterExamples[chapter.chapter] ?? [];
       }
     </div>
   </section>
+  <ChapterProblemList entries={problemEntries} />
 </BaseLayout>

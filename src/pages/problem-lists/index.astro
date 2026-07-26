@@ -1,13 +1,32 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { problemChapters, problemListCounts, problemListPlatforms, problemListSource } from '@/lib/problem-list';
+import {
+  problemChapters,
+  problemKey,
+  problemListCounts,
+  problemListPlatforms,
+  problemListSource
+} from '@/lib/problem-list';
+import { withBase } from '@/lib/site';
+
+const exercises = await getCollection('exercises', ({ data }) => data.review_status === 'verified');
+const exerciseByProblem = new Map<string, (typeof exercises)[number]>();
+for (const exercise of exercises) {
+  if (!exercise.data.external_platform || !exercise.data.external_problem_id) continue;
+  const key = problemKey(exercise.data.external_platform, exercise.data.external_problem_id);
+  const existing = exerciseByProblem.get(key);
+  if (!existing || (existing.data.external_relation !== 'original' && exercise.data.external_relation === 'original')) {
+    exerciseByProblem.set(key, exercise);
+  }
+}
 ---
 
-<BaseLayout title="《算法競賽》題單索引" wide>
+<BaseLayout title="《演算法競賽》題單索引" wide>
   <p class="eyebrow">Problem list</p>
-  <h1>《算法競賽》題單索引</h1>
+  <h1>《演算法競賽》題單索引</h1>
   <p class="lede">
-    羅勇軍《算法競賽》配套題單的完整索引，共 {problemListCounts.rows} 筆條目、{problemListCounts.unique_problems} 道不重複題目，
+    羅勇軍《演算法競賽》配套題單的完整索引，共 {problemListCounts.rows} 筆條目、{problemListCounts.unique_problems} 道不重複題目，
     涵蓋 {problemListCounts.chapters} 章 {problemListCounts.sections} 個小節，其中例題 {problemListCounts.examples} 題、習題
     {problemListCounts.practice} 題。
   </p>
@@ -68,12 +87,16 @@ import { problemChapters, problemListCounts, problemListPlatforms, problemListSo
     problemChapters.map((chapter) => (
       <section class="problem-chapter" data-chapter={chapter.chapter}>
         <h2>
-          第 {chapter.chapter} 章 {chapter.chapter_title}
+          <a href={withBase(`/chapters/${chapter.chapter}/`)}>
+            第 {chapter.chapter} 章 {chapter.chapter_title}
+          </a>
         </h2>
         {chapter.sections.map((section) => (
           <div class="problem-section">
             <h3>
-              {section.section} {section.section_title}
+              <a href={withBase(section.entries[0]?.lesson_href ?? `/chapters/${chapter.chapter}/`)}>
+                {section.section} {section.section_title}
+              </a>
             </h3>
             <div class="table-scroll">
               <table class="problem-table">
@@ -83,31 +106,47 @@ import { problemChapters, problemListCounts, problemListPlatforms, problemListSo
                     <th scope="col">出處</th>
                     <th scope="col">題目</th>
                     <th scope="col">賽事來源</th>
+                    <th scope="col">學習內容</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {section.entries.map((entry) => (
-                    <tr
-                      class="problem-row"
-                      data-chapter={entry.chapter}
-                      data-group={entry.group}
-                      data-platform={entry.platform_label}
-                      data-search={`${entry.title} ${entry.platform_label} ${entry.problem_id} ${section.section} ${section.section_title} ${entry.contest_source}`.toLowerCase()}
-                    >
-                      <td>
-                        <span class:list={['badge', entry.group]}>{entry.group === 'example' ? '例題' : '習題'}</span>
-                      </td>
-                      <td class="nowrap">
-                        {entry.platform_label} {entry.problem_id}
-                      </td>
-                      <td>
-                        <a href={entry.url} target="_blank" rel="noopener noreferrer nofollow">
-                          {entry.title} ↗
-                        </a>
-                      </td>
-                      <td class="meta">{entry.contest_source}</td>
-                    </tr>
-                  ))}
+                  {section.entries.map((entry) => {
+                    const exercise = exerciseByProblem.get(problemKey(entry.platform_label, entry.problem_id));
+                    return (
+                      <tr
+                        class="problem-row"
+                        data-chapter={entry.chapter}
+                        data-group={entry.group}
+                        data-platform={entry.platform_label}
+                        data-search={`${entry.title} ${entry.platform_label} ${entry.problem_id} ${section.section} ${section.section_title} ${entry.source_section_title ?? ''} ${entry.contest_source}`.toLowerCase()}
+                      >
+                        <td>
+                          <span class:list={['badge', entry.group]}>{entry.group === 'example' ? '例題' : '習題'}</span>
+                        </td>
+                        <td class="nowrap">
+                          {entry.platform_label} {entry.problem_id}
+                        </td>
+                        <td>
+                          <a href={entry.url} target="_blank" rel="noopener noreferrer nofollow">
+                            {entry.title} ↗
+                          </a>
+                          {entry.source_section !== entry.section && (
+                            <small class="meta">
+                              原題單分類：{entry.source_section} {entry.source_section_title}
+                            </small>
+                          )}
+                        </td>
+                        <td class="meta">{entry.contest_source}</td>
+                        <td>
+                          {exercise ? (
+                            <a href={withBase(`/practice/${exercise.data.id}/`)}>題解與狀態</a>
+                          ) : (
+                            <a href={withBase(`/chapters/${entry.chapter}/#chapter-problems-title`)}>章節題單</a>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

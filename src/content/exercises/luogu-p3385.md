@@ -2,6 +2,7 @@
 id: luogu-p3385
 volume: lower
 source_file: lower-volume
+original_label: 洛谷 P3385
 title: 洛谷 P3385 負環：SPFA 判定負權迴路
 chapter: 10
 section: '10.8'
@@ -9,6 +10,8 @@ kind: external-oj
 difficulty: 3
 topics: ['負環', 'SPFA', 'Bellman-Ford', '鴿巢原理']
 prerequisites: ['dijkstra']
+core_knowledge: [負環, SPFA, 最短路邊數]
+judgment: 只需偵測從 1 可達的負環，並依題意區分非負雙向邊與負權單向邊。
 statement: |-
   給定一張圖，判斷是否存在從 1 號點出發可以到達的負權迴路。邊權非負時該邊為無向邊，邊權為負時只有單向。
   本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
@@ -43,10 +46,6 @@ hints:
     負環判定的原理是鴿巢原理：一條不含環的最短路最多用 n−1 條邊。若某個點的最短路用了 n 條邊，這條路徑必定重複經過某個點，也就是繞了一個環——而它之所以能讓距離變小，代表那個環的總權重是負的。
   - |-
     所以在 SPFA 裡除了距離，還要維護 `edge_count[v]`＝「目前這條最短路用了幾條邊」，鬆弛時令 `edge_count[v] = edge_count[u] + 1`。一旦達到 n 就判定有負環。
-  - |-
-    **不要改成計「某點被鬆弛的次數」**。那個數字在完全沒有負權的圖上也可能超過 n——例如兩點之間有多條平行邊時，距離會被連續改小好幾次——會把沒有負環的圖誤判成有。這是實作這題最容易踩的坑。
-  - |-
-    題目只要求判斷「從 1 號點可達」的負環，所以從 1 開始跑就好，不必為每個連通塊各跑一次。
 solution_outline: |-
   依規則建圖（非負權加雙向、負權加單向）。從 1 號點跑 SPFA，同時維護每個點當前最短路的邊數。鬆弛成功時把邊數設為前驅的邊數加一，一旦某點的邊數達到 n 就立即判定存在負環並結束該組測資。
 proof_or_invariant: |-
@@ -54,6 +53,10 @@ proof_or_invariant: |-
 complexity:
   time: '最壞 O(nm)'
   space: 'O(n + m)'
+common_errors:
+  - 忘記非負權邊必須加入反向邊
+  - 從所有點出發而誤判 1 號點不可達的負環
+  - 用鬆弛次數而非目前最短路邊數判定負環
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;

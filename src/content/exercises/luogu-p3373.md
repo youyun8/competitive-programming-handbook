@@ -7,17 +7,21 @@ chapter: 4
 section: '4.3'
 kind: external-oj
 difficulty: 4
-topics: ['線段樹', '複合懶標記', '模運算']
-prerequisites: ['segment-tree']
+topics: &id001
+  - 線段樹
+  - 複合懶標記
+  - 模運算
+prerequisites:
+  - segment-tree
 statement: |-
   維護一個長度為 n 的序列，支援三種操作：區間每個數乘上一個值、區間每個數加上一個值、查詢區間和取模。
   本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
 constraints:
-  - '所有輸出都要對給定的模數取模'
-  - '乘法中間值會超過 32 位元，必須用 long long'
-  - '完整限制條件請參閱外部題目頁面'
-input_format: '第一行三個整數 n、m 與模數 p；第二行 n 個初始值；接下來 m 行，`1 x y k` 為區間乘 k，`2 x y k` 為區間加 k，`3 x y` 為查詢區間和。'
-output_format: '對每個操作 3 輸出一行區間和對 p 取模的結果。'
+  - 所有輸出都要對給定的模數取模
+  - 乘法中間值會超過 32 位元，必須用 long long
+  - 完整限制條件請參閱外部題目頁面
+input_format: 第一行三個整數 n、m 與模數 p；第二行 n 個初始值；接下來 m 行，`1 x y k` 為區間乘 k，`2 x y k` 為區間加 k，`3 x y` 為查詢區間和。
+output_format: 對每個操作 3 輸出一行區間和對 p 取模的結果。
 samples:
   - input: |
       5 5 571373
@@ -31,26 +35,18 @@ samples:
       11
       20
       29
-    explanation: |-
-      [2,4] 初始和 11；把 [2,3] 各乘 2 後序列為 1 10 8 2 3，該區間和 20；再全段各加 1 得 2 11 9 3 4，總和 29。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+    explanation: '[2,4] 初始和 11；把 [2,3] 各乘 2 後序列為 1 10 8 2 3，該區間和 20；再全段各加 1 得 2 11 9 3 4，總和 29。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。'
 hints:
-  - |-
-    兩種標記共存時，難點不在資料結構而在**標記的複合順序**。先固定一個約定：每個節點的待辦是 `x -> x * mul + add`，其中 mul 初始為 1、add 初始為 0。
-  - |-
-    在既有的 (mul, add) 之後再套一個 (m2, a2)，得到的是 `(x * mul + add) * m2 + a2 = x * (mul * m2) + (add * m2 + a2)`。所以新標記是 `mul * m2` 與 `add * m2 + a2`——注意舊的 add 必須**先乘上新的 m2**。這一行就是整題的全部難度。
-  - |-
-    區間乘 k 等於套用 (k, 0)，區間加 k 等於套用 (1, k)。用同一個 `apply_tag` 處理兩者，就不會出現兩套幾乎相同卻有微妙差異的程式碼。
-  - |-
-    sum 的更新同樣照約定：`sum = sum * mul + add * 區間長度`。乘法要在取模前用 long long 承接，否則會溢位。
-  - |-
-    下推時若 `mul == 1 && add == 0` 可以直接返回，省下大量無謂遞迴；建樹時記得把 mul 初始化成 1 而不是 0。
-solution_outline: |-
-  每個節點維護 `sum`、`lazy_mul`、`lazy_add`，約定變換為 `x -> x * mul + add`。`apply_tag` 依複合公式 `(mul·m2, add·m2 + a2)` 更新標記並同步 `sum`。區間乘傳入 (k, 0)、區間加傳入 (1, k)，其餘與線段樹 1 相同。
-proof_or_invariant: |-
-  複合的正確性由函數合成給出：兩個仿射變換的合成仍是仿射變換，且係數為 `(mul·m2, add·m2 + a2)`。只要每次下推都嚴格依此複合，節點的 `sum` 就始終等於「已套用自身標記後」的真實區間和。
+  - 把懶標記視為仿射函數 x→mul*x+add。
+  - 新標記接在舊標記之後時，舊 add 也要乘上新 mul。
+  - 區間和套標記為 sum*mul+add*len，所有量即時取模。
+solution_outline:
+  每個節點維護 `sum`、`lazy_mul`、`lazy_add`，約定變換為 `x -> x * mul + add`。`apply_tag` 依複合公式 `(mul·m2, add·m2 + a2)`
+  更新標記並同步 `sum`。區間乘傳入 (k, 0)、區間加傳入 (1, k)，其餘與線段樹 1 相同。
+proof_or_invariant: 複合的正確性由函數合成給出：兩個仿射變換的合成仍是仿射變換，且係數為 `(mul·m2, add·m2 + a2)`。只要每次下推都嚴格依此複合，節點的 `sum` 就始終等於「已套用自身標記後」的真實區間和。
 complexity:
-  time: '單次操作 O(log n)'
-  space: 'O(n)'
+  time: 單次操作 O(log n)
+  space: O(n)
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;
@@ -226,11 +222,23 @@ cpp_solution: |
 external_url: https://www.luogu.com.cn/problem/P3373
 external_platform: 洛谷
 external_problem_id: P3373
-external_title: '【模板】線段樹 2'
+external_title: 【模板】線段樹 2
 external_relation: original
-source_book_pages: [151, 314]
-source_pdf_pages: [169, 332]
+source_book_pages:
+  - 151
+  - 314
+source_pdf_pages:
+  - 169
+  - 332
 review_status: verified
+core_knowledge: *id001
+judgment:
+  每個節點維護 `sum`、`lazy_mul`、`lazy_add`，約定變換為 `x -> x * mul + add`。`apply_tag` 依複合公式 `(mul·m2, add·m2 + a2)` 更新標記並同步
+  `sum`。區間乘傳入 (k, 0)、區間加傳入 (1, k)，其餘與線段樹 1 相同。
+common_errors:
+  - 端點或索引範圍處理錯誤
+  - 懶標記或摘要合併順序顛倒
+  - 使用不足以容納答案的整數型別
 ---
 
 複合懶標記的入門題。把標記寫成仿射變換 `x -> x·mul + add`，順序問題就從「背公式」變成「函數合成」。

@@ -7,18 +7,20 @@ chapter: 6
 section: '6.10'
 kind: external-oj
 difficulty: 5
-topics: ['Pollard-Rho', 'Miller-Rabin', '質因數分解', '乘法取模']
-prerequisites: ['prime-numbers', 'fast-power']
-statement: |-
-  給定若干個正整數，對每個數判斷它是否為質數；若是則輸出 Prime，否則輸出它的最大質因數。
-  本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
+topics:
+  - Pollard-Rho
+  - Miller-Rabin
+  - 質因數分解
+  - 乘法取模
+prerequisites:
+  - prime-numbers
+  - fast-power
+statement: 對每個不小於 2 的整數 n：若 n 為質數輸出 Prime，否則輸出它的最大質因數。
 constraints:
-  - '數值可達 10^18，試除法完全不可行'
-  - '乘法取模會溢位，需要專門處理'
-  - '多組測資，需要期望 O(n^{1/4}) 的分解'
-  - '完整限制條件請參閱外部題目頁面'
-input_format: '第一行一個整數 T；接下來 T 行，每行一個正整數 n。'
-output_format: '每個 n 輸出一行：n 是質數則輸出 Prime，否則輸出其最大質因數。'
+  - 1 <= T <= 100
+  - 2 <= n <= 10^18
+input_format: 第一行為測試組數 T；接著 T 行各有一個整數 n。
+output_format: 每組一行；質數輸出 Prime，合數輸出最大質因數。
 samples:
   - input: |
       6
@@ -35,26 +37,22 @@ samples:
       41
       Prime
       Prime
-    explanation: |-
-      134 = 2×67，最大質因數 67；8897 = 7×31×41，最大質因數 41；10^9+7 與 10^9+9 都是質數。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+    explanation: 134 = 2×67，最大質因數 67；8897 = 7×31×41，最大質因數 41；10^9+7 與 10^9+9 都是質數。 本示例依官方輸入輸出格式設計。
 hints:
-  - |-
-    先要有質數判定。Miller-Rabin 把 n−1 寫成 odd·2^t，對若干底數檢查 a^odd ≡ ±1 或連續平方過程中出現 −1。用固定底數 {2,3,5,7,11,13,17,19,23,29,31,37} 對 2^64 以內是**確定性**的，不必隨機。
-  - |-
-    Pollard-Rho 的想法：用 f(x) = (x²+c) mod n 造出偽隨機序列。由生日悖論，序列在模 p（n 的最小質因數）下大約 O(√p) 步就會出現重複，此時 gcd(|x−y|, n) 有很高機率是 n 的非平凡因數。因為 p ≤ √n，期望複雜度是 O(n^{1/4})。
-  - |-
-    gcd 很貴。Brent 的優化是把連續多步的 |x−y| **乘起來**（模 n），每隔一段才求一次 gcd——只要其中任何一項與 n 有公因數，乘積也會有。若這一批的 gcd 等於 n 就換一組 c 重來。
-  - |-
-    乘法取模是最大的實作陷阱：n 到 10^18 時 a·b 會爆 64 位元。本站的檢查開了 `-pedantic-errors`，`__int128` 會被拒絕，所以改用「long double 估商 + 無號整數環繞求餘」——無號溢位在 C++ 有明確定義，這段是可移植的，速度也接近硬體乘法。注意這個技巧要求模數小於 2^63。
-  - |-
-    **務必先試除小質數再進 Pollard-Rho**。對極小的合數（例如 15），可選的 c 只有十來個，有可能全部失敗而讓外層無限重試——這是實作這題最容易踩到的死迴圈。
-solution_outline: |-
-  先用試除法剝掉 100 以內的質因數，這既加速也保證交給 Pollard-Rho 的數夠大。剩下的部分用 Miller-Rabin 判質：是質數就更新答案，否則用 Brent 版 Pollard-Rho 找出一個非平凡因數，遞迴處理兩半。過程中用「目前最大質因數」剪枝，遇到比它小的整段可以直接跳過。
-proof_or_invariant: |-
-  Miller-Rabin 的正確性來自：p 為奇質數時 x² ≡ 1 只有 x ≡ ±1 兩解，因此合數會在平方鏈上暴露。Pollard-Rho 的期望步數由生日悖論給出：序列在模 p 下的值域大小為 p，出現碰撞的期望步數為 O(√p) ≤ O(n^{1/4})。批次求 gcd 不影響正確性，因為若某項與 n 有公因數，乘積必然也有。
+  - 先要有質數判定。Miller-Rabin 把 n−1 寫成 odd·2^t，對若干底數檢查 a^odd ≡ ±1 或連續平方過程中出現 −1。用固定底數 {2,3,5,7,11,13,17,19,23,29,31,37} 對
+    2^64 以內是**確定性**的，不必隨機。
+  - Pollard-Rho 的想法：用 f(x) = (x²+c) mod n 造出偽隨機序列。由生日悖論，序列在模 p（n 的最小質因數）下大約 O(√p) 步就會出現重複，此時 gcd(|x−y|, n) 有很高機率是 n
+    的非平凡因數。因為 p ≤ √n，期望複雜度是 O(n^{1/4})。
+  - gcd 很貴。Brent 的優化是把連續多步的 |x−y| **乘起來**（模 n），每隔一段才求一次 gcd——只要其中任何一項與 n 有公因數，乘積也會有。若這一批的 gcd 等於 n 就換一組 c 重來。
+solution_outline:
+  先用試除法剝掉 100 以內的質因數，這既加速也保證交給 Pollard-Rho 的數夠大。剩下的部分用 Miller-Rabin 判質：是質數就更新答案，否則用 Brent 版 Pollard-Rho
+  找出一個非平凡因數，遞迴處理兩半。過程中用「目前最大質因數」剪枝，遇到比它小的整段可以直接跳過。
+proof_or_invariant:
+  Miller-Rabin 的正確性來自：p 為奇質數時 x² ≡ 1 只有 x ≡ ±1 兩解，因此合數會在平方鏈上暴露。Pollard-Rho 的期望步數由生日悖論給出：序列在模 p 下的值域大小為
+  p，出現碰撞的期望步數為 O(√p) ≤ O(n^{1/4})。批次求 gcd 不影響正確性，因為若某項與 n 有公因數，乘積必然也有。
 complexity:
-  time: '期望 O(n^{1/4} log n)'
-  space: 'O(log n)'
+  time: 期望 O(n^{1/4} log n)
+  space: O(log n)
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;
@@ -285,11 +283,27 @@ cpp_solution: |
 external_url: https://www.luogu.com.cn/problem/P4718
 external_platform: 洛谷
 external_problem_id: P4718
-external_title: '【模板】Pollard-Rho'
+external_title: 【模板】Pollard-Rho
 external_relation: original
-source_book_pages: [424, 430]
-source_pdf_pages: [54, 60]
+original_label: '洛谷 P4718'
+source_book_pages:
+  - 424
+  - 430
+source_pdf_pages:
+  - 54
+  - 60
 review_status: verified
+core_knowledge:
+  - Miller–Rabin 質數測試
+  - Pollard–Rho 質因數分解
+  - 安全乘法取模
+judgment: 輸入可達 10^18，試除至平方根不可行；以確定性 Miller–Rabin 篩出質數，Pollard–Rho 隨機尋找非平凡因數後遞迴分解。
+common_errors:
+  - 乘法取模直接相乘而溢位
+  - Pollard–Rho 找到因數等於 n 時未重新選參數
+  - 只輸出第一個找到的質因數，未遞迴比較最大者
 ---
 
 這題把數論、機率與整數溢位三件事綁在一起。試除前置與乘法取模是兩個最容易翻車的地方，先把它們寫穩再談效率。
+
+原始題單中本題位於第 6.10 節、習題第 1 題；競賽來源記為「模板」。可用小範圍試除分解作為對拍程式。

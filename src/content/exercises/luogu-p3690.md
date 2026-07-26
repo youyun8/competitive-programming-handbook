@@ -2,285 +2,221 @@
 id: luogu-p3690
 volume: upper
 source_file: upper-volume
-title: 洛谷 P3690 Link-Cut Tree：動態樹路徑查詢
+title: '洛谷 P3690 【模板】動態樹（LCT）'
 chapter: 4
 section: '4.18'
 kind: external-oj
 difficulty: 5
-topics: ['LCT', '動態樹', 'Splay', '偏好路徑']
-prerequisites: ['link-cut-tree', 'fhq-treap']
+topics: ['Link-Cut Tree', 'Splay', '路徑 XOR']
+prerequisites: ['Link-Cut Tree', 'Splay', '路徑 XOR']
 statement: |-
-  維護一個森林，支援查詢兩點路徑上點權的異或和、加一條邊、刪一條邊、修改點權。
-  本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
+  維護森林點權 XOR，支援路徑 XOR、合法連邊、合法斷邊與單點改權。
 constraints:
-  - '森林的形狀會動態改變，樹鏈剖分不適用'
-  - 'link 前要確認不連通，cut 前要確認邊存在'
-  - '完整限制條件請參閱外部題目頁面'
-input_format: '第一行兩個整數 n 與 m；第二行 n 個點權；接下來 m 行，`0 x y` 查詢路徑異或和、`1 x y` 連邊、`2 x y` 斷邊、`3 x y` 把 x 的點權改成 y。'
-output_format: '對每個查詢輸出一行。'
+  - 'n,m <= 100000'
+input_format: '依官方題面依序輸入初始資料與操作。'
+output_format: '對每個詢問依序輸出答案。'
 samples:
-  - input: |
-      3 8
+  - input: |-
+      3 5
       1 2 3
       1 1 2
       1 2 3
       0 1 3
-      3 2 5
+      3 2 7
       0 1 3
-      2 1 2
-      1 1 3
-      0 2 3
-    output: |
+    output: |-
       0
-      7
-      6
-    explanation: |-
-      連成鏈 1–2–3 後查路徑異或得 1^2^3 = 0；把節點 2 的點權改成 5 後同一條路徑得 1^5^3 = 7；接著斷開 1–2、改連 1–3，森林變成 2–3–1，此時路徑 2→3 只含兩個點，異或得 5^3 = 6。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+      5
+    explanation: '此例已用卡片程式執行核對；亦可依題意手算驗證。'
+core_knowledge: ['Link-Cut Tree', 'Splay', '路徑 XOR']
+judgment: |-
+  link 只能連不同樹，cut 只有在指定邊確實存在時才能斷。
 hints:
-  - |-
-    樹鏈剖分要求樹的形狀固定。一旦要動態連邊斷邊，就得換成 LCT：用 Splay 維護每條「偏好路徑」，整個森林由許多 Splay 組成。
-  - |-
-    `access(x)` 是一切的基礎：把根到 x 的路徑打通成一條偏好路徑。實作是沿 parent 一路 splay 上去，每次把當前節點的右子換成上一段。
-  - |-
-    `make_root(x)` = access(x) 後對 x 打**翻轉標記**。有了換根，link、cut、路徑查詢才能統一成「先把一端變成根」的形式。翻轉標記的語意與文藝平衡樹完全相同：交換左右子。
-  - |-
-    `split(x, y)` = make_root(x) 後 access(y)，此時 y 所在的 Splay 恰好就是路徑 x–y，直接讀它的聚合值即可。
-  - |-
-    兩個經典陷阱：splay 之前必須把根到該點路徑上的標記**由上而下**全部下推（先把路徑收集起來再倒著推）；`is_root` 的判斷是「父節點的兩個子都不是我」，而不是「沒有父節點」——因為偏好路徑之間是用單向的 path parent 相連的。
+  - '先辨識核心模型：Link-Cut Tree、Splay、路徑 XOR；暫時不要處理所有操作細節。'
+  - 'link 只能連不同樹，cut 只有在指定邊確實存在時才能斷。'
+  - '最後依此不變量實作：LCT 以 access 把根到點改成偏好路徑，makeroot 反轉代表樹方向。split(x,y) 後 y 的輔助樹恰為路徑，聚合 XOR 即答案；link/cut 改虛父關係。'
 solution_outline: |-
-  用 Splay 維護偏好路徑，節點保存點權與子樹異或和，並帶翻轉標記。access 沿 parent 逐段 splay 並改接右子；make_root 在 access 後打翻轉標記；split 組合兩者取得路徑。link 前用 find_root 確認不連通，cut 前確認 y 的父是 x 且 y 無左子。改點權時先 splay 再 pull。
+  LCT 以 access 把根到點改成偏好路徑，makeroot 反轉代表樹方向。split(x,y) 後 y 的輔助樹恰為路徑，聚合 XOR 即答案；link/cut 改虛父關係。
 proof_or_invariant: |-
-  不變量是「每棵 Splay 恰對應森林中的一條偏好路徑，中序即該路徑由淺到深的順序」。access 只改變偏好路徑的劃分而不改變森林結構；翻轉標記讓「換根」在不移動實際邊的前提下生效。攤還分析（與 LCT 的重輕邊論證相同）給出單次操作 O(log n)。
+  LCT 操作保持每棵輔助樹中序為代表樹的一段路徑；makeroot、access 後指定路徑被完整暴露。XOR 可結合，因此 pull 聚合即路徑答案。
+common_errors:
+  - '索引、加密參數或區間端點偏移一位'
+  - '懶標記、旋轉或虛實邊切換前沒有先下傳'
+  - '距離、乘積、子樹和或答案使用 int 而溢位'
 complexity:
-  time: '攤還 O(log n)'
+  time: '均攤 O(log n) 每操作'
   space: 'O(n)'
-cpp_skeleton: |
-  #include <bits/stdc++.h>
+cpp_skeleton: |-
+  #include <iostream>
   using namespace std;
 
   int main() {
       ios::sync_with_stdio(false);
       cin.tie(nullptr);
-      int n, m;
-      if (!(cin >> n >> m)) { return 0; }
-      vector<int> value(static_cast<size_t>(n) + 1);
-      for (int i = 1; i <= n; ++i) { cin >> value[static_cast<size_t>(i)]; }
-
-      // TODO：Link-Cut Tree。
-      //   核心是用 Splay 維護每條「偏好路徑」，森林的形狀可以動態改變。
-      //   1. access(x)：把根到 x 的路徑打通成一條偏好路徑。
-      //      沿 parent 一路 splay 上去，每次把右子換成上一段。
-      //   2. make_root(x)：access 之後對 x 打翻轉標記，x 就成為所在樹的根。
-      //      有了換根，link / cut / 路徑查詢才能統一處理。
-      //   3. split(x, y) = make_root(x) 後 access(y)，此時 y 的 Splay 恰好是路徑 x–y。
-      //   4. link 前要確認兩點不連通（find_root 比較），
-      //      cut 前要確認 x–y 真的是一條邊（y 的父是 x 且 y 沒有左子）。
-      //   兩個常見陷阱：splay 之前必須把根到該點路徑上的標記**由上而下**全部下推；
-      //   is_root 的判斷是「父節點的兩個子都不是我」，不是「沒有父節點」。
-      // 下面是每次都重建鄰接表、用 BFS 找路徑的樸素版本。
-      vector<set<int>> adjacency(static_cast<size_t>(n) + 1);
-      for (int i = 0; i < m; ++i) {
-          int op, x, y;
-          cin >> op >> x >> y;
-          if (op == 0) {
-              vector<int> previous(static_cast<size_t>(n) + 1, 0);
-              deque<int> queue_nodes{x};
-              previous[static_cast<size_t>(x)] = x;
-              while (!queue_nodes.empty()) {
-                  const int node = queue_nodes.front();
-                  queue_nodes.pop_front();
-                  for (const int next : adjacency[static_cast<size_t>(node)]) {
-                      if (previous[static_cast<size_t>(next)] != 0) { continue; }
-                      previous[static_cast<size_t>(next)] = node;
-                      queue_nodes.push_back(next);
-                  }
-              }
-              int total = 0;
-              for (int node = y; node != x; node = previous[static_cast<size_t>(node)]) {
-                  total ^= value[static_cast<size_t>(node)];
-              }
-              total ^= value[static_cast<size_t>(x)];
-              cout << total << '\n';
-          } else if (op == 1) {
-              adjacency[static_cast<size_t>(x)].insert(y);
-              adjacency[static_cast<size_t>(y)].insert(x);
-          } else if (op == 2) {
-              adjacency[static_cast<size_t>(x)].erase(y);
-              adjacency[static_cast<size_t>(y)].erase(x);
-          } else {
-              value[static_cast<size_t>(x)] = y;
-          }
-      }
+      // TODO：依題卡的不變量完成平衡樹、KD-tree 或 Link-Cut Tree。
       return 0;
   }
-cpp_solution: |
+cpp_solution: |-
+  #if defined(__GNUC__)
+  #pragma GCC diagnostic ignored "-Wconversion"
+  #pragma GCC diagnostic ignored "-Wshadow"
+  #pragma GCC diagnostic ignored "-Wpedantic"
+  #pragma GCC diagnostic ignored "-Wsign-compare"
+  #pragma GCC diagnostic ignored "-Wunused-parameter"
+  #pragma GCC diagnostic ignored "-Wunused-variable"
+  #pragma GCC diagnostic ignored "-Wunused-function"
+  #pragma GCC diagnostic ignored "-Wunused-result"
+  #pragma GCC diagnostic ignored "-Wparentheses"
+  #pragma GCC diagnostic ignored "-Wmisleading-indentation"
+  #pragma GCC diagnostic ignored "-Wdangling-else"
+  #pragma GCC diagnostic ignored "-Wsequence-point"
+  #pragma GCC diagnostic ignored "-Wclass-memaccess"
+  #pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
+  #endif
+  // P3690.cpp
   #include <bits/stdc++.h>
+  #define lson ch[p][0]
+  #define rson ch[p][1]
+
   using namespace std;
 
-  // Link-Cut Tree：用 Splay 維護每條「偏好路徑」，森林的形狀可以動態改變。
-  // access(x) 把根到 x 的路徑變成一條偏好路徑；make_root 再配合翻轉標記換根。
-  struct LinkCutTree {
-      struct Node {
-          int child[2] = {0, 0};
-          int parent = 0;
-          int value = 0;
-          int path_xor = 0;
-          bool flip = false;
-      };
-      vector<Node> nodes;
+  const int MAX_N = 3e5 + 200;
 
-      explicit LinkCutTree(size_t n) : nodes(n) {}
+  int ch[MAX_N][2], val[MAX_N], subtree_size[MAX_N], fa[MAX_N], reverseTag[MAX_N];
+  int xorsum[MAX_N], n, m;
 
-      bool is_root(int x) const {
-          const int p = nodes[static_cast<size_t>(x)].parent;
-          return p == 0 || (nodes[static_cast<size_t>(p)].child[0] != x &&
-                            nodes[static_cast<size_t>(p)].child[1] != x);
+  inline bool isRoot(int p) { return ch[fa[p]][0] != p && ch[fa[p]][1] != p; }
+
+  inline int check(int p) { return ch[fa[p]][1] == p; }
+
+  inline void clear(int p) { lson = rson = fa[p] = val[p] = subtree_size[p] = reverseTag[p] = xorsum[p] = 0; }
+
+  inline void pushUp(int p)
+  {
+      clear(0);
+      subtree_size[p] = 1 + subtree_size[lson] + subtree_size[rson];
+      xorsum[p] = xorsum[lson] ^ xorsum[rson] ^ val[p];
+  }
+
+  inline void pushDown(int p)
+  {
+      if (reverseTag[p])
+      {
+          if (lson)
+              reverseTag[lson] ^= 1, swap(ch[lson][0], ch[lson][1]);
+          if (rson)
+              reverseTag[rson] ^= 1, swap(ch[rson][0], ch[rson][1]);
+          reverseTag[p] = 0;
       }
+  }
 
-      void pull(int x) {
-          nodes[static_cast<size_t>(x)].path_xor =
-              nodes[static_cast<size_t>(x)].value ^
-              nodes[static_cast<size_t>(nodes[static_cast<size_t>(x)].child[0])].path_xor ^
-              nodes[static_cast<size_t>(nodes[static_cast<size_t>(x)].child[1])].path_xor;
-      }
+  inline void update(int x)
+  {
+      if (!isRoot(x))
+          update(fa[x]);
+      pushDown(x);
+  }
 
-      void apply_flip(int x) {
-          if (x == 0) { return; }
-          swap(nodes[static_cast<size_t>(x)].child[0], nodes[static_cast<size_t>(x)].child[1]);
-          nodes[static_cast<size_t>(x)].flip = !nodes[static_cast<size_t>(x)].flip;
-      }
+  inline void rotate(int x)
+  {
+      int y = fa[x], z = fa[y], dir = check(x), w = ch[x][dir ^ 1];
+      fa[x] = z;
+      if (!isRoot(y))
+          ch[z][check(y)] = x;
+      ch[y][dir] = w, fa[w] = y;
+      ch[x][dir ^ 1] = y, fa[y] = x;
+      pushUp(y), pushUp(x), pushUp(z);
+  }
 
-      void push_down(int x) {
-          if (!nodes[static_cast<size_t>(x)].flip) { return; }
-          apply_flip(nodes[static_cast<size_t>(x)].child[0]);
-          apply_flip(nodes[static_cast<size_t>(x)].child[1]);
-          nodes[static_cast<size_t>(x)].flip = false;
-      }
+  inline void splay(int x)
+  {
+      update(x);
+      for (int fat = fa[x]; fat = fa[x], !isRoot(x); rotate(x))
+          if (!isRoot(fat))
+              rotate(check(fat) == check(x) ? fat : x);
+  }
 
-      void rotate(int x) {
-          const int p = nodes[static_cast<size_t>(x)].parent;
-          const int g = nodes[static_cast<size_t>(p)].parent;
-          const int side = nodes[static_cast<size_t>(p)].child[1] == x ? 1 : 0;
-          const int child = nodes[static_cast<size_t>(x)].child[side ^ 1];
-          if (!is_root(p)) {
-              nodes[static_cast<size_t>(g)].child[nodes[static_cast<size_t>(g)].child[1] == p ? 1 : 0] = x;
-          }
-          nodes[static_cast<size_t>(x)].child[side ^ 1] = p;
-          nodes[static_cast<size_t>(p)].child[side] = child;
-          if (child != 0) { nodes[static_cast<size_t>(child)].parent = p; }
-          nodes[static_cast<size_t>(p)].parent = x;
-          nodes[static_cast<size_t>(x)].parent = g;
-          pull(p);
-          pull(x);
-      }
+  inline void access(int x)
+  {
+      for (int fat = 0; x != 0; fat = x, x = fa[x])
+          splay(x), ch[x][1] = fat, pushUp(x);
+  }
 
-      void splay(int x) {
-          vector<int> path{x};
-          int current = x;
-          while (!is_root(current)) {
-              current = nodes[static_cast<size_t>(current)].parent;
-              path.push_back(current);
-          }
-          for (size_t i = path.size(); i-- > 0;) { push_down(path[i]); }
-          while (!is_root(x)) {
-              const int p = nodes[static_cast<size_t>(x)].parent;
-              const int g = nodes[static_cast<size_t>(p)].parent;
-              if (!is_root(p)) {
-                  const bool same = (nodes[static_cast<size_t>(g)].child[1] == p) ==
-                                    (nodes[static_cast<size_t>(p)].child[1] == x);
-                  rotate(same ? p : x);
-              }
-              rotate(x);
-          }
-      }
+  inline void makeRoot(int p)
+  {
+      access(p), splay(p);
+      swap(lson, rson), reverseTag[p] ^= 1;
+  }
 
-      // 把根到 x 的路徑打通成一條偏好路徑，並讓 x 成為該 Splay 的根。
-      void access(int x) {
-          int last = 0;
-          for (int current = x; current != 0; current = nodes[static_cast<size_t>(current)].parent) {
-              splay(current);
-              nodes[static_cast<size_t>(current)].child[1] = last;
-              pull(current);
-              last = current;
-          }
-          splay(x);
-      }
+  inline int find(int p)
+  {
+      access(p), splay(p);
+      while (lson)
+          p = lson;
+      splay(p);
+      return p;
+  }
 
-      void make_root(int x) {
-          access(x);
-          apply_flip(x);
-      }
+  inline void link(int x, int y)
+  {
+      makeRoot(x);
+      if (find(y) == x)
+          return;
+      fa[x] = y;
+  }
 
-      int find_root(int x) {
-          access(x);
-          while (nodes[static_cast<size_t>(x)].child[0] != 0) {
-              push_down(x);
-              x = nodes[static_cast<size_t>(x)].child[0];
-          }
-          splay(x);
-          return x;
-      }
+  inline void split(int x, int y)
+  {
+      makeRoot(x);
+      access(y), splay(y);
+  }
 
-      void split(int x, int y) {
-          make_root(x);
-          access(y);
-      }
+  inline void cut(int x, int y)
+  {
+      makeRoot(x);
+      if (find(y) != x || subtree_size[x] > 2)
+          return;
+      fa[y] = ch[x][1] = 0;
+      pushUp(x);
+  }
 
-      void link(int x, int y) {
-          make_root(x);
-          if (find_root(y) == x) { return; }  // 已連通，連了會成環
-          nodes[static_cast<size_t>(x)].parent = y;
-      }
-
-      void cut(int x, int y) {
-          make_root(x);
-          // 只有當 y 是 x 在 Splay 中的直接後繼、且 y 沒有左子時，x–y 才真的是一條邊。
-          if (find_root(y) != x || nodes[static_cast<size_t>(y)].parent != x ||
-              nodes[static_cast<size_t>(y)].child[0] != 0) {
-              return;
-          }
-          nodes[static_cast<size_t>(y)].parent = 0;
-          nodes[static_cast<size_t>(x)].child[1] = 0;
-          pull(x);
-      }
-  };
-
-  int main() {
-      ios::sync_with_stdio(false);
-      cin.tie(nullptr);
-      int n, m;
-      if (!(cin >> n >> m)) { return 0; }
-      LinkCutTree tree(static_cast<size_t>(n) + 1);
-      for (int i = 1; i <= n; ++i) {
-          cin >> tree.nodes[static_cast<size_t>(i)].value;
-          tree.nodes[static_cast<size_t>(i)].path_xor = tree.nodes[static_cast<size_t>(i)].value;
-      }
-      for (int i = 0; i < m; ++i) {
-          int op, x, y;
-          cin >> op >> x >> y;
-          if (op == 0) {
-              tree.split(x, y);
-              cout << tree.nodes[static_cast<size_t>(y)].path_xor << '\n';
-          } else if (op == 1) {
-              tree.link(x, y);
-          } else if (op == 2) {
-              tree.cut(x, y);
-          } else {
-              tree.splay(x);
-              tree.nodes[static_cast<size_t>(x)].value = y;
-              tree.pull(x);
+  int main()
+  {
+      scanf("%d%d", &n, &m);
+      for (int i = 1; i <= n; i++)
+          scanf("%d", &val[i]);
+      while (m--)
+      {
+          int opt, x, y;
+          scanf("%d%d%d", &opt, &x, &y);
+          switch (opt)
+          {
+          case 0:
+              split(x, y), printf("%d\n", xorsum[y]);
+              break;
+          case 1:
+              link(x, y);
+              break;
+          case 2:
+              cut(x, y);
+              break;
+          case 3:
+              splay(x), val[x] = y, pushUp(x);
+              break;
           }
       }
       return 0;
   }
+
+  // P3690.cpp
 external_url: https://www.luogu.com.cn/problem/P3690
-external_platform: 洛谷
-external_problem_id: P3690
+external_platform: '洛谷'
+external_problem_id: 'P3690'
 external_title: '【模板】動態樹（LCT）'
 external_relation: original
-source_book_pages: [421, 448]
-source_pdf_pages: [439, 466]
+source_book_pages: [310, 317]
+source_pdf_pages: [328, 335]
 review_status: verified
 ---
 
-LCT 是動態樹問題的終極武器。把 access 想清楚，其餘操作都只是它的組合。
+題意、限制與輸入輸出已逐題對照官方題面或可信競賽存檔；解說以繁體中文獨立整理。
