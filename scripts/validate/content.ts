@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import fg from 'fast-glob';
 import textbookCatalog from '../../data/textbook-items.json' with { type: 'json' };
 import toc from '../../data/toc.json' with { type: 'json' };
+import problemList from '../../data/vjudge-3284.json' with { type: 'json' };
 import { readFrontmatter } from './frontmatter';
 
 const errors: string[] = [];
@@ -75,6 +76,58 @@ for (const exercise of exercises) {
     if (!data[field]) errors.push(`${exercise.path}: ${field} is required for every public card`);
   }
   if (data.review_status === 'needs-review') errors.push(`${exercise.path}: needs-review content must not be public`);
+}
+
+function externalProblemKey(platform: string, problemId: string) {
+  const normalizedPlatform = platform
+    .normalize('NFKC')
+    .toLowerCase()
+    .replace(/openjudge.*百練/u, 'openjudge')
+    .replace(/洛谷/u, 'luogu')
+    .replace(/[^a-z0-9]+/gu, '-')
+    .replace(/^-|-$/g, '');
+  return `${normalizedPlatform}:${problemId.normalize('NFKC').toLowerCase()}`;
+}
+
+const exerciseByExternalProblem = new Map(
+  exercises
+    .filter((exercise) => exercise.data.external_platform && exercise.data.external_problem_id)
+    .map((exercise) => [
+      externalProblemKey(exercise.data.external_platform, exercise.data.external_problem_id),
+      exercise
+    ])
+);
+const chapterOneProblems = new Map(
+  problemList.items
+    .filter((item) => item.chapter === 1)
+    .map((item) => [externalProblemKey(item.platform_label, item.problem_id), item])
+);
+for (const [key, problem] of chapterOneProblems) {
+  const exercise = exerciseByExternalProblem.get(key);
+  if (!exercise) {
+    errors.push(`Chapter 1 problem ${problem.platform_label} ${problem.problem_id}: missing exercise card`);
+    continue;
+  }
+  const data = exercise.data;
+  for (const field of [
+    'core_knowledge',
+    'judgment',
+    'proof_or_invariant',
+    'common_errors',
+    'cpp_skeleton',
+    'cpp_solution'
+  ]) {
+    const value = data[field];
+    if (!value || (Array.isArray(value) && value.length === 0)) {
+      errors.push(`${exercise.path}: ${field} is required for a complete Chapter 1 card`);
+    }
+  }
+  if (data.hints?.length !== 3) {
+    errors.push(`${exercise.path}: complete Chapter 1 cards require exactly three hints`);
+  }
+  if (!data.samples?.length || data.samples.some((sample: { explanation?: string }) => !sample.explanation)) {
+    errors.push(`${exercise.path}: complete Chapter 1 cards require a sample walkthrough`);
+  }
 }
 
 for (const lesson of lessons) {
