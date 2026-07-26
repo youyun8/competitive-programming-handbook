@@ -2,6 +2,7 @@
 id: luogu-p5905
 volume: lower
 source_file: lower-volume
+original_label: 洛谷 P5905
 title: 洛谷 P5905 全源最短路：Johnson 重賦權
 chapter: 10
 section: '10.8'
@@ -9,6 +10,8 @@ kind: external-oj
 difficulty: 4
 topics: ['Johnson 演算法', '重賦權', '勢能', '全源最短路']
 prerequisites: ['dijkstra']
+core_knowledge: [Johnson 演算法, 勢能重賦權, 全源最短路]
+judgment: 圖可含負邊但無負環時，以勢能消除負權後對每個起點執行 Dijkstra。
 statement: |-
   給定一張可能含負權邊的有向圖，求每一對點之間的最短路；若存在負環則輸出 −1。
   本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
@@ -44,10 +47,6 @@ hints:
     關鍵是**勢能重賦權**：先求出一組 h[v]，把每條邊的權重改成 w′ = w + h[u] − h[v]。任何一條路徑 u→…→v 的總權重會變成「原本的總權重 + h[u] − h[v]」——中間項全部消掉了。因為只差一個與路徑無關的常數，最短路是哪一條完全不變。
   - |-
     h 要取什麼？取「從一個虛擬源點（連向所有點、權重 0）出發的最短路」。此時三角不等式保證 h[v] <= h[u] + w，移項就得到 w′ = w + h[u] − h[v] >= 0——正是 Dijkstra 需要的非負條件。
-  - |-
-    虛擬源點不必真的建出來：直接把所有點的初始距離設成 0 並全部入隊跑 SPFA 即可，效果相同。這一步順便偵測負環（某點邊數超過 n 就輸出 −1）。
-  - |-
-    最後別忘了把勢能扣回來還原真實距離：dist(s, t) = dist′(s, t) − h[s] + h[t]。這一步漏掉是最常見的錯誤。
 solution_outline: |-
   先用 SPFA（等價於從虛擬源點出發）求勢能 h 並偵測負環，有負環直接輸出 −1。接著把邊權重賦為 w + h[u] − h[v]（保證非負），對每個起點各跑一次 Dijkstra，最後用 dist′ − h[s] + h[t] 還原真實距離並依題目要求加權求和。
 proof_or_invariant: |-
@@ -55,6 +54,10 @@ proof_or_invariant: |-
 complexity:
   time: 'O(nm log n)'
   space: 'O(n + m)'
+common_errors:
+  - 未先檢查負環就執行重賦權
+  - Dijkstra 後忘記扣回起終點勢能
+  - 不可達點未依題意以 10^9 計算
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;

@@ -2,6 +2,7 @@
 id: luogu-p3371
 volume: lower
 source_file: lower-volume
+original_label: 洛谷 P3371
 title: 洛谷 P3371 單源最短路徑（弱化版）：SPFA
 chapter: 10
 section: '10.8'
@@ -9,6 +10,8 @@ kind: external-oj
 difficulty: 2
 topics: ['SPFA', 'Bellman-Ford', '最短路徑', '佇列優化']
 prerequisites: ['dijkstra']
+core_knowledge: [Bellman-Ford 鬆弛, 佇列優化, 不可達距離]
+judgment: 本題無負權且規模較弱；以 SPFA 練習只排程可能繼續鬆弛的點。
 statement: |-
   給定一張有向圖與起點，求起點到每個點的最短距離；不可達者輸出 2^31−1。
   本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
@@ -38,10 +41,6 @@ hints:
     SPFA 就是把這個觀察做成佇列：起點先入隊；每次取出隊首，鬆弛它的所有出邊；某個鄰居的距離變短時，若它不在佇列中就入隊。佇列空了代表沒有任何點還能變短，演算法結束。
   - |-
     `in_queue` 陣列是必要的：同一個點可能被多個鄰居鬆弛，若不判斷就會重複入隊，佇列會膨脹得很誇張。注意出隊時要把標記清掉。
-  - |-
-    SPFA 的最壞複雜度仍是 O(nm)，而且可以被特意構造的資料卡到最壞。在**邊權非負**的圖上請優先用 Dijkstra；SPFA 的真正價值在於它能處理負權邊。
-  - |-
-    不可達的點要輸出 2147483647，把初始距離直接設成這個值最省事。
 solution_outline: |-
   用鄰接表存圖，距離初始化為 2147483647。佇列存待鬆弛的點，起點先入隊並標記。每次取出隊首、清除標記，鬆弛所有出邊；鄰居距離變短且不在佇列中就入隊並標記。佇列空後輸出所有距離。
 proof_or_invariant: |-
@@ -49,6 +48,10 @@ proof_or_invariant: |-
 complexity:
   time: '最壞 O(nm)，實測通常遠快於此'
   space: 'O(n + m)'
+common_errors:
+  - 不可達點仍參與鬆弛造成溢位
+  - 入隊旗標在出隊時沒有清除
+  - 把 SPFA 的平均表現誤當成最壞複雜度保證
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;
