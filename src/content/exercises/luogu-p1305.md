@@ -50,6 +50,8 @@ cpp_skeleton: |
                             const array<char, 26>& right_child) {
       if (node == '*') { return; }
       // TODO：輸出目前節點，再走左、右孩子。
+      (void)left_child;
+      (void)right_child;
   }
 
   int main() {

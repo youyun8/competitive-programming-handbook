@@ -88,6 +88,8 @@ cpp_skeleton: |
 
   static int solve_candidate(const vector<TreeNode>& tree, const vector<int>& path) {
       // TODO：沿 path 形成的巢狀端點逐層合併相對形狀，回傳 2(S-1)-|path|。
+      (void)tree;
+      (void)path;
       return numeric_limits<int>::max();
   }
 

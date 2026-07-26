@@ -78,6 +78,7 @@ cpp_skeleton: |
 
       int intern(const Key& key) {
           // TODO：以開放定址尋找 key；完整三元組相同才可共用 ID。
+          (void)key;
           return 0;
       }
 

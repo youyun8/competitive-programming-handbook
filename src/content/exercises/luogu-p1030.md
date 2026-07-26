@@ -48,6 +48,11 @@ cpp_skeleton: |
                             int in_left, int in_right, int post_left, int post_right) {
       if (in_left == in_right) { return; }
       // TODO：輸出根，計算左子樹大小，遞迴左右兩段。
+      (void)inorder;
+      (void)postorder;
+      (void)position;
+      (void)post_left;
+      (void)post_right;
   }
 
   int main() {
@@ -55,7 +60,8 @@ cpp_skeleton: |
       cin >> inorder >> postorder;
       array<int, 256> position{};
       for (int i = 0; i < static_cast<int>(inorder.size()); ++i) { position[inorder[i]] = i; }
-      emit_preorder(inorder, postorder, position, 0, inorder.size(), 0, postorder.size());
+      emit_preorder(inorder, postorder, position, 0, static_cast<int>(inorder.size()),
+                    0, static_cast<int>(postorder.size()));
       cout << '\n';
   }
 cpp_solution: |
@@ -85,7 +91,8 @@ cpp_solution: |
       for (int i = 0; i < static_cast<int>(inorder.size()); ++i) {
           position[static_cast<unsigned char>(inorder[i])] = i;
       }
-      emit_preorder(inorder, postorder, position, 0, inorder.size(), 0, postorder.size());
+      emit_preorder(inorder, postorder, position, 0, static_cast<int>(inorder.size()),
+                    0, static_cast<int>(postorder.size()));
       cout << '\n';
   }
 external_url: https://www.luogu.com.cn/problem/P1030
