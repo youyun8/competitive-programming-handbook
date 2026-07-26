@@ -1,9 +1,9 @@
 ---
-id: hdu-1269
+id: luogu-p2863
 volume: lower
 source_file: lower-volume
-original_label: 'HDU 1269'
-title: 'HDU 1269 迷宮城堡：判定強連通'
+original_label: '洛谷 P2863'
+title: '洛谷 P2863 The Cow Prom'
 chapter: 10
 section: '10.5'
 kind: external-oj
@@ -11,40 +11,36 @@ difficulty: 2
 topics: [strongly-connected-components, Tarjan]
 prerequisites: [depth-first-search, graph-connectivity]
 statement: >-
-  給定一張有向圖，判斷是否由任意城市都能沿單向道路到達任意另一城市。
-constraints: [1 <= n <= 10000, 1 <= m <= 100000, 多組資料以 0 0 結束]
+  在有向拉繩關係中，統計包含至少兩頭牛的強連通分量數。
+constraints: [2 <= n <= 10000, 2 <= m <= 50000]
 input_format: >-
-  每組先給 n m，後接 m 行有向邊 a b。
+  第一行 n m，後接 m 行有向邊。
 output_format: >-
-  每組強連通輸出 Yes，否則輸出 No。
+  輸出大小大於一的 SCC 數量。
 samples:
   - input: |
-      3 3
+      5 4
+      2 4
+      3 5
       1 2
-      2 3
-      3 1
-      3 2
-      1 2
-      2 3
-      0 0
+      4 1
     output: |
-      Yes
-      No
+      1
     explanation: >-
-      第一張圖形成有向環；第二張圖無法由 3 回到 1。
-core_knowledge: [強連通分量, Tarjan]
+      1、2、4 互相可達；3、5 不構成多人舞群。
+core_knowledge: [Tarjan, 分量大小]
 judgment: >-
-  只有一個強連通分量時答案才是 Yes。
+  單點 SCC 即使有自環也不算多人舞群。
 hints:
-  - 以 dfn 記錄進入時間。
-  - low 只可由仍在堆疊內的已訪點更新。
-  - Tarjan 結束後檢查分量數。
+  - 先完整分解 SCC。
+  - 彈出堆疊時累計大小。
+  - 最後只數 size>1。
 solution_outline: >-
-  對所有未訪頂點執行 Tarjan，計算 SCC 數量。
+  Tarjan 求所有 SCC 並統計每一分量的頂點數。
 proof_or_invariant: >-
-  Tarjan 恰將互相可達的極大頂點集分組；全圖任兩點互達等價於 SCC 數為一。
+  一群牛能彼此透過拉繩作用恰等價於互相可達，極大此類群組正是 SCC。
 complexity: { time: 'O(n + m)', space: 'O(n + m)' }
-common_errors: [把弱連通誤認為強連通, 跨分量邊錯誤更新 low, 漏清多組資料]
+common_errors: [計算 SCC 總數, 把單點自環算入, 只從頂點一搜尋]
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;
@@ -53,14 +49,14 @@ cpp_solution: |
   #include <bits/stdc++.h>
   using namespace std;
   struct Scc{int node_count,t=0,c=0;vector<vector<int>>g;vector<int>d,l,st,id;vector<char>on;explicit Scc(int count):node_count(count),g(static_cast<size_t>(count)),d(static_cast<size_t>(count)),l(static_cast<size_t>(count)),id(static_cast<size_t>(count)),on(static_cast<size_t>(count)){}void dfs(int u){d[u]=l[u]=++t;st.push_back(u);on[u]=1;for(int v:g[u])if(!d[v])dfs(v),l[u]=min(l[u],l[v]);else if(on[v])l[u]=min(l[u],d[v]);if(d[u]==l[u]){while(true){int v=st.back();st.pop_back();on[v]=0;id[v]=c;if(v==u)break;}++c;}}void run(){for(int i=0;i<node_count;++i)if(!d[i])dfs(i);}};
-  int main(){ios::sync_with_stdio(false);cin.tie(nullptr);int n,m;while(cin>>n>>m&&n){Scc s(n);while(m--){int u,v;cin>>u>>v;s.g[--u].push_back(--v);}s.run();cout<<(s.c==1?"Yes":"No")<<'\n';}}
-external_url: https://acm.hdu.edu.cn/showproblem.php?pid=1269
-external_platform: HDU
-external_problem_id: '1269'
-external_title: '迷宮城堡'
+  int main(){ios::sync_with_stdio(false);cin.tie(nullptr);int n,m;cin>>n>>m;Scc s(n);while(m--){int u,v;cin>>u>>v;s.g[--u].push_back(--v);}s.run();vector<int>z(s.c);for(int x:s.id)++z[x];cout<<count_if(z.begin(),z.end(),[](int x){return x>1;})<<'\n';}
+external_url: https://www.luogu.com.cn/problem/P2863
+external_platform: 洛谷
+external_problem_id: 'P2863'
+external_title: '[USACO06JAN] The Cow Prom S'
 external_relation: original
-source_book_pages: [623]
-source_pdf_pages: [253]
+source_book_pages: [627]
+source_pdf_pages: [257]
 review_status: verified
 ---
 

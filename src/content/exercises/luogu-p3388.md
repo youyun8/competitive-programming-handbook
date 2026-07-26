@@ -2,9 +2,10 @@
 id: luogu-p3388
 volume: lower
 source_file: lower-volume
+original_label: '洛谷 P3388'
 title: 洛谷 P3388 割點：Tarjan 求關節點
 chapter: 10
-section: '10.4'
+section: '10.5'
 kind: external-oj
 difficulty: 3
 topics: ['割點', 'Tarjan', '無向圖連通性', 'DFS 樹']
@@ -34,6 +35,8 @@ samples:
       4
     explanation: |-
       1、2、3、4 之間有環，5、6、4 之間也有環，兩個環只透過點 4 相連。移除 4 就會把 5、6 從其餘部分切開，因此 4 是唯一的割點。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+core_knowledge: [Tarjan 割點, DFS 樹, low-link]
+judgment: 非根 u 為割點當且僅當存在樹邊 u→v 使 low[v]>=dfn[u]；DFS 根則需至少兩棵子樹。
 hints:
   - |-
     在 DFS 樹上思考。dfn[u] 是 u 的進入時間；low[u] 定義為「u 的子樹中，不經由連向父節點的那條樹邊，最遠能回到的最小 dfn」。
@@ -52,6 +55,7 @@ proof_or_invariant: |-
 complexity:
   time: 'O(n + m)'
   space: 'O(n + m)'
+common_errors: [根節點套用非根判式, 回邊錯用 low 更新, 無向父邊處理錯誤]
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;
@@ -171,8 +175,8 @@ external_platform: 洛谷
 external_problem_id: P3388
 external_title: '【模板】割點（割頂）'
 external_relation: original
-source_book_pages: [600, 683]
-source_pdf_pages: [230, 313]
+source_book_pages: [627]
+source_pdf_pages: [257]
 review_status: verified
 ---
 

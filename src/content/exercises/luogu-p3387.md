@@ -2,6 +2,7 @@
 id: luogu-p3387
 volume: lower
 source_file: lower-volume
+original_label: '洛谷 P3387'
 title: 洛谷 P3387 縮點：強連通分量與 DAG 最長路
 chapter: 10
 section: '10.5'
@@ -31,6 +32,8 @@ samples:
       15
     explanation: |-
       1、2、3 互相可達，構成一個強連通分量，點權和 1+2+3=6；縮點後的鏈是 6 → 4 → 5，全部取走得 15。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+core_knowledge: [Tarjan 強連通分量, 縮點 DAG, DAG 最長路]
+judgment: 同一強連通分量內的點可全部取到且各只計一次；縮點後問題等價於帶點權 DAG 最長路。
 hints:
   - |-
     「點可以重複經過但只算一次」這個條件是關鍵：只要進入一個**強連通分量**，就能在裡面繞遍所有點、把整個分量的點權全部拿走。所以每個強連通分量可以縮成一個點，點權是分量內的權值總和。
@@ -49,6 +52,7 @@ proof_or_invariant: |-
 complexity:
   time: 'O(n + m)'
   space: 'O(n + m)'
+common_errors: [跨分量邊更新 Tarjan low, 縮點時漏加分量點權, DAG 最長路只從單一起點開始]
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;
@@ -205,8 +209,8 @@ external_platform: 洛谷
 external_problem_id: P3387
 external_title: '【模板】縮點'
 external_relation: original
-source_book_pages: [600, 683]
-source_pdf_pages: [230, 313]
+source_book_pages: [627]
+source_pdf_pages: [257]
 review_status: verified
 ---
 

@@ -46,7 +46,7 @@ common_errors:
 cpp_skeleton: |-
   #include <bits/stdc++.h>
   using namespace std;
-  int main(){int n,target;cin>>n>>target;vector<int>coef(n,1);for(int i=1;i<n;++i)coef[i]=static_cast<int>(1LL*coef[i-1]*(n-i)/i);vector<int>path(n);vector<bool>used(n+1);const auto dfs=[&](const auto& self,int pos,int sum)->bool{if(pos==n)return sum==target;for(int value=1;value<=n;++value)if(!used[value]){int next=sum+value*coef[pos];if(next>target)continue;used[value]=true;path[pos]=value;if(self(self,pos+1,next))return true;used[value]=false;}return false;};if(dfs(dfs,0,0)){for(int i=0;i<n;++i)cout<<path[i]<<(i+1==n?'\n':' ');}}
+  int main(){ios::sync_with_stdio(false);cin.tie(nullptr);int n,target;cin>>n>>target;vector<int>coefficient(n,1);/* TODO：計算二項式係數並按字典序回溯排列。*/(void)target;(void)coefficient;return 0;}
 cpp_solution: |-
   #include <bits/stdc++.h>
   using namespace std;
