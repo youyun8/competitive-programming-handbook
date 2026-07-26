@@ -89,14 +89,15 @@ function externalProblemKey(platform: string, problemId: string) {
   return `${normalizedPlatform}:${problemId.normalize('NFKC').toLowerCase()}`;
 }
 
-const exerciseByExternalProblem = new Map(
-  exercises
-    .filter((exercise) => exercise.data.external_platform && exercise.data.external_problem_id)
-    .map((exercise) => [
-      externalProblemKey(exercise.data.external_platform, exercise.data.external_problem_id),
-      exercise
-    ])
-);
+const exerciseByExternalProblem = new Map<string, (typeof exercises)[number]>();
+for (const exercise of exercises) {
+  if (!exercise.data.external_platform || !exercise.data.external_problem_id) continue;
+  const key = externalProblemKey(exercise.data.external_platform, exercise.data.external_problem_id);
+  const existing = exerciseByExternalProblem.get(key);
+  if (!existing || (existing.data.external_relation !== 'original' && exercise.data.external_relation === 'original')) {
+    exerciseByExternalProblem.set(key, exercise);
+  }
+}
 const chapterOneProblems = new Map(
   problemList.items
     .filter((item) => item.chapter === 1)

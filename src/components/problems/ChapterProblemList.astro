@@ -13,11 +13,15 @@ interface Props {
 
 const { entries, heading = '《演算法競賽》對應題目' } = Astro.props;
 const exercises = await getCollection('exercises', ({ data }) => data.review_status === 'verified');
-const exerciseByProblem = new Map(
-  exercises
-    .filter((exercise) => exercise.data.external_platform && exercise.data.external_problem_id)
-    .map((exercise) => [problemKey(exercise.data.external_platform!, exercise.data.external_problem_id!), exercise])
-);
+const exerciseByProblem = new Map<string, (typeof exercises)[number]>();
+for (const exercise of exercises) {
+  if (!exercise.data.external_platform || !exercise.data.external_problem_id) continue;
+  const key = problemKey(exercise.data.external_platform, exercise.data.external_problem_id);
+  const existing = exerciseByProblem.get(key);
+  if (!existing || (existing.data.external_relation !== 'original' && exercise.data.external_relation === 'original')) {
+    exerciseByProblem.set(key, exercise);
+  }
+}
 const sections = new Map<string, ProblemEntry[]>();
 for (const entry of entries) {
   const sectionEntries = sections.get(entry.section) ?? [];

@@ -11,11 +11,15 @@ import {
 import { withBase } from '@/lib/site';
 
 const exercises = await getCollection('exercises', ({ data }) => data.review_status === 'verified');
-const exerciseByProblem = new Map(
-  exercises
-    .filter((exercise) => exercise.data.external_platform && exercise.data.external_problem_id)
-    .map((exercise) => [problemKey(exercise.data.external_platform!, exercise.data.external_problem_id!), exercise])
-);
+const exerciseByProblem = new Map<string, (typeof exercises)[number]>();
+for (const exercise of exercises) {
+  if (!exercise.data.external_platform || !exercise.data.external_problem_id) continue;
+  const key = problemKey(exercise.data.external_platform, exercise.data.external_problem_id);
+  const existing = exerciseByProblem.get(key);
+  if (!existing || (existing.data.external_relation !== 'original' && exercise.data.external_relation === 'original')) {
+    exerciseByProblem.set(key, exercise);
+  }
+}
 ---
 
 <BaseLayout title="《演算法競賽》題單索引" wide>
