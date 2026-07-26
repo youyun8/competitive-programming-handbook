@@ -103,6 +103,12 @@ for (const item of problemList.items) {
   const key = externalProblemKey(item.platform_label, item.problem_id);
   if (!uniqueProblemListItems.has(key)) uniqueProblemListItems.set(key, item);
 }
+if (uniqueProblemListItems.size !== problemList.counts.unique_problems) {
+  errors.push(
+    `Problem-list normalization produced ${uniqueProblemListItems.size} unique problems; expected ${problemList.counts.unique_problems}`
+  );
+}
+let reviewedRoadmapCount = 0;
 for (const [key, problem] of uniqueProblemListItems) {
   const exercise = exerciseByExternalProblem.get(key);
   if (!exercise) {
@@ -119,6 +125,7 @@ for (const [key, problem] of uniqueProblemListItems) {
     errors.push(`${exercise.path}: problem-list cards must identify the original external problem`);
   }
   if (data.review_status === 'needs-review') {
+    reviewedRoadmapCount++;
     const roadmapText = `${data.title} ${data.solution_outline} ${exercise.body}`.toLowerCase();
     if (!roadmapText.includes('roadmap') && !roadmapText.includes('路線圖')) {
       errors.push(`${exercise.path}: needs-review problem must include a reviewed roadmap`);
@@ -204,5 +211,5 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(
-  `Content validation passed: ${toc.chapters.length} chapters, ${sectionCount} covered sections, ${lessons.length} deep lessons, ${guidedSections.size} core guides, ${exercises.length} interactive exercises, ${textbookCatalog.counts.examples} textbook examples, ${textbookCatalog.counts.exercises} textbook exercises.`
+  `Content validation passed: ${toc.chapters.length} chapters, ${sectionCount} covered sections, ${lessons.length} deep lessons, ${guidedSections.size} core guides, ${uniqueProblemListItems.size} problem-list exercises (${reviewedRoadmapCount} reviewed roadmaps), ${exercises.length} interactive exercises, ${textbookCatalog.counts.examples} textbook examples, ${textbookCatalog.counts.exercises} textbook exercises.`
 );
