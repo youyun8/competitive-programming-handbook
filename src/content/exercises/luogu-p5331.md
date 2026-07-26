@@ -161,9 +161,9 @@ cpp_solution: |-
   int main()
   {
       memset(head, -1, sizeof(head));
-      scanf("%d%d", &n, &W), start_pos = 2 * n + 1, end_pos = ptot = start_pos + 1;
+      (void)!scanf("%d%d", &n, &W), start_pos = 2 * n + 1, end_pos = ptot = start_pos + 1;
   	for (int i = 1; i <= n; i++)
-  		scanf("%d", &ai[i]), addtube(start_pos, i, 1, 0), addtube(i + n, end_pos, 1, 0), addtube(i, end_pos, 1, W);
+      (void)!scanf("%d", &ai[i]), addtube(start_pos, i, 1, 0), addtube(i + n, end_pos, 1, 0), addtube(i, end_pos, 1, W);
   	solve(1, n);
       printf("%lld\n", mcmf());
       return 0;

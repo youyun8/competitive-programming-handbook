@@ -143,11 +143,11 @@ cpp_solution: |-
 
   int main() {
       int n, m;
-      scanf("%d%d", &n, &m);
+      (void)!scanf("%d%d", &n, &m);
       int A[MN];
       int MxA = 0;
       for (int i = 1; i <= n; ++i) {
-          scanf("%d", &A[i]);
+          (void)!scanf("%d", &A[i]);
           MxA = max(MxA, A[i]);
       }
 
@@ -165,7 +165,7 @@ cpp_solution: |-
       // Read d[i][j]
       for (int i = 1; i <= n; ++i) {
           for (int j = i; j <= n; ++j) {
-              scanf("%d", &F[i][j]);
+              (void)!scanf("%d", &F[i][j]);
           }
       }
 

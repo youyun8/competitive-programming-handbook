@@ -147,7 +147,7 @@ cpp_solution: |-
   }
 
   int main() {
-      scanf("%d%d%d%d", &n, &m, &s, &t);
+      (void)!scanf("%d%d%d%d", &n, &m, &s, &t);
       for (int i = 1; i <= n; i++) {
           head[i] = -1;
       }
@@ -155,7 +155,7 @@ cpp_solution: |-
 
       for (int i = 0; i < m; i++) {
           int u, v, w, c;
-          scanf("%d%d%d%d", &u, &v, &w, &c);
+          (void)!scanf("%d%d%d%d", &u, &v, &w, &c);
           add(u, v, w, c);
       }
 

@@ -16,7 +16,7 @@ input_format: 一個正整數 n。
 output_format: 輸出期望，絕對或相對誤差小於 1e-9。
 samples:
   - input: '1'
-    output: '1.000000000'
+    output: '1.000000000000'
     explanation: 唯一的樹只有根，根也是葉節點。
   - input: '3'
     output: '1.200000000'

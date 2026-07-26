@@ -52,7 +52,7 @@ cpp_solution: |
   #include <iostream>
   #include <vector>
   using namespace std;
-  struct Fenwick{vector<int>bit;Fenwick()=default;explicit Fenwick(int n):bit(n+1){}int query(int x){int r=0;for(;x>0;x-=x&-x)r=max(r,bit[x]);return r;}void add(int x,int v){for(int n=bit.size();x<n;x+=x&-x)bit[x]=max(bit[x],v);}};
+  struct Fenwick{vector<int>bit;Fenwick()=default;explicit Fenwick(int n):bit(n+1){}int query(int x){int r=0;for(;x>0;x-=x&-x)r=max(r,bit[x]);return r;}void add(int x,int v){for(int n=static_cast<int>(bit.size());x<n;x+=x&-x)bit[x]=max(bit[x],v);}};
   int main(){ios::sync_with_stdio(false);cin.tie(nullptr);int n,k;cin>>n>>k;vector<int>a(n);int bound=k;for(int&x:a){cin>>x;bound=max(bound,x+k);}vector<Fenwick>by_add;for(int j=0;j<=k;j++)by_add.emplace_back(bound+1);vector<Fenwick>by_height;for(int x=0;x<=bound;x++)by_height.emplace_back(k+1);int answer=0;for(int value:a)for(int j=k;j>=0;j--){int best=max(by_add[j].query(value),by_height[value+j].query(j+1))+1;answer=max(answer,best);by_add[j].add(value,best);by_height[value+j].add(j+1,best);}cout<<answer<<'\n';}
 external_url: https://www.luogu.com.cn/problem/P3287
 external_platform: 洛谷

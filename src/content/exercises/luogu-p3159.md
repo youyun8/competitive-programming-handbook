@@ -137,17 +137,17 @@ cpp_solution: |-
   int ty[]={0,0,-1,1,1,-1,1,-1};
   int Ss[25][25],Ts[25][25];
   int main(){
-      scanf("%d%d",&n,&m);
+      (void)!scanf("%d%d",&n,&m);
       p=t=2*n*m+2,s=t-1;
       char c[25];
       for(int i=1;i<=n;i++){
-          scanf("%s",c);
+          (void)!scanf("%s",c);
           for(int j=1;j<=m;j++)
               if(c[j-1]=='1')
                   Ss[i][j]=1,S++;
       }
       for(int i=1;i<=n;i++){
-          scanf("%s",c);
+          (void)!scanf("%s",c);
           for(int j=1;j<=m;j++)
               if(c[j-1]=='1')
                   Ts[i][j]=1,T++;
@@ -162,7 +162,7 @@ cpp_solution: |-
           }
       }
       for(int i=1,x;i<=n;i++){
-          scanf("%s",c);
+          (void)!scanf("%s",c);
           for(int j=1;j<=m;j++){
               x=c[j-1]-'0';
               Add(P(i,j),P(i,j)+n*m,x>>1,0);

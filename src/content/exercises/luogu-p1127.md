@@ -53,7 +53,7 @@ cpp_skeleton: |
   #include <vector>
   using namespace std;
   struct Edge{int to;string word;};
-  static void build_path(int u,vector<vector<Edge>>& graph,vector<string>& reversed){(void)u;(void)graph;(void)reversed;/* TODO：Hierholzer，回溯時記錄單字。*/}
+  void build_path(int u,vector<vector<Edge>>& graph,vector<string>& reversed){(void)u;(void)graph;(void)reversed;/* TODO：Hierholzer，回溯時記錄單字。*/}
   int main(){ios::sync_with_stdio(false);cin.tie(nullptr);int n=0;cin>>n;vector<vector<Edge>> graph(26);vector<int> indegree(26,0),outdegree(26,0);for(int i=0;i<n;++i){string word;cin>>word;int from=word.front()-'a',to=word.back()-'a';graph[static_cast<size_t>(from)].push_back({to,word});++outdegree[static_cast<size_t>(from)];++indegree[static_cast<size_t>(to)];}/* TODO：驗證度差、排序、建路並輸出。*/}
 cpp_solution: |
   #include <algorithm>

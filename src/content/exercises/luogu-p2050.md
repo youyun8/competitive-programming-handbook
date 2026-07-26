@@ -188,16 +188,16 @@ cpp_solution: |-
   }
 
   int main() {
-      scanf("%d%d", &n, &m);
+      (void)!scanf("%d%d", &n, &m);
       sum_p = 0;
       for (int i = 1; i <= n; i++) {
-          scanf("%d", &p[i]);
+          (void)!scanf("%d", &p[i]);
           sum_p += p[i];
       }
 
       for (int i = 1; i <= n; i++) {
           for (int j = 1; j <= m; j++) {
-              scanf("%d", &t[i][j]);
+              (void)!scanf("%d", &t[i][j]);
           }
       }
 

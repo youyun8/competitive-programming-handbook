@@ -125,18 +125,18 @@ cpp_solution: |-
   }
 
   int main() {
-      scanf("%d", &n);
+      (void)!scanf("%d", &n);
       // 读入P矩阵
       for (int i = 1; i <= n; i++) {
           for (int j = 1; j <= n; j++) {
-              scanf("%d", &a[i][j]);
+              (void)!scanf("%d", &a[i][j]);
           }
       }
       // 读入Q矩阵并计算边权
       for (int i = 1; i <= n; i++) {
           for (int j = 1; j <= n; j++) {
               int r;
-              scanf("%d", &r);
+              (void)!scanf("%d", &r);
               a[j][i] *= r;  // 注意这里是a[j][i] *= r，最终a[i][j]表示男运动员i和女运动员j的边权
           }
       }

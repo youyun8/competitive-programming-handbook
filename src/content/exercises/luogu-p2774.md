@@ -138,7 +138,7 @@ cpp_solution: |-
 
   int main() {
       int m, n;
-      scanf("%d%d", &m, &n);
+      (void)!scanf("%d%d", &m, &n);
       S = 0;
       T = m * n + 1;
 
@@ -149,7 +149,7 @@ cpp_solution: |-
       for (int i = 1; i <= m; i++) {
           for (int j = 1; j <= n; j++) {
               int w;
-              scanf("%d", &w);
+              (void)!scanf("%d", &w);
               sum += w;
               int id = (i - 1) * n + j;
 

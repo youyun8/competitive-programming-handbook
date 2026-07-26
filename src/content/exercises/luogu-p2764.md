@@ -102,10 +102,10 @@ cpp_solution: |-
   void input()
   {
       int a,b;
-      scanf("%d%d",&n,&m);
+      (void)!scanf("%d%d",&n,&m);
       for(int i=1;i<=m;i++)
       {
-          scanf("%d%d",&a,&b);
+          (void)!scanf("%d%d",&a,&b);
           addeg(a,n+b,1);
           addeg(n+b,a,0);
       }

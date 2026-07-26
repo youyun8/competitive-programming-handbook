@@ -149,7 +149,7 @@ cpp_solution: |-
       for (int i = 1; i <= n; i++) {
           for (int j = 1; j <= n; j++) {
               int c;
-              scanf("%d", &c);
+              (void)!scanf("%d", &c);
               add(num(i, j, 0), num(i, j, 1), 1, c);
               add(num(i, j, 0), num(i, j, 1), k - 1, 0);
               if (j < n) add(num(i, j, 1), num(i, j + 1, 0), k, 0);

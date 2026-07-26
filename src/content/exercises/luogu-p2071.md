@@ -122,11 +122,11 @@ cpp_solution: |-
   }
 
   int main() {
-      scanf("%d", &n);
+      (void)!scanf("%d", &n);
       // 读取每个人的偏好
       for (int i = 1; i <= 2 * n; i++) {
           int a, b;
-          scanf("%d%d", &a, &b);
+          (void)!scanf("%d%d", &a, &b);
           add_edge(i, a);
           add_edge(i, b);
       }

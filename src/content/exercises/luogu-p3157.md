@@ -26,9 +26,9 @@ samples:
       4
       1
     output: |
-      5
+      6
+      3
       2
-      1
     explanation: '依題意直接建立小型狀態，可逐項驗證輸出。'
 core_knowledge: ['分塊', '逆序對', 'Fenwick 樹']
 judgment: '資料規模排除逐次重建，需預處理倍增資訊或以分塊維護刪除影響。'

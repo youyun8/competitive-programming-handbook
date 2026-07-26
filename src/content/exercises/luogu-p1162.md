@@ -112,7 +112,8 @@ cpp_solution: |
       for (int row = 0; row < n; ++row) {
           for (int column = 0; column < n; ++column) {
               if (grid[row][column] == 0 && !outside[row][column]) grid[row][column] = 2;
-              cout << grid[row][column] << ' ';
+              if (column > 0) cout << ' ';
+              cout << grid[row][column];
           }
           cout << '\n';
       }

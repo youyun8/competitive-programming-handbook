@@ -90,12 +90,12 @@ cpp_solution: |-
       return false;
   }
   int main() {
-      scanf("%d%d", &n, &m);
+      (void)!scanf("%d%d", &n, &m);
       char s[60][60];
       bool flag = 1;
       pair<int, int> last;
       for (int i = 1; i <= n; i++) {
-          scanf("%s", (s[i] + 1));
+          (void)!scanf("%s", (s[i] + 1));
           for (int j = 1; j <= m; j++) {
               if (s[i][j] == '#') {
                   flag = 1;

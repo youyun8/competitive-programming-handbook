@@ -87,7 +87,10 @@ cpp_solution: |
           }
       }
       for (const auto& row : distance) {
-          for (int value : row) cout << value << ' ';
+          for (size_t column = 0; column < row.size(); ++column) {
+              if (column > 0) cout << ' ';
+              cout << row[column];
+          }
           cout << '\n';
       }
   }
