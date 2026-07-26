@@ -1,0 +1,94 @@
+<h2><span class="sec-no">4</span>狀態設計實戰方法論</h2>
+
+<div class="callout proof"><b>📝 草稿紙上的「狀態規格書」</b>
+<p>寫程式前固定填六格：① \(\mathrm{dp}[\text{維度}]\) 的完整中文定義；② 這個狀態包含哪些選項範圍；③ 最後一步有哪些互斥情況；④ 不可達值與空狀態；⑤ 依賴的偏序／計算順序；⑥ 狀態數 \(\times\) 每格決策數。任何一格空白都先不要進實作。若兩條不同歷史到同一狀態後，未來合法選擇不同，立即把能區分它們的最小資訊加成新維度。</p></div>
+
+<div class="tbl-wrap"><table>
+<tr><th>卡住位置</th><th>優先嘗試</th></tr>
+<tr><td>不知道狀態</td><td>先寫完整暴力函數參數，再刪除未來用不到或可導出的量</td></tr>
+<tr><td>轉移互相糾纏</td><td>改枚舉最後一步、最後消失者或固定分割點</td></tr>
+<tr><td>狀態太多</td><td>找對稱性、相對量、值域互換、輪廓或等價類</td></tr>
+<tr><td>單次轉移太慢</td><td>整理決策項後查 2.12，不要先猜優化名稱</td></tr>
+<tr><td>不確定正確性</td><td>寫指數暴力，隨機生成小測資對拍</td></tr>
+</table></div>
+
+<h3>4.1 從暴力遞迴到 DP 的機械化流程</h3>
+<p>不會做的 DP 題，永遠從<b>暴力遞迴</b>開始——狀態設計不是靈感，是重構：</p>
+<ol>
+  <li><b>寫暴力</b>：定義 \(\mathrm{solve}(\text{完整描述目前局面})\) 回傳答案，枚舉當下所有決策遞迴。</li>
+  <li><b>削參數</b>：檢查每個參數——未來用不到的刪掉；能由其他參數導出的刪掉（交錯字串裡 \(C\) 的下標是 \(i+j\)）。</li>
+  <li><b>找重疊</b>：剩下的參數組合會不會重複出現？會 → 加 memo，DP 完成。</li>
+  <li><b>需要時改遞推</b>：要滾動陣列或轉移優化時，把記憶化搜尋翻成 for 迴圈。</li>
+</ol>
+
+<div class="callout idea"><b>💡 示範一：打家劫舍</b>
+<p>暴力為 \(\mathrm{solve}(i,\text{上一家偷了嗎})\)。削參數：「上一家偷了嗎」只影響「這一家能不能偷」，可以併進轉移，比較 \(\mathrm{dp}[i-2]+a_i\) 與 \(\mathrm{dp}[i-1]\)——參數剩一個 \(i\)，重疊顯然，完工。</p></div>
+
+<div class="callout idea"><b>💡 示範二：戳氣球</b>
+<p>暴力為 \(\mathrm{solve}(\text{剩餘氣球集合})\)，有指數個狀態。<b>換枚舉對象</b>：不枚舉「第一個戳誰」而枚舉「最後一個戳誰」，剩餘集合永遠是連續區間，因此參數變成 \((l,r)\)，狀態數為 \(O(n^2)\)。卡在狀態爆炸時，先懷疑「枚舉的方向」而不是硬壓縮。</p></div>
+
+<h3>4.2 狀態設計四視角</h3>
+<div class="tbl-wrap"><table>
+<tr><th>視角</th><th>觸發訊號</th><th>代表</th></tr>
+<tr><td><b>前 \(i\) 個</b>（前綴）</td><td>決策從左到右、答案只問總體</td><td>背包、股票、編輯距離</td></tr>
+<tr><td><b>以 \(i\) 結尾</b></td><td>轉移需要知道「最後一個是誰／在哪」</td><td>LIS、Kadane、值域 DP</td></tr>
+<tr><td><b>區間 \([l,r]\)</b></td><td>操作發生在相鄰元素之間、子區間獨立</td><td>石子合併、戳氣球、博弈取數</td></tr>
+<tr><td><b>集合 \(S\)</b></td><td>\(n \le 20\)、順序任意、每個元素用一次</td><td>TSP、配對計數、集合覆蓋</td></tr>
+</table></div>
+<p>再各加一組常用「附加維」：處理到第幾行＋輪廓（棋盤）、目前節點＋子樹已合併（樹）、匹配到模式串第幾位（自動機）、用了幾次特權（分層）。</p>
+
+<h3>4.3 降維與資訊壓縮技巧清單</h3>
+<ul>
+  <li><b>滾動陣列</b>：只依賴上一排 → 兩排交替；0/1 背包型 → 原地倒序。</li>
+  <li><b>導出量不進狀態</b>：能由其他維算出的（例如 \(i+j\) 是常數、\(j=k-i\)）刪掉一維。</li>
+  <li><b>相對量代替絕對量</b>：排列計數記「相對名次」（AT DP T）；差值代替兩個絕對位置。</li>
+  <li><b>對稱性合併</b>：等價元素只記個數不記身分（Sushi 的 \(\mathrm{dp}[a][b][c]\)）。</li>
+  <li><b>值域與下標互換</b>：價值範圍小、重量範圍大時，改用 \(\mathrm{dp}[\text{價值}]=\text{最小重量}\)（經典逆轉）。</li>
+  <li><b>模一個共同量</b>：整除類條件只需模最小公倍數（CF 55D 的 \(2520\)）。</li>
+  <li><b>凸性/單調性外包</b>：整個函數當 DP 值，用堆/平衡樹維護（slope trick）。</li>
+</ul>
+
+<h3>4.4 對拍驗證器（C++）</h3>
+<p>DP 最幸福的一點：<b>暴力遞迴天然就是正確性基準</b>。方程一寫完就對拍，別等大測資 WA。</p>
+<pre><code class="lang-cpp">long long brute_force(const std::vector&lt;int&gt;&amp; values, int index) {
+    if (index &lt; 0) {
+        return 0;
+    }
+    return std::max(brute_force(values, index - 1),
+                    brute_force(values, index - 2) + values[index]);
+}
+
+long long solve_dp(const std::vector&lt;int&gt;&amp; values) {
+    long long two_steps_back = 0;
+    long long one_step_back = 0;
+    for (const int value : values) {
+        const long long current =
+            std::max(one_step_back, two_steps_back + value);
+        two_steps_back = one_step_back;
+        one_step_back = current;
+    }
+    return one_step_back;
+}
+
+int main() {
+    std::mt19937 random_engine(123456789);
+    std::uniform_int_distribution&lt;int&gt; size_distribution(0, 8);
+    std::uniform_int_distribution&lt;int&gt; value_distribution(-5, 20);
+    for (int test = 0; test &lt; 100000; ++test) {
+        const int size = size_distribution(random_engine);
+        std::vector&lt;int&gt; values(size);
+        for (int&amp; value : values) {
+            value = value_distribution(random_engine);
+        }
+        const long long brute_answer =
+            brute_force(values, static_cast&lt;int&gt;(values.size()) - 1);
+        const long long dp_answer = solve_dp(values);
+        if (brute_answer != dp_answer) {
+            std::cout &lt;&lt; "Counterexample found\n";
+            return 0;
+        }
+    }
+    std::cout &lt;&lt; "100000 tests passed\n";
+    return 0;
+}</code></pre>
+<p class="small">要點：測資<b>小而刁</b>（長度 \(0\) 到 \(8\)、含負數／零／重複）比大測資更會抓 bug；找到反例後把它縮到最小再除錯。</p>
