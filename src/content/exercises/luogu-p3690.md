@@ -10,13 +10,13 @@ difficulty: 5
 topics: ['LCT', '動態樹', 'Splay', '偏好路徑']
 prerequisites: ['link-cut-tree', 'fhq-treap']
 statement: |-
-  維護一個森林，支援查詢兩點路徑上點權的異或和、加一條邊、刪一條邊、修改點權。
-  本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
+  給定 n 個各自獨立、帶整數點權的節點，動態維護一座森林。依序支援：查詢兩個連通節點間簡單路徑上所有點權的異或和；若兩點尚未連通便加邊；若指定邊存在便刪除；把單一節點的權值改為新值。
 constraints:
-  - '森林的形狀會動態改變，樹鏈剖分不適用'
-  - 'link 前要確認不連通，cut 前要確認邊存在'
-  - '完整限制條件請參閱外部題目頁面'
-input_format: '第一行兩個整數 n 與 m；第二行 n 個點權；接下來 m 行，`0 x y` 查詢路徑異或和、`1 x y` 連邊、`2 x y` 斷邊、`3 x y` 把 x 的點權改成 y。'
+  - '1 <= n <= 100000'
+  - '1 <= m <= 300000'
+  - '1 <= 初始點權、修改後點權 <= 1000000000'
+  - '查詢的兩點保證連通；對已連通兩點的加邊與不存在邊的刪除皆不改變森林'
+input_format: '第一行兩個整數 n 與 m；接著輸入 n 個初始點權；再輸入 m 行操作：`0 x y` 查詢路徑異或和、`1 x y` 嘗試連邊、`2 x y` 嘗試斷邊、`3 x y` 把 x 的點權改成 y。'
 output_format: '對每個查詢輸出一行。'
 samples:
   - input: |
@@ -35,22 +35,27 @@ samples:
       7
       6
     explanation: |-
-      連成鏈 1–2–3 後查路徑異或得 1^2^3 = 0；把節點 2 的點權改成 5 後同一條路徑得 1^5^3 = 7；接著斷開 1–2、改連 1–3，森林變成 2–3–1，此時路徑 2→3 只含兩個點，異或得 5^3 = 6。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+      連成鏈 1–2–3 後，路徑異或為 1^2^3=0；把節點 2 改成 5 後，同一路徑為 1^5^3=7。斷開 1–2、改連 1–3 後，2 與 3 的路徑只包含這兩點，答案為 5^3=6。
+core_knowledge: ['Link-Cut Tree 以 Splay 維護偏好路徑', 'access 與 make_root', '路徑異或聚合與翻轉懶標記']
+judgment: '路徑聚合包含兩個端點；操作 3 的第二個參數是新點權而非增量；link 與 cut 必須自行判斷是否能生效。'
 hints:
   - |-
-    樹鏈剖分要求樹的形狀固定。一旦要動態連邊斷邊，就得換成 LCT：用 Splay 維護每條「偏好路徑」，整個森林由許多 Splay 組成。
+    將每條「偏好路徑」以一棵 Splay 表示，Splay 的中序順序對應樹上由淺到深的順序；每個節點維護子樹點權異或。
   - |-
-    `access(x)` 是一切的基礎：把根到 x 的路徑打通成一條偏好路徑。實作是沿 parent 一路 splay 上去，每次把當前節點的右子換成上一段。
+    `access(x)` 沿 path-parent 向上，逐段把當前節點 splay 到根並將右子改接成上一段，最後 x 所在輔助樹正好表示原樹根到 x 的路徑。
   - |-
-    `make_root(x)` = access(x) 後對 x 打**翻轉標記**。有了換根，link、cut、路徑查詢才能統一成「先把一端變成根」的形式。翻轉標記的語意與文藝平衡樹完全相同：交換左右子。
-  - |-
-    `split(x, y)` = make_root(x) 後 access(y)，此時 y 所在的 Splay 恰好就是路徑 x–y，直接讀它的聚合值即可。
-  - |-
-    兩個經典陷阱：splay 之前必須把根到該點路徑上的標記**由上而下**全部下推（先把路徑收集起來再倒著推）；`is_root` 的判斷是「父節點的兩個子都不是我」，而不是「沒有父節點」——因為偏好路徑之間是用單向的 path parent 相連的。
+    `make_root(x)` 是 access 後翻轉路徑；接著 `access(y)` 便使 y 的輔助子樹代表 x–y。link 令換根後的 x 指向 y；cut 則在暴露 x–y 後確認 x 是 y 的直接左子，再斷開。
 solution_outline: |-
   用 Splay 維護偏好路徑，節點保存點權與子樹異或和，並帶翻轉標記。access 沿 parent 逐段 splay 並改接右子；make_root 在 access 後打翻轉標記；split 組合兩者取得路徑。link 前用 find_root 確認不連通，cut 前確認 y 的父是 x 且 y 無左子。改點權時先 splay 再 pull。
 proof_or_invariant: |-
   不變量是「每棵 Splay 恰對應森林中的一條偏好路徑，中序即該路徑由淺到深的順序」。access 只改變偏好路徑的劃分而不改變森林結構；翻轉標記讓「換根」在不移動實際邊的前提下生效。攤還分析（與 LCT 的重輕邊論證相同）給出單次操作 O(log n)。
+common_errors:
+  [
+    '把輔助樹根誤判為 parent 等於 0，而未檢查父節點是否真的以它為子',
+    'splay 前未由上而下推送翻轉標記',
+    'cut 只檢查連通性，未確認兩點之間是直接邊',
+    '修改點權後漏掉 pull'
+  ]
 complexity:
   time: '攤還 O(log n)'
   space: 'O(n)'
@@ -234,14 +239,13 @@ cpp_solution: |
 
       void cut(int x, int y) {
           make_root(x);
-          // 只有當 y 是 x 在 Splay 中的直接後繼、且 y 沒有左子時，x–y 才真的是一條邊。
-          if (find_root(y) != x || nodes[static_cast<size_t>(y)].parent != x ||
-              nodes[static_cast<size_t>(y)].child[0] != 0) {
-              return;
-          }
-          nodes[static_cast<size_t>(y)].parent = 0;
-          nodes[static_cast<size_t>(x)].child[1] = 0;
-          pull(x);
+          access(y);
+          // 暴露 x–y 後，若它們直接相鄰，x 必為 y 的左子且 x 沒有右子。
+          if (nodes[static_cast<size_t>(y)].child[0] != x ||
+              nodes[static_cast<size_t>(x)].child[1] != 0) { return; }
+          nodes[static_cast<size_t>(y)].child[0] = 0;
+          nodes[static_cast<size_t>(x)].parent = 0;
+          pull(y);
       }
   };
 

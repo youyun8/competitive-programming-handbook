@@ -285,6 +285,7 @@ external_platform: 洛谷
 external_problem_id: P4718
 external_title: 【模板】Pollard-Rho
 external_relation: original
+original_label: '洛谷 P4718'
 source_book_pages:
   - 424
   - 430
@@ -304,3 +305,5 @@ common_errors:
 ---
 
 這題把數論、機率與整數溢位三件事綁在一起。試除前置與乘法取模是兩個最容易翻車的地方，先把它們寫穩再談效率。
+
+原始題單中本題位於第 6.10 節、習題第 1 題；競賽來源記為「模板」。可用小範圍試除分解作為對拍程式。

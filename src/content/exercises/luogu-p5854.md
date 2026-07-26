@@ -10,37 +10,39 @@ difficulty: 3
 topics: ['笛卡兒樹', '單調棧', '二元搜尋樹', '堆']
 prerequisites: ['cartesian-tree', 'stack']
 statement: |-
-  給定一個排列，建出它的笛卡兒樹（對索引是二元搜尋樹、對權值是小根堆），輸出左右子節點編號的加權和。
-  本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
+  給定長度為 n 的排列 p。建出唯一的笛卡兒樹：節點編號為排列下標，中序遍歷依序為 1..n，且每個父節點的 p 值都小於其子節點。令 l_i、r_i 分別為節點 i 的左右子編號，缺少子節點時記為 0；輸出所有 i×(l_i+1) 的位元 XOR，以及所有 i×(r_i+1) 的位元 XOR。
 constraints:
-  - 'n 可達 10^7，必須是 O(n)'
-  - '輸入是排列，權值兩兩不同'
-  - '完整限制條件請參閱外部題目頁面'
+  - '1 <= n <= 10000000'
+  - 'p 是 1..n 的排列，因此所有權值互異'
 input_format: '第一行一個整數 n；第二行 n 個整數表示排列。'
-output_format: '一行兩個整數，分別是 Σ i×(l_i+1) 與 Σ i×(r_i+1)，其中 l_i、r_i 是節點 i 的左右子（無子節點記為 0）。'
+output_format: '一行兩個整數，分別是 XOR_{i=1..n} i×(l_i+1) 與 XOR_{i=1..n} i×(r_i+1)。'
 samples:
   - input: |
       5
       3 1 4 2 5
     output: |
-      29 43
+      19 21
     explanation: |-
-      權值最小的 1 在位置 2，成為根；左子是位置 1，右子是位置 4（權值 2），位置 4 底下再掛位置 3 與 5。左子陣列為 0 1 0 3 0、右子為 0 4 0 5 0，代入公式即得 29 與 43。 本站自製測資（本次工作環境的網路政策封鎖了所有 OJ 網域，無法取得官方範例）。解法本身已與獨立撰寫的暴力參考解在數千組隨機測資上對拍一致。
+      最小值 1 位於位置 2，所以節點 2 是根；其左子為 1、右子為 4，節點 4 的左右子分別為 3、5。故 l=(0,1,0,3,0)、r=(0,4,0,5,0)，代入兩個 XOR 式得到 19 與 21。
+core_knowledge: ['笛卡兒樹同時滿足索引二元搜尋樹與權值小根堆', '單調棧維護最右鏈', '每個節點至多進棧與出棧一次']
+judgment: '節點編號是元素位置而非排列值；本題建的是小根笛卡兒樹；最後聚合使用位元 XOR 而非加總，且空子節點仍要先加一。'
 hints:
   - |-
-    笛卡兒樹的雙重定義：對**索引**是二元搜尋樹（中序遍歷回到原序列順序），對**權值**是小根堆（父節點權值小於子節點）。這兩個條件在權值互異時唯一確定一棵樹。
+    對一個區間而言，最小值必為根，左右區間分別形成左右子樹；直接遞迴找最小值雖能說明唯一性，最壞卻會退化為平方時間。
   - |-
-    最直觀的做法是遞迴：找出區間最小值當根，左右兩段各自遞迴。但最壞是 O(n²)（序列已排序時退化成鏈）。
+    從左到右加入節點，維護目前樹從根走右子可到達的整條右鏈；依小根堆性質，鏈上的 p 值嚴格遞增，可存於單調棧。
   - |-
-    線性做法用單調棧。維護的是樹的**右鏈**——從根一路往右子走的那條路徑，權值沿路遞增。
-  - |-
-    加入新元素 i 時：把棧中所有權值大於 value[i] 的節點彈出，**最後一個被彈出的**成為 i 的左子（它們的整棵子樹都在 i 左邊、權值都比 i 大）；若棧還有元素，i 就成為棧頂的右子；最後把 i 推入棧。
-  - |-
-    每個元素進出棧各一次，所以總計 O(n)。n 到 10^7 時還要注意輸入輸出速度，`cin` 記得關同步或改手寫讀入。
+    加入 i 時彈出所有 p 值大於 p_i 的節點：最後彈出的節點成為 i 的左子；若棧仍非空，i 成為新棧頂的右子。每個節點只進出棧一次。
 solution_outline: |-
-  用一個棧維護當前的右鏈（權值遞增）。逐一加入元素：彈出所有權值更大的節點，最後彈出者成為新節點的左子；若棧非空則新節點成為棧頂的右子；把新節點推入棧。掃完後依公式計算兩個加權和。
+  用一個棧維護當前的右鏈（權值遞增）。逐一加入元素：彈出所有權值更大的節點，最後彈出者成為新節點的左子；若棧非空則新節點成為棧頂的右子；把新節點推入棧。掃完後依公式計算兩個 XOR 值。
 proof_or_invariant: |-
   不變量是「棧中由底到頂恰為當前笛卡兒樹的右鏈，且權值遞增」。加入新元素時，所有權值大於它的節點都不可能再有新的右子，因此可以永久彈出；被彈出的那一段構成新節點的左子樹，恰好滿足中序在左、權值更大兩個條件。
+common_errors:
+  [
+    '把第一個而非最後一個彈出節點設為新節點左子',
+    '彈棧後忘記把新節點設為剩餘棧頂的右子',
+    '把最終 XOR 誤寫成算術加總或以 int 計算乘積'
+  ]
 complexity:
   time: 'O(n)'
   space: 'O(n)'
@@ -69,13 +71,13 @@ cpp_skeleton: |
       vector<int> stack_nodes;
       (void)stack_nodes;
 
-      long long first = 0;
-      long long second = 0;
+      long long first_xor = 0;
+      long long second_xor = 0;
       for (int i = 1; i <= n; ++i) {
-          first += static_cast<long long>(i) * (left_child[static_cast<size_t>(i)] + 1);
-          second += static_cast<long long>(i) * (right_child[static_cast<size_t>(i)] + 1);
+          first_xor ^= static_cast<long long>(i) * (left_child[static_cast<size_t>(i)] + 1);
+          second_xor ^= static_cast<long long>(i) * (right_child[static_cast<size_t>(i)] + 1);
       }
-      cout << first << ' ' << second << '\n';
+      cout << first_xor << ' ' << second_xor << '\n';
       return 0;
   }
 cpp_solution: |
@@ -108,13 +110,13 @@ cpp_solution: |
           stack_nodes.push_back(i);
       }
 
-      long long first = 0;
-      long long second = 0;
+      long long first_xor = 0;
+      long long second_xor = 0;
       for (int i = 1; i <= n; ++i) {
-          first += static_cast<long long>(i) * (left_child[static_cast<size_t>(i)] + 1);
-          second += static_cast<long long>(i) * (right_child[static_cast<size_t>(i)] + 1);
+          first_xor ^= static_cast<long long>(i) * (left_child[static_cast<size_t>(i)] + 1);
+          second_xor ^= static_cast<long long>(i) * (right_child[static_cast<size_t>(i)] + 1);
       }
-      cout << first << ' ' << second << '\n';
+      cout << first_xor << ' ' << second_xor << '\n';
       return 0;
   }
 external_url: https://www.luogu.com.cn/problem/P5854

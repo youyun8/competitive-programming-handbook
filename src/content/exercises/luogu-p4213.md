@@ -203,6 +203,7 @@ external_platform: 洛谷
 external_problem_id: P4213
 external_title: 【模板】杜教篩
 external_relation: original
+original_label: '洛谷 P4213'
 source_book_pages:
   - 456
   - 461
@@ -223,3 +224,5 @@ common_errors:
 ---
 
 杜教篩是「不用算出每一項，也能算出前綴和」的典範。真正要練的是挑 g 的直覺：要讓 f\*g 簡單，同時 g 自己的前綴和也要好算。
+
+原始題單中本題位於第 6.17 節、例題第 1 題；競賽來源記為「模板」。可對小 n 直接線性篩出 φ、μ 前綴和，與遞迴結果逐項對拍。

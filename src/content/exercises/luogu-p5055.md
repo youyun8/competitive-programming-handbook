@@ -9,13 +9,18 @@ kind: external-oj
 difficulty: 5
 topics: ['可持久化', 'FHQ Treap', '區間翻轉', '強制在線']
 prerequisites: ['fhq-treap', 'persistent-segment-tree']
+core_knowledge:
+  - 隱式 FHQ Treap
+  - 可持久化懶標記
+  - 區間翻轉與區間和
+judgment: 序列按位置切分且每次操作從歷史版本分岔；隱式 FHQ Treap 可用子樹大小定位，並以寫入時複製同時支援翻轉標記與版本。
 statement: |-
   維護一個支援版本回溯的序列，支援在指定位置插入、刪除某個位置、翻轉一個區間、查詢區間和。強制在線。
   本卡片的題意為本站依題目主題重新敘述；完整原文敘述與資料範圍請以外部題目頁面為準。
 constraints:
-  - '強制在線：版本編號與所有參數都要異或上「上一次查詢的答案」'
-  - '同時需要可持久化與懶標記，兩者互相牽制'
-  - '完整限制條件請參閱外部題目頁面'
+  - '1 <= n <= 200000'
+  - '所有輸入參數均須先與上一次查詢答案做位元 XOR'
+  - '序列值與區間和需使用 64 位元有號整數'
 input_format: '第一行一個整數 n；接下來 n 行，每行為 `v opt` 與對應參數（1 插入 p x、2 刪除 p、3 翻轉 l r、4 求和 l r）。'
 output_format: '對每個操作 4 輸出一行區間和。'
 samples:
@@ -38,10 +43,6 @@ hints:
     最關鍵的一行是：**push_down 時必須先 clone 子節點再翻轉**。子節點可能被舊版本共用，就地打標記等於竄改歷史。這是本題與非持久化文藝平衡樹唯一的本質差別。
   - |-
     節點除了 size 還要維護 sum，才能回答區間和。pull 時記得同時更新兩者。
-  - |-
-    強制在線的設計是刻意的：版本編號與所有參數都要異或上「上一次操作 4 的答案」，逼你不能離線重排操作順序。
-  - |-
-    空間會長得很快：每次操作 O(log n) 個新節點，加上 push_down 產生的 clone。開陣列時要估足，或直接用 vector 動態增長。
 solution_outline: |-
   用 FHQ Treap 表示序列，split 依子樹大小切分，節點維護 size 與 sum。split / merge 沿路 clone 以維持可持久化；push_down 翻轉標記時先 clone 兩個子節點再交換與取反。四種操作分別由三段切分組合而成，查詢型操作把新版本指回原版本。
 proof_or_invariant: |-
@@ -49,6 +50,10 @@ proof_or_invariant: |-
 complexity:
   time: '期望 O(log n)'
   space: 'O(n log n)'
+common_errors:
+  - 下推翻轉標記前沒有複製共享子節點
+  - 忘記將版本與每個操作參數和 last_answer 做 XOR
+  - 區間和或 last_answer 使用 32 位元整數而溢位
 cpp_skeleton: |
   #include <bits/stdc++.h>
   using namespace std;
