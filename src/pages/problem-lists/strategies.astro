@@ -156,7 +156,7 @@ const crossListed = rows.filter((row) => row.exercise).length;
               <td class="meta">{problem.idea}</td>
               <td>{href ? <a href={href}>{strategyLabel}</a> : <span class="meta">—</span>}</td>
               <td>
-                <ExerciseStatusControl client:visible exerciseId={problem.progress_id} compact />
+                <ExerciseStatusControl client:idle exerciseId={problem.progress_id} compact />
               </td>
             </tr>
           ))
