@@ -42,6 +42,8 @@ external_platform: 洛谷
 external_problem_id: P2534
 external_title: '[AHOI2012] 鐵盤整理'
 external_relation: original
+source_book_pages: [97, 149]
+source_pdf_pages: [115, 167]
 review_status: verified
 ---
 

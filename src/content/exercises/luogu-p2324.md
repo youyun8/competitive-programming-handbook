@@ -53,6 +53,8 @@ external_platform: 洛谷
 external_problem_id: P2324
 external_title: '[SCOI2005] 騎士精神'
 external_relation: original
+source_book_pages: [97, 149]
+source_pdf_pages: [115, 167]
 review_status: verified
 ---
 

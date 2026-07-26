@@ -6,7 +6,7 @@ title: OpenJudge 4054 Cubic Eight-Puzzle：reviewed roadmap（缺初始面向圖
 chapter: 3
 section: '3.5'
 kind: external-oj
-difficulty: 0
+difficulty: 5
 topics: [source-recovery, cube-orientation, roadmap]
 prerequisites: []
 statement: 八個彩色立方體置於 3×3 棋盤並留一空格，每步把相鄰立方體滾入空格，要求頂面形成指定色彩圖案；官方文字與樣例已恢復，但決定各立方體初始各面的關鍵圖片仍缺失。
@@ -29,6 +29,8 @@ external_platform: OpenJudge 百練
 external_problem_id: '4054'
 external_title: Cubic Eight-Puzzle
 external_relation: original
+source_book_pages: [97, 149]
+source_pdf_pages: [115, 167]
 review_status: verified
 ---
 

@@ -47,6 +47,8 @@ external_platform: 洛谷
 external_problem_id: P2346
 external_title: 四子連棋
 external_relation: original
+source_book_pages: [97, 149]
+source_pdf_pages: [115, 167]
 review_status: verified
 ---
 
