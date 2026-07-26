@@ -42,13 +42,14 @@ export function canonicalProblemSection(section: string) {
 }
 
 export function problemKey(platform: string, problemId: string) {
-  const normalizedPlatform = platform
-    .normalize('NFKC')
-    .toLowerCase()
-    .replace(/openjudge.*百練/u, 'openjudge')
-    .replace(/洛谷/u, 'luogu')
-    .replace(/[^a-z0-9]+/gu, '-')
-    .replace(/^-|-$/g, '');
+  const platformText = platform.normalize('NFKC').toLowerCase();
+  const normalizedPlatform =
+    platformText.includes('openjudge') || platformText.includes('openj_bailian')
+      ? 'openjudge'
+      : platformText
+          .replace(/洛谷/u, 'luogu')
+          .replace(/[^a-z0-9]+/gu, '-')
+          .replace(/^-|-$/g, '');
   return `${normalizedPlatform}:${problemId.normalize('NFKC').toLowerCase()}`;
 }
 

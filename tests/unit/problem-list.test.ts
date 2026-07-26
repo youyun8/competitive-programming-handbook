@@ -28,6 +28,8 @@ describe('《演算法競賽》題單章節映射', () => {
   it('normalizes external problem identities', () => {
     expect(problemKey('洛谷', 'P1886')).toBe('luogu:p1886');
     expect(problemKey('OpenJudge 百練', '1234')).toBe('openjudge:1234');
+    expect(problemKey('OpenJ_Bailian', '1234')).toBe('openjudge:1234');
+    expect(problemKey('POJ / OpenJudge', '1234')).toBe('openjudge:1234');
   });
 });
 
