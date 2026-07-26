@@ -236,7 +236,7 @@ const scenarios: Record<VisualizerKind, { title: string; legend: string; steps: 
     ]
   },
   'extended-gcd': {
-    title: '擴展歐幾里得：回代出裴蜀係數',
+    title: '擴展歐幾裡得：回代出裴蜀係數',
     legend: '求 30x + 18y = gcd(30,18)。',
     steps: [
       { values: ['30 = 1×18 + 12'], active: [0], status: '第一步取餘數 12。' },

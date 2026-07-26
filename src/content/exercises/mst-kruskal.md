@@ -101,6 +101,6 @@ review_status: verified
 external_url: https://www.luogu.com.cn/problem/P3366
 external_platform: 洛谷
 external_problem_id: P3366
-external_title: 【模板】最小生成树
+external_title: 【模板】最小生成樹
 external_relation: related
 ---

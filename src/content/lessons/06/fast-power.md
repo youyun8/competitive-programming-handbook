@@ -109,7 +109,7 @@ long long modular_power(long long base, long long exponent, long long modulus) {
 
 ## 教材經典例題與 C++ 解答
 
-以下例題對應本章教材的快速冪與擴展歐幾里得主題。題意皆為本站重新敘述，程式為獨立撰寫、可直接編譯的 C++17，讀完即得完整解法。
+以下例題對應本章教材的快速冪與擴展歐幾裡得主題。題意皆為本站重新敘述，程式為獨立撰寫、可直接編譯的 C++17，讀完即得完整解法。
 
 ### 例題一：模快速冪
 
@@ -156,15 +156,15 @@ int main() {
 
 輸入 `2 10 1000000007` 得 `1024`；輸入 `-2 3 1000` 得 `992`（即 -8 對 1000 取模後的非負值）。
 
-### 例題二：擴展歐幾里得與線性同餘
+### 例題二：擴展歐幾裡得與線性同餘
 
-解一次同餘方程 `a·x ≡ b (mod m)`。把它改寫成 `a·x + m·y = b`，用擴展歐幾里得求 `g = gcd(a, m)` 與一組係數：若 `g` 不整除 `b` 則無解，否則縮放係數並對 `m/g` 正規化，得到最小非負解。時間 O(log min(a, m))。
+解一次同餘方程 `a·x ≡ b (mod m)`。把它改寫成 `a·x + m·y = b`，用擴展歐幾裡得求 `g = gcd(a, m)` 與一組係數：若 `g` 不整除 `b` 則無解，否則縮放係數並對 `m/g` 正規化，得到最小非負解。時間 O(log min(a, m))。
 
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
 
-// 擴展歐幾里得：回傳 gcd(a,b) 並求出 a*x + b*y = gcd 的一組係數。
+// 擴展歐幾裡得：回傳 gcd(a,b) 並求出 a*x + b*y = gcd 的一組係數。
 static long long extended_gcd(long long a, long long b, long long& x, long long& y) {
     if (b == 0) {
         x = 1;

@@ -2,7 +2,7 @@
 id: dp-knapsack-01
 volume: upper
 source_file: upper-volume
-title: 0-1 背包問題
+title: 0-1 揹包問題
 chapter: 5
 section: '5.2'
 kind: practice
@@ -13,7 +13,7 @@ topics:
   - linear-dp
 prerequisites:
   - arrays
-statement: 給定 n 個物品，每個物品有重量 w[i] 與價值 v[i]。背包容量為 W，每個物品只能選或不選，求最大總價值。
+statement: 給定 n 個物品，每個物品有重量 w[i] 與價值 v[i]。揹包容量為 W，每個物品只能選或不選，求最大總價值。
 constraints:
   - 1 <= n <= 1000
   - 1 <= W <= 100000
@@ -69,6 +69,6 @@ review_status: verified
 external_url: https://www.luogu.com.cn/problem/P1048
 external_platform: 洛谷
 external_problem_id: P1048
-external_title: 采药
+external_title: 採藥
 external_relation: related
 ---

@@ -1,7 +1,7 @@
 ---
 id: core-terms
 traditional: 不變量
-simplified: 不变量
+simplified: 不變量
 english: invariant
 aliases: [迴圈不變量, loop invariant]
 definition: 在演算法某個固定時點始終成立的敘述，用來證明每一步不會丟失答案並最終得到正確結果。

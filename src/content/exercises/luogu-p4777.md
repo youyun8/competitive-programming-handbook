@@ -7,7 +7,7 @@ chapter: 6
 section: '6.9'
 kind: external-oj
 difficulty: 4
-topics: ['EXCRT', '中國剩餘定理', '擴展歐幾里得', '同餘']
+topics: ['EXCRT', '中國剩餘定理', '擴展歐幾裡得', '同餘']
 prerequisites: ['congruence', 'extended-gcd']
 statement: |-
   給定 n 條同餘方程 x ≡ r_i (mod m_i)，模數 m_i 不保證兩兩互質，求最小的非負整數解 x。
@@ -34,13 +34,13 @@ hints:
   - |-
     設已合併的結果是 x ≡ remainder (mod modulus)，新的一條是 x ≡ next_remainder (mod next_modulus)。把 x 寫成 remainder + modulus·t 代入第二條，得到一次同餘方程 modulus·t ≡ next_remainder − remainder (mod next_modulus)。
   - |-
-    這個方程有解的充要條件是 g = gcd(modulus, next_modulus) 整除右邊的差值；不整除就代表兩條式子矛盾，整個方程組無解。用擴展歐幾里得同時求出 g 與一組係數。
+    這個方程有解的充要條件是 g = gcd(modulus, next_modulus) 整除右邊的差值；不整除就代表兩條式子矛盾，整個方程組無解。用擴展歐幾裡得同時求出 g 與一組係數。
   - |-
     有解時 t 在模 (next_modulus / g) 下唯一。取最小非負的 t，代回得到新的 remainder，新的 modulus 則是兩者的**最小公倍數** modulus / g × next_modulus。
   - |-
     溢位是這題最大的陷阱：modulus 累乘後可達 10^18，乘上 t 會爆 long long。用二進位乘法取模（把乘數拆成二進位，逐位倍增累加）就能安全計算，而且不需要 __int128——本站的 C++ 檢查開了 -pedantic-errors，__int128 會被拒絕。
 solution_outline: |-
-  把第一條式子當作初始的 (modulus, remainder)，逐條合併其餘式子。合併時用擴展歐幾里得解 modulus·t ≡ 差值 (mod next_modulus)：差值不是 gcd 的倍數就輸出 −1；否則取最小非負的 t，更新 remainder 與 modulus（後者變成最小公倍數），並把 remainder 規約到 [0, modulus)。
+  把第一條式子當作初始的 (modulus, remainder)，逐條合併其餘式子。合併時用擴展歐幾裡得解 modulus·t ≡ 差值 (mod next_modulus)：差值不是 gcd 的倍數就輸出 −1；否則取最小非負的 t，更新 remainder 與 modulus（後者變成最小公倍數），並把 remainder 規約到 [0, modulus)。
 proof_or_invariant: |-
   迴圈不變量是「(modulus, remainder) 恰好刻畫前 i 條同餘式的完整解集，即解集為 {remainder + k·modulus}」。合併步驟的正確性來自一次同餘方程的解結構：a·t ≡ b (mod m) 有解當且僅當 gcd(a, m) | b，且此時解在模 m/gcd(a, m) 下唯一。
 complexity:
@@ -63,7 +63,7 @@ cpp_skeleton: |
       return result;
   }
 
-  // TODO 1：擴展歐幾里得。回傳 gcd(a, b)，同時求出滿足 a·x + b·y = gcd 的一組 (x, y)。
+  // TODO 1：擴展歐幾裡得。回傳 gcd(a, b)，同時求出滿足 a·x + b·y = gcd 的一組 (x, y)。
   //   遞迴式：先解 (b, a mod b) 得到 (x1, y1)，則 x = y1、y = x1 - ⌊a/b⌋·y1。
   static long long extended_gcd(long long a, long long b, long long& x, long long& y) {
       x = 1;
@@ -165,4 +165,4 @@ source_pdf_pages: [48, 54]
 review_status: verified
 ---
 
-EXCRT 的每一步都是「解一次同餘方程」，而那正是擴展歐幾里得的工作。想清楚合併的代數推導，程式就只是把它抄下來。
+EXCRT 的每一步都是「解一次同餘方程」，而那正是擴展歐幾裡得的工作。想清楚合併的代數推導，程式就只是把它抄下來。

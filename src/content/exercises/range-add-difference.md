@@ -60,6 +60,6 @@ review_status: verified
 external_url: https://www.luogu.com.cn/problem/P2367
 external_platform: 洛谷
 external_problem_id: P2367
-external_title: 语文成绩
+external_title: 語文成績
 external_relation: related
 ---

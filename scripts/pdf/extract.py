@@ -27,8 +27,8 @@ from pyzbar.pyzbar import decode as decode_barcode
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES = {
-    "upper": ROOT / "source/900782057-算法竞赛-上册-罗勇军-郭卫斌.pdf",
-    "lower": ROOT / "source/算法竞赛（清华科技大讲堂）.pdf",
+    "upper": ROOT / "source/900782057-算法競賽-上冊-羅勇軍-郭衛斌.pdf",
+    "lower": ROOT / "source/算法競賽（清華科技大講堂）.pdf",
 }
 EXPECTED = {
     "upper": {
@@ -40,13 +40,13 @@ EXPECTED = {
         "sha256": "885c201be96b05a146d8dd3f493d848231b1e7fa8b2d82a13aa1aa8fbbdb04f5",
     },
 }
-EXAMPLE_RE = re.compile(r"(?:例|例题|練習|练习)\s*([0-9]{1,2})\s*[.．·]\s*([0-9]{1,3})")
+EXAMPLE_RE = re.compile(r"(?:例|例題|練習|練習)\s*([0-9]{1,2})\s*[.．·]\s*([0-9]{1,3})")
 URL_RE = re.compile(r"(?:https?://|www\.)[^\s<>{}\\[\\]\"']+", re.IGNORECASE)
 OJ_RE = re.compile(
-    r"(LeetCode|LintCode|洛谷|HDU|POJ|Codeforces|AtCoder|UVA|牛客|计蒜客|OJ)",
+    r"(LeetCode|LintCode|洛谷|HDU|POJ|Codeforces|AtCoder|UVA|牛客|計蒜客|OJ)",
     re.IGNORECASE,
 )
-SAMPLE_RE = re.compile(r"(输入样例|输出样例|样例输入|样例输出|Sample\s+(?:Input|Output))", re.IGNORECASE)
+SAMPLE_RE = re.compile(r"(輸入樣例|輸出樣例|樣例輸入|樣例輸出|Sample\s+(?:Input|Output))", re.IGNORECASE)
 CODE_RE = re.compile(r"(#include|using\s+namespace|int\s+main|std::|long\s+long)")
 
 

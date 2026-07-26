@@ -5,10 +5,10 @@ source_file: lower-volume
 chapter: 6
 section: '6.7'
 title: GCD 與 LCM
-summary: 歐幾里得演算法求最大公因數，推導最小公倍數與裴蜀定理，掌握互質相關性質。
+summary: 歐幾裡得演算法求最大公因數，推導最小公倍數與裴蜀定理，掌握互質相關性質。
 prerequisites: [integers]
 learning_goals:
-  - 熟練歐幾里得演算法
+  - 熟練歐幾裡得演算法
   - 理解 LCM 與 GCD 的關係
   - 應用裴蜀定理判斷整數解存在性
 concepts: [gcd, lcm, euclidean-algorithm]
@@ -23,7 +23,7 @@ review_status: verified
 
 ## 這個技術解決什麼問題
 
-兩個整數的最大公因數（GCD）是許多數論問題的入口。歐幾里得演算法以取餘數的方式快速縮小問題規模，遠快於質因數分解。
+兩個整數的最大公因數（GCD）是許多數論問題的入口。歐幾裡得演算法以取餘數的方式快速縮小問題規模，遠快於質因數分解。
 
 ## 辨識題型的訊號
 

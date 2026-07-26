@@ -4975,8 +4975,8 @@
       "source_pdf_pages": [181],
       "platform": "洛谷",
       "problem_id": "P3370",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -4989,8 +4989,8 @@
       "source_file": "lower-volume",
       "source_book_pages": [554],
       "source_pdf_pages": [184],
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5005,8 +5005,8 @@
       "source_pdf_pages": [184, 204],
       "platform": "洛谷",
       "problem_id": "P4391",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5021,8 +5021,8 @@
       "source_pdf_pages": [185],
       "platform": "洛谷",
       "problem_id": "P5270",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5037,8 +5037,8 @@
       "source_pdf_pages": [185],
       "platform": "HDU",
       "problem_id": "4821",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5051,8 +5051,8 @@
       "source_file": "lower-volume",
       "source_book_pages": [557, 558],
       "source_pdf_pages": [187, 188],
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5067,8 +5067,8 @@
       "source_pdf_pages": [189],
       "platform": "洛谷",
       "problem_id": "P1659",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5083,8 +5083,8 @@
       "source_pdf_pages": [189],
       "platform": "HDU",
       "problem_id": "3294",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5097,8 +5097,8 @@
       "source_file": "lower-volume",
       "source_book_pages": [560],
       "source_pdf_pages": [190],
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5113,8 +5113,8 @@
       "source_pdf_pages": [190],
       "platform": "洛谷",
       "problem_id": "P2580",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5129,8 +5129,8 @@
       "source_pdf_pages": [192],
       "platform": "洛谷",
       "problem_id": "P3879",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5143,8 +5143,8 @@
       "source_file": "lower-volume",
       "source_book_pages": [567],
       "source_pdf_pages": [197],
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5159,8 +5159,8 @@
       "source_pdf_pages": [198],
       "platform": "洛谷",
       "problem_id": "P5496",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5175,8 +5175,8 @@
       "source_pdf_pages": [202, 203],
       "platform": "HDU",
       "problem_id": "2087",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5189,8 +5189,8 @@
       "source_file": "lower-volume",
       "source_book_pages": [574],
       "source_pdf_pages": [204],
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5203,8 +5203,8 @@
       "source_file": "lower-volume",
       "source_book_pages": [576],
       "source_pdf_pages": [206],
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5219,8 +5219,8 @@
       "source_pdf_pages": [206],
       "platform": "洛谷",
       "problem_id": "P5410",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5235,8 +5235,8 @@
       "source_pdf_pages": [206],
       "platform": "HDU",
       "problem_id": "1686",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5251,8 +5251,8 @@
       "source_pdf_pages": [206],
       "platform": "POJ",
       "problem_id": "1961",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5267,8 +5267,8 @@
       "source_pdf_pages": [209],
       "platform": "HDU",
       "problem_id": "2222",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5283,8 +5283,8 @@
       "source_pdf_pages": [211],
       "platform": "HDU",
       "problem_id": "2243",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5299,8 +5299,8 @@
       "source_pdf_pages": [217, 219],
       "platform": "HDU",
       "problem_id": "1403",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5315,8 +5315,8 @@
       "source_pdf_pages": [220],
       "platform": "HDU",
       "problem_id": "5769",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5331,8 +5331,8 @@
       "source_pdf_pages": [226],
       "platform": "HDU",
       "problem_id": "4622",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {
@@ -5347,8 +5347,8 @@
       "source_pdf_pages": [229],
       "platform": "洛谷",
       "problem_id": "P3804",
-      "learning_focus": ["BKDRHash", "應用", "暴力最長回文", "演算法", "模板", "建構"],
-      "summary": "重用前綴、後綴、回文或子字串等價資訊，避免重複比較字元。",
+      "learning_focus": ["BKDRHash", "應用", "暴力最長迴文", "演算法", "模板", "建構"],
+      "summary": "重用前綴、後綴、迴文或子字串等價資訊，避免重複比較字元。",
       "review_status": "verified-metadata"
     },
     {

@@ -51,7 +51,7 @@ hints:
 solution_outline: |-
   實作 FHQ Treap 的 split（依值切分）與 merge（依隨機優先度合併），每個節點維護子樹大小。六種操作分別由 split / merge 組合而成：插入夾入新節點、刪除切出等值段後移除一個、排名取左子樹大小加一、第 k 小依大小往下走、前驅與後繼各自切分後走到極端。
 proof_or_invariant: |-
-  兩個不變量同時維持：對值是二元搜尋樹（中序有序），對隨機優先度是堆。後者讓樹的形狀分布等同於隨機插入順序建出的 BST，期望高度 O(log n)。split 與 merge 都只沿一條根到葉的路徑遞迴，故單次操作期望 O(log n)。
+  兩個不變量同時維持：對值是二元搜尋樹（中序有序），對隨機優先度是堆。後者讓樹的形狀分佈等同於隨機插入順序建出的 BST，期望高度 O(log n)。split 與 merge 都只沿一條根到葉的路徑遞迴，故單次操作期望 O(log n)。
 complexity:
   time: '期望 O(log n)'
   space: 'O(n)'

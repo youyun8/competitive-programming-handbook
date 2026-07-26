@@ -5,7 +5,7 @@ source_file: lower-volume
 chapter: 9
 section: '9.7'
 title: 後綴陣列：把所有後綴排序後的強大工具
-summary: 以倍增法在 O(n log n) 內對所有後綴排序，配合 LCP 進行子串相關查询。
+summary: 以倍增法在 O(n log n) 內對所有後綴排序，配合 LCP 進行子串相關查詢。
 prerequisites: [strings, sorting]
 learning_goals:
   - 以倍增法建構後綴陣列

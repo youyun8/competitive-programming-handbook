@@ -78,7 +78,7 @@ long long count_ways(int steps) {
 
 ## 例題與分級練習
 
-從 Fibonacci、最小路徑和、0/1 背包開始，逐步練習增加維度與壓縮狀態。
+從 Fibonacci、最小路徑和、0/1 揹包開始，逐步練習增加維度與壓縮狀態。
 
 ## 本節重點速查
 

@@ -106,6 +106,6 @@ review_status: verified
 external_url: https://www.luogu.com.cn/problem/P2742
 external_platform: 洛谷
 external_problem_id: P2742
-external_title: 【模板】二维凸包
+external_title: 【模板】二維凸包
 external_relation: related
 ---

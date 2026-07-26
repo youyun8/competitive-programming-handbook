@@ -67,7 +67,26 @@ const pageTitle = title === homeLabel ? siteName : `${title}｜${siteName}`;
           aria-expanded="false">☰</button
         >
         <a class="brand" href={withBase('/')} aria-label={`${siteName}${homeLabel}`}>
-          <span class="brand-mark" aria-hidden="true">AC</span>
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" focusable="false">
+              <defs>
+                <linearGradient id="brand-gradient" x1="5" y1="4" x2="35" y2="36" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#0c7183"></stop>
+                  <stop offset="1" stop-color="#5147a8"></stop>
+                </linearGradient>
+              </defs>
+              <rect width="40" height="40" rx="11" fill="url(#brand-gradient)"></rect>
+              <path d="M7.5 29.5 13.7 11h4.6l6.1 18.5h-4.2l-1.2-4.1h-6.3l-1.2 4.1Zm6.5-7.3h4l-2-6.7Z" fill="#fff"
+              ></path>
+              <path
+                d="M32.8 12.6a7.9 7.9 0 1 0 0 14.8"
+                fill="none"
+                stroke="#9ee8dc"
+                stroke-linecap="round"
+                stroke-width="3"></path>
+              <circle cx="32.8" cy="12.6" r="2" fill="#ffd166"></circle>
+            </svg>
+          </span>
           <span>{siteName}</span>
         </a>
         <nav class="header-nav" aria-label="主要導覽">
@@ -85,7 +104,7 @@ const pageTitle = title === homeLabel ? siteName : `${title}｜${siteName}`;
         <a class="sidebar-link" href={withBase('/learn/')}>依先備關係學習</a>
         <a class="sidebar-link" href={withBase('/patterns/')}>跨章解題模式</a>
         <a class="sidebar-link" href={withBase('/glossary/')}>術語表</a>
-        <a class="sidebar-link" href={withBase('/problem-lists/')}>《算法竞赛》題單索引</a>
+        <a class="sidebar-link" href={withBase('/problem-lists/')}>《算法競賽》題單索引</a>
         <div class="sidebar-label">章節</div>
         {
           curriculum.chapters.map((chapter) => {
@@ -109,9 +128,6 @@ const pageTitle = title === homeLabel ? siteName : `${title}｜${siteName}`;
       </aside>
       <main class:list={['main-content', { reading: !wide }]} id="main" data-pagefind-body>
         <slot />
-        <footer class="footer">
-          <p><a href={withBase('/about/sources/')}>教材來源與頁碼對照</a></p>
-        </footer>
       </main>
     </div>
     <dialog id="search-dialog" aria-labelledby="search-title">

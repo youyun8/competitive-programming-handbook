@@ -4,8 +4,8 @@ volume: lower
 source_file: lower-volume
 chapter: 6
 section: '6.8'
-title: 擴展歐幾里得：求出 gcd 之外的係數
-summary: 在歐幾里得遞迴回代中求 ax + by = gcd(a,b)，並連到丟番圖方程與模反元素。
+title: 擴展歐幾裡得：求出 gcd 之外的係數
+summary: 在歐幾裡得遞迴回代中求 ax + by = gcd(a,b)，並連到丟番圖方程與模反元素。
 prerequisites: [gcd, recursion, congruence]
 learning_goals: [推導回代公式, 解二元丟番圖方程, 判斷模反元素是否存在]
 concepts: [bezout, diophantine-equation, modular-inverse]
@@ -64,7 +64,7 @@ long long extended_gcd(long long a, long long b, long long& x, long long& y) {
 
 ## 時間與空間複雜度
 
-與歐幾里得演算法相同，時間與遞迴空間皆為 $O(\log \min(a,b))$。
+與歐幾裡得演算法相同，時間與遞迴空間皆為 $O(\log \min(a,b))$。
 
 ## 常見錯誤與邊界條件
 

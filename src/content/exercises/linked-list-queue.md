@@ -65,6 +65,6 @@ review_status: verified
 external_url: https://www.luogu.com.cn/problem/P1996
 external_platform: 洛谷
 external_problem_id: P1996
-external_title: 约瑟夫问题
+external_title: 約瑟夫問題
 external_relation: related
 ---

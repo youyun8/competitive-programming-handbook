@@ -5,7 +5,7 @@ source_file: upper-volume
 chapter: 3
 section: '3.1'
 title: BFS 與 DFS：先決定搜尋順序
-summary: 以 frontier、visited 與不變量理解兩種基本圖搜尋，而不是只記遞迴模板。
+summary: 以 frontier、visited 與不變量理解兩種基本圖搜尋，而不是隻記遞迴模板。
 prerequisites: [queue, stack, graph-storage]
 learning_goals: [選擇 BFS 或 DFS, 正確標記 visited, 以 BFS 求無權最短路]
 concepts: [frontier, visited, connected-components, shortest-path]

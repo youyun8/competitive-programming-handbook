@@ -10,7 +10,7 @@ prerequisites: [offline-algorithms, sorting]
 learning_goals:
   - 實作基礎莫隊的塊排序與指標移動
   - 加入修改時間軸做帶修改莫隊
-  - 理解樹上莫隊的欧拉序轉換
+  - 理解樹上莫隊的歐拉序轉換
 concepts: [sqrt-decomposition, mo-algorithm, offline-query]
 complexity:
   time: O((n + q)√n)
@@ -135,8 +135,8 @@ private:
 
 ## 例題與分級練習
 
-先寫區間不同元素個數，再做帶修改莫隊（加入時間維度），最後挑戰樹上莫隊（用欧拉序攤平）。
+先寫區間不同元素個數，再做帶修改莫隊（加入時間維度），最後挑戰樹上莫隊（用歐拉序攤平）。
 
 ## 本節重點速查
 
-塊大小 $\sqrt{n}$ 最穩；排序後暴力移動指標；`add`/`remove` 必須可逆；樹上用欧拉序攤成陣列。
+塊大小 $\sqrt{n}$ 最穩；排序後暴力移動指標；`add`/`remove` 必須可逆；樹上用歐拉序攤成陣列。

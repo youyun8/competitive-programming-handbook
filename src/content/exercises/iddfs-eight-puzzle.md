@@ -109,6 +109,6 @@ review_status: verified
 external_url: https://www.luogu.com.cn/problem/P1379
 external_platform: 洛谷
 external_problem_id: P1379
-external_title: 八數码难题
+external_title: 八數碼難題
 external_relation: related
 ---

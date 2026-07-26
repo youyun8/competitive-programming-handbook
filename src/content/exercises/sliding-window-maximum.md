@@ -60,6 +60,6 @@ review_status: verified
 external_url: https://www.luogu.com.cn/problem/P1886
 external_platform: 洛谷
 external_problem_id: P1886
-external_title: 滑動窗口 / 單调佇列
+external_title: 滑動窗口 / 單調佇列
 external_relation: related
 ---

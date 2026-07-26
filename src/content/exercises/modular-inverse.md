@@ -27,10 +27,10 @@ samples:
       4
     explanation: 3 * 4 = 12 ≡ 1 (mod 11)。
 hints:
-  - 使用擴展歐幾里得求 ax + by = gcd(a,mod) 的解。
+  - 使用擴展歐幾裡得求 ax + by = gcd(a,mod) 的解。
   - 若 mod 為質數，也可用快速冪計算 a^(mod-2) mod mod。
-solution_outline: 擴展歐幾里得求出 x 使得 ax + mod*y = 1，則 x mod mod 即為反元素。
-proof_or_invariant: 根據裴蜀定理，反元素存在當且僅當 gcd(a, mod) = 1。擴展歐幾里得給出 Bézout 係數。
+solution_outline: 擴展歐幾裡得求出 x 使得 ax + mod*y = 1，則 x mod mod 即為反元素。
+proof_or_invariant: 根據裴蜀定理，反元素存在當且僅當 gcd(a, mod) = 1。擴展歐幾裡得給出 Bézout 係數。
 complexity:
   time: O(log mod)
   space: O(log mod)

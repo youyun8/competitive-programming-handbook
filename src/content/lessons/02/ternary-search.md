@@ -87,7 +87,7 @@ int ternary_search_int(int left, int right, std::function<int(int)> evaluate) {
 
 - 整數三分中 m1 與 m2 可能相等，導致死迴圈；可加上 right - left > 2 的終止條件。
 - 浮點三分若以 `fabs(right - left) < eps` 終止，eps 選太小可能會多繞很多圈；通常固定迭代 80~100 次更安全。
-- 函數並非嚴格單峰（有平台區），三分法仍可能正確，但需在最後小區間完整檢查。
+- 函數並非嚴格單峰（有平臺區），三分法仍可能正確，但需在最後小區間完整檢查。
 
 ## 與相似技巧的比較
 

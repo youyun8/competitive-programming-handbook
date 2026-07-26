@@ -107,9 +107,9 @@ export const chapterExerciseSolutions: Record<string, ExerciseSolution> = {
     correctness: '較小尾值至少保有原尾值的所有延伸可能；tails 的長度只在確實找到更長遞增子序列時增加。',
     complexity: '時間 O(n log n)，空間 O(n)。'
   },
-  '0/1與完全背包': {
+  '0/1與完全揹包': {
     approach:
-      '令 dp[c] 為容量 c 的最佳值。0/1 背包容量由大到小更新，避免同一物品重用；完全背包由小到大更新，允許本輪新狀態再次使用該物品。',
+      '令 dp[c] 為容量 c 的最佳值。0/1 揹包容量由大到小更新，避免同一物品重用；完全揹包由小到大更新，允許本輪新狀態再次使用該物品。',
     correctness: '更新方向控制轉移依賴的是上一輪還是本輪狀態，分別精確對應每件最多一次與可用任意次。',
     complexity: '時間 O(nC)，空間 O(C)。'
   },
@@ -122,8 +122,8 @@ export const chapterExerciseSolutions: Record<string, ExerciseSolution> = {
   },
   樹上選點: {
     approach:
-      '把樹定根，令 dp[u][k] 為 u 子樹選 k 點的最佳值。DFS 回程時逐個合併兒子的背包，枚舉目前已選數與兒子貢獻數。',
-    correctness: '不同兒子子樹互不相交；固定總選點數時，所有分配方式都會在背包合併中被枚舉。',
+      '把樹定根，令 dp[u][k] 為 u 子樹選 k 點的最佳值。DFS 回程時逐個合併兒子的揹包，枚舉目前已選數與兒子貢獻數。',
+    correctness: '不同兒子子樹互不相交；固定總選點數時，所有分配方式都會在揹包合併中被枚舉。',
     complexity: '典型為 O(nK²)，空間 O(nK)，可依子樹大小縮小迴圈。'
   },
   模快速冪: {
@@ -231,7 +231,7 @@ export const chapterExerciseSolutions: Record<string, ExerciseSolution> = {
   單源最短路: {
     approach:
       '先依邊權選演算法：全為 1 用 BFS、只有 0/1 用 deque、非負權用 Dijkstra、可能有負權則用 Bellman-Ford 或其他具相應保證的方法。',
-    correctness: '核心是只在演算法的定案前提成立時鎖定距離；所有方法都以鬆弛維持 dist[v] 是目前已知路徑的最小成本。',
+    correctness: '核心是隻在演算法的定案前提成立時鎖定距離；所有方法都以鬆弛維持 dist[v] 是目前已知路徑的最小成本。',
     complexity: 'BFS/0-1 BFS 為 O(V+E)；二元堆 Dijkstra 為 O((V+E) log V)。'
   },
   橋與割點: {

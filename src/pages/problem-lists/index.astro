@@ -3,11 +3,11 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { problemChapters, problemListCounts, problemListPlatforms, problemListSource } from '@/lib/problem-list';
 ---
 
-<BaseLayout title="《算法竞赛》題單索引" wide>
+<BaseLayout title="《算法競賽》題單索引" wide>
   <p class="eyebrow">Problem list</p>
-  <h1>《算法竞赛》題單索引</h1>
+  <h1>《算法競賽》題單索引</h1>
   <p class="lede">
-    罗勇军《算法竞赛》配套題單的完整索引，共 {problemListCounts.rows} 筆條目、{problemListCounts.unique_problems} 道不重複題目，
+    羅勇軍《算法競賽》配套題單的完整索引，共 {problemListCounts.rows} 筆條目、{problemListCounts.unique_problems} 道不重複題目，
     涵蓋 {problemListCounts.chapters} 章 {problemListCounts.sections} 個小節，其中例題 {problemListCounts.examples} 題、習題
     {problemListCounts.practice} 題。
   </p>
@@ -56,7 +56,7 @@ import { problemChapters, problemListCounts, problemListPlatforms, problemListSo
       </select>
     </div>
     <div class="field">
-      <label for="problem-platform">平台</label>
+      <label for="problem-platform">平臺</label>
       <select id="problem-platform">
         <option value="">全部</option>
         {problemListPlatforms.map((platform) => <option value={platform}>{platform}</option>)}

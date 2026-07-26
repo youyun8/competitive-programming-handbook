@@ -901,7 +901,7 @@ int main() {
     return 0;
 }
 `,
-  '0/1與完全背包': String.raw`#include <bits/stdc++.h>
+  '0/1與完全揹包': String.raw`#include <bits/stdc++.h>
 using namespace std;
 
 long long zero_one_knapsack(const vector<int>& weights,

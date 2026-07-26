@@ -53,7 +53,7 @@ export const chapterWorkshops: Record<number, ChapterWorkshop> = {
         sourcePdfPages: [28, 30],
         setup: '窗口由左向右移動，每一步都要輸出窗口內最小值與最大值。',
         reasoning: [
-          '佇列中保存索引而不是只有數值，才能判斷隊首是否已離開窗口。',
+          '佇列中保存索引而不是隻有數值，才能判斷隊首是否已離開窗口。',
           '維護最小值時，從隊尾刪掉不小於新值的索引；它們更舊且更差，以後不可能成為答案。',
           '每個索引最多入隊一次、出隊一次，因此總成本是線性。最大值只需反轉比較方向。'
         ],
@@ -162,10 +162,10 @@ export const chapterWorkshops: Record<number, ChapterWorkshop> = {
         setup: '在有限排列狀態中，以固定規則移動空位，求到目標排列的最少步數。',
         reasoning: [
           '把圓形位置線性編碼成字串，讓狀態可直接放入集合。',
-          '若不判重，分支數會指數成長；判重後最多只展開所有排列狀態。',
+          '若不判重，分支數會指數成長；判重後最多隻展開所有排列狀態。',
           '狀態在入隊時立即標記，確保同一排列只入隊一次，第一次到達目標即為最短。'
         ],
-        takeaway: '先估算「不同狀態數」而不是只看樹的分支數，常能找到可行的判重表示。'
+        takeaway: '先估算「不同狀態數」而不是隻看樹的分支數，常能找到可行的判重表示。'
       },
       {
         title: '數獨的動態選點剪枝',
@@ -224,7 +224,7 @@ export const chapterWorkshops: Record<number, ChapterWorkshop> = {
         sourcePdfPages: [181],
         setup: '支援區間加值與單點查詢。',
         reasoning: [
-          '把原陣列改看成差分陣列，區間 [l,r] 加 d 只影響 l 與 r+1。',
+          '把原陣列改看成差分陣列，區間 [l,r] 加 d 隻影響 l 與 r+1。',
           'Fenwick Tree 維護差分的前綴和，查詢位置 x 即得到所有覆蓋 x 的修改總和。',
           '每次更新與查詢都是 O(log n)，且只需線性空間。'
         ],
@@ -235,9 +235,9 @@ export const chapterWorkshops: Record<number, ChapterWorkshop> = {
         sourceLabel: '例 4.12',
         sourceBookPages: [184],
         sourcePdfPages: [202],
-        setup: '維護花瓶區間的占用狀態，支援區間清空與從指定位置開始放入若干物品。',
+        setup: '維護花瓶區間的佔用狀態，支援區間清空與從指定位置開始放入若干物品。',
         reasoning: [
-          '節點摘要保存區間內已占用數量，便能判斷區間是否仍有空位。',
+          '節點摘要保存區間內已佔用數量，便能判斷區間是否仍有空位。',
           '沿樹下降時優先查看左子樹，利用摘要找到第一個或第 k 個空位。',
           '區間設為全空或全滿使用 lazy assignment，標記合成要覆蓋舊標記而不是相加。'
         ],
@@ -275,13 +275,13 @@ export const chapterWorkshops: Record<number, ChapterWorkshop> = {
     overview:
       '動態規劃把大量方案壓縮成有限狀態。深入學習時要反覆檢查五件事：狀態語意、轉移來源、基底、計算順序、答案位置；優化則是在不破壞語意下減少狀態或轉移。',
     connections: [
-      '背包的原地更新方向其實是在控制同一物品能被使用一次、無限次或有限次。',
+      '揹包的原地更新方向其實是在控制同一物品能被使用一次、無限次或有限次。',
       '數位 DP 的 tight、started 與前綴資訊，是把「不超過上界」這個全域限制局部化。',
       '單調佇列、凸殼與四邊形不等式優化，分別利用窗口、代數幾何與最佳決策單調性減少轉移。'
     ],
     examples: [
       {
-        title: '0/1 背包的狀態壓縮',
+        title: '0/1 揹包的狀態壓縮',
         sourceLabel: '例 5.1',
         sourceBookPages: [319, 322],
         sourcePdfPages: [337, 340],
@@ -316,7 +316,7 @@ export const chapterWorkshops: Record<number, ChapterWorkshop> = {
       },
       {
         level: '基礎',
-        title: '0/1 與完全背包',
+        title: '0/1 與完全揹包',
         prompt: '比較兩者的一維更新方向並解釋原因。',
         focus: '依賴順序'
       },
@@ -325,7 +325,7 @@ export const chapterWorkshops: Record<number, ChapterWorkshop> = {
         level: '挑戰',
         title: '樹上選點',
         prompt: '在父子限制下選固定數量節點最大化價值。',
-        focus: '樹形背包'
+        focus: '樹形揹包'
       }
     ]
   },
@@ -408,7 +408,7 @@ export const chapterWorkshops: Record<number, ChapterWorkshop> = {
         sourcePdfPages: [106, 108],
         setup: '四種硬幣面額固定，每次查詢限制各種硬幣數量，詢問湊成指定金額的方法數。',
         reasoning: [
-          '先用完全背包預處理不設上限時的方案數。',
+          '先用完全揹包預處理不設上限時的方案數。',
           '某種硬幣超過上限可轉成「先強制使用上限加一枚，再湊剩餘金額」。',
           '枚舉違反上限的硬幣子集合，以容斥交替加減，四種硬幣只需 16 個子集合。'
         ],
@@ -510,11 +510,11 @@ export const chapterWorkshops: Record<number, ChapterWorkshop> = {
   },
   9: {
     overview:
-      '字串演算法的共同目標是重用前綴、後綴或回文資訊。不同結構的差別在於狀態代表單一前綴長度、共享前綴樹、回文後綴鏈，還是整個子字串等價類。',
+      '字串演算法的共同目標是重用前綴、後綴或迴文資訊。不同結構的差別在於狀態代表單一前綴長度、共享前綴樹、迴文後綴鏈，還是整個子字串等價類。',
     connections: [
       'rolling hash 用數值摘要比較子串，KMP 與 Z-function 用確定性邊界資訊比較前後綴。',
       'Trie 與 AC 自動機共享前綴；AC 再加入失配邊，讓多模式匹配不必回退文本位置。',
-      '回文樹按不同回文建狀態，後綴自動機按 endpos 等價類建狀態，兩者都在線擴充字串。'
+      '迴文樹按不同迴文建狀態，後綴自動機按 endpos 等價類建狀態，兩者都在線擴充字串。'
     ],
     examples: [
       {
@@ -531,14 +531,14 @@ export const chapterWorkshops: Record<number, ChapterWorkshop> = {
         takeaway: '同一題可用摘要或結構性邊界資訊；能用確定性線性演算法時通常優先。'
       },
       {
-        title: 'Manacher 的最右回文不變量',
+        title: 'Manacher 的最右迴文不變量',
         sourceLabel: '例 9.4',
         sourceBookPages: [557, 558],
         sourcePdfPages: [187, 188],
-        setup: '在線性時間求最長回文子串。',
+        setup: '在線性時間求最長迴文子串。',
         reasoning: [
-          '插入分隔符統一奇偶長度回文，並用哨兵避免越界。',
-          '維持目前右端最遠的回文中心 C 與右界 R；R 內位置先利用鏡像半徑初始化。',
+          '插入分隔符統一奇偶長度迴文，並用哨兵避免越界。',
+          '維持目前右端最遠的迴文中心 C 與右界 R；R 內位置先利用鏡像半徑初始化。',
           '只有超出既知右界的部分需要新比較，而 R 在整體過程只向右移，因此總成本線性。'
         ],
         takeaway: '線性複雜度不是因為沒有 while，而是所有 while 的成功擴張總次數受 R 單調移動限制。'

@@ -124,7 +124,7 @@ RLS 測試建立 user A 與 user B，證明 user A 看不到或改不到 user B 
 2. Supabase project、region、GitHub OAuth callback domain。
 3. Pages URL 與可選 custom domain，供 `ALLOWED_ORIGINS` 精確列入 CORS。
 
-Supabase migration／Functions 需獨立部署，不能由 GitHub Pages 代替。Fork PR 不取得正式 secrets；後端部署應使用 protected environment 與人工核准。
+Supabase migration／Functions 需獨立部署，不能由 GitHub Pages 代替。Fork PR 不取得正式 secrets；後端部署應使用 protected environment 與人工核準。
 
 ## 備份與復原
 
