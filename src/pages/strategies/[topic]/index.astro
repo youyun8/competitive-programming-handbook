@@ -1,4 +1,5 @@
 ---
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import BeginnerRecap from '@/components/strategies/BeginnerRecap.astro';
 import StrategyNav from '@/components/strategies/StrategyNav.astro';
 import StrategyProgress from '@/components/strategies/StrategyProgress';
@@ -21,9 +22,7 @@ const problems = strategyProblemsForTopic(topic.id);
 <BaseLayout title={`${topic.name}｜策略圖鑑`} description={topic.homeDescription}>
   <StrategyNav slot="sidebar" topic={topic} current="index" />
 
-  <p class="eyebrow">
-    <a href={withBase('/strategies/')}>策略圖鑑</a>
-  </p>
+  <Breadcrumb items={[{ label: '策略圖鑑', href: withBase('/strategies/') }]} current={topic.name} />
   <h1>{topic.icon} {topic.name}</h1>
   <p class="lede">{topic.tagline}</p>
 

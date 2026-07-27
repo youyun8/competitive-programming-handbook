@@ -1,0 +1,26 @@
+---
+import type { Crumb } from '@/lib/navigation';
+import { overviewLink } from '@/lib/navigation';
+
+interface Props {
+  /** 不含「總覽」與目前頁面標題的中間層級。 */
+  items?: Crumb[];
+  /** 目前頁面，顯示為最後一段純文字。 */
+  current: string;
+}
+
+const { items = [], current } = Astro.props;
+const trail: Crumb[] = [{ label: overviewLink.label, href: overviewLink.href }, ...items];
+---
+
+<nav class="breadcrumb" aria-label="麵包屑">
+  {
+    trail.map((crumb) => (
+      <>
+        {crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span>{crumb.label}</span>}
+        <span aria-hidden="true">/</span>
+      </>
+    ))
+  }
+  <span aria-current="page">{current}</span>
+</nav>

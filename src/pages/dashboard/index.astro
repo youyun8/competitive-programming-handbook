@@ -1,10 +1,12 @@
 ---
 import AccountPanel from '@/components/auth/AccountPanel';
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<BaseLayout title="Dashboard" wide>
+<BaseLayout title="學習儀表板" wide>
+  <Breadcrumb current="學習儀表板" />
   <p class="eyebrow">Dashboard</p>
   <h1>你的學習摘要</h1>
   <AccountPanel client:load basePath={basePath} />

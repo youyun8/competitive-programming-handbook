@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { Code } from 'astro:components';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import ChapterProblemList from '@/components/problems/ChapterProblemList.astro';
 import { chapterWorkshops } from '@/lib/chapter-workshops';
 import { chapterExamples } from '@/lib/chapter-examples';
@@ -17,6 +18,9 @@ export function getStaticPaths() {
 }
 
 const { chapter } = Astro.props;
+const chapterIndex = curriculum.chapters.findIndex((item) => item.chapter === chapter.chapter);
+const previousChapter = curriculum.chapters[chapterIndex - 1];
+const nextChapter = curriculum.chapters[chapterIndex + 1];
 const lessons = await getCollection('lessons');
 const exercises = await getCollection('exercises');
 const workshop = chapterWorkshops[chapter.chapter]!;
@@ -25,11 +29,15 @@ const problemEntries = problemEntriesForChapter(chapter.chapter);
 ---
 
 <BaseLayout title={`第 ${chapter.chapter} 章 ${chapter.title}`} wide>
-  <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>總覽</a><span aria-hidden="true">/</span><a href={withBase(`/volumes/${chapter.volume}/`)}
-      >{chapter.volume === 'upper' ? '上冊' : '下冊'}</a
-    ><span aria-hidden="true">/</span><span>第 {chapter.chapter} 章</span>
-  </nav>
+  <Breadcrumb
+    items={[
+      {
+        label: chapter.volume === 'upper' ? '上冊' : '下冊',
+        href: withBase(`/volumes/${chapter.volume}/`)
+      }
+    ]}
+    current={`第 ${chapter.chapter} 章 ${chapter.title}`}
+  />
   <p class="eyebrow">{chapter.volume === 'upper' ? '上冊' : '下冊'} · Chapter {chapter.chapter}</p>
   <h1>{chapter.title}</h1>
   <p class="lede">
@@ -120,4 +128,28 @@ const problemEntries = problemEntriesForChapter(chapter.chapter);
     </div>
   </section>
   <ChapterProblemList entries={problemEntries} />
+  <nav class="page-actions" aria-label="前後章節">
+    {
+      previousChapter ? (
+        <a class="button secondary" href={withBase(`/chapters/${previousChapter.chapter}/`)}>
+          ← 第 {previousChapter.chapter} 章 {previousChapter.title}
+        </a>
+      ) : (
+        <a class="button secondary" href={withBase(`/volumes/${chapter.volume}/`)}>
+          ← {chapter.volume === 'upper' ? '上冊' : '下冊'}總覽
+        </a>
+      )
+    }
+    {
+      nextChapter ? (
+        <a class="button secondary" href={withBase(`/chapters/${nextChapter.chapter}/`)}>
+          第 {nextChapter.chapter} 章 {nextChapter.title} →
+        </a>
+      ) : (
+        <a class="button secondary" href={withBase('/appendix/')}>
+          附錄 A：C++ 競賽工程技巧 →
+        </a>
+      )
+    }
+  </nav>
 </BaseLayout>

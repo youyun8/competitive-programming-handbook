@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { withBase } from '@/lib/site';
 
@@ -49,6 +50,7 @@ const cards: GlossaryCard[] = [
 ---
 
 <BaseLayout title="術語表" wide>
+  <Breadcrumb current="術語表" />
   <p class="eyebrow">Glossary</p>
   <h1>簡體／繁體／英文術語對照</h1>
   <div class="field" style="max-width:30rem">

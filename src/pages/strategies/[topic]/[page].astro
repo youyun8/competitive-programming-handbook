@@ -1,4 +1,5 @@
 ---
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import BeginnerGuide from '@/components/strategies/BeginnerGuide.astro';
 import BeginnerRecap from '@/components/strategies/BeginnerRecap.astro';
 import StrategyNav from '@/components/strategies/StrategyNav.astro';
@@ -23,9 +24,13 @@ const { previous, next } = siblingPages(topic, page.id);
 <BaseLayout title={`${page.title}｜${topic.name}`} description={page.desc ?? topic.homeDescription}>
   <StrategyNav slot="sidebar" topic={topic} current={page.id} />
 
-  <p class="eyebrow">
-    <a href={withBase('/strategies/')}>策略圖鑑</a> ／ <a href={withBase(`/strategies/${topic.id}/`)}>{topic.name}</a>
-  </p>
+  <Breadcrumb
+    items={[
+      { label: '策略圖鑑', href: withBase('/strategies/') },
+      { label: topic.name, href: withBase(`/strategies/${topic.id}/`) }
+    ]}
+    current={page.nav ?? page.title}
+  />
 
   <BeginnerGuide topic={topic} page={page} />
 

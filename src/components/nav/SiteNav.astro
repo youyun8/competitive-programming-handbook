@@ -1,0 +1,143 @@
+---
+import {
+  isCurrent,
+  isVolumeOpen,
+  siteNav,
+  strategyAtlasLink,
+  textbookContext,
+  textbookNav,
+  type NavLink,
+  type TextbookChapterNav
+} from '@/lib/navigation';
+import { stripBase } from '@/lib/site';
+
+interface Props {
+  currentPath: string;
+  /** `/lessons/topic/<id>/` 這類看不出小節的路由，由頁面補上目前位置。 */
+  activeChapter?: number;
+  activeSection?: string;
+  /** 頁面是否提供了次級導覽（策略圖鑑的主題導覽）。 */
+  hasContextNav?: boolean;
+}
+
+const { currentPath, activeChapter, activeSection, hasContextNav = false } = Astro.props;
+const context = textbookContext(currentPath, { chapter: activeChapter, sectionId: activeSection });
+const path = stripBase(currentPath);
+
+function linkState(link: NavLink) {
+  const target = stripBase(link.href);
+  if (path === target) return 'page' as const;
+  return isCurrent(link, currentPath) ? ('trail' as const) : undefined;
+}
+
+function hrefState(href: string) {
+  return path === stripBase(href) ? ('page' as const) : undefined;
+}
+
+function chapterState(chapter: TextbookChapterNav) {
+  if (path === stripBase(chapter.href)) return 'page' as const;
+  return context.chapter === chapter.chapter ? ('trail' as const) : undefined;
+}
+
+function chapterRange(chapters: TextbookChapterNav[]) {
+  const first = chapters[0]?.chapter;
+  const last = chapters[chapters.length - 1]?.chapter;
+  return first === undefined || last === undefined ? '' : `第 ${first}–${last} 章`;
+}
+---
+
+<nav class="site-nav" aria-label="網站導覽">
+  {
+    siteNav.map((section) =>
+      section.kind === 'textbook' ? (
+        <>
+          <div class="sidebar-label">{section.label}</div>
+          {textbookNav.map((volume) => (
+            <details class="nav-volume" open={!hasContextNav && isVolumeOpen(context, volume.volume)}>
+              <summary class="nav-volume-summary">
+                <span>{volume.label}</span>
+                <span class="nav-volume-range">{chapterRange(volume.chapters)}</span>
+              </summary>
+              <a class="sidebar-link sidebar-link-overview" href={volume.href} aria-current={hrefState(volume.href)}>
+                {volume.label}總覽
+              </a>
+              {volume.chapters.map((chapter) => (
+                <>
+                  <a
+                    class="sidebar-link"
+                    href={chapter.href}
+                    data-state={chapterState(chapter)}
+                    aria-current={chapterState(chapter) === 'page' ? 'page' : undefined}
+                  >
+                    {chapter.chapter}. {chapter.title}
+                  </a>
+                  {context.chapter === chapter.chapter && (
+                    <ul class="nav-sections">
+                      {chapter.sections.map((section) => (
+                        <li>
+                          <a
+                            class="sidebar-link sidebar-sublink"
+                            href={section.href}
+                            aria-current={context.sectionId === section.id ? 'page' : undefined}
+                          >
+                            <span class="nav-section-id">{section.id}</span>
+                            {section.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </>
+              ))}
+              {volume.appendix && (
+                <a class="sidebar-link" href={volume.appendix.href} aria-current={hrefState(volume.appendix.href)}>
+                  {volume.appendix.label}
+                </a>
+              )}
+            </details>
+          ))}
+        </>
+      ) : (
+        <>
+          <div class="sidebar-label">{section.label}</div>
+          {section.items.map((item) => {
+            const state = linkState(item);
+            const isAtlas = item.href === strategyAtlasLink.href;
+            return (
+              <>
+                <a
+                  class="sidebar-link"
+                  href={item.href}
+                  data-state={state}
+                  aria-current={state === 'page' ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+                {isAtlas && hasContextNav && <slot name="context" />}
+                {item.children && !(isAtlas && hasContextNav) && (
+                  <ul class="nav-sections">
+                    {item.children.map((child) => {
+                      const childState = linkState(child);
+                      return (
+                        <li>
+                          <a
+                            class="sidebar-link sidebar-sublink"
+                            href={child.href}
+                            data-state={childState}
+                            aria-current={childState === 'page' ? 'page' : undefined}
+                          >
+                            {child.label}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </>
+            );
+          })}
+        </>
+      )
+    )
+  }
+</nav>

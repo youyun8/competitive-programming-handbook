@@ -1,4 +1,10 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+// 900px 以下側欄是收起來的抽屜，連結雖然存在但落在畫面外，要先按漢堡鈕。
+async function openSidebarOnMobile(page: Page) {
+  const menu = page.getByRole('button', { name: '開啟導覽' });
+  if (await menu.isVisible()) await menu.click();
+}
 
 test('home, chapter, lesson, visualizer, and progress work under project base path', async ({ page }) => {
   await page.goto('./');
@@ -18,6 +24,45 @@ test('every curriculum section has a published guide instead of an expansion pla
   await expect(page.getByRole('heading', { name: '鏈結串列：用指標串起連續邏輯' })).toBeVisible();
   await expect(page.getByRole('heading', { name: '不變量或正確性證明' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'C++17 模板' })).toBeVisible();
+});
+
+test('the sidebar exposes the whole site hierarchy and marks where the reader is', async ({ page }) => {
+  await page.goto('./chapters/2/');
+  await openSidebarOnMobile(page);
+  const sidebar = page.locator('.site-sidebar');
+
+  // 目前章節標成 page，並就地展開這一章的小節。
+  await expect(sidebar.locator('.sidebar-link[aria-current="page"]')).toHaveText('2. 基本演算法');
+  const binarySearch = sidebar.locator('.sidebar-sublink', { hasText: '二分法' });
+  await expect(binarySearch).toBeVisible();
+  // 上冊展開、下冊收起；下冊的章節要展開 details 才看得到。
+  await expect(sidebar.getByRole('link', { name: '10. 圖論' })).toBeHidden();
+  await sidebar.locator('.nav-volume-summary', { hasText: '下冊' }).click();
+  await expect(sidebar.getByRole('link', { name: '10. 圖論' })).toBeVisible();
+
+  // 每一條主線在側欄都有入口，行動版也一樣（header 的桌機連結會被藏起來）。
+  for (const name of ['學習路線', '策略圖鑑', '跨章解題模式', '題庫', '題單索引', '教材題單', '策略題單', '術語表']) {
+    await expect(sidebar.getByRole('link', { name, exact: true })).toBeVisible();
+  }
+
+  // 進到小節後，章節仍在路徑上，目前位置換成小節本身。
+  await binarySearch.click();
+  await openSidebarOnMobile(page);
+  await expect(page.locator('.site-sidebar .sidebar-link[aria-current="page"]')).toContainText('二分法');
+  await expect(page.locator('.site-sidebar .sidebar-link[data-state="trail"]')).toHaveText('2. 基本演算法');
+  await expect(page.locator('.breadcrumb')).toContainText('第 2 章 基本演算法');
+});
+
+test('the problem list hub routes to the textbook list, the strategy list, and the practice library', async ({
+  page
+}) => {
+  await page.goto('./problem-lists/');
+  await expect(page.getByRole('heading', { name: '題單索引', level: 1 })).toBeVisible();
+  await page.getByRole('link', { name: '開啟教材題單 →' }).click();
+  await expect(page.getByRole('heading', { name: '教材題單', level: 1 })).toBeVisible();
+  await page.locator('.breadcrumb').getByRole('link', { name: '題單索引' }).click();
+  await page.getByRole('link', { name: '開啟策略題單 →' }).click();
+  await expect(page.getByRole('heading', { name: '策略題單', level: 1 })).toBeVisible();
 });
 
 test('practice cards, external links, hints, solution, and progress status', async ({ page }) => {

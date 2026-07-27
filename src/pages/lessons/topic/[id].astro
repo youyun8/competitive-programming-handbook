@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import AlgorithmVisualizer from '@/components/visualizers/AlgorithmVisualizer';
 import ProgressActions from '@/components/progress/ProgressActions';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -19,21 +20,23 @@ const chapter = chapterByNumber(lesson.data.chapter);
 const section = sectionById(lesson.data.section);
 ---
 
-<BaseLayout title={lesson.data.title}>
-  <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>總覽</a><span aria-hidden="true">/</span><a
-      href={withBase(`/chapters/${lesson.data.chapter}/`)}>第 {lesson.data.chapter} 章</a
-    >{
-      section && (
-        <>
-          <span aria-hidden="true">/</span>
-          <a href={withBase(`/lessons/${sectionSlug(section)}/`)}>
-            {section.id} {section.title}
-          </a>
-        </>
-      )
-    }<span aria-hidden="true">/</span><span>{lesson.data.title}</span>
-  </nav>
+<BaseLayout title={lesson.data.title} activeChapter={lesson.data.chapter} activeSection={lesson.data.section}>
+  <Breadcrumb
+    items={[
+      {
+        label: lesson.data.volume === 'upper' ? '上冊' : '下冊',
+        href: withBase(`/volumes/${lesson.data.volume}/`)
+      },
+      {
+        label: `第 ${lesson.data.chapter} 章${chapter ? ` ${chapter.title}` : ''}`,
+        href: withBase(`/chapters/${lesson.data.chapter}/`)
+      },
+      ...(section
+        ? [{ label: `${section.id} ${section.title}`, href: withBase(`/lessons/${sectionSlug(section)}/`) }]
+        : [])
+    ]}
+    current={lesson.data.title}
+  />
   <p class="eyebrow">Lesson {lesson.data.section}</p>
   <h1>{lesson.data.title}</h1>
   <p class="lede">{lesson.data.summary}</p>

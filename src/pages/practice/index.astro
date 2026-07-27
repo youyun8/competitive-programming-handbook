@@ -2,16 +2,22 @@
 import { getCollection } from 'astro:content';
 import ExerciseNotes from '@/components/progress/ExerciseNotes';
 import ExerciseStatusControl from '@/components/progress/ExerciseStatusControl';
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { withBase } from '@/lib/site';
 
 const exercises = await getCollection('exercises', ({ data }) => data.review_status === 'verified');
 ---
 
-<BaseLayout title="完整題庫" wide>
+<BaseLayout title="題庫" wide>
+  <Breadcrumb current="題庫" />
   <p class="eyebrow">Practice</p>
-  <h1>完整題庫</h1>
-  <p class="lede">依章節與難度練習核心技巧，並記錄解題狀態、思路與完整解答。</p>
+  <h1>題庫</h1>
+  <p class="lede">
+    依章節與難度練習核心技巧，並記錄解題狀態、思路與完整解答。想找教材或策略的外部題目，看<a
+      href={withBase('/problem-lists/')}>題單索引</a
+    >。
+  </p>
   <div class="filter-bar">
     <div class="field">
       <label for="exercise-search">搜尋</label>

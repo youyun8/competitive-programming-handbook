@@ -51,6 +51,30 @@ pnpm build
 pnpm test:e2e
 ```
 
+## 網站架構
+
+站台分成「讀、查、練」三條主線，加上帳戶；三者共用同一份練習進度：
+
+```
+/                          總覽：三種用法、上下冊地圖、策略主題、推薦起點
+├─ 讀 /learn/              學習路線（依先備關係）
+│   └─ /volumes/{upper,lower}/ → /chapters/<1-10>/ → /lessons/<section>/
+│                               └─ /lessons/topic/<id>/（同一節的其他深度教學）
+│      /appendix/          附錄 A：C++ 競賽工程技巧（掛在下冊）
+├─ 查 /strategies/         策略圖鑑 → /strategies/<topic>/ → /strategies/<topic>/<page>/
+│      /patterns/          跨章解題模式
+│      /glossary/          術語表
+├─ 練 /practice/           題庫（本站題目卡）→ /practice/<id>/
+│      /problem-lists/     題單索引 hub
+│        ├─ /problem-lists/textbook/    教材題單（依章節小節）
+│        └─ /problem-lists/strategies/  策略題單（依手法、難度、標籤）
+└─ 帳戶 /dashboard/、/profile/、/auth/*
+```
+
+導覽只有一份真實來源：`src/lib/navigation.ts` 定義側欄分組、header 連結、上下冊章節樹與「目前位置」判斷；`src/components/nav/SiteNav.astro` 依它渲染側欄，`Breadcrumb.astro` 渲染麵包屑。新增頁面時在 `navigation.ts` 補一筆，header、側欄與 `tests/unit/navigation.test.ts` 的路由存在性檢查都會跟著更新。
+
+側欄依所在位置展開：目前那一冊會打開，目前章節就地列出所有小節並標出正在讀的那一節；策略圖鑑的頁面則把主題導覽（`StrategyNav`）掛進「解題策略」分組，同時把教材冊別收起來。路徑看不出位置的路由（`/lessons/topic/<id>/`、`/practice/<id>/`）由頁面用 `activeChapter`／`activeSection` 告訴 layout。
+
 ## 內容結構
 
 網站有兩套互補的索引方式，兩者共用同一份練習進度：

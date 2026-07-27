@@ -3,8 +3,10 @@ import { Code } from 'astro:components';
 import { getCollection, render } from 'astro:content';
 import ExerciseNotes from '@/components/progress/ExerciseNotes';
 import ExerciseStatusControl from '@/components/progress/ExerciseStatusControl';
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { hintStageLabels, threeStageHints } from '@/lib/exercise-content';
+import { practiceLink } from '@/lib/navigation';
 import { withBase } from '@/lib/site';
 
 export async function getStaticPaths() {
@@ -17,12 +19,14 @@ const { Content } = await render(exercise);
 const hints = threeStageHints(exercise.data.hints);
 ---
 
-<BaseLayout title={exercise.data.title} wide>
-  <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>總覽</a><span aria-hidden="true">/</span><a href={withBase('/practice/')}>題庫</a><span
-      aria-hidden="true">/</span
-    ><span>{exercise.data.title}</span>
-  </nav>
+<BaseLayout title={exercise.data.title} wide activeChapter={exercise.data.chapter}>
+  <Breadcrumb
+    items={[
+      { label: practiceLink.label, href: practiceLink.href },
+      { label: `第 ${exercise.data.chapter} 章`, href: withBase(`/chapters/${exercise.data.chapter}/`) }
+    ]}
+    current={exercise.data.title}
+  />
   <p class="eyebrow">第 {exercise.data.chapter} 章 · 難度 {exercise.data.difficulty}</p>
   <h1>{exercise.data.title}</h1>
   {
