@@ -8,22 +8,29 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 <BaseLayout title="個人資料與偏好" wide>
   <p class="eyebrow">Profile</p>
   <h1>個人資料、偏好與資料權利</h1>
-  <div class="grid">
-    <AccountPanel client:load basePath={basePath} />
-    <section class="card">
+  <p class="lede">管理登入狀態、閱讀體驗，以及本機與雲端資料的匯出與刪除。</p>
+  <div class="profile-layout">
+    <div class="profile-account">
+      <AccountPanel client:load basePath={basePath} />
+    </div>
+    <section class="card profile-settings">
       <ReadingSettings client:load idPrefix="profile" />
     </section>
-    <section class="card">
-      <h2>匯出資料</h2>
-      <p>匯出本機 lesson 進度、題目狀態、書籤與閱讀偏好。</p>
-      <button class="button secondary" id="export-data" type="button">下載 JSON</button>
-    </section>
-    <section class="card">
-      <h2>刪除帳號</h2>
-      <p>正式 Supabase 模式會呼叫受保護的帳號刪除 API，清除同步進度、題目狀態、書籤與儲存資料。</p>
-      <button class="button danger" id="delete-account" type="button">要求刪除</button>
-      <p id="delete-status" role="status"></p>
-    </section>
+    <div class="profile-side">
+      <section class="card profile-data-card">
+        <h2>匯出資料</h2>
+        <p class="settings-hint">匯出本機 lesson 進度、題目狀態、書籤與閱讀偏好。</p>
+        <button class="button secondary" id="export-data" type="button">下載 JSON</button>
+      </section>
+      <section class="card profile-data-card danger">
+        <h2>刪除帳號</h2>
+        <p class="settings-hint">
+          正式 Supabase 模式會呼叫受保護的帳號刪除 API，清除同步進度、題目狀態、書籤與儲存資料。此操作無法復原。
+        </p>
+        <button class="button danger" id="delete-account" type="button">要求刪除</button>
+        <p class="settings-hint" id="delete-status" role="status"></p>
+      </section>
+    </div>
   </div>
   <script>
     import { authMode, getSupabaseClient, readMockUser, writeMockUser } from '@/lib/auth/client';

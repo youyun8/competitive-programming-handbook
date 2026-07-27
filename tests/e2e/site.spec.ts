@@ -2,8 +2,8 @@ import { expect, test } from '@playwright/test';
 
 test('home, chapter, lesson, visualizer, and progress work under project base path', async ({ page }) => {
   await page.goto('./');
-  await expect(page.getByRole('heading', { name: /把演算法/ })).toBeVisible();
-  await page.getByRole('link', { name: '從二分搜尋開始' }).click();
+  await expect(page.getByRole('heading', { name: /《演算法競賽》上下冊學習筆記/ })).toBeVisible();
+  await page.getByRole('link', { name: '從二分搜尋開始讀' }).click();
   await expect(page.getByRole('heading', { name: '二分搜尋：把單調性變成答案' })).toBeVisible();
   await page.getByRole('button', { name: '下一步' }).click();
   await expect(page.getByText(/步驟 2\//)).toBeVisible();

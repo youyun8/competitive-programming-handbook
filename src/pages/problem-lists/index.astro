@@ -108,7 +108,14 @@ for (const exercise of exercises) {
               </a>
             </h3>
             <div class="table-scroll">
-              <table class="problem-table">
+              <table class="problem-table chapter-problem-table">
+                <colgroup>
+                  <col class="col-group" />
+                  <col class="col-origin" />
+                  <col />
+                  <col class="col-source" />
+                  <col class="col-learn" />
+                </colgroup>
                 <thead>
                   <tr>
                     <th scope="col">類型</th>
@@ -140,12 +147,12 @@ for (const exercise of exercises) {
                             {entry.title} ↗
                           </a>
                           {entry.source_section !== entry.section && (
-                            <small class="meta">
+                            <small class="row-note">
                               原題單分類：{entry.source_section} {entry.source_section_title}
                             </small>
                           )}
                         </td>
-                        <td class="meta">{entry.contest_source}</td>
+                        <td class="source">{entry.contest_source}</td>
                         <td>
                           {exercise ? (
                             <a href={withBase(`/practice/${exercise.data.id}/`)}>題解與狀態</a>

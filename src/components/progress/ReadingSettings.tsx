@@ -92,9 +92,14 @@ export default function ReadingSettings({ idPrefix = 'reading' }: Props) {
 
   return (
     <section className="reading-settings" aria-busy={!hydrated} aria-labelledby={`${idPrefix}-settings-title`}>
-      <h2 id={`${idPrefix}-settings-title`}>閱讀偏好</h2>
+      <header className="settings-header">
+        <h2 id={`${idPrefix}-settings-title`}>閱讀偏好</h2>
+        <p className="settings-hint">調整後立即套用到全站，並保存在此裝置。</p>
+      </header>
+
       <fieldset className="settings-group">
         <legend>主題</legend>
+        <p className="settings-hint">「跟隨系統」會依作業系統的深淺色設定自動切換。</p>
         <div className="segmented-control">
           {(
             [
@@ -115,8 +120,10 @@ export default function ReadingSettings({ idPrefix = 'reading' }: Props) {
           ))}
         </div>
       </fieldset>
+
       <fieldset className="settings-group">
         <legend>頁面寬度</legend>
+        <p className="settings-hint">決定內文每行的長度，寬版與全螢幕適合對照程式碼。</p>
         <div className="segmented-control">
           {(
             [
@@ -137,31 +144,54 @@ export default function ReadingSettings({ idPrefix = 'reading' }: Props) {
           ))}
         </div>
       </fieldset>
-      <div className="field">
-        <label htmlFor={`${idPrefix}-font-size`}>正文字級：{settings.fontSize}px</label>
-        <input
-          id={`${idPrefix}-font-size`}
-          type="range"
-          min="15"
-          max="22"
-          disabled={!hydrated}
-          value={settings.fontSize}
-          onChange={(event) => updateNumber('fontSize', Number(event.target.value))}
-        />
+
+      <div className="settings-group">
+        <div className="settings-row">
+          <div className="settings-row-head">
+            <label htmlFor={`${idPrefix}-font-size`}>正文字級</label>
+            <span className="settings-value">{settings.fontSize}px</span>
+          </div>
+          <input
+            className="settings-range"
+            id={`${idPrefix}-font-size`}
+            type="range"
+            min="15"
+            max="22"
+            disabled={!hydrated}
+            value={settings.fontSize}
+            aria-valuetext={`${settings.fontSize}px`}
+            onChange={(event) => updateNumber('fontSize', Number(event.target.value))}
+          />
+          <div className="settings-scale" aria-hidden="true">
+            <span>15px</span>
+            <span>22px</span>
+          </div>
+        </div>
+
+        <div className="settings-row">
+          <div className="settings-row-head">
+            <label htmlFor={`${idPrefix}-code-font-size`}>程式碼字級</label>
+            <span className="settings-value">{settings.codeFontSize}px</span>
+          </div>
+          <input
+            className="settings-range"
+            id={`${idPrefix}-code-font-size`}
+            type="range"
+            min="12"
+            max="20"
+            disabled={!hydrated}
+            value={settings.codeFontSize}
+            aria-valuetext={`${settings.codeFontSize}px`}
+            onChange={(event) => updateNumber('codeFontSize', Number(event.target.value))}
+          />
+          <div className="settings-scale" aria-hidden="true">
+            <span>12px</span>
+            <span>20px</span>
+          </div>
+        </div>
       </div>
-      <div className="field">
-        <label htmlFor={`${idPrefix}-code-font-size`}>程式碼字級：{settings.codeFontSize}px</label>
-        <input
-          id={`${idPrefix}-code-font-size`}
-          type="range"
-          min="12"
-          max="20"
-          disabled={!hydrated}
-          value={settings.codeFontSize}
-          onChange={(event) => updateNumber('codeFontSize', Number(event.target.value))}
-        />
-      </div>
-      <label className="settings-checkbox">
+
+      <label className="settings-toggle">
         <input
           type="checkbox"
           checked={settings.wrapLines}
@@ -172,8 +202,10 @@ export default function ReadingSettings({ idPrefix = 'reading' }: Props) {
             void persist(next);
           }}
         />
-        程式碼長行換行
+        <strong>程式碼長行換行</strong>
+        <span className="settings-hint">關閉後過長的程式碼改用左右捲動，保留原始排版。</span>
       </label>
+
       <div className="settings-actions">
         <button className="button secondary" type="button" disabled={!hydrated} onClick={reset}>
           恢復預設

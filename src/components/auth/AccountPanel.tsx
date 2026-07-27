@@ -40,8 +40,11 @@ export default function AccountPanel({ basePath }: { basePath: string }) {
 
   if (!account) {
     return (
-      <div className="callout warning">
-        <p>目前是訪客模式。進度與草稿只保存在此裝置。</p>
+      <div className="callout warning account-panel">
+        <div className="account-identity">
+          <h2>訪客模式</h2>
+          <p className="settings-hint">進度與草稿只保存在此裝置，換裝置或清除瀏覽器資料後會遺失。</p>
+        </div>
         <a className="button" href={`${basePath}/auth/login/`}>
           登入以跨裝置同步
         </a>
@@ -50,10 +53,14 @@ export default function AccountPanel({ basePath }: { basePath: string }) {
   }
 
   return (
-    <section className="card">
-      <h2>帳戶</h2>
-      <p>{account.email ?? account.id}</p>
-      <p role="status">{syncMessage}</p>
+    <section className="card account-panel">
+      <div className="account-identity">
+        <h2>帳戶</h2>
+        <p className="account-email">{account.email ?? account.id}</p>
+        <p className="settings-hint" role="status">
+          {syncMessage}
+        </p>
+      </div>
       <div className="page-actions">
         <button className="button" type="button" onClick={sync}>
           立即同步
