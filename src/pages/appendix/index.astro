@@ -1,5 +1,6 @@
 ---
 import { Code } from 'astro:components';
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { withBase } from '@/lib/site';
 
@@ -26,9 +27,7 @@ std::cin.tie(nullptr);`;
 ---
 
 <BaseLayout title="附錄 A：C++ 競賽工程技巧">
-  <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>總覽</a><span>/</span><span>附錄 A</span>
-  </nav>
+  <Breadcrumb items={[{ label: '下冊', href: withBase('/volumes/lower/') }]} current="附錄 A" />
   <p class="eyebrow">Appendix A · C++17/C++20</p>
   <h1>C++ 競賽工程技巧</h1>
   <p class="lede">整理大數、測資生成、差分測試與 I/O 等實戰工程技巧。</p>
@@ -67,4 +66,8 @@ std::cin.tie(nullptr);`;
     <li><code>examples/appendix/fast_io.cpp</code></li>
   </ul>
   <p class="meta">來源書頁 684–693；下冊 PDF 314–323。</p>
+  <nav class="page-actions" aria-label="前後章節">
+    <a class="button secondary" href={withBase('/chapters/10/')}>← 第 10 章 圖論</a>
+    <a class="button secondary" href={withBase('/practice/')}>前往題庫 →</a>
+  </nav>
 </BaseLayout>

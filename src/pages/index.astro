@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { curriculum } from '@/lib/curriculum';
+import { glossaryLink, learnLink, patternsLink, practiceLink, problemListsLink, textbookNav } from '@/lib/navigation';
 import { withBase } from '@/lib/site';
 import { strategyTopics } from '@/lib/strategy-topics';
 
@@ -16,6 +17,46 @@ const chapterColors: Record<string, string> = {
   teal: '#27766e',
   red: '#a5433d'
 };
+
+const chapterByNumber = new Map(curriculum.chapters.map((chapter) => [chapter.chapter, chapter]));
+
+// 三條主線對應側欄的三個分組，讓首頁、側欄與 header 講同一套結構。
+const tracks = [
+  {
+    eyebrow: '讀',
+    title: '教材章節',
+    href: withBase('/volumes/upper/'),
+    cta: '從上冊開始',
+    description: '依《演算法競賽》上下冊十章與附錄 A 編排，每一節都有核心導讀，重點主題另有深度教學與視覺化。',
+    links: [
+      { label: learnLink.label, href: learnLink.href, description: learnLink.description },
+      { label: '上冊：第 1–5 章', href: withBase('/volumes/upper/') },
+      { label: '下冊：第 6–10 章與附錄 A', href: withBase('/volumes/lower/') }
+    ]
+  },
+  {
+    eyebrow: '查',
+    title: '策略圖鑑',
+    href: withBase('/strategies/'),
+    cta: '開啟策略圖鑑',
+    description: '同一類解題手法擺在一起，附判斷訊號、正確性論證、常見陷阱與練習路線圖，適合賽前複習與遇到新題時查。',
+    links: [
+      { label: patternsLink.label, href: patternsLink.href, description: patternsLink.description },
+      { label: glossaryLink.label, href: glossaryLink.href, description: glossaryLink.description }
+    ]
+  },
+  {
+    eyebrow: '練',
+    title: '題庫與題單',
+    href: practiceLink.href,
+    cta: '前往題庫',
+    description: '題庫提供逐層提示、C++17 解答與私人筆記；題單索引則把教材與策略兩份外部題單整理成可篩選的表格。',
+    links: [
+      { label: '教材題單', href: withBase('/problem-lists/textbook/'), description: '依章節小節編排的配套題單' },
+      { label: '策略題單', href: withBase('/problem-lists/strategies/'), description: '依主題、難度與標籤篩選' }
+    ]
+  }
+];
 ---
 
 <BaseLayout title="總覽" wide>
@@ -27,41 +68,95 @@ const chapterColors: Record<string, string> = {
     </p>
     <div class="hero-actions">
       <a class="button" href={withBase('/lessons/binary-search/')}>從二分搜尋開始讀</a>
-      <a class="button secondary" href={withBase('/learn/')}>查看學習路線</a>
+      <a class="button secondary" href={learnLink.href}>查看學習路線</a>
       <a class="button secondary" href={withBase('/strategies/')}>依解題策略查手法</a>
     </div>
   </section>
 
-  <section aria-labelledby="course-map-title">
-    <p class="eyebrow">Course map</p>
-    <h2 id="course-map-title">上下冊十章地圖</h2>
+  <section aria-labelledby="tracks-title">
+    <p class="eyebrow">How to use</p>
+    <h2 id="tracks-title">三種用法：讀、查、練</h2>
+    <p class="lede">同一批知識有三種索引方式，練習進度共用同一份資料，在任一處標記都會同步。</p>
     <div class="grid">
       {
-        curriculum.chapters.map((chapter) => (
-          <article class="card chapter-card" style={`--chapter-color:${chapterColors[chapter.color]}`}>
-            <p class="eyebrow">
-              {chapter.volume === 'upper' ? '上冊' : '下冊'} · 第 {chapter.chapter} 章
-            </p>
+        tracks.map((track) => (
+          <article class="card track-card">
+            <p class="eyebrow">{track.eyebrow}</p>
             <h3>
-              <a href={withBase(`/chapters/${chapter.chapter}/`)}>{chapter.title}</a>
+              <a href={track.href}>{track.title}</a>
             </h3>
-            <p>
-              {chapter.sections
-                .map((section) => section.title)
-                .slice(0, 4)
-                .join('、')}
-              …
-            </p>
-            <p class="meta">
-              <span>{chapter.sections.length} 節</span>
-              <span>
-                書本 {chapter.book_pages[0]}–{chapter.book_pages[1]} 頁
-              </span>
-            </p>
+            <p>{track.description}</p>
+            <ul class="track-links">
+              {track.links.map((link) => (
+                <li>
+                  <a href={link.href}>{link.label}</a>
+                  {link.description && <span class="meta">{link.description}</span>}
+                </li>
+              ))}
+            </ul>
+            <a href={track.href}>{track.cta} →</a>
           </article>
         ))
       }
     </div>
+  </section>
+
+  <section style="margin-top:3rem" aria-labelledby="course-map-title">
+    <p class="eyebrow">Course map</p>
+    <h2 id="course-map-title">上下冊十章地圖</h2>
+    {
+      textbookNav.map((volume) => (
+        <>
+          <h3 class="volume-heading">
+            <a href={volume.href}>{curriculum.volumes[volume.volume].display_name}</a>
+            <span class="meta">
+              第 {volume.chapters[0]?.chapter}–{volume.chapters[volume.chapters.length - 1]?.chapter} 章
+            </span>
+          </h3>
+          <div class="grid">
+            {volume.chapters.map((entry) => {
+              const chapter = chapterByNumber.get(entry.chapter)!;
+              return (
+                <article class="card chapter-card" style={`--chapter-color:${chapterColors[chapter.color]}`}>
+                  <p class="eyebrow">第 {chapter.chapter} 章</p>
+                  <h4>
+                    <a href={entry.href}>{chapter.title}</a>
+                  </h4>
+                  <p>
+                    {chapter.sections
+                      .map((section) => section.title)
+                      .slice(0, 4)
+                      .join('、')}
+                    …
+                  </p>
+                  <p class="meta">
+                    <span>{chapter.sections.length} 節</span>
+                    <span>
+                      書本 {chapter.book_pages[0]}–{chapter.book_pages[1]} 頁
+                    </span>
+                  </p>
+                </article>
+              );
+            })}
+            {volume.appendix && (
+              <article class="card chapter-card" style="--chapter-color:#5f6f7d">
+                <p class="eyebrow">Appendix A</p>
+                <h4>
+                  <a href={volume.appendix.href}>C++ 競賽工程技巧</a>
+                </h4>
+                <p>{volume.appendix.description}</p>
+                <p class="meta">
+                  <span>3 節</span>
+                  <span>
+                    書本 {curriculum.appendix.book_pages[0]}–{curriculum.appendix.book_pages[1]} 頁
+                  </span>
+                </p>
+              </article>
+            )}
+          </div>
+        </>
+      ))
+    }
   </section>
 
   <section style="margin-top:3rem" aria-labelledby="strategy-atlas-title">
@@ -112,7 +207,10 @@ const chapterColors: Record<string, string> = {
     <p class="eyebrow">Your progress</p>
     <h2 id="progress-title">目前進度</h2>
     <p id="home-progress">尚未開始。完成 lesson 後，進度會先保存在此裝置。</p>
-    <a href={withBase('/dashboard/')}>開啟 Dashboard</a>
+    <p>
+      <a href={withBase('/dashboard/')}>開啟學習儀表板</a>
+      <span class="meta">或到<a href={problemListsLink.href}>題單索引</a>挑下一題。</span>
+    </p>
   </section>
 
   <script>

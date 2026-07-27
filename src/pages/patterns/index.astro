@@ -1,4 +1,5 @@
 ---
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { withBase } from '@/lib/site';
 
@@ -16,9 +17,14 @@ const patterns = [
 ---
 
 <BaseLayout title="跨章解題模式" wide>
+  <Breadcrumb current="跨章解題模式" />
   <p class="eyebrow">Patterns</p>
   <h1>跨章解題模式</h1>
-  <p class="lede">同一個思考模式會在不同章節反覆出現。先辨認模式，再選資料結構與演算法。</p>
+  <p class="lede">
+    同一個思考模式會在不同章節反覆出現。先辨認模式，再選資料結構與演算法。需要更完整的手法分類與練習路線，請看<a
+      href={withBase('/strategies/')}>策略圖鑑</a
+    >。
+  </p>
   <div class="grid">
     {
       patterns.map(([title, description, href]) => (

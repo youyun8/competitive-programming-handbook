@@ -353,6 +353,98 @@ code {
   content: '';
 }
 
+/* 位在目前頁面的路徑上（例如所在章節），但本身不是目前頁面。 */
+.sidebar-link[data-state='trail'] {
+  color: var(--text);
+  font-weight: 650;
+}
+
+.sidebar-link-overview {
+  font-size: 0.85rem;
+}
+
+/* 側欄的冊別摺疊區不套用內文 details 的卡片外框，維持導覽的輕量感。 */
+.nav-volume {
+  margin: 0.15rem 0 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  padding: 0;
+}
+
+.nav-volume-summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-radius: 0.38rem;
+  padding: 0.3rem 0.5rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.nav-volume-summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-volume-summary::before {
+  color: var(--muted);
+  font-size: 0.7rem;
+  content: '▸';
+  transition: transform 130ms ease;
+}
+
+.nav-volume[open] > .nav-volume-summary::before {
+  transform: rotate(90deg);
+}
+
+.nav-volume-summary > span:first-of-type {
+  flex: 1;
+}
+
+.nav-volume-summary:hover {
+  background: var(--surface-muted);
+}
+
+.nav-volume-range {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.nav-sections {
+  margin: 0.1rem 0 0.35rem;
+  border-left: 1px solid var(--border);
+  padding: 0;
+  margin-left: 0.75rem;
+  list-style: none;
+}
+
+.sidebar-sublink {
+  display: flex;
+  gap: 0.4rem;
+  padding-left: 0.6rem;
+  font-size: 0.85rem;
+}
+
+.nav-section-id {
+  flex: none;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.sidebar-sublink[aria-current='page'] .nav-section-id {
+  color: inherit;
+}
+
+.header-nav a[aria-current='true'] {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
 .main-content {
   min-width: 0;
   padding: clamp(1.4rem, 4vw, 3.5rem);
@@ -452,8 +544,40 @@ a.card:hover,
 }
 
 .card h2,
-.card h3 {
+.card h3,
+.card h4 {
   margin-top: 0;
+}
+
+.card h4 {
+  font-size: 1.05rem;
+}
+
+.volume-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 1.8rem 0 0.8rem;
+  font-size: 1.15rem;
+}
+
+.track-links {
+  margin: 0.6rem 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.track-links li {
+  border-top: 1px solid var(--border);
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+}
+
+.track-links .meta {
+  display: block;
+  margin: 0.1rem 0 0;
+  font-size: 0.82rem;
 }
 
 .card p:last-child {
@@ -1446,7 +1570,11 @@ summary {
     bottom: 0;
     left: 0;
     width: min(86vw, var(--sidebar-width));
-    height: auto;
+    /* grid 的 align-self: start 會讓固定定位的抽屜依內容撐高、整條蓋掉自身捲動，
+       抽屜比一個螢幕長時下半部就再也捲不到。這裡明確給高度，讓它自己捲。 */
+    align-self: stretch;
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
     transform: translateX(-105%);
     border-right: 1px solid var(--border);
     background: var(--surface);

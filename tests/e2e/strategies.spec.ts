@@ -11,7 +11,9 @@ test('strategy atlas navigates from overview through topic home into a chapter',
   await page.goto('./strategies/');
   await expect(page.getByRole('heading', { name: '策略圖鑑', level: 1 })).toBeVisible();
 
+  // 側欄現在也列得出四個主題，這裡要的是總覽頁正文的主題卡。
   await page
+    .locator('main')
     .getByRole('link', { name: /貪心演算法/ })
     .first()
     .click();

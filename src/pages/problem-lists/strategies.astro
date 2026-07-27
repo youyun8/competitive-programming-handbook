@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import ExerciseStatusControl from '@/components/progress/ExerciseStatusControl';
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { problemListsLink } from '@/lib/navigation';
 import { problemKey } from '@/lib/problem-list';
 import { withBase } from '@/lib/site';
 import {
@@ -42,9 +44,8 @@ const crossListed = rows.filter((row) => row.exercise).length;
 ---
 
 <BaseLayout title="策略題單" description="依解題策略分類的競賽題目總表，可依主題、難度、標籤與平臺篩選。" wide>
-  <p class="eyebrow">
-    <a href={withBase('/problem-lists/')}>題單索引</a>
-  </p>
+  <Breadcrumb items={[{ label: problemListsLink.label, href: problemListsLink.href }]} current="策略題單" />
+  <p class="eyebrow">Problem list · 依解題手法</p>
   <h1>策略題單</h1>
   <p class="lede">
     <a href={withBase('/strategies/')}>策略圖鑑</a>四個主題共 {strategyProblemCounts.rows} 筆條目、{
@@ -61,7 +62,7 @@ const crossListed = rows.filter((row) => row.exercise).length;
       {strategyProblemSource.notes.map((note) => <li>{note}</li>)}
     </ul>
     <p class="meta">
-      其中 {crossListed} 題同時出現在<a href={withBase('/problem-lists/')}>《演算法競賽》題單索引</a>，
+      其中 {crossListed} 題同時出現在<a href={withBase('/problem-lists/textbook/')}>教材題單</a>，
       已比對平臺與題號後互相連結。
     </p>
   </section>

@@ -1,0 +1,214 @@
+---
+import { getCollection } from 'astro:content';
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { problemListsLink } from '@/lib/navigation';
+import {
+  problemChapters,
+  problemKey,
+  problemListCounts,
+  problemListPlatforms,
+  problemListSource
+} from '@/lib/problem-list';
+import { withBase } from '@/lib/site';
+
+const exercises = await getCollection('exercises', ({ data }) => data.review_status === 'verified');
+const exerciseByProblem = new Map<string, (typeof exercises)[number]>();
+for (const exercise of exercises) {
+  if (!exercise.data.external_platform || !exercise.data.external_problem_id) continue;
+  const key = problemKey(exercise.data.external_platform, exercise.data.external_problem_id);
+  const existing = exerciseByProblem.get(key);
+  if (!existing || (existing.data.external_relation !== 'original' && exercise.data.external_relation === 'original')) {
+    exerciseByProblem.set(key, exercise);
+  }
+}
+---
+
+<BaseLayout title="教材題單" wide>
+  <Breadcrumb items={[{ label: problemListsLink.label, href: problemListsLink.href }]} current="教材題單" />
+  <p class="eyebrow">Problem list · 依教材章節</p>
+  <h1>教材題單</h1>
+  <p class="lede">
+    羅勇軍《演算法競賽》配套題單的完整索引，共 {problemListCounts.rows} 筆條目、{problemListCounts.unique_problems} 道不重複題目，
+    涵蓋 {problemListCounts.chapters} 章 {problemListCounts.sections} 個小節，其中例題 {problemListCounts.examples} 題、習題
+    {problemListCounts.practice} 題。
+  </p>
+
+  <section class="card">
+    <h2>來源與注意事項</h2>
+    <p>
+      題單原文由 {problemListSource.author} 整理並發表於
+      <a href={problemListSource.article_url} target="_blank" rel="noopener noreferrer"> vjudge.net/article/3284 ↗ </a>
+      。本頁只重建章節結構與題目索引，不轉載題目敘述。
+    </p>
+    <ul>
+      {problemListSource.notes.map((note) => <li>{note}</li>)}
+    </ul>
+    <p class="meta">
+      <strong>連結尚未逐一驗證。</strong>
+      {problemListSource.url_verification_note}
+      點擊前請自行確認，若發現失效連結歡迎回報。
+    </p>
+  </section>
+
+  <p class="meta">
+    本頁依教材章節編排；想改用解題手法找題目，請看<a href={withBase('/problem-lists/strategies/')}>策略題單</a
+    >。兩份題單與<a href={withBase('/practice/')}>題庫</a>共用同一份練習進度。
+  </p>
+
+  <div class="filter-bar">
+    <div class="field">
+      <label for="problem-search">搜尋</label>
+      <input id="problem-search" type="search" placeholder="題名、題號、小節、賽事" />
+    </div>
+    <div class="field">
+      <label for="problem-chapter">章節</label>
+      <select id="problem-chapter">
+        <option value="">全部</option>
+        {
+          problemChapters.map((chapter) => (
+            <option value={chapter.chapter}>
+              第 {chapter.chapter} 章 {chapter.chapter_title}
+            </option>
+          ))
+        }
+      </select>
+    </div>
+    <div class="field">
+      <label for="problem-group">類型</label>
+      <select id="problem-group">
+        <option value="">全部</option>
+        <option value="example">例題</option>
+        <option value="practice">習題</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="problem-platform">平臺</label>
+      <select id="problem-platform">
+        <option value="">全部</option>
+        {problemListPlatforms.map((platform) => <option value={platform}>{platform}</option>)}
+      </select>
+    </div>
+  </div>
+
+  {
+    problemChapters.map((chapter) => (
+      <section class="problem-chapter" data-chapter={chapter.chapter}>
+        <h2>
+          <a href={withBase(`/chapters/${chapter.chapter}/`)}>
+            第 {chapter.chapter} 章 {chapter.chapter_title}
+          </a>
+        </h2>
+        {chapter.sections.map((section) => (
+          <div class="problem-section">
+            <h3>
+              <a href={withBase(section.entries[0]?.lesson_href ?? `/chapters/${chapter.chapter}/`)}>
+                {section.section} {section.section_title}
+              </a>
+            </h3>
+            <div class="table-scroll">
+              <table class="problem-table chapter-problem-table">
+                <colgroup>
+                  <col class="col-group" />
+                  <col class="col-origin" />
+                  <col />
+                  <col class="col-source" />
+                  <col class="col-learn" />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">類型</th>
+                    <th scope="col">出處</th>
+                    <th scope="col">題目</th>
+                    <th scope="col">賽事來源</th>
+                    <th scope="col">學習內容</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {section.entries.map((entry) => {
+                    const exercise = exerciseByProblem.get(problemKey(entry.platform_label, entry.problem_id));
+                    return (
+                      <tr
+                        class="problem-row"
+                        data-chapter={entry.chapter}
+                        data-group={entry.group}
+                        data-platform={entry.platform_label}
+                        data-search={`${entry.title} ${entry.platform_label} ${entry.problem_id} ${section.section} ${section.section_title} ${entry.source_section_title ?? ''} ${entry.contest_source}`.toLowerCase()}
+                      >
+                        <td>
+                          <span class:list={['badge', entry.group]}>{entry.group === 'example' ? '例題' : '習題'}</span>
+                        </td>
+                        <td class="nowrap">
+                          {entry.platform_label} {entry.problem_id}
+                        </td>
+                        <td>
+                          <a href={entry.url} target="_blank" rel="noopener noreferrer nofollow">
+                            {entry.title} ↗
+                          </a>
+                          {entry.source_section !== entry.section && (
+                            <small class="row-note">
+                              原題單分類：{entry.source_section} {entry.source_section_title}
+                            </small>
+                          )}
+                        </td>
+                        <td class="source">{entry.contest_source}</td>
+                        <td>
+                          {exercise ? (
+                            <a href={withBase(`/practice/${exercise.data.id}/`)}>題解與狀態</a>
+                          ) : (
+                            <a href={withBase(`/chapters/${entry.chapter}/#chapter-problems-title`)}>章節題單</a>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </section>
+    ))
+  }
+
+  <p id="problem-empty" hidden>沒有符合條件的題目。</p>
+
+  <script>
+    const search = document.querySelector<HTMLInputElement>('#problem-search');
+    const chapter = document.querySelector<HTMLSelectElement>('#problem-chapter');
+    const group = document.querySelector<HTMLSelectElement>('#problem-group');
+    const platform = document.querySelector<HTMLSelectElement>('#problem-platform');
+    const rows = [...document.querySelectorAll<HTMLElement>('.problem-row')];
+    const sections = [...document.querySelectorAll<HTMLElement>('.problem-section')];
+    const chapters = [...document.querySelectorAll<HTMLElement>('.problem-chapter')];
+    const empty = document.querySelector<HTMLElement>('#problem-empty');
+
+    function filter() {
+      const term = search?.value.trim().toLowerCase() ?? '';
+      let visible = 0;
+      for (const row of rows) {
+        const matches =
+          (!term || row.dataset.search?.includes(term)) &&
+          (!chapter?.value || row.dataset.chapter === chapter.value) &&
+          (!group?.value || row.dataset.group === group.value) &&
+          (!platform?.value || row.dataset.platform === platform.value);
+        row.hidden = !matches;
+        if (matches) visible++;
+      }
+      // 整節或整章都被濾掉時一併收起，避免留下空標題。
+      for (const section of sections) {
+        const anyVisible = [...section.querySelectorAll<HTMLElement>('.problem-row')].some((row) => !row.hidden);
+        section.hidden = !anyVisible;
+      }
+      for (const entry of chapters) {
+        const anyVisible = [...entry.querySelectorAll<HTMLElement>('.problem-section')].some(
+          (section) => !section.hidden
+        );
+        entry.hidden = !anyVisible;
+      }
+      if (empty) empty.hidden = visible !== 0;
+    }
+
+    for (const input of [search, chapter, group, platform]) input?.addEventListener('input', filter);
+  </script>
+</BaseLayout>

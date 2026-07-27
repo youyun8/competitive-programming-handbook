@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import SectionGuide from '@/components/lessons/SectionGuide.astro';
 import TextbookPractice from '@/components/lessons/TextbookPractice.astro';
 import ChapterProblemList from '@/components/problems/ChapterProblemList.astro';
@@ -42,11 +43,13 @@ const problemEntries = problemEntriesForSection(section.id);
 ---
 
 <BaseLayout title={lesson?.data.title ?? `${section.id} ${section.title}`}>
-  <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>總覽</a><span aria-hidden="true">/</span><a href={withBase(`/chapters/${chapter.chapter}/`)}
-      >第 {chapter.chapter} 章</a
-    ><span aria-hidden="true">/</span><span>{section.id}</span>
-  </nav>
+  <Breadcrumb
+    items={[
+      { label: chapter.volume === 'upper' ? '上冊' : '下冊', href: withBase(`/volumes/${chapter.volume}/`) },
+      { label: `第 ${chapter.chapter} 章 ${chapter.title}`, href: withBase(`/chapters/${chapter.chapter}/`) }
+    ]}
+    current={`${section.id} ${section.title}`}
+  />
   <p class="eyebrow">Lesson {section.id}</p>
   <h1>{lesson?.data.title ?? section.title}</h1>
   <p class="lede">{lesson?.data.summary ?? `本節涵蓋：${section.topics.join('、')}。`}</p>

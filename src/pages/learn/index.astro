@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { withBase } from '@/lib/site';
 
@@ -22,9 +23,14 @@ const ordered = orderedIds.map((id) => lessons.find((lesson) => lesson.data.id =
 ---
 
 <BaseLayout title="學習路線" wide>
-  <p class="eyebrow">Learning paths</p>
-  <h1>依先備關係前進</h1>
-  <p class="lede">頁碼適合查來源；真正學習時，先備關係比書本順序更重要。</p>
+  <Breadcrumb current="學習路線" />
+  <p class="eyebrow">Learning path</p>
+  <h1>學習路線：依先備關係前進</h1>
+  <p class="lede">
+    頁碼適合查來源；真正學習時，先備關係比書本順序更重要。想照書本順序讀，改走<a href={withBase('/volumes/upper/')}
+      >上冊</a
+    >與<a href={withBase('/volumes/lower/')}>下冊</a>的章節地圖。
+  </p>
   <ol class="section-list">
     {
       ordered.map(

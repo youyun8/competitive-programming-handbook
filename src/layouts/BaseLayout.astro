@@ -1,6 +1,7 @@
 ---
+import SiteNav from '@/components/nav/SiteNav.astro';
 import ReadingSettings from '@/components/progress/ReadingSettings';
-import { curriculum } from '@/lib/curriculum';
+import { headerLinks, isCurrent, loginLink } from '@/lib/navigation';
 import { homeLabel, siteName, withBase } from '@/lib/site';
 import '@/styles/global.css';
 
@@ -8,12 +9,21 @@ interface Props {
   title: string;
   description?: string;
   wide?: boolean;
+  /** 路徑看不出教材位置時（例如 /lessons/topic/…），由頁面指定側欄要展開哪一章、標記哪一節。 */
+  activeChapter?: number;
+  activeSection?: string;
 }
 
-const { title, description = '以繁體中文重新整理的競賽演算法學習筆記。', wide = false } = Astro.props;
+const {
+  title,
+  description = '以繁體中文重新整理的競賽演算法學習筆記。',
+  wide = false,
+  activeChapter,
+  activeSection
+} = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const currentPath = Astro.url.pathname;
-// 頁面可用 slot="sidebar" 換掉預設的章節導覽（策略圖鑑用自己的主題導覽）。
+// 頁面可用 slot="sidebar" 在側欄插入所在區塊的次級導覽（策略圖鑑用自己的主題導覽）。
 const hasSidebarSlot = Astro.slots.has('sidebar');
 const pageTitle = title === homeLabel ? siteName : `${title}｜${siteName}`;
 ---
@@ -92,45 +102,29 @@ const pageTitle = title === homeLabel ? siteName : `${title}｜${siteName}`;
           <span>{siteName}</span>
         </a>
         <nav class="header-nav" aria-label="主要導覽">
-          <a class="desktop-only" href={withBase('/learn/')}>學習路線</a>
-          <a class="desktop-only" href={withBase('/practice/')}>題庫</a>
+          {
+            headerLinks.map((link) => (
+              <a class="desktop-only" href={link.href} aria-current={isCurrent(link, currentPath) ? 'true' : undefined}>
+                {link.label}
+              </a>
+            ))
+          }
           <button class="icon-button" id="search-toggle" type="button" aria-label="開啟搜尋">⌕</button>
           <button class="icon-button" id="settings-toggle" type="button" aria-label="開啟閱讀設定">⚙</button>
-          <a href={withBase('/auth/login/')}>登入</a>
+          <a href={loginLink.href}>{loginLink.label}</a>
         </nav>
       </div>
     </header>
     <div class="site-shell">
-      <aside class="site-sidebar" id="site-sidebar" data-open="false" aria-label="章節導覽">
-        <div class="sidebar-label">開始</div>
-        <a class="sidebar-link" href={withBase('/learn/')}>依先備關係學習</a>
-        <a class="sidebar-link" href={withBase('/patterns/')}>跨章解題模式</a>
-        <a class="sidebar-link" href={withBase('/strategies/')}>策略圖鑑</a>
-        <a class="sidebar-link" href={withBase('/glossary/')}>術語表</a>
-        <a class="sidebar-link" href={withBase('/problem-lists/')}>題單索引</a>
-        {
-          hasSidebarSlot ? (
-            <slot name="sidebar" />
-          ) : (
-            <>
-              <div class="sidebar-label">章節</div>
-              {curriculum.chapters.map((chapter) => {
-                const href = withBase(`/chapters/${chapter.chapter}/`);
-                return (
-                  <a class="sidebar-link" href={href} aria-current={currentPath === href ? 'page' : undefined}>
-                    {chapter.chapter}. {chapter.title}
-                  </a>
-                );
-              })}
-              <a class="sidebar-link" href={withBase('/appendix/')}>
-                附錄 A：C++ 工程技巧
-              </a>
-            </>
-          )
-        }
-        <div class="sidebar-label">帳戶</div>
-        <a class="sidebar-link" href={withBase('/dashboard/')}>Dashboard</a>
-        <a class="sidebar-link" href={withBase('/profile/')}>偏好與資料</a>
+      <aside class="site-sidebar" id="site-sidebar" data-open="false">
+        <SiteNav
+          currentPath={currentPath}
+          activeChapter={activeChapter}
+          activeSection={activeSection}
+          hasContextNav={hasSidebarSlot}
+        >
+          <slot name="sidebar" slot="context" />
+        </SiteNav>
         <div class="sidebar-label">同步狀態</div>
         <span class="sync-indicator" id="sync-indicator" data-status="synced">
           <span class="sync-dot" aria-hidden="true"></span>

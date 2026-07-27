@@ -3,6 +3,7 @@
 ## Architecture
 
 - Astro static site with strict TypeScript and content collections.
+- `src/lib/navigation.ts` is the single source of truth for site structure: sidebar groups, header links, the volume/chapter/section tree, and current-location detection. Add new routes there instead of hard-coding links in the layout; `SiteNav.astro` and `Breadcrumb.astro` render from it.
 - Markdown/MDX owns lessons, exercises, glossary entries, patterns, and learning paths.
 - `src/content/strategies/` is the one exception: the strategy atlas keeps its hand-written HTML fragments verbatim. Edit the fragments and the registry in `src/lib/strategy-topics.ts`; never write rendered output back into a fragment.
 - React islands are reserved for stateful UI: auth, sync, practice status, exercise notes, and visualizers.

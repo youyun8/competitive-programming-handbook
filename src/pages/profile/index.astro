@@ -1,11 +1,13 @@
 ---
 import AccountPanel from '@/components/auth/AccountPanel';
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import ReadingSettings from '@/components/progress/ReadingSettings';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<BaseLayout title="個人資料與偏好" wide>
+<BaseLayout title="偏好與資料" wide>
+  <Breadcrumb current="偏好與資料" />
   <p class="eyebrow">Profile</p>
   <h1>個人資料、偏好與資料權利</h1>
   <p class="lede">管理登入狀態、閱讀體驗，以及本機與雲端資料的匯出與刪除。</p>

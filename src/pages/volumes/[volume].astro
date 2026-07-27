@@ -1,4 +1,5 @@
 ---
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { curriculum, type Volume } from '@/lib/curriculum';
 import { withBase } from '@/lib/site';
@@ -13,9 +14,7 @@ const chapters = curriculum.chapters.filter((chapter) => chapter.volume === volu
 ---
 
 <BaseLayout title={info.display_name} wide>
-  <nav class="breadcrumb" aria-label="麵包屑">
-    <a href={withBase('/')}>總覽</a><span aria-hidden="true">/</span><span>{info.display_name}</span>
-  </nav>
+  <Breadcrumb current={info.display_name} />
   <p class="eyebrow">{volume === 'upper' ? 'Volume I' : 'Volume II'}</p>
   <h1>{info.display_name}</h1>
   <p class="lede">
@@ -53,4 +52,20 @@ const chapters = curriculum.chapters.filter((chapter) => chapter.volume === volu
       </article>
     )
   }
+  <nav class="page-actions" aria-label="切換冊別">
+    {
+      volume === 'lower' && (
+        <a class="button secondary" href={withBase('/volumes/upper/')}>
+          ← {curriculum.volumes.upper.display_name}
+        </a>
+      )
+    }
+    {
+      volume === 'upper' && (
+        <a class="button secondary" href={withBase('/volumes/lower/')}>
+          {curriculum.volumes.lower.display_name} →
+        </a>
+      )
+    }
+  </nav>
 </BaseLayout>

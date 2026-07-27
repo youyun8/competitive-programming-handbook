@@ -1,4 +1,5 @@
 ---
+import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { strategyProblemCounts } from '@/lib/strategy-problems';
 import { readablePageCount, strategyHref, strategyTopics } from '@/lib/strategies';
@@ -6,6 +7,7 @@ import { withBase } from '@/lib/site';
 ---
 
 <BaseLayout title="策略圖鑑" description="依解題策略分類的競賽演算法攻略：貪心、動態規劃、字串與競賽資料結構。">
+  <Breadcrumb current="策略圖鑑" />
   <p class="eyebrow">Strategy atlas</p>
   <h1>策略圖鑑</h1>
   <p class="lede">
