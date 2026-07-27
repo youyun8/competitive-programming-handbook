@@ -1,0 +1,4 @@
+# 統一以 LF 儲存並簽出。Windows 上若靠 core.autocrlf 產生 CRLF 工作區，
+# prettier（預設 endOfLine: lf）會把整個 repo 判定成格式錯誤，
+# scripts/validate 讀 frontmatter 的 /^---\n/ 也會配不到 ---\r\n。
+* text=auto eol=lf
