@@ -1,4 +1,11 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+// 900px 以下側欄是收起來的抽屜（transform: translateX(-105%)），連結雖然存在但落在
+// 畫面外，直接點會等到 timeout。mobile project 必須先按漢堡鈕，桌機版沒有這顆按鈕。
+async function openSidebarOnMobile(page: Page) {
+  const menu = page.getByRole('button', { name: '開啟導覽' });
+  if (await menu.isVisible()) await menu.click();
+}
 
 test('strategy atlas navigates from overview through topic home into a chapter', async ({ page }) => {
   await page.goto('./strategies/');
@@ -11,6 +18,7 @@ test('strategy atlas navigates from overview through topic home into a chapter',
   await expect(page.getByRole('heading', { name: /貪心演算法/, level: 1 })).toBeVisible();
   await expect(page.getByText('從排序貪心到擬陣與模擬費用流的完整策略分類')).toBeVisible();
 
+  await openSidebarOnMobile(page);
   await page.getByRole('link', { name: '2.1 排序貪心' }).first().click();
   await expect(page.getByRole('heading', { name: '2.1 排序貪心（Sort & Sweep）' })).toBeVisible();
   // 側欄要標出目前章節，主題導覽取代預設的教材章節清單。
@@ -77,6 +85,7 @@ test('previous and next links walk the topic reading order', async ({ page }) =>
 
 test('topic switcher keeps the reader inside the strategy atlas', async ({ page }) => {
   await page.goto('./strategies/greedy/01-sorting/');
+  await openSidebarOnMobile(page);
   await page.locator('.strategy-switcher-link', { hasText: '字串' }).click();
   await expect(page.getByRole('heading', { name: /字串演算法/, level: 1 })).toBeVisible();
   await expect(page.locator('.strategy-switcher-link.active')).toHaveText(/字串/);
@@ -135,6 +144,7 @@ test('strategy pages are reachable from the sidebar and the home page', async ({
   await expect(page.getByRole('heading', { name: '策略圖鑑', level: 1 })).toBeVisible();
 
   await page.goto('./chapters/2/');
+  await openSidebarOnMobile(page);
   await page.locator('.site-sidebar').getByRole('link', { name: '策略圖鑑' }).click();
   await expect(page.getByRole('heading', { name: '策略圖鑑', level: 1 })).toBeVisible();
 });
