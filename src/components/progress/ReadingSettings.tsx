@@ -202,10 +202,8 @@ export default function ReadingSettings({ idPrefix = 'reading' }: Props) {
             void persist(next);
           }}
         />
-        <span className="settings-toggle-text">
-          <strong>程式碼長行換行</strong>
-          <span className="settings-hint">關閉後過長的程式碼改用左右捲動，保留原始排版。</span>
-        </span>
+        <strong>程式碼長行換行</strong>
+        <span className="settings-hint">關閉後過長的程式碼改用左右捲動，保留原始排版。</span>
       </label>
 
       <div className="settings-actions">

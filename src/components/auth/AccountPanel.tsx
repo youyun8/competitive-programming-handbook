@@ -57,7 +57,9 @@ export default function AccountPanel({ basePath }: { basePath: string }) {
       <div className="account-identity">
         <h2>帳戶</h2>
         <p className="account-email">{account.email ?? account.id}</p>
-        <p className="settings-hint" role="status">{syncMessage}</p>
+        <p className="settings-hint" role="status">
+          {syncMessage}
+        </p>
       </div>
       <div className="page-actions">
         <button className="button" type="button" onClick={sync}>

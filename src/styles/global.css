@@ -788,14 +788,17 @@ a.card:hover,
   box-shadow: 0 1px 5px rgb(18 37 53 / 30%);
 }
 
+/* 核取方塊與說明文字直接放在 label 底下（不再包一層），jsx-a11y 才能辨識標籤文字。 */
 .settings-toggle {
-  display: flex;
-  gap: 0.7rem;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.15rem 0.7rem;
+  align-items: start;
   border: 1px solid var(--border);
   border-radius: 0.55rem;
   background: var(--surface-muted);
   padding: 0.75rem 0.85rem;
+  line-height: 1.5;
   cursor: pointer;
 }
 
@@ -804,17 +807,22 @@ a.card:hover,
 }
 
 .settings-toggle input {
+  grid-row: 1;
+  grid-column: 1;
   width: 1.15rem;
   height: 1.15rem;
   margin: 0.25rem 0 0;
   accent-color: var(--accent);
-  flex: none;
 }
 
-.settings-toggle-text {
-  display: grid;
-  gap: 0.15rem;
-  line-height: 1.5;
+.settings-toggle strong {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.settings-toggle .settings-hint {
+  grid-row: 2;
+  grid-column: 2;
 }
 
 .segmented-control {
