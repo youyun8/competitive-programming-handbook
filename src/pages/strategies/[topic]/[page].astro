@@ -1,0 +1,56 @@
+---
+import BeginnerGuide from '@/components/strategies/BeginnerGuide.astro';
+import BeginnerRecap from '@/components/strategies/BeginnerRecap.astro';
+import StrategyNav from '@/components/strategies/StrategyNav.astro';
+import StrategyProgress from '@/components/strategies/StrategyProgress';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/site';
+import { pageHref, renderFragment, siblingPages, strategyTopics } from '@/lib/strategies';
+
+export function getStaticPaths() {
+  return strategyTopics.flatMap((topic) =>
+    topic.pages
+      .filter((page) => page.slug && page.fragment)
+      .map((page) => ({ params: { topic: topic.id, page: page.slug! }, props: { topic, page } }))
+  );
+}
+
+const { topic, page } = Astro.props;
+const body = await renderFragment(topic, page.fragment!);
+const { previous, next } = siblingPages(topic, page.id);
+---
+
+<BaseLayout title={`${page.title}｜${topic.name}`} description={page.desc ?? topic.homeDescription}>
+  <StrategyNav slot="sidebar" topic={topic} current={page.id} />
+
+  <p class="eyebrow">
+    <a href={withBase('/strategies/')}>策略圖鑑</a> ／ <a href={withBase(`/strategies/${topic.id}/`)}>{topic.name}</a>
+  </p>
+
+  <BeginnerGuide topic={topic} page={page} />
+
+  <div class="strategy-body" set:html={body} />
+
+  <BeginnerRecap topic={topic} page={page} />
+
+  <nav class="strategy-pagenav" aria-label="章節導覽">
+    {
+      previous && (
+        <a class="previous" href={pageHref(topic, previous)}>
+          <span class="direction">← 上一節</span>
+          {previous.id === 'index' ? `${topic.name}首頁` : (previous.nav ?? previous.title)}
+        </a>
+      )
+    }
+    {
+      next && (
+        <a class="next" href={pageHref(topic, next)}>
+          <span class="direction">下一節 →</span>
+          {next.nav ?? next.title}
+        </a>
+      )
+    }
+  </nav>
+
+  <StrategyProgress client:idle />
+</BaseLayout>

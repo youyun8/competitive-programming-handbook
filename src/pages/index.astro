@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { curriculum } from '@/lib/curriculum';
 import { withBase } from '@/lib/site';
+import { strategyTopics } from '@/lib/strategy-topics';
 
 const chapterColors: Record<string, string> = {
   cyan: '#0c7183',
@@ -27,6 +28,7 @@ const chapterColors: Record<string, string> = {
     <div class="hero-actions">
       <a class="button" href={withBase('/lessons/binary-search/')}>從二分搜尋開始讀</a>
       <a class="button secondary" href={withBase('/learn/')}>查看學習路線</a>
+      <a class="button secondary" href={withBase('/strategies/')}>依解題策略查手法</a>
     </div>
   </section>
 
@@ -57,6 +59,28 @@ const chapterColors: Record<string, string> = {
               </span>
             </p>
           </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section style="margin-top:3rem" aria-labelledby="strategy-atlas-title">
+    <p class="eyebrow">Strategy atlas</p>
+    <h2 id="strategy-atlas-title">換一個切面：策略圖鑑</h2>
+    <p class="lede">
+      章節地圖跟著書本推進；<a href={withBase('/strategies/')}>策略圖鑑</a
+      >則把同一類解題手法擺在一起，適合賽前複習與遇到新題時查手法。
+    </p>
+    <div class="strategy-topic-grid">
+      {
+        strategyTopics.map((topic) => (
+          <a class="strategy-topic-card" href={withBase(`/strategies/${topic.id}/`)}>
+            <span class="strategy-topic-icon" aria-hidden="true">
+              {topic.icon}
+            </span>
+            <h3>{topic.name}</h3>
+            <p>{topic.tagline}</p>
+          </a>
         ))
       }
     </div>

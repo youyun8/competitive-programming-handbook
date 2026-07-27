@@ -1,0 +1,59 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { strategyProblemCounts } from '@/lib/strategy-problems';
+import { readablePageCount, strategyHref, strategyTopics } from '@/lib/strategies';
+import { withBase } from '@/lib/site';
+---
+
+<BaseLayout title="策略圖鑑" description="依解題策略分類的競賽演算法攻略：貪心、動態規劃、字串與競賽資料結構。">
+  <p class="eyebrow">Strategy atlas</p>
+  <h1>策略圖鑑</h1>
+  <p class="lede">
+    教材章節依書本順序推進，這裡則換一個切面：<strong>同一類解題手法擺在一起</strong>。
+    每個主題都是從入門（★）到競賽專家（★★★★★）的策略分類，附上判斷訊號、正確性論證、常見陷阱與練習路線圖。
+    需要按章節複習時，回到<a href={withBase('/chapters/1/')}>章節導覽</a>；想直接找題目，看<a
+      href={withBase('/problem-lists/strategies/')}>策略題單</a
+    >。
+  </p>
+
+  <div class="strategy-topic-grid">
+    {
+      strategyTopics.map((topic) => (
+        <a class="strategy-topic-card" href={strategyHref(topic.id)}>
+          <span class="strategy-topic-icon" aria-hidden="true">
+            {topic.icon}
+          </span>
+          <h2>{topic.name}</h2>
+          <p>{topic.tagline}</p>
+          <p class="meta">
+            {readablePageCount(topic)} 個章節 · {strategyProblemCounts.byTopic[topic.id] ?? 0} 題
+          </p>
+        </a>
+      ))
+    }
+    <div class="strategy-topic-card strategy-topic-card-future">
+      <span class="strategy-topic-icon" aria-hidden="true">✨</span>
+      <h2>更多主題陸續加入</h2>
+      <p>圖論、數論與計算幾何的策略分類尚未整理；在此之前可先讀對應的教材章節。</p>
+      <p class="meta">
+        <a href={withBase('/chapters/10/')}>第 10 章 圖論</a>、<a href={withBase('/chapters/6/')}>第 6 章 數論</a>、<a
+          href={withBase('/chapters/8/')}>第 8 章 計算幾何</a
+        >
+      </p>
+    </div>
+  </div>
+
+  <section class="card">
+    <h2>和教材章節有什麼不同</h2>
+    <p>兩者是同一批知識的兩種索引方式，練習進度共用同一份資料，在任一邊標記都會同步：</p>
+    <ul>
+      <li>
+        <strong>章節</strong>（第 1–10 章與附錄 A）跟著《演算法競賽》的編排走，適合完整讀完一個主題、建立基礎。
+      </li>
+      <li>
+        <strong>策略圖鑑</strong>以「看到什麼訊號、該想到哪一招」組織，適合賽前複習與遇到新題時查手法。
+      </li>
+    </ul>
+    <p class="meta">策略圖鑑原先是獨立的網站專案，內容已完整併入本站；原 repo 不再更新。</p>
+  </section>
+</BaseLayout>

@@ -1,4 +1,5 @@
 @import 'katex/dist/katex.min.css';
+@import './strategies.css';
 
 :root {
   color-scheme: light;
@@ -1506,28 +1507,32 @@ summary {
   background: var(--surface);
 }
 
-/* 固定表格佈局，讓每個小節的表格欄寬一致、跨區塊也能對齊。 */
 .problem-table {
   width: 100%;
   min-width: 46rem;
   border-collapse: collapse;
-  table-layout: fixed;
   font-size: 0.92rem;
 }
 
-.problem-table .col-group {
+/* 章節題單每個小節各是一個表格，改成固定佈局＋colgroup 才能讓欄寬一致、
+   跨區塊也能對齊。策略題單欄數不同且靠內容自動撐開，維持 auto 佈局。 */
+.chapter-problem-table {
+  table-layout: fixed;
+}
+
+.chapter-problem-table .col-group {
   width: 5.5rem;
 }
 
-.problem-table .col-origin {
+.chapter-problem-table .col-origin {
   width: 9.5rem;
 }
 
-.problem-table .col-source {
+.chapter-problem-table .col-source {
   width: 13rem;
 }
 
-.problem-table .col-learn {
+.chapter-problem-table .col-learn {
   width: 8.5rem;
 }
 

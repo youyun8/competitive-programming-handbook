@@ -48,6 +48,15 @@ for (const exercise of exercises) {
     </p>
   </section>
 
+  <section class="card">
+    <h2>另一份題單：策略題單</h2>
+    <p>
+      本頁依教材章節編排。若想改用<strong>解題手法</strong>找題目，請看
+      <a href={withBase('/problem-lists/strategies/')}>策略題單</a>—— 那是<a href={withBase('/strategies/')}>策略圖鑑</a
+      >四個主題的題目總表，可依主題、難度星級與策略標籤篩選。 兩份題單的練習狀態共用同一份進度資料。
+    </p>
+  </section>
+
   <div class="filter-bar">
     <div class="field">
       <label for="problem-search">搜尋</label>
@@ -99,7 +108,7 @@ for (const exercise of exercises) {
               </a>
             </h3>
             <div class="table-scroll">
-              <table class="problem-table">
+              <table class="problem-table chapter-problem-table">
                 <colgroup>
                   <col class="col-group" />
                   <col class="col-origin" />

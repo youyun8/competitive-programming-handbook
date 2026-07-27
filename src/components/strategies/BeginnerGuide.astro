@@ -1,0 +1,54 @@
+---
+import { strategyBeginnerMeta, strategyMiniTraces } from '@/lib/strategy-beginner';
+import type { StrategyPage, StrategyTopic } from '@/lib/strategies';
+
+interface Props {
+  topic: StrategyTopic;
+  page: StrategyPage;
+}
+
+const { topic, page } = Astro.props;
+const meta = strategyBeginnerMeta[topic.id];
+const trace = strategyMiniTraces[`${topic.id}/${page.id}`];
+const description = page.desc ?? topic.homeDescription;
+---
+
+{
+  meta && (
+    <aside class="beginner-guide" aria-label="本頁初學者閱讀指南">
+      <div class="beginner-guide-head">
+        <span aria-hidden="true">🧭</span>
+        <div>
+          <b>初學者閱讀指南</b>
+          <small>{page.title}</small>
+        </div>
+      </div>
+      <h3>這頁要解決什麼問題？</h3>
+      <p>
+        <b>先問：</b>
+        {meta.question}
+      </p>
+      <p>本頁聚焦「{description}」。先在紙上用 3～8 個元素走一次，再對照正文的公式與程式碼。</p>
+      <p>
+        <b>暴力做法的代價：</b>
+        {meta.brute}
+      </p>
+      <h3>核心直覺</h3>
+      <p>{meta.intuition}</p>
+      <div class="callout proof">
+        <b>閱讀程式前先找不變量</b>
+        <p>{meta.invariant}</p>
+      </div>
+      <details class="predict-box">
+        <summary>先猜猜看：什麼時候該想到這頁？</summary>
+        <p>{meta.signals}</p>
+      </details>
+      {trace && (
+        <div class="mini-trace">
+          <h3>最小可手算例子</h3>
+          <ol set:html={trace} />
+        </div>
+      )}
+    </aside>
+  )
+}

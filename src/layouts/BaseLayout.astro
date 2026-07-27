@@ -13,6 +13,8 @@ interface Props {
 const { title, description = '以繁體中文重新整理的競賽演算法學習筆記。', wide = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const currentPath = Astro.url.pathname;
+// 頁面可用 slot="sidebar" 換掉預設的章節導覽（策略圖鑑用自己的主題導覽）。
+const hasSidebarSlot = Astro.slots.has('sidebar');
 const pageTitle = title === homeLabel ? siteName : `${title}｜${siteName}`;
 ---
 
@@ -103,20 +105,29 @@ const pageTitle = title === homeLabel ? siteName : `${title}｜${siteName}`;
         <div class="sidebar-label">開始</div>
         <a class="sidebar-link" href={withBase('/learn/')}>依先備關係學習</a>
         <a class="sidebar-link" href={withBase('/patterns/')}>跨章解題模式</a>
+        <a class="sidebar-link" href={withBase('/strategies/')}>策略圖鑑</a>
         <a class="sidebar-link" href={withBase('/glossary/')}>術語表</a>
-        <a class="sidebar-link" href={withBase('/problem-lists/')}>《演算法競賽》題單索引</a>
-        <div class="sidebar-label">章節</div>
+        <a class="sidebar-link" href={withBase('/problem-lists/')}>題單索引</a>
         {
-          curriculum.chapters.map((chapter) => {
-            const href = withBase(`/chapters/${chapter.chapter}/`);
-            return (
-              <a class="sidebar-link" href={href} aria-current={currentPath === href ? 'page' : undefined}>
-                {chapter.chapter}. {chapter.title}
+          hasSidebarSlot ? (
+            <slot name="sidebar" />
+          ) : (
+            <>
+              <div class="sidebar-label">章節</div>
+              {curriculum.chapters.map((chapter) => {
+                const href = withBase(`/chapters/${chapter.chapter}/`);
+                return (
+                  <a class="sidebar-link" href={href} aria-current={currentPath === href ? 'page' : undefined}>
+                    {chapter.chapter}. {chapter.title}
+                  </a>
+                );
+              })}
+              <a class="sidebar-link" href={withBase('/appendix/')}>
+                附錄 A：C++ 工程技巧
               </a>
-            );
-          })
+            </>
+          )
         }
-        <a class="sidebar-link" href={withBase('/appendix/')}>附錄 A：C++ 工程技巧</a>
         <div class="sidebar-label">帳戶</div>
         <a class="sidebar-link" href={withBase('/dashboard/')}>Dashboard</a>
         <a class="sidebar-link" href={withBase('/profile/')}>偏好與資料</a>
