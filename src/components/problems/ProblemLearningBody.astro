@@ -1,0 +1,140 @@
+---
+import { Code } from 'astro:components';
+import type { CollectionEntry } from 'astro:content';
+import { hintStageLabels, threeStageHints } from '@/lib/exercise-content';
+
+interface Props {
+  exercise?: CollectionEntry<'exercises'>;
+  // 例題精講需要完整題面；題單清單只列推演與解答，避免同一頁重複整份題目敘述。
+  showStatement?: boolean;
+}
+
+const { exercise, showStatement = false } = Astro.props;
+const data = exercise?.data;
+const hints = data ? threeStageHints(data.hints) : [];
+---
+
+{
+  data ? (
+    <>
+      {data.statement_verification === 'pending-author-check' && (
+        <p class="content-pending">
+          題面待核實：本題的題目敘述與輸入輸出格式是依可取得的資料重建的，尚未與原題頁逐字核對。解法、正確性與複雜度針對下述題意成立；提交前請以原題頁為準，並參考題目頁的「待核實項目」。
+        </p>
+      )}
+      {showStatement && (
+        <section>
+          <h4>題目敘述</h4>
+          <p>{data.statement}</p>
+          {data.constraints?.length ? (
+            <>
+              <h5>限制</h5>
+              <ul>
+                {data.constraints.map((constraint) => (
+                  <li>{constraint}</li>
+                ))}
+              </ul>
+            </>
+          ) : null}
+          {data.input_format && (
+            <>
+              <h5>輸入格式</h5>
+              <p>{data.input_format}</p>
+            </>
+          )}
+          {data.output_format && (
+            <>
+              <h5>輸出格式</h5>
+              <p>{data.output_format}</p>
+            </>
+          )}
+        </section>
+      )}
+      <section>
+        <h4>核心知識點與判斷方法</h4>
+        <p>{data.core_knowledge?.length ? data.core_knowledge.join('、') : data.topics.join('、')}</p>
+        <p>{data.judgment ?? '判斷方法尚待逐題複核；請先依資料範圍與目標操作，對照本節核心教學選擇方法。'}</p>
+      </section>
+      <section>
+        <h4>圖解或範例推演</h4>
+        {data.walkthrough && <p>{data.walkthrough}</p>}
+        {data.samples.length ? (
+          data.samples.map((sample, index) => (
+            <div class="problem-sample">
+              <strong>範例 {index + 1}</strong>
+              <div class="problem-sample-grid">
+                <pre>
+                  <code>{sample.input}</code>
+                </pre>
+                <pre>
+                  <code>{sample.output}</code>
+                </pre>
+              </div>
+              {sample.explanation && <p>{sample.explanation}</p>}
+            </div>
+          ))
+        ) : (
+          <p class="content-pending">範例推演尚待依原題核實。</p>
+        )}
+      </section>
+      <section>
+        <h4>三階段提示</h4>
+        {hints.map((hint, index) => (
+          <details>
+            <summary>
+              提示 {index + 1}：{hintStageLabels[index]}
+            </summary>
+            {hint.split('\n\n').map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </details>
+        ))}
+      </section>
+      <details>
+        <summary>可直接提交的 C++17 skeleton</summary>
+        {data.cpp_skeleton ? (
+          <Code code={data.cpp_skeleton} lang="cpp" theme="github-dark-default" />
+        ) : (
+          <p class="content-pending">尚未有經編譯與題目格式核實的 skeleton。</p>
+        )}
+      </details>
+      <details>
+        <summary>完整 C++17 解答、正確性與複雜度</summary>
+        <h4>解法概要</h4>
+        <p>{data.solution_outline}</p>
+        <h4>正確性說明</h4>
+        <p>{data.proof_or_invariant ?? '正確性證明尚待內容複核。'}</p>
+        <h4>複雜度</h4>
+        <p>
+          時間 {data.complexity.time}；空間 {data.complexity.space}。
+        </p>
+        {data.cpp_solution ? (
+          <Code code={data.cpp_solution} lang="cpp" theme="github-dark-default" />
+        ) : (
+          <p class="content-pending">尚未有經編譯與原題核實的完整解答。</p>
+        )}
+      </details>
+      <details>
+        <summary>常見錯誤</summary>
+        {data.common_errors?.length ? (
+          <ul>
+            {data.common_errors.map((error) => (
+              <li>{error}</li>
+            ))}
+          </ul>
+        ) : (
+          <p class="content-pending">本題常見錯誤尚待內容複核。</p>
+        )}
+      </details>
+    </>
+  ) : (
+    <section class="content-roadmap" aria-label="內容補完狀態">
+      <h4>內容補完狀態</h4>
+      <p>
+        本題已納入對應章節與完成狀態追蹤；核心判斷、推演、三階段提示、C++17
+        skeleton、完整解答、證明、複雜度與常見錯誤仍須依原題逐項核實後發布。本次作業的網路政策封鎖了各 OJ
+        網域，無法取得原題敘述，因此不以通用模板冒充題解。
+      </p>
+    </section>
+  )
+}

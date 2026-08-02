@@ -2,13 +2,13 @@
 import { getCollection, render } from 'astro:content';
 import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import SectionGuide from '@/components/lessons/SectionGuide.astro';
-import TextbookPractice from '@/components/lessons/TextbookPractice.astro';
+import SectionExamples from '@/components/lessons/SectionExamples.astro';
 import ChapterProblemList from '@/components/problems/ChapterProblemList.astro';
 import AlgorithmVisualizer from '@/components/visualizers/AlgorithmVisualizer';
 import ProgressActions from '@/components/progress/ProgressActions';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { curriculum, sectionSlug } from '@/lib/curriculum';
-import { problemEntriesForSection } from '@/lib/problem-list';
+import { exampleEntriesForSection, problemEntriesForSection, problemKey } from '@/lib/problem-list';
 import { withBase } from '@/lib/site';
 
 export async function getStaticPaths() {
@@ -40,6 +40,10 @@ const currentIndex = allSections.findIndex((item) => item.section.id === section
 const previous = allSections[currentIndex - 1];
 const next = allSections[currentIndex + 1];
 const problemEntries = problemEntriesForSection(section.id);
+// 例題一律由題單決定歸屬並在本頁逐題講解；題單清單只保留索引，不再重複同一份題解。
+const taughtProblemKeys = exampleEntriesForSection(section.id).map((entry) =>
+  problemKey(entry.platform_label, entry.problem_id)
+);
 ---
 
 <BaseLayout title={lesson?.data.title ?? `${section.id} ${section.title}`}>
@@ -88,8 +92,16 @@ const problemEntries = problemEntriesForSection(section.id);
       </section>
     )
   }
-  <TextbookPractice chapter={chapter} section={section} />
-  {problemEntries.length > 0 && <ChapterProblemList entries={problemEntries} heading="本節《演算法競賽》對應題目" />}
+  <SectionExamples section={section.id} sectionTitle={section.title} />
+  {
+    problemEntries.length > 0 && (
+      <ChapterProblemList
+        entries={problemEntries}
+        heading="本節《演算法競賽》對應題目"
+        taughtProblemKeys={taughtProblemKeys}
+      />
+    )
+  }
   <nav class="page-actions" aria-label="前後教學">
     {
       previous && (
