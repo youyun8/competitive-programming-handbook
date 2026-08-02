@@ -17,6 +17,11 @@ const hints = data ? threeStageHints(data.hints) : [];
 {
   data ? (
     <>
+      {data.statement_verification === 'pending-author-check' && (
+        <p class="content-pending">
+          題面待核實：本題的題目敘述與輸入輸出格式是依可取得的資料重建的，尚未與原題頁逐字核對。解法、正確性與複雜度針對下述題意成立；提交前請以原題頁為準，並參考題目頁的「待核實項目」。
+        </p>
+      )}
       {showStatement && (
         <section>
           <h4>題目敘述</h4>

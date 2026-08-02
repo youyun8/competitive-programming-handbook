@@ -48,6 +48,13 @@ const hints = threeStageHints(exercise.data.hints);
     </div>
   </section>
   <article>
+    {
+      exercise.data.statement_verification === 'pending-author-check' && (
+        <p class="content-pending">
+          題面待核實：本題的題目敘述與輸入輸出格式是依可取得的資料重建的，尚未與原題頁逐字核對。以下解法、正確性與複雜度針對這份題意成立；提交前請以原題頁為準，並先讀本頁最後的「待核實項目」。
+        </p>
+      )
+    }
     <section>
       <h2>核心知識點與判斷方法</h2>
       <p>

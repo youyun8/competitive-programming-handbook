@@ -96,6 +96,9 @@ const exercises = defineCollection({
     source_book_pages: z.array(z.number().int().positive()).min(1),
     source_pdf_pages: z.array(z.number().int().positive()).min(1),
     ocr_confidence: z.number().min(0).max(1).optional(),
+    // 題面本身的核實狀態，與 review_status（是否可公開）分開記錄。
+    // pending-author-check 代表題面是依可得資料重建、由維護者自行核對，頁面會標示出來。
+    statement_verification: z.enum(['confirmed', 'pending-author-check']).optional(),
     review_status: reviewStatus
   })
 });

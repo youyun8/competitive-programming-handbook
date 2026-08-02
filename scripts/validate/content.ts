@@ -158,6 +158,10 @@ for (const [key, problem] of uniqueProblemListItems) {
   if (!data.samples?.length || data.samples.some((sample: { explanation?: string }) => !sample.explanation)) {
     errors.push(`${exercise.path}: complete problem-list cards require a sample walkthrough`);
   }
+  // 題面重建的題卡必須逐項寫出還沒核對的東西，讀者與維護者才知道要查什麼。
+  if (data.statement_verification === 'pending-author-check' && !exercise.body.includes('## 待核實項目')) {
+    errors.push(`${exercise.path}: pending-author-check cards must list what still needs checking`);
+  }
 }
 
 for (const lesson of lessons) {
