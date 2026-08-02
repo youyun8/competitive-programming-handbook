@@ -6,6 +6,8 @@ import Breadcrumb from '@/components/nav/Breadcrumb.astro';
 import ChapterProblemList from '@/components/problems/ChapterProblemList.astro';
 import { chapterWorkshops } from '@/lib/chapter-workshops';
 import { chapterExamples } from '@/lib/chapter-examples';
+import { chapterExerciseCode } from '@/lib/chapter-exercise-code';
+import { chapterExerciseSolutions } from '@/lib/chapter-exercise-solutions';
 import { curriculum, sectionSlug } from '@/lib/curriculum';
 import { problemEntriesForChapter } from '@/lib/problem-list';
 import { withBase } from '@/lib/site';
@@ -26,6 +28,8 @@ const exercises = await getCollection('exercises');
 const workshop = chapterWorkshops[chapter.chapter]!;
 const examples = chapterExamples[chapter.chapter] ?? [];
 const problemEntries = problemEntriesForChapter(chapter.chapter);
+// 分級習題屬於整章，不屬於任何一節；解答與程式碼跟著習題留在章頁，各只出現一次。
+const normalizeTitle = (title: string) => title.replace(/\s+/g, '');
 ---
 
 <BaseLayout title={`第 ${chapter.chapter} 章 ${chapter.title}`} wide>
@@ -116,14 +120,36 @@ const problemEntries = problemEntriesForChapter(chapter.chapter);
     <h2 id="chapter-practice-title">章末分級習題</h2>
     <div class="grid">
       {
-        workshop.exercises.map((exercise) => (
-          <article class="card">
-            <span class="badge">{exercise.level}</span>
-            <h3>{exercise.title}</h3>
-            <p>{exercise.prompt}</p>
-            <p class="meta">訓練重點：{exercise.focus}</p>
-          </article>
-        ))
+        workshop.exercises.map((exercise) => {
+          const solution = chapterExerciseSolutions[normalizeTitle(exercise.title)];
+          const solutionCode = chapterExerciseCode[normalizeTitle(exercise.title)];
+          return (
+            <article class="card">
+              <span class="badge">{exercise.level}</span>
+              <h3>{exercise.title}</h3>
+              <p>{exercise.prompt}</p>
+              <p class="meta">訓練重點：{exercise.focus}</p>
+              {solution ? (
+                <details>
+                  <summary>解法、正確性與 C++17 實作</summary>
+                  <h4>演算法</h4>
+                  <p>{solution.approach}</p>
+                  <h4>正確性</h4>
+                  <p>{solution.correctness}</p>
+                  <h4>複雜度</h4>
+                  <p>{solution.complexity}</p>
+                  {solutionCode ? (
+                    <Code code={solutionCode} lang="cpp" theme="github-dark-default" />
+                  ) : (
+                    <p class="content-pending">目前尚未附上程式碼實作。</p>
+                  )}
+                </details>
+              ) : (
+                <p>先依「{exercise.focus}」建立不變量，再逐步驗證每次更新不會排除正確答案。</p>
+              )}
+            </article>
+          );
+        })
       }
     </div>
   </section>

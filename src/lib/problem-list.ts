@@ -41,6 +41,11 @@ export function canonicalProblemSection(section: string) {
   return section.startsWith('8.') ? geometrySection : section;
 }
 
+// 例題精講區塊與題單清單用同一組錨點連結彼此，所以錨點命名只在這裡定義一次。
+export function problemAnchorId(platform: string, problemId: string) {
+  return `example-${problemKey(platform, problemId).replace(':', '-')}`;
+}
+
 export function problemKey(platform: string, problemId: string) {
   const platformText = platform.normalize('NFKC').toLowerCase();
   const normalizedPlatform =
@@ -100,4 +105,8 @@ export function problemEntriesForChapter(chapter: number) {
 
 export function problemEntriesForSection(section: string) {
   return entries.filter((entry) => entry.section === section);
+}
+
+export function exampleEntriesForSection(section: string) {
+  return entries.filter((entry) => entry.section === section && entry.group === 'example');
 }

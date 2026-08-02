@@ -1,0 +1,116 @@
+---
+import { Code } from 'astro:components';
+import { getCollection } from 'astro:content';
+import ExerciseStatusControl from '@/components/progress/ExerciseStatusControl';
+import ProblemLearningBody from '@/components/problems/ProblemLearningBody.astro';
+import { exampleEntriesForSection, problemAnchorId, problemKey } from '@/lib/problem-list';
+import { textbookExampleFor } from '@/lib/textbook-examples';
+import { withBase } from '@/lib/site';
+
+interface Props {
+  section: string;
+  sectionTitle: string;
+}
+
+const { section, sectionTitle } = Astro.props;
+const entries = exampleEntriesForSection(section);
+const exercises = await getCollection('exercises', ({ data }) => data.review_status === 'verified');
+const exerciseByProblem = new Map<string, (typeof exercises)[number]>();
+for (const exercise of exercises) {
+  if (!exercise.data.external_platform || !exercise.data.external_problem_id) continue;
+  const key = problemKey(exercise.data.external_platform, exercise.data.external_problem_id);
+  const existing = exerciseByProblem.get(key);
+  if (!existing || (existing.data.external_relation !== 'original' && exercise.data.external_relation === 'original')) {
+    exerciseByProblem.set(key, exercise);
+  }
+}
+const examples = entries.map((entry) => {
+  const key = problemKey(entry.platform_label, entry.problem_id);
+  return {
+    entry,
+    key,
+    anchor: problemAnchorId(entry.platform_label, entry.problem_id),
+    exercise: exerciseByProblem.get(key),
+    textbook: textbookExampleFor(entry.chapter, entry.url)
+  };
+});
+---
+
+{
+  examples.length > 0 && (
+    <section class="section-examples" aria-labelledby="section-examples-title">
+      <h2 id="section-examples-title">本節例題精講</h2>
+      <p class="lede">
+        以下是《演算法競賽》{section} {sectionTitle} 一節列出的 {examples.length}{' '}
+        道例題，全部逐題講解：先讀題目與判斷訊號，再看推演、正確性與複雜度，最後才展開 C++17
+        解答。題目歸屬依原題單，不再按章節順序輪替，所以每一題都確實屬於本節主題。
+      </p>
+      {examples.map(({ entry, anchor, exercise, textbook }, index) => (
+        <article class="card section-example" id={anchor}>
+          <p class="eyebrow">
+            例題 {index + 1} / {examples.length}
+            {textbook ? ` · 教材${textbook.label}（書頁 ${textbook.bookPages.join('–')}）` : ''}
+          </p>
+          <h3>
+            {entry.platform_label} {entry.problem_id} · {entry.title}
+          </h3>
+          {entry.contest_source && <p class="meta">題目來源：{entry.contest_source}</p>}
+          <div class="problem-links">
+            <a href={entry.url} target="_blank" rel="noopener noreferrer nofollow">
+              前往外部題目 ↗
+            </a>
+            {exercise && <a href={withBase(`/practice/${exercise.data.id}/`)}>開啟獨立題目頁與解題筆記</a>}
+          </div>
+          <ExerciseStatusControl client:visible exerciseId={exercise?.data.id ?? `problem-${anchor}`} compact />
+          <ProblemLearningBody exercise={exercise} showStatement />
+          {textbook && (
+            <details class="textbook-version">
+              <summary>教材版題面與參考解答（{textbook.label}）</summary>
+              {textbook.statement.split('\n').map((line) => (
+                <p class="statement-line">{line}</p>
+              ))}
+              <h4>教材解題想法</h4>
+              <p>{textbook.idea}</p>
+              <h4>教材版 C++17 參考解答</h4>
+              <Code code={textbook.code} lang="cpp" theme="github-dark-default" />
+              <p>
+                <strong>複雜度：</strong>
+                {textbook.complexity}
+              </p>
+            </details>
+          )}
+        </article>
+      ))}
+    </section>
+  )
+}
+
+<style>
+  .section-examples {
+    margin-top: 2.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-example {
+    margin: 1rem 0;
+    scroll-margin-top: 5rem;
+  }
+
+  .section-example h4 {
+    margin-bottom: 0.2rem;
+  }
+
+  .section-example h5 {
+    margin: 0.6rem 0 0.2rem;
+  }
+
+  .statement-line {
+    margin: 0.2rem 0;
+  }
+
+  .section-example :global(pre) {
+    max-height: 38rem;
+    overflow: auto;
+  }
+</style>

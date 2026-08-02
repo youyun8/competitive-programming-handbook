@@ -1,17 +1,20 @@
 ---
-import { Code } from 'astro:components';
 import { getCollection } from 'astro:content';
 import ExerciseStatusControl from '@/components/progress/ExerciseStatusControl';
-import { hasCompleteLearningContent, hintStageLabels, threeStageHints } from '@/lib/exercise-content';
-import { problemKey, type ProblemEntry } from '@/lib/problem-list';
+import ProblemLearningBody from '@/components/problems/ProblemLearningBody.astro';
+import { hasCompleteLearningContent } from '@/lib/exercise-content';
+import { problemAnchorId, problemKey, type ProblemEntry } from '@/lib/problem-list';
 import { withBase } from '@/lib/site';
 
 interface Props {
   entries: ProblemEntry[];
   heading?: string;
+  // 小節頁已在「本節例題精講」逐題講完這些題目，這裡只留索引與錨點，不重複整份題解。
+  taughtProblemKeys?: string[];
 }
 
-const { entries, heading = '《演算法競賽》對應題目' } = Astro.props;
+const { entries, heading = '《演算法競賽》對應題目', taughtProblemKeys = [] } = Astro.props;
+const taught = new Set(taughtProblemKeys);
 const exercises = await getCollection('exercises', ({ data }) => data.review_status === 'verified');
 const exerciseByProblem = new Map<string, (typeof exercises)[number]>();
 for (const exercise of exercises) {
@@ -47,8 +50,9 @@ for (const entry of entries) {
             const key = problemKey(entry.platform_label, entry.problem_id);
             const exercise = exerciseByProblem.get(key);
             const complete = exercise ? hasCompleteLearningContent(exercise.data) : false;
-            const hints = exercise ? threeStageHints(exercise.data.hints) : [];
             const statusId = exercise?.data.id ?? `problem-${key.replace(':', '-')}`;
+            const anchor = problemAnchorId(entry.platform_label, entry.problem_id);
+            const taughtOnPage = taught.has(key);
             const sourceSubdivision =
               entry.source_section !== entry.section
                 ? `${entry.source_section} ${entry.source_section_title}`
@@ -61,7 +65,7 @@ for (const entry of entries) {
                     {entry.platform_label} {entry.problem_id} · {entry.title}
                   </span>
                   <span class:list={['badge', complete ? 'verified' : 'needs-review']}>
-                    {complete ? '完整教學' : '待內容複核'}
+                    {taughtOnPage ? '本頁已講解' : complete ? '完整教學' : '待內容複核'}
                   </span>
                 </summary>
                 <div class="problem-learning-content">
@@ -71,103 +75,20 @@ for (const entry of entries) {
                       前往外部題目 ↗
                     </a>
                     {exercise && <a href={withBase(`/practice/${exercise.data.id}/`)}>開啟獨立題目頁與解題筆記</a>}
-                    {entry.lesson_href && <a href={withBase(entry.lesson_href)}>回到本節教學</a>}
+                    {taughtOnPage ? (
+                      <a href={`#${anchor}`}>跳到本節例題精講</a>
+                    ) : (
+                      entry.lesson_href && <a href={withBase(entry.lesson_href)}>回到本節教學</a>
+                    )}
                   </div>
                   <ExerciseStatusControl client:visible exerciseId={statusId} compact />
-                  {exercise ? (
-                    <>
-                      <section>
-                        <h4>核心知識點與判斷方法</h4>
-                        <p>
-                          {exercise.data.core_knowledge?.length
-                            ? exercise.data.core_knowledge.join('、')
-                            : exercise.data.topics.join('、')}
-                        </p>
-                        <p>
-                          {exercise.data.judgment ??
-                            '判斷方法尚待逐題複核；請先依資料範圍與目標操作，對照本節核心教學選擇方法。'}
-                        </p>
-                      </section>
-                      <section>
-                        <h4>圖解或範例推演</h4>
-                        {exercise.data.walkthrough && <p>{exercise.data.walkthrough}</p>}
-                        {exercise.data.samples.length ? (
-                          exercise.data.samples.map((sample, index) => (
-                            <div class="problem-sample">
-                              <strong>範例 {index + 1}</strong>
-                              <div class="problem-sample-grid">
-                                <pre>
-                                  <code>{sample.input}</code>
-                                </pre>
-                                <pre>
-                                  <code>{sample.output}</code>
-                                </pre>
-                              </div>
-                              {sample.explanation && <p>{sample.explanation}</p>}
-                            </div>
-                          ))
-                        ) : (
-                          <p class="content-pending">範例推演尚待依原題核實。</p>
-                        )}
-                      </section>
-                      <section>
-                        <h4>三階段提示</h4>
-                        {hints.map((hint, index) => (
-                          <details>
-                            <summary>
-                              提示 {index + 1}：{hintStageLabels[index]}
-                            </summary>
-                            {hint.split('\n\n').map((paragraph) => (
-                              <p>{paragraph}</p>
-                            ))}
-                          </details>
-                        ))}
-                      </section>
-                      <details>
-                        <summary>可直接提交的 C++17 skeleton</summary>
-                        {exercise.data.cpp_skeleton ? (
-                          <Code code={exercise.data.cpp_skeleton} lang="cpp" theme="github-dark-default" />
-                        ) : (
-                          <p class="content-pending">尚未有經編譯與題目格式核實的 skeleton。</p>
-                        )}
-                      </details>
-                      <details>
-                        <summary>完整 C++17 解答、正確性與複雜度</summary>
-                        <h4>解法概要</h4>
-                        <p>{exercise.data.solution_outline}</p>
-                        <h4>正確性說明</h4>
-                        <p>{exercise.data.proof_or_invariant ?? '正確性證明尚待內容複核。'}</p>
-                        <h4>複雜度</h4>
-                        <p>
-                          時間 {exercise.data.complexity.time}；空間 {exercise.data.complexity.space}。
-                        </p>
-                        {exercise.data.cpp_solution ? (
-                          <Code code={exercise.data.cpp_solution} lang="cpp" theme="github-dark-default" />
-                        ) : (
-                          <p class="content-pending">尚未有經編譯與原題核實的完整解答。</p>
-                        )}
-                      </details>
-                      <details>
-                        <summary>常見錯誤</summary>
-                        {exercise.data.common_errors?.length ? (
-                          <ul>
-                            {exercise.data.common_errors.map((error) => (
-                              <li>{error}</li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <p class="content-pending">本題常見錯誤尚待內容複核。</p>
-                        )}
-                      </details>
-                    </>
+                  {taughtOnPage ? (
+                    <p>
+                      本題是本節例題，題面、判斷方法、推演、正確性、複雜度與 C++17
+                      解答已在上方「本節例題精講」完整講解。
+                    </p>
                   ) : (
-                    <section class="content-roadmap" aria-label="內容補完狀態">
-                      <h4>內容補完狀態</h4>
-                      <p>
-                        本題已納入對應章節與完成狀態追蹤；核心判斷、推演、三階段提示、C++17
-                        skeleton、完整解答、證明、複雜度與常見錯誤仍須依原題逐項核實後發布。
-                      </p>
-                    </section>
+                    <ProblemLearningBody exercise={exercise} />
                   )}
                 </div>
               </details>
