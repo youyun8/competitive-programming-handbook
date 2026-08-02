@@ -63,12 +63,9 @@ const hints = data ? threeStageHints(data.hints) : [];
             <div class="problem-sample">
               <strong>範例 {index + 1}</strong>
               <div class="problem-sample-grid">
-                <pre>
-                  <code>{sample.input}</code>
-                </pre>
-                <pre>
-                  <code>{sample.output}</code>
-                </pre>
+                {/* pre 保留原始空白，內容一律用 set:text 注入；若改寫成有子節點的寫法，格式化後的模板縮排會被當成範例內容。 */}
+                <pre set:text={sample.input.trim()} />
+                <pre set:text={sample.output.trim()} />
               </div>
               {sample.explanation && <p>{sample.explanation}</p>}
             </div>

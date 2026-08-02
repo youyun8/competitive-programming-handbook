@@ -108,11 +108,11 @@ const hints = threeStageHints(exercise.data.hints);
         <div class="grid">
           <div>
             <strong>輸入</strong>
-            <pre>{sample.input}</pre>
+            <pre set:text={sample.input.trim()} />
           </div>
           <div>
             <strong>輸出</strong>
-            <pre>{sample.output}</pre>
+            <pre set:text={sample.output.trim()} />
           </div>
           {sample.explanation && <p>{sample.explanation}</p>}
         </div>

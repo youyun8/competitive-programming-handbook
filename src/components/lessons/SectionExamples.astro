@@ -54,7 +54,7 @@ const examples = entries.map((entry) => {
           <h3>
             {entry.platform_label} {entry.problem_id} · {entry.title}
           </h3>
-          {entry.contest_source && <p class="meta">題目來源：{entry.contest_source}</p>}
+          {/* 題單的來源欄位在原始 PDF 就被欄寬截斷，卡片改以下方外部連結為準，不再顯示殘缺字串。 */}
           <div class="problem-links">
             <a href={entry.url} target="_blank" rel="noopener noreferrer nofollow">
               前往外部題目 ↗
